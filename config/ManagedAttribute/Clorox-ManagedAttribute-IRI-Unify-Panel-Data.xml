@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="IRI Unify Panel Data" type="Role" value="IRI Unify Panel Data">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%IRI_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="IRI Unify Panel Data"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

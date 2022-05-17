@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IRI" name="IRI" type="organizational">
+<Bundle displayName="IRI Unify POS (Store) Data Read Only" name="IRI Unify POS (Store) Data Read Only" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -11,7 +11,8 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName"/>
+      <entry key="appName" value="IRI"/>
+      <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
       <entry key="defaultStartDateSpan"/>
@@ -26,17 +27,29 @@
       <entry key="roleBusApprovers"/>
       <entry key="roleKeywords"/>
       <entry key="rolePrivileged"/>
+      <entry key="sapVcbr">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
       <entry key="singleRoleRequest"/>
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="IRI"/>
+            <entry key="en_US" value="IRI Unify-POS (Store) Data- Read Only-This role gives users ready only access to IRI Unify-POS."/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="IRI"/>
+  </Inheritance>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
   </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="IRI Unify POS (Store) Data Read Only IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="IRI IT Role"/>
+  </Requirements>
 </Bundle>

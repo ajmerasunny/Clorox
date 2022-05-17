@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IRI IT Role" name="IRI IT Role" type="it">
+<Bundle displayName="IRI Unify POS (Store) Data Read Only IT Role" name="IRI Unify POS (Store) Data Read Only IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -51,7 +51,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Grants access to entitlement ADus-jbs IRIGROUP"/>
+            <entry key="en_US" value="IRI Unify-POS (Store) Data- Read Only-This role gives users ready only access to IRI Unify-POS."/>
           </Map>
         </value>
       </entry>
@@ -61,18 +61,18 @@
     <Reference class="sailpoint.object.Bundle" name="IRI"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
   </Owner>
   <Profiles>
     <Profile>
       <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%AD_APP_NAME%%"/>
+        <Reference class="sailpoint.object.Application" name="IRI"/>
       </ApplicationRef>
       <Constraints>
-        <Filter operation="CONTAINS_ALL" property="memberOf">
+        <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>%IRI_JBS_IRIGROUP%%</String>
+              <String>IRI Unify POS (Store) Data Read Only</String>
             </List>
           </Value>
         </Filter>
