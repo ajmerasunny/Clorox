@@ -4,6 +4,7 @@
   <Attributes>
     <Map>
       <entry key="displayName" value="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
+      <entry key="email" value="%%CLX_IRI_EMAIL_ADDRESS%%"/>      
     </Map>
   </Attributes>
   <Description>IRI</Description>

@@ -1,23 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IRI" name="IRI" type="business">
+<Bundle displayName="IRI Unify Panel Data" name="IRI Unify Panel Data" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
       <entry key="accountSelectorRules"/>
       <entry key="additionalRoleBusApprovalRule"/>
-      <entry key="additionalRoleBusApprovers" value="CLX_AR_IRINET"/>
+      <entry key="additionalRoleBusApprovers"/>
       <entry key="allApprovers"/>
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName"/>
+      <entry key="appName" value="IRI"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
       <entry key="defaultStartDateSpan"/>
       <entry key="enablerTypes"/>
-      <entry key="formappName"/>
+      <entry key="formappName" value="IRI"/>
       <entry key="isBirthright"/>
       <entry key="mandatoryEntitlements"/>
       <entry key="mandatoryRoles"/>
@@ -25,7 +25,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords"/>
+      <entry key="roleKeywords" value="IRI"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -36,19 +36,20 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="This role gives user access to US jbs IRIGROUP"/>
+            <entry key="en_US" value="IRI Unify-Panel Data-This role gives users panel data access to IRI Unify."/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
   <Inheritance>
-    <Reference class="sailpoint.object.Bundle" name="IRI Role"/>
+    <Reference class="sailpoint.object.Bundle" name="IRI"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="IRI Unify Panel Data IT Role"/>
     <Reference class="sailpoint.object.Bundle" name="IRI IT Role"/>
   </Requirements>
 </Bundle>

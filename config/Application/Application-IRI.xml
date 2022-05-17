@@ -215,10 +215,39 @@
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    <Reference class="sailpoint.object.Identity" name="CLX_AR_IRI"/>
   </Owner>
+  <ProvisioningForms>
+    <Form name="Create" objectType="account" type="Create">
+      <Attributes>
+        <Map>
+          <entry key="pageTitle" value="Create"/>
+        </Map>
+      </Attributes>
+      <Description>Create</Description>
+      <Section label="Account" name="Account">
+        <Field displayName="username" helpKey="username" name="username" type="string">
+          <Script>
+            <Source><![CDATA[return application.getName() + " " + identity.getName();]]></Source>
+          </Script>
+        </Field>
+      </Section>
+    </Form>
+  </ProvisioningForms>
   <Schemas>
-    <Schema displayAttribute="" identityAttribute="" instanceAttribute="" nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None"/>
+    <Schema displayAttribute="username" identityAttribute="username" instanceAttribute="" nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None">
+      <AttributeDefinition name="username" type="string">
+        <Description>username</Description>
+      </AttributeDefinition>
+      <AttributeDefinition entitlement="true" managed="true" multi="true" name="Role" schemaObjectType="Role" type="string">
+        <Description>Role</Description>
+      </AttributeDefinition>
+    </Schema>
+    <Schema aggregationType="group" descriptionAttribute="Role" displayAttribute="Role" identityAttribute="Role" instanceAttribute="Role" nativeObjectType="Role" objectType="Role" permissionsRemediationModificationType="None">
+      <AttributeDefinition entitlement="true" multi="true" name="Role" schemaObjectType="Role" type="string">
+        <Description>Role</Description>
+      </AttributeDefinition>
+    </Schema>
   </Schemas>
   <ApplicationScorecard/>
 </Application>

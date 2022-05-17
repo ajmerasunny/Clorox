@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IRI IT Role" name="IRI IT Role" type="it">
+<Bundle displayName="IRI Unify Panel Data IT Role" name="IRI Unify Panel Data IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -26,13 +26,13 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName" value="%%IRI_APP_NAME%%"/>
+      <entry key="appName" value="IRI"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
       <entry key="defaultStartDateSpan"/>
       <entry key="enablerTypes"/>
-      <entry key="formappName"/>
+      <entry key="formappName" value="IRI"/>
       <entry key="isBirthright"/>
       <entry key="mandatoryEntitlements"/>
       <entry key="mandatoryRoles"/>
@@ -40,7 +40,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords"/>
+      <entry key="roleKeywords" value="IRI"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -51,7 +51,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Grants access to entitlement ADus-jbs IRIGROUP"/>
+            <entry key="en_US" value="IRI Unify-Panel Data-This role gives users panel data access to IRI Unify."/>
           </Map>
         </value>
       </entry>
@@ -66,13 +66,13 @@
   <Profiles>
     <Profile>
       <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%AD_APP_NAME%%"/>
+        <Reference class="sailpoint.object.Application" name="IRI"/>
       </ApplicationRef>
       <Constraints>
-        <Filter operation="CONTAINS_ALL" property="memberOf">
+        <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>%IRI_JBS_IRIGROUP%%</String>
+              <String>IRI Unify Panel Data</String>
             </List>
           </Value>
         </Filter>

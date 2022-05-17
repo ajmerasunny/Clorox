@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="IRI unify POS (Store) Data Full Access" hash="9798e5b8037fc18057e334e5cd056440134e5fd0" type="Role" value="IRI unify POS (Store) Data Full Access">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%IRI_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="IRI unify POS (Store) Data Full Access"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>
