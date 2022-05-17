@@ -26,7 +26,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName" value="IRI"/>
+      <entry key="appName" value="%%IRI_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -61,7 +61,7 @@
     <Reference class="sailpoint.object.Bundle" name="IRI"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
   </Owner>
   <Profiles>
     <Profile>
