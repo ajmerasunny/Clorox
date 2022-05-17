@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Identity name="CLX_AR_DSISOwner" workgroup="true">
+  <Attributes>
+    <Map>
+      <entry key="displayName" value="CLX_AR_DSISOwner"/>
+    </Map>
+  </Attributes>
+  <Description>DS/IS Secondar Role Approvers</Description>
+  <Preferences>
+    <Map>
+      <entry key="workgroupNotificationOption">
+        <value>
+          <WorkgroupNotifationOption>Both</WorkgroupNotifationOption>
+        </value>
+      </entry>
+    </Map>
+  </Preferences>
+</Identity>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="BusinessUnit" displayName="HP PPM Canada" hash="68952f4ca036f42b27078657fd4e66689f279b13" requestable="true" type="BusinessUnit" value="HP PPM Canada">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%HP_PPM_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="For access to Canada BU in PPM"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLOROX_UAA_ADMINS_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

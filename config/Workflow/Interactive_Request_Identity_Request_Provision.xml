@@ -1,0 +1,469 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Workflow PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Workflow explicitTransitions="true" libraries="Identity,IdentityRequest" name="Interactive Request Identity Request Provision" type="Subprocess">
+  <Variable editable="true" initializer="false" input="true" name="optimisticProvisioning">
+    <Description>Set to true to enable optimistic provisioning.  This will cause
+      changes to the entitlements compiled from role assignments to be 
+      applied immediately to the identity cube rather than waiting
+      for the next refresh/reaggregation after the provisioning system
+      completes the request.</Description>
+  </Variable>
+  <Variable input="true" name="endDate">
+    <Description>End date of the role assignment.</Description>
+  </Variable>
+  <Variable input="true" name="startDate">
+    <Description>Start date of the role assignment.</Description>
+  </Variable>
+  <Variable editable="true" initializer="true" input="true" name="foregroundProvisioning">
+    <Description>Normally provisioning is done in a step that uses the &amp;quot;background&amp;quot;
+      option to force the workflow to be suspend and be resumed in a
+      background task thread.  This prevents the browser session from
+      hanging since provision can sometimes take a long time.  For demos
+      and testing it can be better to do this in the foreground so that
+      provisioning will have been performed when control is returned to the
+      user.  This prevents having to run the Perform Maintenance task to 
+      see the resutls of the request.</Description>
+  </Variable>
+  <Variable initializer="true" input="true" name="noFiltering"/>
+  <Variable initializer="true" name="nullDecisionApproved"/>
+  <Variable input="true" name="launcher"/>
+  <Variable input="true" name="fallbackApprover" required="true">
+    <Description>A String that specifies the name of the Identity that will 
+      be assigned any manual actions  where the owner of the approver 
+      can&amp;#39;t be resolved.</Description>
+  </Variable>
+  <Variable name="psaValidationError" output="true"/>
+  <Variable editable="true" input="true" name="spExtAttrs"/>
+  <Variable editable="true" input="true" name="formAttrs"/>
+  <Variable input="true" name="enablePSA"/>
+  <Variable input="true" name="source"/>
+  <Variable input="true" name="flow"/>
+  <Variable input="true" name="requestType"/>
+  <Variable editable="true" input="true" name="doModifyProject"/>
+  <Variable input="true" name="approvalSet">
+    <Description>This attributes is set during the &amp;quot;Build Approval Set&amp;quot; step,
+       which builds this list by going through the ProvisioningPlan
+       to build the line items that need to be approved,
+       This variable includes all ApprovalItems that are part of 
+       the request process and is updated during the AfterScript
+       of the approval process by assimilating the decisions 
+       and comments from the Approvals copy of the ApprovalItem.</Description>
+  </Variable>
+  <Variable initializer="Form-Framework-IdentityUpdate" input="true" name="formTemplate">
+    <Description>Template used when processing provisioning forms.</Description>
+  </Variable>
+  <Variable input="true" name="trace">
+    <Description>Used for debugging this workflow and when set to true trace
+      will be sent to stdout.</Description>
+  </Variable>
+  <Variable input="true" name="plan">
+    <Description>The plan may be passed in from the Create/Update Identity workflows.
+      Otherwise the passed in project&amp;#39;s master plan is typically used.</Description>
+  </Variable>
+  <Variable initializer="true" input="true" name="recompile"/>
+  <Variable initializer="Pending Manual Changes" input="true" name="manualActionsEmailTemplate">
+    <Description>Option that can be used to prevent recompilation after approval
+       changes have been applied to the plan/project.</Description>
+  </Variable>
+  <Variable input="true" name="workItemComments">
+    <Description>Global comments which should be appended to each approval item.</Description>
+  </Variable>
+  <Variable input="true" name="noTriggers">
+    <Description>Used for debugging this subprocess and when set to true trace
+      statements will be sent to stdout.</Description>
+  </Variable>
+  <Variable input="true" name="approvalScheme">
+    <Description>A csv string that specifies how approvals should be generated for 
+      the incoming request.
+      The value can be any of the values below, combined together but
+      are always processed in this order:
+      1. manager
+      2. owner
+      3. securityOfficer
+      Any rejected items from previous approvals will be omitted from the  
+      next phase of approvers.
+      none - disabled approvals
+      owner - the object owner gets the approval
+              For Role approvals this is the Role object owner. When dealing 
+              with things like Unlock and other account level changes 
+              the approvals will be assigned to the the application owner.
+      manager - The manager will get all approvals
+      securityOfficer - The identity named security the security in the variable
+                        securityOfficerName.</Description>
+  </Variable>
+  <Variable input="true" name="identityRequestId">
+    <Description>The ID of the IdentityRequest.</Description>
+  </Variable>
+  <Variable input="true" name="priority">
+    <Description>String version of WorkItem.level that will be used
+      to set the priority on any generated workitems for
+      of forms or manual actions.</Description>
+  </Variable>
+  <Variable input="true" name="splitProvisioning">
+    <Description>True to denote this is a partial of the full ProvisioningPlan. This should be true in the case of LCM Provisioning
+          splits.</Description>
+  </Variable>
+  <Variable input="true" name="project" output="true">
+    <Description>ProvisioningProject which is just a compiled version of the ProvisioningPlan.</Description>
+  </Variable>
+  <Variable initializer="false" name="isGRCReq">
+    <Description>Check for SAP GRC type request</Description>
+  </Variable>
+  <Variable initializer="Connection reset,No route to host,Cannot find server" input="true" name="retriableErrors">
+    <Description>A comma separated string that specifies errors which will be retried while getting the status of the request.</Description>
+  </Variable>
+  <Variable initializer="3" input="true" name="numberOfRetries">
+    <Description>The number of retries that will be attempted before failure of the provisioning activities.</Description>
+  </Variable>
+  <Variable input="true" name="requestNumber">
+    <Description>The request number received after successful execution of the User Access Web service in GRC.
+          This Request number is used by Request Detail Web service for polling.</Description>
+  </Variable>
+  <Variable input="true" name="requestStubDetailsMap">
+    <Description>Holding user info and headerinfo to generate request detail stub for GRC.</Description>
+  </Variable>
+  <Variable input="true" name="requestStatusMap" output="true">
+    <Description>The request status map containing the status information of the request received from the Request Detail Web service.
+          This map is returned to the calling workflow.
+          Request status could be OK or FAILED.
+          The map has all the information retrieved from the last stage of approval on SAP GRC system. 
+          The Map(String,Object) containing following fields.
+          1) RequestStatus         Status of the request
+          2) Risk Violation Information
+          RiskViolations           This is a list of key as a String and Object as a value
+            UserId                 User Id
+            RiskId                 Risk Id
+            RiskDesc               Risk Description
+            RiskLevelDesc          Risk Level Description
+            RuleId                 Rule Id
+            System                 System Name
+            RoleList               Role List, A Map(String,String) containing following -
+                Role               Role Name
+                CompositRole       Composite Role
+            Action                 This is a list containing the Action names. List(String)
+          3) Requested Item Details - The details of requested items and its related properties
+            RequestedItems        A Map(String,String) containing following -
+            ItemId                 Item Id
+            ItemDesc               Item Description
+            Connector              System Connector
+            ProvItemType           Provision Item Type
+            ProvItemTypeDesc       Provision Item Description
+            ProvType               Provision Type
+            ProvTypeDesc           Provision Type Description
+            AssignmentType         Assignment type
+            AssignmentTypeDesc     Assignment Type Description
+            ProvStatus             Provision Status
+            ProvStatusDesc         Provision Status Description
+            Status                 Status
+            ApprovalStatus         Approval Status
+            ApprovalStatusDesc     Approval Status Description
+            ProvAction             Provision Action
+            ProvActionDesc         Provision Action Description
+            ValidFrom              Valid From Date
+            ValidTo                Valid To Date
+            Comments               Comments
+            Owners                 Owners
+            ReqItemDesc            Request Item Description
+          4) Current Stage - The stage at which the request is currently residing.
+            CurrentStage           The Map(String,String) containing following -
+            CurstageName           Current Stage Name
+            CurstageDesc           Current Stage Description
+            Approver               Approver - A comma separated approvers list
+          5) MsgType - Contains type of exception occurred in the web service call.
+          6) MsgStatement - A short description about the failure occurred while executing an User Access Web service.</Description>
+  </Variable>
+  <Variable input="true" name="requestedLineItemMap">
+    <Description>A list containing RequestedLineItem data required as an input for SAP GRC User Access Web service.
+          List(Map(String, String)) where the map accepts following keys :-
+            ItemName               Item Name
+            Connector              System ID
+            ProvItemType           Provision Item Type
+            ProvType               Provision Type
+            AssignmentType         Assignment Type
+            ProvStatus             Provision Status
+            ValidFrom              Valid From
+            ValidTo                Valid To
+            FfOwner                Firefighter Owner
+            Comments               Comments
+            ProvAction             Provision Action
+            RoleType               Role Type</Description>
+  </Variable>
+  <Variable initializer="EN" input="true" name="language" output="true">
+    <Description>The language used by requester. Default language is English &amp;quot;EN&amp;quot;</Description>
+  </Variable>
+  <Variable input="true" name="identityDisplayName"/>
+  <Variable input="true" name="identityName"/>
+  <Variable initializer="360" name="manualWorkItemHoursTillExpiration"/>
+  <Variable initializer="48" name="workItemHoursBetweenReminders"/>
+  <Variable initializer="3" name="workItemMaxReminders"/>
+  <Variable initializer="Clorox EmailTemplate-FrameworkReminder" name="workItemReminderTemplate"/>
+  <Description>This workflow subprocess is used to provision a
+      project.
+      This subprocess was added in 5.5 in an effort to
+      break groups of related steps into a single call
+      from the top level workflow.
+      It now encapsulates the following services:
+        - Process approval decisions
+           -- which recompiles the project
+        - Post provisioning forms for user's outside of the requester</Description>
+  <RuleLibraries>
+    <Reference class="sailpoint.object.Rule" name="LCM Workflow Library"/>
+  </RuleLibraries>
+  <Step icon="Start" name="Start" posX="28" posY="10">
+    <Transition to="Start Provisioning Process"/>
+  </Step>
+  <Step action="call:addMessage" icon="Message" name="Start Provisioning Process" posX="98" posY="10">
+    <Arg name="message" value="Modifications to $(identityDisplayName) are being provisioned."/>
+    <Transition to="Recalculate Account Selection" when="script:!isNull(approvalSet)"/>
+    <Transition to="Do Provisioning Forms Post-Approval" when="script:isNull(approvalSet)"/>
+    <Transition to="Recalculate Account Selection"/>
+  </Step>
+  <Step name="Recalculate Account Selection" posX="336" posY="10">
+    <Script>
+      <Source><![CDATA[
+                
+       import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
+       ApprovalRuleLibrary.recalculateAccountSelection(workflow, context);
+       
+      
+            ]]></Source>
+    </Script>
+    <Transition to="Process Approval Decisions"/>
+  </Step>
+  <Step action="call:processApprovalDecisions" icon="Task" name="Process Approval Decisions" posX="598" posY="10" resultVariable="project">
+    <Arg name="disableAudit" value="false"/>
+    <Arg name="approvalSet" value="ref:approvalSet"/>
+    <Arg name="recompile" value="ref:recompile"/>
+    <Arg name="project" value="ref:project"/>
+    <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
+    <Arg name="plan" value="ref:plan"/>
+    <Arg name="recompilePlan" value="true"/>
+    <Arg name="dontUpdatePlan" value="false"/>
+    <Description>
+      Dig through the ApprovalSets found in the Approval step and build an audit
+      trail for the decisions.  Then for any rejected items remove them from
+      the provisioning plan so they are not part of the provisioning request.
+    </Description>
+    <Transition to="Do Provisioning Forms Post-Approval"/>
+  </Step>
+  <Step icon="Task" name="Do Provisioning Forms Post-Approval" posX="836" posY="10">
+    <Arg name="formTemplate" value="ref:formTemplate"/>
+    <Arg name="requiredOwner"/>
+    <Arg name="fallbackOwner"/>
+    <Arg name="enablePSA" value="ref:enablePSA"/>
+    <Arg name="identityName" value="ref:identityName"/>
+    <Arg name="requestType" value="ref:requestType"/>
+    <Arg name="accountSelectionOwner"/>
+    <Arg name="extSendRequestorNotifications"/>
+    <Arg name="accountSelectionForm"/>
+    <Arg name="workItemForm"/>
+    <Arg name="preferredOwner">
+      <Script>
+        <Source><![CDATA[
+                    
+           if(sessionOwner.equals("System") || sessionOwner.equals("Scheduler") || sessionOwner.equals("RequestHandler"))
+           {
+            return "spadmin";
+           }
+           else
+           {
+           return sessionOwner;
+           }
+          
+                ]]></Source>
+      </Script>
+    </Arg>
+    <Arg name="workItemComments"/>
+    <Arg name="project" value="ref:project"/>
+    <Arg name="source" value="ref:source"/>
+    <Arg name="priority"/>
+    <Arg name="calculatedAccountSelectionOwner"/>
+    <Arg name="noFiltering" value="ref:noFiltering"/>
+    <Arg name="identityDisplayName" value="ref:identityDisplayName"/>
+    <Arg name="formWorkItemNotificAttrs"/>
+    <Arg name="validatePSA"/>
+    <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
+    <Arg name="formOwnerError"/>
+    <Arg name="disableManualAccountSelection"/>
+    <Description>
+      Call the standard subprocess for assembling, presenting, and assimilating
+      provisioning forms that remain after approvals.
+    </Description>
+    <Return name="project" to="project"/>
+    <Return name="psaValidationError" to="psaValidationError"/>
+    <WorkflowRef>
+      <Reference class="sailpoint.object.Workflow" name="Interactive Request Do Provisioning Forms"/>
+    </WorkflowRef>
+    <Transition to="Exit On Invalid Privileged Access" when="psaValidationError!=null"/>
+    <Transition to="Pre Provision"/>
+  </Step>
+  <Step action="call:assimilateAccountIdChanges" icon="Task" name="Pre Provision" posX="1226" posY="126" resultVariable="approvalSet">
+    <Arg name="approvalSet" value="ref:approvalSet"/>
+    <Arg name="project" value="ref:project"/>
+    <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
+    <Arg name="priority" value="ref:priority"/>
+    <Description> 
+      Before we approve assimilate the result of any accountId changes that may have been compiled 
+      into the plan back onto the ApprovalSet. 
+    </Description>
+    <Transition to="Refresh Identity Request"/>
+  </Step>
+  <Step action="call:refreshIdentityRequestAfterApproval" icon="Task" name="Refresh Identity Request" posX="1440" posY="126">
+    <Arg name="project" value="ref:project"/>
+    <Arg name="splitProvisioning" value="ref:splitProvisioning"/>
+    <Description> 
+       Assimilate any approval summaries that were built up during
+       the provisioning process.  
+    </Description>
+    <Transition to="Provision"/>
+  </Step>
+  <Step icon="Task" name="Provision" posX="1662" posY="126">
+    <Arg name="identityName" value="ref:identityName"/>
+    <Arg name="enableRetryRequest"/>
+    <Arg name="requestType" value="ref:requestType"/>
+    <Arg name="endDate" value="ref:endDate"/>
+    <Arg name="formAttrs" value="ref:formAttrs"/>
+    <Arg name="project" value="ref:project"/>
+    <Arg name="identityRequestId" value="ref:identityRequestId"/>
+    <Arg name="source" value="ref:source"/>
+    <Arg name="priority" value="ref:priority"/>
+    <Arg name="splitProvisioning" value="ref:splitProvisioning"/>
+    <Arg name="provisioningRetryThreshold"/>
+    <Arg name="foregroundProvisioning" value="ref:foregroundProvisioning"/>
+    <Arg name="noTriggers" value="ref:noTriggers"/>
+    <Arg name="trace" value="ref:trace"/>
+    <Arg name="doModifyProject" value="ref:doModifyProject"/>
+    <Arg name="disableIdentityRequests"/>
+    <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
+    <Arg name="provisioningMaxRetries"/>
+    <Arg name="retryProject"/>
+    <Arg name="flow" value="ref:flow"/>
+    <Arg name="startDate" value="ref:startDate"/>
+    <Arg name="launcher" value="ref:launcher"/>
+    <Description>
+      Call the standard subprocess to initialize the request, this includes
+      auditing, building the approvalset, compiling the plan into 
+       project and checking policy violations.
+    </Description>
+    <Return name="retries" to="retries"/>
+    <Return name="project" to="project"/>
+    <WorkflowRef>
+      <Reference class="sailpoint.object.Workflow" name="Interactive Request Provision with retries"/>
+    </WorkflowRef>
+    <Transition to="Wait for Queued Items"/>
+  </Step>
+  <Step icon="Task" name="Wait for Queued Items" posX="1764" posY="126">
+    <Arg name="trace" value="ref:trace"/>
+    <Arg name="statusChecks"/>
+    <Arg name="optimisticProv"/>
+    <Arg name="disableIdentityRequests"/>
+    <Arg name="provisioningStatusCheckInterval"/>
+    <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
+    <Arg name="project" value="ref:project"/>
+    <Arg name="splitProvisioning" value="ref:splitProvisioning"/>
+    <Arg name="provisioningMaxStatusChecks"/>
+    <Return name="project" to="project"/>
+    <WorkflowRef>
+      <Reference class="sailpoint.object.Workflow" name="Interactive Request Check Status of queued items"/>
+    </WorkflowRef>
+    <Transition to="Post Provision"/>
+  </Step>
+  <Step icon="Task" name="Post Provision" posX="1962" posY="126">
+    <Script>
+      <Source><![CDATA[
+                
+        import sailpoint.api.ObjectUtil;
+        import sailpoint.tools.Util;
+        import sailpoint.object.ProvisioningProject;
+        if ( approvalSet != null ) {
+            // Set state to pending
+            approvalSet.initializeProvisioningState();
+         }
+        if ( project != null ) 
+        {
+            if ( Util.otob(trace) ) 
+            {
+                 // clone and scrub the project so passwords are not visible
+                 ProvisioningProject clonedProject = project.deepCopy(wfcontext.getSailPointContext());
+                 ObjectUtil.scrubPasswords(clonedProject);
+            }
+        }
+      
+            ]]></Source>
+    </Script>
+    <Transition to="Manual Actions" when="script:project.getUnmanagedPlan() != null"/>
+    <Transition to="end"/>
+  </Step>
+  <Step icon="Approval" name="Manual Actions" posX="2104" posY="126">
+    <Approval mode="parallelPoll" owner="rule:Build Manual Action Approvals" renderer="lcmManualActionsRenderer.xhtml" send="identityDisplayName,identityName,policyViolations">
+      <AfterScript>
+        <Source><![CDATA[
+                    
+          import sailpoint.object.ApprovalSet;
+          import sailpoint.object.ApprovalItem;
+          import sailpoint.object.WorkItem;
+          import sailpoint.object.WorkItem;
+          import sailpoint.workflow.IdentityRequestLibrary;
+          if (item == null) {
+              // must not be a leaf approval...
+              return;
+          }
+          // mark all of the items finished once the item is complete
+          ApprovalSet set = (ApprovalSet)item.get("approvalSet");
+          if ( set != null ) {
+              List approvalItems = set.getItems();
+              for ( ApprovalItem approvalItem : approvalItems ) {
+                  approvalItem.setState(WorkItem.State.Finished);
+                  // update identity request provisioning state
+                  IdentityRequestLibrary.updateIdentityRequestItemProvisioningState(approvalItem, wfcontext);
+              }
+          }
+          // Audit the manual change
+          auditManualAction(item);
+        
+                ]]></Source>
+      </AfterScript>
+      <Arg name="workItemRequester" value="$(launcher)"/>
+      <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
+      <Arg name="workItemDescription" value="Manual Changes requested for User: $(identityDisplayName)"/>
+      <Arg name="workItemType" value="ManualAction"/>
+      <Arg name="workItemPriority" value="ref:priority"/>
+      <Arg name="workItemNotificationTemplate" value="ref:manualActionsEmailTemplate"/>
+      <Arg name="workItemReminderTemplate" value="ref:workItemReminderTemplate"/>
+      <Arg name="workItemHoursBetweenReminders" value="ref:workItemHoursBetweenReminders"/>
+      <Arg name="workItemMaxReminders" value="ref:workItemMaxReminders"/>
+      <Arg name="workItemHoursTillExpiration" value="ref:manualWorkItemHoursTillExpiration"/>
+      <Arg name="workItemEscalationStyle" value="reminder"/>
+      <InterceptorScript>
+        <Source><![CDATA[
+         
+		      import sailpoint.object.Workflow;   
+		      import sailpoint.object.Attributes;  		            		  		     
+          
+		      Date expirationDate = new Date();  		
+		      String hoursTillExpiration = manualWorkItemHoursTillExpiration;  					
+					if (hoursTillExpiration!=null) {  
+					  int hoursTillExpirationInt=Util.atoi(hoursTillExpiration);  
+						if(hoursTillExpirationInt!=null && hoursTillExpirationInt>0) {  
+						  int minutes = hoursTillExpirationInt * 60;  
+							Date dateExp = Util.incrementDateByMinutes(new Date(), minutes);  							
+							if(item!=null && item.getExpirationDate()==null && context!=null && dateExp!=null) {  							  
+								item.setExpiration(dateExp);   
+								item.setWakeUpDate(dateExp);  
+								context.saveObject(item);  
+								context.commitTransaction();  								
+							}  
+						}  
+					}  
+        ]]></Source>
+      </InterceptorScript>
+    </Approval>
+    <Transition to="end"/>
+  </Step>
+  <Step action="call:addMessage" name="Exit On Invalid Privileged Access" posX="1146" posY="10">
+    <Arg name="message" value="ref:psaValidationError"/>
+    <Arg name="type" value="Error"/>
+    <Transition to="end"/>
+  </Step>
+  <Step icon="Stop" name="end" posX="1524" posY="10"/>
+</Workflow>

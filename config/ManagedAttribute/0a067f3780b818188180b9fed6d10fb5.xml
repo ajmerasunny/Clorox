@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="BusinessUnit" displayName="HP PPM Cleaning Core" hash="284af3fdd5e8cea7b4daa79526e8e681dc6bca0a" requestable="true" type="BusinessUnit" value="HP PPM Cleaning Core">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%HP_PPM_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="For access to Cleaning Core BU in PPM"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLOROX_UAA_ADMINS_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

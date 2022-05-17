@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="MediaBin Internal" hash="6380e9429c9626a5e1aca22e35fac4a5fc20af43" type="Role" value="MediaBin Internal">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%MediaBin_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="MediaBin Internal"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_CC-Mediabin_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

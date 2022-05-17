@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox Skip Manager Approval on Remove Access Rule">
+  <Source><![CDATA[
+
+  import sailpoint.object.ProvisioningPlan;
+  import sailpoint.object.ProvisioningPlan.AccountRequest;
+  import sailpoint.object.ProvisioningPlan.AttributeRequest;
+  import org.apache.log4j.Logger;  
+  import org.apache.log4j.Level;  
+  import sailpoint.object.Bundle;
+  import sailpoint.tools.Util;
+  import sailpoint.object.Bundle;
+  import sailpoint.object.ApprovalItem;	
+  import sailpoint.object.ManagedAttribute;
+  import sailpoint.object.QueryOptions;
+  import sailpoint.object.Filter;
+  import sailpoint.services.ServicesUtil;
+  import sailpoint.object.Identity;
+  import sailpoint.object.ApprovalItem;
+  import sailpoint.object.IdentityRequest;
+  import java.util.Map;
+
+
+  import sailpoint.object.Custom;
+
+  Logger log = Logger.getLogger("rapidapponboarding.rules");
+  log.debug("Inside myACCESS Skip Manager Approval Rule: " + plan.toXml());
+
+    //establish the default resultMap to return
+  Map resultMap = new HashMap();
+
+
+  //name type of item request
+  String name = item.getName();
+  String applicationName = item.getApplicationName();
+
+
+  //if its a remove don't do approval, return the default
+  String itemOp = item.getOperation();
+  
+  if(itemOp != null && itemOp.equalsIgnoreCase("Remove") )
+  {
+    resultMap.put("ApprovalRequired","false");
+  
+  } 
+
+  
+return resultMap;
+ 
+
+  ]]></Source>
+</Rule>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="BusinessUnit" displayName="HP PPM HR" hash="2ba1e52a386f22ae39e450bc8c3646878e59a036" requestable="true" type="BusinessUnit" value="HP PPM HR">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%HP_PPM_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="For access to HR BU in PPM"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLOROX_UAA_ADMINS_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

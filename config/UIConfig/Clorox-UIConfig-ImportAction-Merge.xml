@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sailpoint PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<sailpoint>
+	<ImportAction name="merge">
+		<UIConfig name="UIConfig">
+			<Attributes>
+				<Map>					
+					<entry key="uiWorkItemListCardColumns">
+					  <value>
+					    <List>
+						  <ColumnConfig dataIndex="expirationDate" dateStyle="shortDate" groupProperty="expirationDate" headerKey="Expiration Date" property="expirationDate" secondarySort="name" sortProperty="expirationDate" sortable="true" stateId="expirationDate"/>
+						</List>
+					  </value>
+					</entry>						
+				</Map>
+			</Attributes>
+		</UIConfig>
+	</ImportAction>
+</sailpoint>

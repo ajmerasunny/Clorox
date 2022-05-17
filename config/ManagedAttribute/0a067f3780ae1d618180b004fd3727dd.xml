@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="HP PPM Reviewer" hash="58bd5688acd7c679d37abc080fe39adb3b0c5776" type="Role" value="HP PPM Reviewer">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%HP_PPM_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="HP PPM Reviewer"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLOROX_UAA_ADMINS_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

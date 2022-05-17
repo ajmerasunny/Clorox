@@ -1,0 +1,4 @@
+/build/
+/bin/
+*.zip
+base/patch/identityiq-8.1p2.jar

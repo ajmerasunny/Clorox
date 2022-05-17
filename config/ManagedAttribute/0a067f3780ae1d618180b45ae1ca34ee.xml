@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="Confirmer" hash="69c071aa46dab4db8647aca5bb8f1bebc856f253" type="Role" value="Confirmer">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%iDMS_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="Confirmer"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLOROX_UAA_ADMINS_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

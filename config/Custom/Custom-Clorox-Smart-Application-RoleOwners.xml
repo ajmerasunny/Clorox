@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Custom PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Custom name="Clorox SMART Application with Secondary Approval">
+  <Attributes>
+    <Map>
+        <entry key="Applications">
+            <value>
+                <List>
+                    <String>%%CCMS_APP_NAME%%</String>
+                    <String>%%iDMS_APP_NAME%%</String>
+			  <String>%%Concur_APP_NAME%%</String>
+			  <String>%%EssBase%%</String>
+			  <String>%%DS/IS%%</String>					
+                </List>
+            </value>
+        </entry>
+		<entry key="ApplicationOwner">
+        <value>
+          <Map>
+            <entry key="%%CCMS_APP_NAME%%" value="%%CLX_AR_CCMSAdmin_OWNER_WORKGROUP%%"/>
+            <entry key="%%iDMS_APP_NAME%%" value="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
+            <entry key="%%Concur_APP_NAME%%" value="%%CLX_AR_ConcurAdmin_OWNER_WORKGROUP%%"/>
+            <entry key="%%EssBase%%" value="%%CLX_AR_DSISOwner_OWNER_WORKGROUP%%"/>
+            <entry key="%%DS/IS%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
+          </Map>
+        </value>
+      </entry>        
+    </Map>
+  </Attributes>
+</Custom>

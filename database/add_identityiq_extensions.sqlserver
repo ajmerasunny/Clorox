@@ -1,0 +1,531 @@
+--
+-- This script is generated from the *Extended.hbm.xml
+-- files and contains alter statements and indexes for
+-- extended attributes that can be applied to an
+-- existing database.
+--
+
+USE identityiq
+GO
+
+--
+-- Identity
+--
+
+alter table identityiq.spt_identity add extended1 nvarchar(450) null;
+create index spt_identity_extended1_ci on identityiq.spt_identity (extended1);
+GO
+alter table identityiq.spt_identity add extended2 nvarchar(450) null;
+create index spt_identity_extended2_ci on identityiq.spt_identity (extended2);
+GO
+alter table identityiq.spt_identity add extended3 nvarchar(450) null;
+create index spt_identity_extended3_ci on identityiq.spt_identity (extended3);
+GO
+alter table identityiq.spt_identity add extended4 nvarchar(450) null;
+create index spt_identity_extended4_ci on identityiq.spt_identity (extended4);
+GO
+alter table identityiq.spt_identity add extended5 nvarchar(450) null;
+create index spt_identity_extended5_ci on identityiq.spt_identity (extended5);
+GO
+alter table identityiq.spt_identity add extended6 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended7 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended8 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended9 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended10 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add employee_id nvarchar(450) null;
+create index spt_identity_employeeid_ci on identityiq.spt_identity (employee_id);
+GO
+alter table identityiq.spt_identity add sent_end_date_notification nvarchar(450) null;
+create index spt_identity_sentenddatenotification_ci on identityiq.spt_identity (sent_end_date_notification);
+GO
+alter table identityiq.spt_identity add legal_hold nvarchar(450) null;
+create index spt_identity_legalhold_ci on identityiq.spt_identity (legal_hold);
+GO
+alter table identityiq.spt_identity add account_id nvarchar(450) null;
+create index spt_identity_accountid_ci on identityiq.spt_identity (account_id);
+GO
+alter table identityiq.spt_identity add forwarding_user nvarchar(450) null;
+create index spt_identity_forwardinguser_ci on identityiq.spt_identity (forwarding_user);
+GO
+alter table identityiq.spt_identity add termination_date nvarchar(450) null;
+create index spt_identity_terminationdate_ci on identityiq.spt_identity (termination_date);
+GO
+alter table identityiq.spt_identity add distinguished_name nvarchar(450) null;
+create index spt_identity_distinguishedname_ci on identityiq.spt_identity (distinguished_name);
+GO
+alter table identityiq.spt_identity add worker_status nvarchar(450) null;
+create index spt_identity_workerstatus_ci on identityiq.spt_identity (worker_status);
+GO
+alter table identityiq.spt_identity add ext_email nvarchar(450) null;
+create index spt_identity_extemail_ci on identityiq.spt_identity (ext_email);
+GO
+alter table identityiq.spt_identity add approver_flag nvarchar(450) null;
+create index spt_identity_approverFlag_ci on identityiq.spt_identity (approver_flag);
+GO
+alter table identityiq.spt_identity add extended11 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended12 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended13 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended14 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended15 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended16 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended17 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended18 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended19 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add extended20 nvarchar(450) null;
+GO
+alter table identityiq.spt_identity add saccount_ownerone nvarchar(450) null;
+create index spt_identity_sOwnone_ci on identityiq.spt_identity (saccount_ownerone);
+GO
+alter table identityiq.spt_identity add service_cube nvarchar(450) null;
+create index spt_identity_sCube_ci on identityiq.spt_identity (service_cube);
+GO
+alter table identityiq.spt_identity add needs_joiner nvarchar(450) null;
+create index spt_identity_needsJoiner_ci on identityiq.spt_identity (needs_joiner);
+GO
+alter table identityiq.spt_identity add middle_name nvarchar(450) null;
+create index spt_identity_middleName_ci on identityiq.spt_identity (middle_name);
+GO
+alter table identityiq.spt_identity add ctrexp_dt nvarchar(450) null;
+create index spt_identity_ctrexpDt_ci on identityiq.spt_identity (ctrexp_dt);
+GO
+alter table identityiq.spt_identity add ctr_mgr nvarchar(450) null;
+create index spt_identity_ctrMgr_ci on identityiq.spt_identity (ctr_mgr);
+GO
+alter table identityiq.spt_identity add ctr_profid nvarchar(450) null;
+create index spt_identity_ctrProfid_ci on identityiq.spt_identity (ctr_profid);
+GO
+alter table identityiq.spt_identity add ctr_dptid nvarchar(450) null;
+create index spt_identity_ctrDptid_ci on identityiq.spt_identity (ctr_dptid);
+GO
+alter table identityiq.spt_identity add ctr_vendorid nvarchar(450) null;
+create index spt_identity_ctrVendorid_ci on identityiq.spt_identity (ctr_vendorid);
+GO
+alter table identityiq.spt_identity add ctr_prfmgrdpids nvarchar(450) null;
+create index spt_identity_ctrPrfmgrdpids_ci on identityiq.spt_identity (ctr_prfmgrdpids);
+GO
+alter table identityiq.spt_identity add ctr_acctadmdpids nvarchar(450) null;
+create index spt_identity_ctrAcctadmdpids_ci on identityiq.spt_identity (ctr_acctadmdpids);
+GO
+alter table identityiq.spt_identity add ctr_acctspndpids nvarchar(450) null;
+create index spt_identity_ctrAcctspndpids_ci on identityiq.spt_identity (ctr_acctspndpids);
+GO
+
+--
+-- Link
+--
+alter table identityiq.spt_link add role_details nvarchar(4000) null;
+GO
+
+alter table identityiq.spt_link add extended1 nvarchar(450) null;
+create index spt_link_extended1_ci on identityiq.spt_link (extended1);
+GO
+alter table identityiq.spt_link add extended2 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended3 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended4 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended5 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended6 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended7 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended8 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended9 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended10 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended11 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended12 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended13 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended14 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended15 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended16 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended17 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended18 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended19 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add extended20 nvarchar(450) null;
+GO
+alter table identityiq.spt_link add ps_account nvarchar(450) null;
+create index spt_link_psAccount_ci on identityiq.spt_link (ps_account);
+GO
+alter table identityiq.spt_link add disabled_account nvarchar(450) null;
+create index spt_link_disabledAccount_ci on identityiq.spt_link (disabled_account);
+GO
+alter table identityiq.spt_link add locked_account nvarchar(450) null;
+create index spt_link_lockedAccount_ci on identityiq.spt_link (locked_account);
+GO
+alter table identityiq.spt_link add s_account nvarchar(450) null;
+create index spt_link_sAccount_ci on identityiq.spt_link (s_account);
+GO
+alter table identityiq.spt_link add apaccount_type nvarchar(450) null;
+create index spt_link_apAccttype_ci on identityiq.spt_link (apaccount_type);
+GO
+
+--
+-- Application
+--
+
+alter table identityiq.spt_application add extended1 nvarchar(450) null;
+create index spt_app_extended1_ci on identityiq.spt_application (extended1);
+GO
+alter table identityiq.spt_application add extended2 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended3 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended4 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended5 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended6 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended7 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended8 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended9 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended10 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended11 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended12 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended13 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended14 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended15 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended16 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended17 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended18 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended19 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add extended20 nvarchar(450) null;
+GO
+alter table identityiq.spt_application add bus_app nvarchar(450) null;
+create index spt_app_busApp_ci on identityiq.spt_application (bus_app);
+GO
+alter table identityiq.spt_application add termination_process nvarchar(450) null;
+create index spt_app_terminationProcess_ci on identityiq.spt_application (termination_process);
+GO
+alter table identityiq.spt_application add loa_process nvarchar(450) null;
+create index spt_app_loaProcess_ci on identityiq.spt_application (loa_process);
+GO
+alter table identityiq.spt_application add ltd_process nvarchar(450) null;
+create index spt_app_ltdProcess_ci on identityiq.spt_application (ltd_process);
+GO
+alter table identityiq.spt_application add mover_process nvarchar(450) null;
+create index spt_app_moverOpt_ci on identityiq.spt_application (mover_process);
+GO
+alter table identityiq.spt_application add native_change_process nvarchar(450) null;
+create index spt_app_nativeChangeOpt_ci on identityiq.spt_application (native_change_process);
+GO
+alter table identityiq.spt_application add app_bus_approvers nvarchar(450) null;
+create index spt_app_busApprs_ci on identityiq.spt_application (app_bus_approvers);
+GO
+alter table identityiq.spt_application add additional_app_bus_approvers nvarchar(450) null;
+create index spt_app_addnlBusApprs_ci on identityiq.spt_application (additional_app_bus_approvers);
+GO
+alter table identityiq.spt_application add enablepswexp_notification nvarchar(450) null;
+create index spt_app_enableexpNotif_ci on identityiq.spt_application (enablepswexp_notification);
+GO
+alter table identityiq.spt_application add after_pass_exp_process nvarchar(450) null;
+create index spt_app_afterpwdexpOpt_ci on identityiq.spt_application (after_pass_exp_process);
+GO
+alter table identityiq.spt_application add joiner_enabled nvarchar(450) null;
+create index spt_app_joinerEnabled_ci on identityiq.spt_application (joiner_enabled);
+GO
+alter table identityiq.spt_application add rehire_process nvarchar(450) null;
+create index spt_app_rehireOpt_ci on identityiq.spt_application (rehire_process);
+GO
+alter table identityiq.spt_application add rtwloa_process nvarchar(450) null;
+create index spt_app_rtwLOAOpt_ci on identityiq.spt_application (rtwloa_process);
+GO
+alter table identityiq.spt_application add rtwltd_process nvarchar(450) null;
+create index spt_app_rtwLTDOpt_ci on identityiq.spt_application (rtwltd_process);
+GO
+alter table identityiq.spt_application add reverseleaver_process nvarchar(450) null;
+create index spt_app_revrsleaverOpt_ci on identityiq.spt_application (reverseleaver_process);
+GO
+alter table identityiq.spt_application add soft_policyviolations nvarchar(450) null;
+create index spt_app_softPV_ci on identityiq.spt_application (soft_policyviolations);
+GO
+alter table identityiq.spt_application add hard_policyviolations nvarchar(450) null;
+create index spt_app_hardPV_ci on identityiq.spt_application (hard_policyviolations);
+GO
+
+--
+-- Bundle
+--
+
+alter table identityiq.spt_bundle add extended1 nvarchar(450) null;
+create index spt_bundle_extended1_ci on identityiq.spt_bundle (extended1);
+GO
+alter table identityiq.spt_bundle add extended2 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended3 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended4 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended5 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended6 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended7 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended8 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended9 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended10 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended11 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended12 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended13 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended14 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended15 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended16 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended17 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended18 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended19 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add extended20 nvarchar(450) null;
+GO
+alter table identityiq.spt_bundle add all_approvers nvarchar(450) null;
+create index spt_bundle_allApprovers_ci on identityiq.spt_bundle (all_approvers);
+GO
+alter table identityiq.spt_bundle add role_keywords nvarchar(450) null;
+create index spt_bundle_roleKeywords_ci on identityiq.spt_bundle (role_keywords);
+GO
+alter table identityiq.spt_bundle add enabler_types nvarchar(450) null;
+create index spt_bundle_enablerTypes_ci on identityiq.spt_bundle (enabler_types);
+GO
+alter table identityiq.spt_bundle add business_subprocess_name nvarchar(450) null;
+create index spt_bundle_businessSubprocessName_ci on identityiq.spt_bundle (business_subprocess_name);
+GO
+
+alter table identityiq.spt_bundle add is_birthright nvarchar(450) null;
+create index spt_bundle_birthright_ci on identityiq.spt_bundle (is_birthright);
+GO
+alter table identityiq.spt_bundle add app_name nvarchar(450) null;
+create index spt_bundle_appName_ci on identityiq.spt_bundle (app_name);
+GO
+alter table identityiq.spt_bundle add role_bus_approvers nvarchar(450) null;
+create index spt_bundle_roleBusApprs_ci on identityiq.spt_bundle (role_bus_approvers);
+GO
+alter table identityiq.spt_bundle add additional_role_bus_approvers nvarchar(450) null;
+create index spt_bundle_addRoleBusApprs_ci on identityiq.spt_bundle (additional_role_bus_approvers);
+GO
+alter table identityiq.spt_bundle add role_privileged nvarchar(450) null;
+create index spt_bundle_rolePriv_ci on identityiq.spt_bundle (role_privileged);
+GO
+
+--
+-- ManagedAttribute
+--
+
+alter table identityiq.spt_managed_attribute add extended1 nvarchar(450) null;
+create index spt_manag_atr_extd1_ci on identityiq.spt_managed_attribute (extended1);
+GO
+alter table identityiq.spt_managed_attribute add extended2 nvarchar(450) null;
+create index spt_manag_atr_extd2_ci on identityiq.spt_managed_attribute (extended2);
+GO
+alter table identityiq.spt_managed_attribute add extended3 nvarchar(450) null;
+create index spt_manag_atr_extd3_ci on identityiq.spt_managed_attribute (extended3);
+GO
+alter table identityiq.spt_managed_attribute add extended4 nvarchar(450) null;
+create index spt_managed_attr_extended4_ci on identityiq.spt_managed_attribute (extended4);
+GO
+alter table identityiq.spt_managed_attribute add extended5 nvarchar(450) null;
+create index spt_managed_attr_extended5_ci on identityiq.spt_managed_attribute (extended5);
+GO
+alter table identityiq.spt_managed_attribute add extended6 nvarchar(450) null;
+create index spt_managed_attr_extended6_ci on identityiq.spt_managed_attribute (extended6);
+GO
+alter table identityiq.spt_managed_attribute add extended7 nvarchar(450) null;
+create index spt_managed_attr_extended7_ci on identityiq.spt_managed_attribute (extended7);
+GO
+alter table identityiq.spt_managed_attribute add extended8 nvarchar(450) null;
+create index spt_managed_attr_extended8_ci on identityiq.spt_managed_attribute (extended8);
+GO
+alter table identityiq.spt_managed_attribute add all_approvers nvarchar(450) null;
+create index spt_manag_atr_allApprovers_ci on identityiq.spt_managed_attribute (all_approvers);
+GO
+alter table identityiq.spt_managed_attribute add entitlement_keywords nvarchar(450) null;
+create index spt_manag_atr_entitlementKeywords_ci on identityiq.spt_managed_attribute (entitlement_keywords);
+GO
+alter table identityiq.spt_managed_attribute add enabler_type nvarchar(450) null;
+create index spt_manag_atr_enablerType_ci on identityiq.spt_managed_attribute (enabler_type);
+GO
+alter table identityiq.spt_managed_attribute add location nvarchar(450) null;
+create index spt_manag_atr_location_ci on identityiq.spt_managed_attribute (location);
+GO
+alter table identityiq.spt_managed_attribute add enabler_description nvarchar(450) null;
+create index spt_manag_atr_enablerDescription_ci on identityiq.spt_managed_attribute (enabler_description);
+GO
+alter table identityiq.spt_managed_attribute add business_subprocess_name nvarchar(450) null;
+create index spt_manag_atr_businessSubprocessName_ci on identityiq.spt_managed_attribute (business_subprocess_name);
+GO
+alter table identityiq.spt_managed_attribute add project_name nvarchar(450) null;
+GO
+alter table identityiq.spt_managed_attribute add task_role nvarchar(4000) null;
+GO
+alter table identityiq.spt_managed_attribute add task_role_system nvarchar(450) null;
+GO
+alter table identityiq.spt_managed_attribute add detailed_business_description nvarchar(4000) null;
+GO
+
+alter table identityiq.spt_managed_attribute add business_role_type nvarchar(450) null;
+GO
+alter table identityiq.spt_managed_attribute add business_friendly_task_role_system nvarchar(450) null;
+GO
+
+create index spt_managed_attr_businessToleType_ci on identityiq.spt_managed_attribute (business_role_type);
+GO
+create index spt_managed_attr_businessFriendlyTaskRoleSystem_ci on identityiq.spt_managed_attribute (business_friendly_task_role_system);
+GO
+
+-- alter index all on identityiq.spt_managed_attribute rebuild
+
+alter table identityiq.spt_managed_attribute add is_birthright nvarchar(450) null;
+create index spt_manag_atr_birth_ci on identityiq.spt_managed_attribute (is_birthright);
+GO
+alter table identityiq.spt_managed_attribute add ent_bus_approvers nvarchar(450) null;
+create index spt_manag_atr_eBusApp_ci on identityiq.spt_managed_attribute (ent_bus_approvers);
+GO
+alter table identityiq.spt_managed_attribute add additional_ent_bus_approvers nvarchar(450) null;
+create index spt_manag_atr_addEntBusApr_ci on identityiq.spt_managed_attribute (additional_ent_bus_approvers);
+GO
+alter table identityiq.spt_managed_attribute add ent_app_name nvarchar(450) null;
+create index spt_manag_atr_eAppName_ci on identityiq.spt_managed_attribute (ent_app_name);
+GO
+alter table identityiq.spt_managed_attribute add ent_privileged nvarchar(450) null;
+create index spt_manag_atr_entPrivilgd_ci on identityiq.spt_managed_attribute (ent_privileged);
+GO
+alter table identityiq.spt_managed_attribute add manual_override nvarchar(450) null;
+create index spt_manag_atr_manOver_ci on identityiq.spt_managed_attribute (manual_override);
+GO
+
+--
+-- CertificationItem
+--
+
+alter table identityiq.spt_certification_item add extended1 nvarchar(450) null;
+create index spt_certitem_extended1_ci on identityiq.spt_certification_item (extended1);
+GO
+alter table identityiq.spt_certification_item add extended2 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended3 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended4 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended5 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended6 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended7 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended8 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended9 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended10 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended11 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended12 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended13 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended14 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended15 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended16 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended17 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended18 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended19 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add extended20 nvarchar(450) null;
+GO
+alter table identityiq.spt_certification_item add s_account nvarchar(450) null;
+create index spt_certitem_sAccount_ci on identityiq.spt_certification_item (s_account);
+GO
+alter table identityiq.spt_certification_item add disabled_account nvarchar(450) null;
+create index spt_certitem_disAcct_ci on identityiq.spt_certification_item (disabled_account);
+GO
+alter table identityiq.spt_certification_item add locked_account nvarchar(450) null;
+create index spt_certitem_lockAcct_ci on identityiq.spt_certification_item (locked_account);
+GO
+alter table identityiq.spt_certification_item add ps_account nvarchar(450) null;
+create index spt_certitem_psAccount_ci on identityiq.spt_certification_item (ps_account);
+GO
+alter table identityiq.spt_certification_item add apaccount_type nvarchar(450) null;
+create index spt_certitem_apAccttype_ci on identityiq.spt_certification_item (apaccount_type);
+GO
+
+--
+-- Target
+--
+
+alter table identityiq.spt_target add extended1 nvarchar(255) null;
+create index spt_target_extended1_ci on identityiq.spt_target (extended1);
+GO
+
+--
+-- Alert
+--
+
+alter table identityiq.spt_alert add extended1 nvarchar(255) null;
+create index spt_alert_extended1_ci on identityiq.spt_alert (extended1);
+GO
+
+--
+-- Server
+--
+
+alter table identityiq.spt_server add extended1 nvarchar(255) null;
+create index spt_server_extended1_ci on identityiq.spt_server (extended1);
+GO
+

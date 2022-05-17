@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="HP PPM Finance or CCEM" name="HP PPM Finance or CCEM" type="business">
+  <Attributes>
+    <Map>
+      <entry key="acceleratorPackEnabled"/>
+      <entry key="accountSelectorRules"/>
+      <entry key="additionalRoleBusApprovalRule"/>
+      <entry key="additionalRoleBusApprovers"/>
+      <entry key="allApprovers"/>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="apaccountType"/>
+      <entry key="appName" value="%%HP_PPM_APP_NAME%%"/>
+      <entry key="autoAssignEnablerTypes"/>
+      <entry key="businessSubprocessName"/>
+      <entry key="defaultEndDateSpan"/>
+      <entry key="defaultStartDateSpan"/>
+      <entry key="enablerTypes" value="Select Business Unit"/>
+      <entry key="formappName"/>
+      <entry key="isBirthright"/>
+      <entry key="mandatoryEntitlements"/>
+      <entry key="mandatoryRoles"/>
+      <entry key="mergeTemplates" value="false"/>
+      <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
+      <entry key="roleBusApprovalRule"/>
+      <entry key="roleBusApprovers"/>
+      <entry key="roleKeywords" value="HP PPM Finance or CCEM"/>
+      <entry key="rolePrivileged"/>
+      <entry key="sapVcbr">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="singleRoleRequest"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="For Finance or CCEM PPM Access- Allows user to run financial summary or cost savings reports in PPM. Also need to request appropriate BU entitlement&lt;br&gt;&#10;&#10;&lt;br&gt;&#10;&#10;&lt;b&gt;Additional Steps required for your request:&lt;/b&gt;&lt;br&gt;&#10;&#10;Please ensure that you select a Business Unit Entitlement (e.g., HP PPM ASIA, HP PPM AMEA)&lt;br&gt;"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="HP PPM"/>
+  </Inheritance>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_HPPPMAdmin_OWNER_WORKGROUP%%"/>
+  </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="HP PPM PPM Users IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="HP PPM Finance or CCEM IT Role"/>
+  </Requirements>
+</Bundle>

@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Identity name="%%CLX_AR_IRI_OWNER_WORKGROUP%%" workgroup="true">
+  <Attributes>
+    <Map>
+      <entry key="displayName" value="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
+    </Map>
+  </Attributes>
+  <Description>IRI</Description>
+  <Preferences>
+    <Map>
+      <entry key="workgroupNotificationOption">
+        <value>
+          <WorkgroupNotifationOption>Both</WorkgroupNotifationOption>
+        </value>
+      </entry>
+    </Map>
+  </Preferences>
+</Identity>

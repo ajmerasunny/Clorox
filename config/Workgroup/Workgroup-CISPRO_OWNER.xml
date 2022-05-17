@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Identity name="%%CLX_AR_CISPRO_OWNER_WORKGROUP%%" workgroup="true">
+  <Attributes>
+    <Map>
+      <entry key="displayName" value="%%CLX_AR_CISPRO_OWNER_WORKGROUP%%"/>
+      <entry key="email" value="%%CISPRO_ADMIN_EMAIL_ADDRESS%%"/>
+    </Map>
+  </Attributes>
+  <Description>CTC - CisPro Global</Description>
+  <Preferences>
+    <Map>
+      <entry key="workgroupNotificationOption">
+        <value>
+          <WorkgroupNotifationOption>Both</WorkgroupNotifationOption>
+        </value>
+      </entry>
+    </Map>
+  </Preferences>
+</Identity>

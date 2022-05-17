@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="iDMS Invoice Search" name="iDMS Invoice Search" type="business">
+  <Attributes>
+    <Map>
+      <entry key="acceleratorPackEnabled"/>
+      <entry key="accountSelectorRules"/>
+      <entry key="additionalRoleBusApprovalRule"/>
+      <entry key="additionalRoleBusApprovers"/>
+      <entry key="additionalRoleBusInvoice Searchs"/>
+      <entry key="allApprovers"/>
+      <entry key="allInvoice Searchs"/>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="apaccountType"/>
+      <entry key="appName" value="%%iDMS_APP_NAME%%"/>
+      <entry key="autoAssignEnablerTypes"/>
+      <entry key="businessSubprocessName"/>
+      <entry key="defaultEndDateSpan"/>
+      <entry key="defaultStartDateSpan"/>
+      <entry key="enablerTypes"/>
+      <entry key="formappName"/>
+      <entry key="isBirthright"/>
+      <entry key="mandatoryEntitlements"/>
+      <entry key="mandatoryRoles"/>
+      <entry key="mergeTemplates" value="false"/>
+      <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
+      <entry key="roleBusApprovalRule"/>
+      <entry key="roleBusApprovers"/>
+      <entry key="roleKeywords" value="iDMS Invoice Search"/>
+      <entry key="rolePrivileged"/>
+      <entry key="sapVcbr">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="singleRoleRequest"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="This role provides expanded iDMS search capabilities and permits users to view all images stored in iDMS, which are composed of invoices processed in the previous 2 years. (Role should be reserved for those individuals who have a business requirement to obtain a high volume of invoice copies.)"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="iDMS"/>
+  </Inheritance>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
+  </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="iDMS Invoice Search IT Role"/>
+  </Requirements>
+</Bundle>
