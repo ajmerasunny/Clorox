@@ -26,7 +26,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName"/>
+      <entry key="appName" value="%%CTC_CISPRO_Global_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -73,6 +73,20 @@
           <Value>
             <List>
               <String>%%CTC-CISPRO_GLOBAL%%</String>
+            </List>
+          </Value>
+        </Filter>
+      </Constraints>
+    </Profile>
+     <Profile>
+      <ApplicationRef>
+        <Reference class="sailpoint.object.Application" name="%%CTC_CISPRO_Global_APP_NAME%%"/>
+      </ApplicationRef>
+      <Constraints>
+        <Filter operation="CONTAINS_ALL" property="Role">
+          <Value>
+            <List>
+              <String>CTC CISPRO Global</String>
             </List>
           </Value>
         </Filter>
