@@ -72,7 +72,7 @@
         <Filter operation="CONTAINS_ALL" property="memberOf">
           <Value>
             <List>
-              <String>%IRI_JBS_IRIGROUP%%</String>
+              <String>%%IRI_JBS_IRIGROUP%%</String>
             </List>
           </Value>
         </Filter>
