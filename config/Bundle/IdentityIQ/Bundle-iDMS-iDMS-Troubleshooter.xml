@@ -51,5 +51,6 @@
   </Owner>
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="iDMS Troubleshooter IT Role"/>
+        <Reference class="sailpoint.object.Bundle" name="iDMS IT Role"/>
   </Requirements>
 </Bundle>

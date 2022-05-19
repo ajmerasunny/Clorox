@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="Role" displayName="IRI Unify POS (Store) Data Read Only" hash="4926fd14e96f5be311aa0b4922b51f38fb4484c0" type="Role" value="IRI Unify POS (Store) Data Read Only">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="IRI Unify POS (Store) Data Read Only" type="Role" value="IRI Unify POS (Store) Data Read Only">
   <ApplicationRef>
     <Reference class="sailpoint.object.Application" name="%%IRI_APP_NAME%%"/>
   </ApplicationRef>

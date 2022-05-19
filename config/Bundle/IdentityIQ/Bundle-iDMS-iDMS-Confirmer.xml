@@ -49,6 +49,7 @@
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="iDMS IT Role"/>
     <Reference class="sailpoint.object.Bundle" name="iDMS Confirmer IT Role"/>
   </Requirements>
 </Bundle>

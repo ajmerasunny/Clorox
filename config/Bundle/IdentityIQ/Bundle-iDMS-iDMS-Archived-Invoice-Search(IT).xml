@@ -57,7 +57,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>Archived Invoice Search</String>
+              <String>iDMS Archived Invoice Search</String>
             </List>
           </Value>
         </Filter>

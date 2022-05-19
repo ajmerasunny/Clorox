@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="Role" displayName="CTC CISPRO Global" hash="354315697703fa4d8ae4fd29f040a4110713f660" type="Role" value="CTC CISPRO Global">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="CTC CISPRO Global" type="Role" value="CTC CISPRO Global">
   <ApplicationRef>
     <Reference class="sailpoint.object.Application" name="%%CTC_CISPRO_Global_APP_NAME%%"/>
   </ApplicationRef>
