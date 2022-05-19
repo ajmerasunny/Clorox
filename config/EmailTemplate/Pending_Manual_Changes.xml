@@ -6,7 +6,7 @@
 	      <html>
           <body>
  	<p>A request has been made by $launcher for '$identityDisplayName' within the myAccess system which requires your action to confirm an approved manual work item.</p> 	
- 	<p>Request ID:	<a href="http://%%CLOROX_IDENTITYIQ_HOMEPAGE_LINK%%/workitem/workItem.jsf?id=${workItem.id}">$spExtAttrs.identityRequestId</a></p>
+ 	<p>Request ID:	<a href="%%CLOROX_IDENTITYIQ_HOMEPAGE_LINK%%/workitem/workItem.jsf?id=${workItem.id}">$spExtAttrs.identityRequestId</a></p>
    
 #if ( $approvalSet.items )
 #foreach ($item in $approvalSet.items)

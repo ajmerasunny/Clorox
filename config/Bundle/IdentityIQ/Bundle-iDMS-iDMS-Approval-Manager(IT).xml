@@ -57,7 +57,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>Approval Manager</String>
+              <String>iDMS Approval Manager</String>
             </List>
           </Value>
         </Filter>

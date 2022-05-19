@@ -57,7 +57,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>GSS COE</String>
+              <String>iDMS GSS COE</String>
             </List>
           </Value>
         </Filter>

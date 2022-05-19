@@ -57,7 +57,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>Confirmer</String>
+              <String>iDMS Confirmer</String>
             </List>
           </Value>
         </Filter>
