@@ -242,6 +242,9 @@
       <AttributeDefinition entitlement="true" managed="true" multi="true" name="Role" schemaObjectType="Role" type="string">
         <Description>Role</Description>
       </AttributeDefinition>
+      <AttributeDefinition name="AccountExpiration" type="string">
+        <Description>AccountExpiration</Description>
+      </AttributeDefinition>       
     </Schema>
     <Schema aggregationType="group" descriptionAttribute="Role" displayAttribute="Role" identityAttribute="Role" instanceAttribute="Role" nativeObjectType="Role" objectType="Role" permissionsRemediationModificationType="None">
       <AttributeDefinition entitlement="true" multi="true" name="Role" schemaObjectType="Role" type="string">

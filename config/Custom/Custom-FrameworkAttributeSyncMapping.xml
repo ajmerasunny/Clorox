@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Custom PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Custom created="1553026907462" id="8a86ffc969979d890169979dfd46007d" modified="1653075743376" name="Custom-FrameworkAttributeSyncMapping">
+  <Attributes>
+    <Map>
+      <entry key="CREATEPOLICY">
+        <value>
+          <List>
+            <String>LDAP:givenName</String>
+            <String>Active Directory:streetAddress</String>
+            <String>MyTech:title</String>
+            <String>Active Directory:postalAddress</String>
+            <String>Active Directory:l</String>
+            <String>Active Directory:clxPronoun</String>
+            <String>Active Directory:displayName</String>
+            <String>Active Directory:extensionAttribute13</String>
+            <String>Active Directory:mail</String>
+            <String>Active Directory:extensionAttribute15</String>
+            <String>Active Directory:employeeNumber</String>
+            <String>Active Directory:title</String>
+            <String>Active Directory:physicalDeliveryOfficeName</String>
+            <String>Active Directory:postalCode</String>
+            <String>Active Directory:givenName</String>
+            <String>Active Directory:employeeType</String>
+            <String>Active Directory:initials</String>
+            <String>Active Directory:sn</String>
+            <String>Active Directory:st</String>
+            <String>Active Directory:officePhone</String>
+            <String>Active Directory:telephoneNumber</String>
+            <String>Active Directory:department</String>
+            <String>Active Directory:company</String>
+            <String>MyTech:u_employee_type</String>
+            <String>MyTech:email</String>
+            <String>MyTech:title</String>
+            <String>MyTech:employee_number</String>
+            <String>MyTech:location</String>
+            <String>MyTech:mobile_phone</String>
+            <String>MyTech:phone</String>
+            <String>MyTech:first_name</String>
+            <String>MyTech:last_name</String>
+            <String>MyTech:department</String>
+            <String>MyTech:company</String>
+            <String>MyTech:cost_center</String>
+            <String>MyTech:user_name</String>
+            <String>LDAP:mail</String>
+            <String>LDAP:sn</String>
+            <String>Exceedra:User_FirstName</String>
+            <String>Exceedra:User_LastName</String>
+            <String>Exceedra:User_DisplayName</String>
+            <String>Exceedra:User_Email</String>
+            <String>Exceedra:User_SSOName</String>
+            <String>Exceedra:User_LoginName</String>
+            <String>Exceedra:User_AD_Name</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="accountId">
+        <value>
+          <List>
+            <String>Workday:USERID</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="ctexpDt">
+        <value>
+          <List>
+            <String>RULE:Active Directory:Clorox AttributeSync ActiveDirectory ContractEndDate Rule</String>
+            <String>RULE:Workday:Clorox AttributeSync Workday ContractEndDate Rule</String>
+            <String>RULE:SAP Access Management:Clorox AttributeSync SAP GRC ContractEndDate Rule</String>
+            <String>RULE:iDMS:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:HP PPM:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:CTC CISPRO Global:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:CTC Hard Surface Cleaning:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:CCMS:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:CTC Colorbase:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:IBM Imaging:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:MRDB:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:IRI:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:MediaBin:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:Concur:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:EssBase:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:MDWorkflow:Clorox AttributeSync AccountExpiration Rule</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="displayName">
+        <value>
+          <List>
+            <String>Exceedra:User_DisplayName</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="email">
+        <value>
+          <List>
+            <String>RULE:Workday:Clorox AttributeSync Workday Email Rule</String>
+            <String>RULE:Active Directory:Clorox AttributeSync Active Directory ProxyEmailAddress Rule</String>
+            <String>SAP S4 Treasury:E-Mail</String>
+            <String>SAP ECC R3P Domestic:E-Mail</String>
+            <String>SAP ECC GP2 Latam:E-Mail</String>
+            <String>SAP EWM:E-Mail</String>
+            <String>Exceedra:User_Email</String>
+            <String>Exceedra:User_SSOName</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="firstname">
+        <value>
+          <List>
+            <String>SAP S4 Treasury:First name</String>
+            <String>SAP ECC R3P Domestic:First name</String>
+            <String>SAP ECC GP2 Latam:First name</String>
+            <String>SAP EWM:First name</String>
+            <String>Exceedra:User_FirstName</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="lastname">
+        <value>
+          <List>
+            <String>SAP S4 Treasury:Last name</String>
+            <String>SAP ECC R3P Domestic:Last name</String>
+            <String>SAP ECC GP2 Latam:Last name</String>
+            <String>SAP EWM:Last name</String>
+            <String>Exceedra:User_LastName</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="manager">
+        <value>
+          <List>
+            <String>RULE:Active Directory:Clorox AttributeSync ActiveDirectory Manager Rule</String>
+            <String>RULE:MyTech:Clorox AttributeSync MyTech Manager Rule</String>
+            <String>RULE:Coupa:Clorox AttributeSync Coupa Manager Rule</String>
+          </List>
+        </value>
+      </entry>
+      <entry key="saccountOwnerone">
+        <value>
+          <List>
+            <String>RULE:Active Directory:Clorox AttributeSync ActiveDirectory ServiceAccountOwner Rule</String>
+          </List>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+</Custom>
