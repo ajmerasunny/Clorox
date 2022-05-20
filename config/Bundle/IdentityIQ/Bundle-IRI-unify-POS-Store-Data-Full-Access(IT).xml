@@ -4,22 +4,6 @@
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
-      <entry key="accountSelectorRules">
-        <value>
-          <AccountSelectorRules>
-            <ApplicationAccountSelectorRules>
-              <ApplicationAccountSelectorRule>
-                <ApplicationRef>
-                  <Reference class="sailpoint.object.Application" name="%%AD_APP_NAME%%"/>
-                </ApplicationRef>
-                <RuleRef>
-                  <Reference class="sailpoint.object.Rule" name="Clorox Primary AD Account Selector Rule"/>
-                </RuleRef>
-              </ApplicationAccountSelectorRule>
-            </ApplicationAccountSelectorRules>
-          </AccountSelectorRules>
-        </value>
-      </entry>
       <entry key="additionalRoleBusApprovalRule"/>
       <entry key="additionalRoleBusApprovers"/>
       <entry key="allApprovers"/>
