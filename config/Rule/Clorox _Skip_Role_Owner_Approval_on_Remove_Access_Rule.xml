@@ -57,13 +57,22 @@
 					isRole = true;
 					appName = (String) role.getAttribute("appName");
 					log.debug(" App Name " + appName);
-					String approvers = "";    
-					if(smartApplications.contains(appName)) {
+					String approvers = "";
+					if(roleName.startsWith("IBM Content Management Accounts Payable")) {
+						resultMap.put("ApprovalRequired","true");
+						approvers = smartApplicationOwners.get("IBM Content Management Accounts Payable");                
+						resultMap.put("Approvers", approvers);							
+					} else if(roleName.startsWith("IBM Content Management Accounts Receivable")) {
+						resultMap.put("ApprovalRequired","true");
+						approvers = smartApplicationOwners.get("IBM Content Management Accounts Receivable");                
+						resultMap.put("Approvers", approvers);
+					}    
+					else if(smartApplications.contains(appName)) {
 						resultMap.put("ApprovalRequired","true");
 						approvers = smartApplicationOwners.get(appName);                
 						resultMap.put("Approvers", approvers);
 					}
-				}  
+				} 
 			}
 		}	
 		log.debug(" map " + resultMap.toString());  

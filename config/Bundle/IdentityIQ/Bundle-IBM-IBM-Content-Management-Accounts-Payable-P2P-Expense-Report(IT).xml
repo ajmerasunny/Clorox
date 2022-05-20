@@ -72,7 +72,7 @@
         <Filter operation="CONTAINS_ALL" property="memberOf">
           <Value>
             <List>
-              <String>%%FCM_SR_P2PExpenseReports/INFOR_view%%</String>
+              <String>%%FCM_SR_P2PExpenseReports%%</String>
             </List>
           </Value>
         </Filter>

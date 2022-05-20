@@ -50,5 +50,6 @@
   </Owner>
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="IBM Content Management Accounts Payable P2P Expense Report IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="IBM Content Management Accounts Payable Information View IT Role"/>
   </Requirements>
 </Bundle>

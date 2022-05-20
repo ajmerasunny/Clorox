@@ -8,9 +8,9 @@
                 <List>
                     <String>%%CCMS_APP_NAME%%</String>
                     <String>%%iDMS_APP_NAME%%</String>
-			  <String>%%Concur_APP_NAME%%</String>
-			  <String>%%EssBase%%</String>
-			  <String>%%DS/IS%%</String>					
+			              <String>%%Concur_APP_NAME%%</String>
+			              <String>%%EssBase%%</String>			
+                    <String>%%IBM_Imaging_APP_NAME%%</String>
                 </List>
             </value>
         </entry>
@@ -20,8 +20,9 @@
             <entry key="%%CCMS_APP_NAME%%" value="%%CLX_AR_CCMSAdmin_OWNER_WORKGROUP%%"/>
             <entry key="%%iDMS_APP_NAME%%" value="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
             <entry key="%%Concur_APP_NAME%%" value="%%CLX_AR_ConcurAdmin_OWNER_WORKGROUP%%"/>
-            <entry key="%%EssBase%%" value="%%CLX_AR_DSISOwner_OWNER_WORKGROUP%%"/>
-            <entry key="%%DS/IS%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
+            <entry key="%%EssBase%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
+            <entry key="IBM Content Management Accounts Payable" value="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
+            <entry key="IBM Content Management Accounts Receivable" value="CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP"/>            
           </Map>
         </value>
       </entry>        
