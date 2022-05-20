@@ -158,9 +158,9 @@
       <entry key="joinerPopulationRegex"/>
       <entry key="joinerRoles"/>
       <entry key="loaExtendedRule"/>
-      <entry key="loaProcess" value="Do Nothing"/>
+      <entry key="loaProcess" value="Disable Only"/>
       <entry key="ltdExtendedRule"/>
-      <entry key="ltdProcess" value="Do Nothing"/>
+      <entry key="ltdProcess" value="Disable Only"/>
       <entry key="mergeRows">
         <value>
           <Boolean/>
@@ -210,7 +210,7 @@
           <Boolean/>
         </value>
       </entry>
-      <entry key="rehireProcess" value="Do Nothing"/>
+      <entry key="rehireProcess" value="Enable Immediately"/>
       <entry key="removeEntitlementLeaverExceptionExpression"/>
       <entry key="renameLDAPaccount">
         <value>
@@ -222,7 +222,7 @@
       <entry key="reverseleaverProcess" value="Do Nothing"/>
       <entry key="rtwLOAExtendedRule"/>
       <entry key="rtwLTDxtendedRule"/>
-      <entry key="rtwloaProcess" value="Do Nothing"/>
+      <entry key="rtwloaProcess" value="Enable Immediately"/>
       <entry key="rtwltdProcess" value="Do Nothing"/>
       <entry key="scramPwdattr"/>
       <entry key="scramblePasswordAttr"/>
@@ -245,7 +245,7 @@
       <entry key="targetpasswordSync"/>
       <entry key="templateApplication" value="DelimitedFile Template"/>
       <entry key="terminationExtendedRule"/>
-      <entry key="terminationProcess" value="Do Nothing"/>
+      <entry key="terminationProcess" value="Disable and Remove Entitlements"/>
       <entry key="txCombinationName"/>
       <entry key="userLastLogonAttributeName"/>
       <entry key="userLastLogonDateFormat"/>
