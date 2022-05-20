@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle disabled="true" displayName="CTC Colorbase" name="CTC Colorbase" pendingDelete="true" type="business">
+<Bundle displayName="CTC Colorbase" name="CTC Colorbase" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
