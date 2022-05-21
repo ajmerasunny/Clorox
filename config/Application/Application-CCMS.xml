@@ -228,7 +228,7 @@
       <Section label="Account" name="Account">
         <Field displayName="username" helpKey="username" name="username" type="string">
           <Script>
-            <Source>return application.getName() + " " + identity.getName();</Source>
+             <Source><![CDATA[return application.getName() + " " + identity.getName();]]></Source>
           </Script>
         </Field>
       </Section>
