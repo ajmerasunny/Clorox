@@ -25,7 +25,26 @@
             <entry key="IBM Content Management Accounts Receivable" value="CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP"/>            
           </Map>
         </value>
-      </entry>        
+      </entry>
+        <entry key="AllApplications">
+            <value>
+                <List>
+                  <String>%%HP_PPM_APP_NAME%%</String>
+                  <String>%%iDMS_APP_NAME%%</String>
+                  <String>%%CCMS_APP_NAME%%</String>
+                  <String>%%CTC_CISPRO_Global_APP_NAME%%</String>
+                  <String>%%CTC_HardSurface_Cleaning_APP_NAME%%</String>
+                  <String>%%IBM_Imaging_APP_NAME%%</String>
+                  <String>%%MRDB_APP_NAME%%</String>
+                  <String>%%MediaBin_APP_NAME%%</String>
+                  <String>%%IRI_APP_NAME%%</String>
+                  <String>%%CTC_Colorbase_APP_NAME%%</String>
+                  <String>%%Concur_APP_NAME%%</String>
+                  <String>%%EssBase%%</String>
+                  <String>%%MDWORKFLOW_APP_NAME%%</String>
+                </List>
+            </value>
+        </entry>              
     </Map>
   </Attributes>
 </Custom>
