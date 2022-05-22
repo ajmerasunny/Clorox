@@ -76,6 +76,7 @@
 	import java.util.TimeZone;
     import sailpoint.object.RoleAssignment;
     import sailpoint.object.Custom;
+	import sailpoint.object.AttributeAssignment;
 	
 	Log logger = LogFactory.getLog("clorox.attributesync.AccountExpiration");
 	
@@ -109,7 +110,7 @@
 	            	
 	            accountRequests.add(accReq);
 			}
-      
+			// Update End Date on Role Assignment
             List assingedRoles = identity.getRoleAssignments();      
             for(RoleAssignment roleAssign: assingedRoles){
                 String rName = roleAssign.getRoleName();
@@ -121,6 +122,21 @@
                     }                    
                 }                
 	        }
+
+			// Update End Date on Attribute/Entitlement Assignment
+			List assingedAttributes = identity.getAttributeAssignments();
+            for(AttributeAssignment attributeAssign: assingedAttributes){
+                String attrValue = attributeAssign.getValue();
+				String appName = attributeAssign.getApplicationName();
+                for(String app: allApplications) {
+                    if(attrValue.contains(app)) {
+                        attributeAssign.setEndDate(ctrexpDt);
+                        context.saveObject(identity);
+                        context.commitTransaction();
+                    }                    
+                }                
+	        }
+			context.decache(identity);						
         }
     }        
 	
