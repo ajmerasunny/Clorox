@@ -1,50 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%MDWORKFLOW_APP_NAME%%" profileClass="" type="DelimitedFile">
+<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%CTC_CISPRO_Global_APP_NAME%%" profileClass="" type="DelimitedFile">
   <Attributes>
     <Map>
       <entry key="PassphraseForPrivateKey"/>
       <entry key="PrivateKeyFilePath"/>
-      <entry key="Role.columnNames"/>
-      <entry key="Role.commentCharacter"/>
-      <entry key="Role.delimiter"/>
-      <entry key="Role.file"/>
-      <entry key="Role.fileEncoding"/>
-      <entry key="Role.filterEmptyRecords">
-        <value>
-          <Boolean></Boolean>
-        </value>
-      </entry>
-      <entry key="Role.filterString"/>
-      <entry key="Role.hasHeader">
-        <value>
-          <Boolean></Boolean>
-        </value>
-      </entry>
-      <entry key="Role.indexColumn"/>
-      <entry key="Role.isCaseInsensitiveMerge">
-        <value>
-          <Boolean></Boolean>
-        </value>
-      </entry>
-      <entry key="Role.isSortedByIndexColumn">
-        <value>
-          <Boolean></Boolean>
-        </value>
-      </entry>
-      <entry key="Role.mergeColumns"/>
-      <entry key="Role.mergeRows">
-        <value>
-          <Boolean></Boolean>
-        </value>
-      </entry>
-      <entry key="Role.numberOfLinesToSkip"/>
-      <entry key="Role.regularExpression"/>
-      <entry key="Role.stopIfLineHasWrongColumnLength">
-        <value>
-          <Boolean></Boolean>
-        </value>
-      </entry>
       <entry key="acceleratorPackEnabled"/>
       <entry key="accountCorrelationAttrExpression"/>
       <entry key="accountCreateConditionalRule"/>
@@ -65,23 +25,23 @@
       <entry key="apAdditionalApplicationPreIterateRule"/>
       <entry key="apAfterMoverJoiner">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="apAfterRehireAttrSync">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="apAppendApplicationName">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="apAttributeSyncEligibleRule"/>
       <entry key="apBeforeMoverAttrSync">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="apPopulationReverseLeaverOptions"/>
@@ -95,14 +55,14 @@
       <entry key="beforeProvisioningRule"/>
       <entry key="beforemoverPrimaryaccount">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="beforepwdexpAttr"/>
       <entry key="birthrightEntAttrExpression"/>
       <entry key="busApp">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="commentsAttr"/>
@@ -112,13 +72,13 @@
       <entry key="eligibilityExpression"/>
       <entry key="enablepsaValidation">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="enablepswexpNotification"/>
       <entry key="entDir">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="evaluateCreateprovpolicy"/>
@@ -141,29 +101,29 @@
       <entry key="hardPolicyviolations"/>
       <entry key="hasHeader">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="isCaseInsensitiveMerge">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="isSortedByIndexColumn">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="joinerEnabled"/>
       <entry key="joinerPopulationRegex"/>
       <entry key="joinerRoles"/>
       <entry key="loaExtendedRule"/>
-      <entry key="loaProcess" value="Disable Only"/>
+      <entry key="loaProcess" value="Do Nothing"/>
       <entry key="ltdExtendedRule"/>
-      <entry key="ltdProcess" value="Disable Only"/>
+      <entry key="ltdProcess" value="Do Nothing"/>
       <entry key="mergeRows">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="moveAccountContainer"/>
@@ -174,7 +134,7 @@
       <entry key="nativeChangeDetectionAttributes"/>
       <entry key="nativeChangeDetectionEnabled">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="nativeChangeDetectionOperations"/>
@@ -182,7 +142,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="omitmanagerPrivgaccess">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="parseType" value="delimited"/>
@@ -192,12 +152,12 @@
       <entry key="port"/>
       <entry key="primarySyncaccounts">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="primarypasswordSyncaccounts">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="privilegedAccountAttrExpression"/>
@@ -207,14 +167,14 @@
       <entry key="rehireExtendedRule"/>
       <entry key="rehirePrimaryaccount">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="rehireProcess" value="Enable Immediately"/>
+      <entry key="rehireProcess" value="Do Nothing"/>
       <entry key="removeEntitlementLeaverExceptionExpression"/>
       <entry key="renameLDAPaccount">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="requestorFormRole"/>
@@ -222,7 +182,7 @@
       <entry key="reverseleaverProcess" value="Do Nothing"/>
       <entry key="rtwLOAExtendedRule"/>
       <entry key="rtwLTDxtendedRule"/>
-      <entry key="rtwloaProcess" value="Enable Immediately"/>
+      <entry key="rtwloaProcess" value="Do Nothing"/>
       <entry key="rtwltdProcess" value="Do Nothing"/>
       <entry key="scramPwdattr"/>
       <entry key="scramblePasswordAttr"/>
@@ -232,7 +192,7 @@
       <entry key="softPolicyviolations"/>
       <entry key="stopIfLineHasWrongColumnLength">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="sysDescriptions">
@@ -245,7 +205,7 @@
       <entry key="targetpasswordSync"/>
       <entry key="templateApplication" value="DelimitedFile Template"/>
       <entry key="terminationExtendedRule"/>
-      <entry key="terminationProcess" value="Disable and Remove Entitlements"/>
+      <entry key="terminationProcess" value="Do Nothing"/>
       <entry key="txCombinationName"/>
       <entry key="userLastLogonAttributeName"/>
       <entry key="userLastLogonDateFormat"/>
@@ -255,41 +215,41 @@
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_MDWorkflow_OWNER_WORKGROUP%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_CISPRO_OWNER_WORKGROUP%%"/>
   </Owner>
-  <ProvisioningForms>
-    <Form name="Create" objectType="account" type="Create">
-      <Attributes>
-        <Map>
-          <entry key="pageTitle" value="Create"/>
-        </Map>
-      </Attributes>
-      <Description>Create</Description>
-      <Section label="Account" name="Account">
-        <Field displayName="username" helpKey="username" name="username" type="string">
-          <Script>
-            <Source><![CDATA[return application.getName() + " " + identity.getName();]]></Source>
-          </Script>
-        </Field>
-      </Section>
-    </Form>
-  </ProvisioningForms>  
-  <Schemas>
-    <Schema displayAttribute="username" identityAttribute="username" instanceAttribute="" nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None">
-      <AttributeDefinition name="username" type="string">
-        <Description>username</Description>
-      </AttributeDefinition>
-      <AttributeDefinition entitlement="true" managed="true" name="Role" schemaObjectType="Role" type="string">
-        <Description>Role</Description>
-      </AttributeDefinition>
-      <AttributeDefinition name="AccountExpiration" type="string">
+<ProvisioningForms>
+<Form name="Create" objectType="account" type="Create">
+  <Attributes>
+	<Map>
+	  <entry key="pageTitle" value="Create"/>
+	</Map>
+  </Attributes>
+  <Description>Create</Description>
+  <Section label="Account" name="Account">
+	<Field displayName="username" helpKey="username" name="username" type="string">
+	  <Script>
+		 <Source><![CDATA[return application.getName() + " " + identity.getName();]]></Source>
+	  </Script>
+	</Field>
+  </Section>
+</Form>
+</ProvisioningForms>
+<Schemas>
+<Schema displayAttribute="username"  identityAttribute="username" instanceAttribute="" nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None">
+  <AttributeDefinition name="username" type="string">
+	<Description>username</Description>
+  </AttributeDefinition>
+  <AttributeDefinition entitlement="true" managed="true" multi="true" name="Role" schemaObjectType="Role" type="string">
+	<Description>Role</Description>
+  </AttributeDefinition>
+   <AttributeDefinition name="AccountExpiration" type="string">
         <Description>AccountExpiration</Description>
-      </AttributeDefinition>       
-    </Schema>
-    <Schema aggregationType="group" descriptionAttribute="" displayAttribute="Role" identityAttribute="Role" instanceAttribute="Role" nativeObjectType="Role" objectType="Role" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="Role" type="boolean">
-        <Description>Role</Description>
-      </AttributeDefinition>
-    </Schema>
-  </Schemas>
+   </AttributeDefinition>
+</Schema>
+<Schema aggregationType="group" descriptionAttribute="Role" displayAttribute="Role" identityAttribute="Role" instanceAttribute="Role" nativeObjectType="Role" objectType="Role" permissionsRemediationModificationType="None">
+  <AttributeDefinition entitlement="true" multi="true" name="Role" schemaObjectType="Role" type="string">
+	<Description>Role</Description>
+  </AttributeDefinition>
+</Schema>
+ </Schemas>
 </Application>

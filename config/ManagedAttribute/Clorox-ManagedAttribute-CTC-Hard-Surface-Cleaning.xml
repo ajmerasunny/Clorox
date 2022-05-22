@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="%%CTC_HardSurface_Cleaning_APP_NAME%%" type="Role" value="%%CTC_HardSurface_Cleaning_APP_NAME%%">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%CTC_HardSurface_Cleaning_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="%%CTC_HardSurface_Cleaning_APP_NAME%%"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+  </Owner>
+</ManagedAttribute>
