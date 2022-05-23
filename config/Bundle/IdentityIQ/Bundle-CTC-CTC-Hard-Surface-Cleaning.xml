@@ -51,5 +51,4 @@
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="CTC Hard Surface Cleaning IT Role"/>
   </Requirements>
-  <RoleScorecard permittedEntitlements="1" provisionedEntitlements="1"/>
 </Bundle>

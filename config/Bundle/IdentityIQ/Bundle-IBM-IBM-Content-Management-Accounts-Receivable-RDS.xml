@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IBM Content Management Accounts Receivable Logistics CSA" name="IBM Content Management Accounts Payable Logistics CSA" type="business">
+<Bundle displayName="IBM Content Management Accounts Receivable RDS" name="IBM Content Management Accounts Receivable RDS" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="CSA - CSA can create and work cases"/>
+            <entry key="en_US" value="RDS - RDS can create and work cases"/>
           </Map>
         </value>
       </entry>
@@ -49,6 +49,6 @@
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="IBM Content Management Accounts Receivable Logistics CSA IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="IBM Content Management Accounts Receivable RDS IT Role"/>
   </Requirements>
 </Bundle>

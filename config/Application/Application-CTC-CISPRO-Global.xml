@@ -46,7 +46,7 @@
       </entry>
       <entry key="apPopulationReverseLeaverOptions"/>
       <entry key="apServiceAccountUniqueName"/>
-      <entry key="appBusApprovalRule"/>
+     <entry key="appBusApprovalRule" value="Clorox Skip Role Owner Approval on Remove Access Rule"/>
       <entry key="appBusApprovers"/>
       <entry key="assignmentGroupname"/>
       <entry key="authoritativeEmployee"/>
