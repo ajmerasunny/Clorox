@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="T&E Admin Clorox P2P" type="Role" value="T&E Admin Clorox P2P">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%Concur_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="T&E Admin Clorox P2P"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+  </Owner>
+</ManagedAttribute>
