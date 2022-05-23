@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="Co-packer Birthright LDAP Role" name="Co-packer Birthright LDAP Role" type="dynamic">
+    <Attributes>
+        <Map>
+            <entry key="acceleratorPackEnabled"/>
+            <entry key="accountSelectorRules"/>
+            <entry key="additionalRoleBusApprovalRule"/>
+            <entry key="additionalRoleBusApprovers"/>
+            <entry key="allowDuplicateAccounts" value="false"/>
+            <entry key="allowMultipleAssignments" value="false"/>
+            <entry key="apaccountType"/>
+            <entry key="appName"/>
+            <entry key="formappName"/>
+            <entry key="isBirthright" value="true"/>
+            <entry key="mergeTemplates" value="false"/>
+            <entry key="roleBusApprovalRule"/>
+            <entry key="roleBusApprovers"/>
+            <entry key="rolePrivileged"/>
+            <entry key="sysDescriptions">
+                <value>
+                    <Map>
+                        <entry key="en_US"/>
+                    </Map>
+                </value>
+            </entry>
+        </Map>
+    </Attributes>
+    <Inheritance>
+        <Reference class="sailpoint.object.Bundle" name="Clorox BaselineBirthright LDAP Roles"/>
+    </Inheritance>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Selector>
+        <IdentitySelector>
+            <RuleRef>
+                <Reference class="sailpoint.object.Rule" name="Clorox LDAP Birthright Co-Packer Assignment Rule"/>
+            </RuleRef>
+        </IdentitySelector>
+    </Selector>
+    <Profiles>
+        <Profile>
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="LDAP"/>
+            </ApplicationRef>
+            <Constraints>
+                <Filter operation="CONTAINS_ALL" property="groups">
+                    <Value>
+                        <List>
+                            <String>cn=ISG-prod,ou=Groups,o=Clorox,c=US</String>
+                        </List>
+                    </Value>
+                </Filter>
+            </Constraints>
+        </Profile>
+    </Profiles>
+</Bundle>

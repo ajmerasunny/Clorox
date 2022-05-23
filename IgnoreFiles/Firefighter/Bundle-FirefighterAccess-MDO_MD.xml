@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="Firefighter Access MDO_MD" name="Firefighter Access MDO_MD" type="firefighter">
+  <Attributes>
+    <Map>
+      <entry key="acceleratorPackEnabled"/>
+      <entry key="accountSelectorRules"/>
+      <entry key="additionalRoleBusApprovalRule"/>
+      <entry key="additionalRoleBusApprovers"/>
+      <entry key="allApprovers" value="00041175,00108437,00040883"/>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="apaccountType"/>
+      <entry key="defaultEndDateSpan" value="2"/>
+      <entry key="appName" value="SAP ECC R3P Domestic"/>
+      <entry key="autoAssignEnablerTypes"/>
+      <entry key="businessSubprocessName"/>
+      <entry key="enablerTypes"/>
+      <entry key="formappName"/>
+      <entry key="singleRoleRequest" value="true"/>
+      <entry key="rolePrivileged" value="false"/>
+      <entry key="isBirthright" value="false"/>
+      <entry key="mandatoryEntitlements" value="%%FIREFIGHTER_MANDATORY_ENTITLEMENT_VALUES%%"/>
+      <entry key="skipManagerApproval" value="true"/>
+      <entry key="mergeTemplates" value="false"/>
+      <entry key="roleBusApprovalRule"/>
+      <entry key="roleBusApprovers"/>
+      <entry key="roleKeywords"/>
+      <entry key="rolePrivileged" value="false"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Inheritance>
+        <Reference class="sailpoint.object.Bundle" name="Firefighter Roles"/>
+  </Inheritance>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="00041175"/>
+  </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="Firefighter Access MDO_MD (IT)"/>
+  </Requirements>
+</Bundle>

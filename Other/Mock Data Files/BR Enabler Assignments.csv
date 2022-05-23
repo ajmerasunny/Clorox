@@ -1,0 +1,578 @@
+Process Area,Business Role,Enabler Type,Enabler Type,Auto-Assigned,Requestable in SailPoint
+ES,CLX_CONTRACT MANUFACTURER (NONCLX),PL_D,Plant_Display,,
+ES,CLX_CONTRACT MANUFACTURING MANAGER,PL_D,Plant_Display,,
+ES,CLX_CONTRACT MANUFACTURING SUPPORT,PL_D,Plant_Display,,
+ES,CLX_EHS SPECIALIST,PL_D,Plant_Display,,
+ES,CLX_PLANT ACCOUNTANT CONTROLLER,PL_D,Plant_Display,,
+ES,CLX_PLANT DATA MAINTAINER,PL_D,Plant_Display,,
+ES,CLX_PLANT ENGINEER,PL_D,Plant_Display,,
+ES,CLX_PLANT INVENTORY MANAGEMENT,PL_D,Plant_Display,,
+ES,CLX_PLANT LOCAL MASTER DATA MAINTAINER,PL_D,Plant_Display,,
+ES,CLX_PLANT MAINTENANCE EXECUTION,PL_D,Plant_Display,,
+ES,CLX_PLANT MAINTENANCE MANAGEMENT,PL_D,Plant_Display,,
+ES,CLX_PLANT MAINTENANCE PLANNING,PL_D,Plant_Display,,
+ES,CLX_PLANT MATERIAL COORDINATOR,PL_D,Plant_Display,,
+ES,CLX_PLANT OPERATIONS MANAGER,PL_D,Plant_Display,,
+ES,CLX_PLANT PARTS MANAGEMENT,PL_D,Plant_Display,,
+ES,CLX_PLANT PROCESS OPERATOR,PL_D,Plant_Display,,
+ES,CLX_PLANT PRODUCTION EXECUTION,PL_D,Plant_Display,,
+ES,CLX_PLANT PRODUCTION EXECUTION TEAM LEAD,PL_D,Plant_Display,,
+ES,CLX_PLANT PRODUCTION SCHEDULER,PL_D,Plant_Display,,
+ES,CLX_PLANT QUALITY MANAGEMENT,PL_D,Plant_Display,,
+ES,CLX_PLANT SITE MANAGER,PL_D,Plant_Display,,
+ES,CLX_PROJECT ENGINEER,PL_D,Plant_Display,,
+Finance,CLX_CATEGORY COST ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_CATEGORY COST MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_CFP ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_CFP MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_CORPORATE ACCOUNTANT,PL_D,Plant_Display,Yes,No
+Finance,CLX_CORPORATE ACCOUNTING MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_CORPORATE EBE ACCOUNTANT,PL_D,Plant_Display,Yes,No
+Finance,CLX_CORPORATE EBE ACCOUNTING  MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_CORPORATE REPORTING MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_CREDIT ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_ESSBASE DATABASE ADMIN,PL_D,Plant_Display,Yes,No
+Finance,CLX_FA ACCOUNTANT,PL_D,Plant_Display,Yes,No
+Finance,CLX_FA MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_FINANCE DISPLAY,PL_D,Plant_Display,Yes,No
+Finance,CLX_CORPORATE ACCOUNTANT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_FORECAST MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_FUNCTIONAL PLANNING ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_FUNCTIONAL PLANNING MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_INTERNAL CONTROL MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_INTERNAL INVENTORY MANAGEMENT,PL_D,Plant_Display,Yes,No
+Finance,CLX_INTERNATIONAL ACCOUNTANT,PL_D,Plant_Display,Yes,No
+Finance,CLX_INTERNATIONAL ACCOUNTING MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_INTERNATIONAL FINANCE MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT SPECIALIST,PL_D,Plant_Display,Yes,No
+Finance,CLX_LCOE ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_LCOE MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_LER TAX ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_LER TAX MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_MARKETING ACCOUNTANT,PL_D,Plant_Display,Yes,No
+Finance,CLX_MCOE ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_MCOE MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_P&A ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_PCOE ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_PCOE MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_PPD ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_PPD FINANCE MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_SALES ACCOUNTANT,PL_D,Plant_Display,Yes,No
+Finance,CLX_SALES AND MARKETING ACCOUNTING MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_SALES FINANCE ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_TAX ADMINISTRATOR,PL_D,Plant_Display,Yes,No
+Finance,CLX_TAX ANALYST,PL_D,Plant_Display,Yes,No
+Finance,CLX_TAX MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_TREASURY MANAGER,PL_D,Plant_Display,Yes,No
+Finance,CLX_USOPS ACCOUNTANT,PL_D,Plant_Display,Yes,No
+Finance,CLX_USOPS ACCOUNTING MANAGER,PL_D,Plant_Display,Yes,No
+GSS,CLX_GSS COE MGR,PL_D,Plant_Display,,
+GSS,CLX_GSS MRO-CAPITAL,PL_D,Plant_Display,,
+GSS,CLX_GSS SOURCING,PL_D,Plant_Display,,
+GSS,CLX_GSS SOURCING ANALYST,PL_D,Plant_Display,,
+HR,CLX_HR PAYROLL ANALYST,PL_D,Plant_Display,,
+HR,CLX_HR PAYROLL MANAGER,PL_D,Plant_Display,,
+HR,CLX_HR SAP BASIC,PL_D,Plant_Display,,
+LARCC,CLX_FI BASIC DISPLAYER,PL_D,Plant_Display,,
+LARCC,CLX_RISK_MANAGEMENT_DISPLAY,PL_D,Plant_Display,,
+LARCC,CLX_RISK_MANAGEMENT_POSTING,PL_D,Plant_Display,,
+MD,CLX_EDM GLOBAL TEAM,PL_D,Plant_Display,,
+MD,CLX_EDM MDM CONTRACTORS,PL_D,Plant_Display,,
+MIT,CLX_APO SUPPORT,PL_D,Plant_Display,,
+MIT,CLX_EDI INTEGRATION ADMINISTRATOR,PL_D,Plant_Display,,
+MIT,CLX_FICO SUPPORT,PL_D,Plant_Display,,
+MIT,CLX_IT BUSINESS ANALYST,PL_D,Plant_Display,,
+MIT,CLX_O2C SUPPORT,PL_D,Plant_Display,,
+MIT,CLX_S2P SUPPORT,PL_D,Plant_Display,,
+MIT,CLX_SAP BI ADMINISTRATOR,PL_D,Plant_Display,,
+MIT,CLX_SOLUTION DESIGNER,PL_D,Plant_Display,,
+O2C,CLX_CROSSMARK BROKER,PL_D,Plant_Display,,
+O2C,CLX_O2C AR PROCESSING TEAM LEAD,PL_D,Plant_Display,,
+O2C,CLX_O2C AR REVENUE COORDINATOR,PL_D,Plant_Display,,
+O2C,CLX_O2C ARA DEDUCTION SPECIALIST,PL_D,Plant_Display,,
+O2C,CLX_O2C LOGISTICS CONTROLLER,PL_D,Plant_Display,,
+O2C,CLX_O2C OPERATIONS DISPLAY,PL_D,Plant_Display,,
+Finance,CLX_CORPORATE ACCOUNTANT,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CORPORATE ACCOUNTANT,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_FORECAST ANALYST,PL_D,Plant_Display,Yes,No
+O2C,CLX_O2C REPORTING & TABLE UPDATES SU,PL_D,Plant_Display,,
+O2C,CLX_O2C TRANS SERVICES GROUP,PL_D,Plant_Display,,
+O2C,CLX_ORD PROC TEAM LEAD LOG OPS SU,PL_D,Plant_Display,,
+Finance,CLX_FORECAST ANALYST,PC_D,Profit Center_Display,No,Yes
+O2C,CLX_PLANT SHIPPING,PL_D,Plant_Display,,
+P2P,CLX_P2P CO-PACK PROCESSING SPECIALIST,PL_D,Plant_Display,,
+P2P,CLX_P2P FREIGHT ANALYST,PL_D,Plant_Display,,
+P2P,CLX_P2P OPERATIONS MANAGER,PL_D,Plant_Display,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT,PL_D,Plant_Display,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT MANAGER,PL_D,Plant_Display,,
+P2P,CLX_P2P PROCESSING ANALYST,PL_D,Plant_Display,,
+P2P,CLX_P2P PROCSPEC SPECIALIST,PL_D,Plant_Display,,
+P2P,CLX_P2P PROCUREMENT CORPORATE SUPPORT MANAGER,PL_D,Plant_Display,,
+P2P,CLX_P2P PROCUREMENT OPS ANALYST,PL_D,Plant_Display,,
+P2P,CLX_P2P PROCUREMENT SUPERVISOR,PL_D,Plant_Display,,
+P2P,CLX_P2P REPORTING ANALYST,PL_D,Plant_Display,,
+P2P,CLX_P2P SPECIALIZED PROCESSING,PL_D,Plant_Display,,
+P2P,CLX_P2P VM SPECIALIST,PL_D,Plant_Display,,
+Planning,CLX_DEPLOYER,PL_D,Plant_Display,,
+Planning,CLX_F2S NETWORK PLANNING DISPLAY,PL_D,Plant_Display,,
+Planning,CLX_F2S NETWORK PLANNING SUPPLY,PL_D,Plant_Display,,
+Planning,CLX_F2S PDP,PL_D,Plant_Display,,
+Planning,CLX_F2S PLANNING COE,PL_D,Plant_Display,,
+PMB,CLX_MARKETING DISPLAY,PL_D,Plant_Display,,
+PPD,CLX_PPD_DISPLAY ROLE,PL_D,Plant_Display,,
+PPD,CLX_PPD_WRITE ROLE,PL_D,Plant_Display,,
+R&D,CLX_R&D MILL TAX,PL_D,Plant_Display,,
+R&D,CLX_R&D SCIENTIST DISPLAY,PL_D,Plant_Display,,
+Sales,CLX_FIELD SALES-ANALYST COORDINATOR,PL_D,Plant_Display,,
+Sales,CLX_FIELD SALES-MANAGER,PL_D,Plant_Display,,
+Sales,CLX_SALES DISPLAYER,PL_D,Plant_Display,,
+Sales,CLX_SALES PLANNING-ANALYST COORD,PL_D,Plant_Display,,
+Sales,CLX_SALES TECH OPS-ANALYST,PL_D,Plant_Display,,
+Sales,CLX_TRADE OPS - ANALYSTS,PL_D,Plant_Display,,
+Sales,CLX_UNSALEABLES OPS-ANALYST,PL_D,Plant_Display,,
+Sales,CLX_WBS ORDER MANAGEMENT SPECIALIST,PL_D,Plant_Display,,
+Sales,CLX_WBS ORDER TRADE MGMT SPECIALIST,PL_D,Plant_Display,,
+ES,CLX_CONTRACT MANUFACTURER (NONCLX),PL_U,Plant_Update,,
+ES,CLX_CONTRACT MANUFACTURING MANAGER,PL_U,Plant_Update,,
+ES,CLX_CONTRACT MANUFACTURING SUPPORT,PL_U,Plant_Update,,
+ES,CLX_EHS SPECIALIST,PL_U,Plant_Update,,
+ES,CLX_PLANT DATA MAINTAINER,PL_U,Plant_Update,,
+ES,CLX_PLANT ENGINEER,PL_U,Plant_Update,,
+ES,CLX_PLANT INVENTORY MANAGEMENT,PL_U,Plant_Update,,
+ES,CLX_PLANT LOCAL MASTER DATA MAINTAINER,PL_U,Plant_Update,,
+ES,CLX_PLANT MAINTENANCE EXECUTION,PL_U,Plant_Update,,
+ES,CLX_PLANT MAINTENANCE MANAGEMENT,PL_U,Plant_Update,,
+ES,CLX_PLANT MAINTENANCE PLANNING,PL_U,Plant_Update,,
+ES,CLX_PLANT MATERIAL COORDINATOR,PL_U,Plant_Update,,
+ES,CLX_PLANT OPERATIONS MANAGER,PL_U,Plant_Update,,
+ES,CLX_PLANT PARTS MANAGEMENT,PL_U,Plant_Update,,
+ES,CLX_PLANT PROCESS OPERATOR,PL_U,Plant_Update,,
+ES,CLX_PLANT PRODUCTION EXECUTION,PL_U,Plant_Update,,
+ES,CLX_PLANT PRODUCTION EXECUTION TEAM LEAD,PL_U,Plant_Update,,
+ES,CLX_PLANT PRODUCTION SCHEDULER,PL_U,Plant_Update,,
+ES,CLX_PLANT QUALITY MANAGEMENT,PL_U,Plant_Update,,
+ES,CLX_PLANT SITE MANAGER,PL_U,Plant_Update,,
+ES,CLX_PROJECT ENGINEER,PL_U,Plant_Update,,
+Finance,CLX_CATEGORY COST ANALYST,PL_U,Plant_Update,No,Yes
+Finance,CLX_CATEGORY COST MANAGER,PL_U,Plant_Update,No,Yes
+Finance,CLX_FA ACCOUNTANT,PL_U,Plant_Update,No,Yes
+Finance,CLX_FA MANAGER,PL_U,Plant_Update,No,Yes
+Finance,CLX_INTERNAL CONTROL MANAGER,PL_U,Plant_Update,No,Yes
+Finance,CLX_INTERNAL INVENTORY MANAGEMENT,PL_U,Plant_Update,No,Yes
+Finance,CLX_INTERNATIONAL PROCUREMENT MANAGER,PL_U,Plant_Update,No,Yes
+Finance,CLX_INTERNATIONAL PROCUREMENT SPECIALIST,PL_U,Plant_Update,No,Yes
+Finance,CLX_PCOE ANALYST,PL_U,Plant_Update,No,Yes
+Finance,CLX_PCOE MANAGER,PL_U,Plant_Update,No,Yes
+GSS,CLX_GSS COE MGR,PL_U,Plant_Update,,
+GSS,CLX_GSS MRO-CAPITAL,PL_U,Plant_Update,,
+GSS,CLX_GSS SOURCING,PL_U,Plant_Update,,
+GSS,CLX_GSS SOURCING ANALYST,PL_U,Plant_Update,,
+MD,CLX_EDM GLOBAL TEAM,PL_U,Plant_Update,,
+MD,CLX_EDM MDM CONTRACTORS,PL_U,Plant_Update,,
+MIT,CLX_APO SUPPORT,PL_U,Plant_Update,,
+MIT,CLX_EDI INTEGRATION ADMINISTRATOR,PL_U,Plant_Update,,
+MIT,CLX_O2C SUPPORT,PL_U,Plant_Update,,
+MIT,CLX_S2P SUPPORT,PL_U,Plant_Update,,
+O2C,CLX_O2C AR PROCESSING TEAM LEAD,PL_U,Plant_Update,,
+O2C,CLX_O2C ARA DEDUCTION SPECIALIST,PL_U,Plant_Update,,
+Finance,CLX_FORECAST ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_FORECAST ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+O2C,CLX_O2C ORDER PROCESSING EXPORT,PL_D,Plant_Display,,
+O2C,CLX_O2C REPORTING & TABLE UPDATES SU,PL_U,Plant_Update,,
+O2C,CLX_O2C TRANS SERVICES GROUP,PL_U,Plant_Update,,
+O2C,CLX_ORD PROC TEAM LEAD LOG OPS SU,PL_U,Plant_Update,,
+ES,CLX_GEMS MANAGER,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_PLANT SHIPPING,PL_U,Plant_Update,,
+P2P,CLX_P2P CO-PACK PROCESSING SPECIALIST,PL_U,Plant_Update,,
+P2P,CLX_P2P FREIGHT ANALYST,PL_U,Plant_Update,,
+P2P,CLX_P2P OPERATIONS MANAGER,PL_U,Plant_Update,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT,PL_U,Plant_Update,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT MANAGER,PL_U,Plant_Update,,
+P2P,CLX_P2P PROCESSING ANALYST,PL_U,Plant_Update,,
+P2P,CLX_P2P PROCSPEC SPECIALIST,PL_U,Plant_Update,,
+P2P,CLX_P2P PROCUREMENT OPS ANALYST,PL_U,Plant_Update,,
+P2P,CLX_P2P PROCUREMENT SUPERVISOR,PL_U,Plant_Update,,
+P2P,CLX_P2P SPECIALIZED PROCESSING,PL_U,Plant_Update,,
+Planning,CLX_DEPLOYER,PL_U,Plant_Update,,
+Planning,CLX_F2S NETWORK PLANNING SUPPLY,PL_U,Plant_Update,,
+Planning,CLX_F2S PDP,PL_U,Plant_Update,,
+Planning,CLX_F2S PLANNING COE,PL_U,Plant_Update,,
+R&D,CLX_R&D MILL TAX,PL_U,Plant_Update,,
+Sales,CLX_ACOSTA DEDUCTION SPECIALIST,PL_U,Plant_Update,,
+Sales,CLX_WBS ORDER MANAGEMENT SPECIALIST,PL_U,Plant_Update,,
+Sales,CLX_WBS ORDER TRADE MGMT SPECIALIST,PL_U,Plant_Update,,
+Finance,CLX_CATEGORY COST ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_CATEGORY COST MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_CFP ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_CFP MANAGER,PC_D,Profit Center_Display,No,Yes
+O2C,CLX_O2C ORDER PROCESSING,PL_D,Plant_Display,Yes,No
+Finance,CLX_CORPORATE ACCOUNTING MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_CORPORATE EBE ACCOUNTANT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_CORPORATE EBE ACCOUNTING  MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_CORPORATE REPORTING,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_CREDIT ANALYST,PC_D,Profit Center_Display,No,Yes
+MD,CLX_EDM GLOBAL TEAM,PC_D,Profit Center_Display,No,Yes
+MD,CLX_EDM MDM CONTRACTORS,PC_D,Profit Center_Display,No,Yes
+Planning,CLX_F2S NETWORK PLANNING DISPLAY,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_FA ACCOUNTANT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_FA MANAGER,PC_D,Profit Center_Display,No,Yes
+MIT,CLX_FICO SUPPORT,PC_D,Profit Center_Display,No,Yes
+O2C,CLX_O2C ORDER PROCESSING,PL_U,Plant_Update,No,Yes
+Finance,CLX_FORECAST MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_FUNCTIONAL PLANNING ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_FUNCTIONAL PLANNING MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_INTERNAL CONTROL MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_INTERNAL INVENTORY MANAGEMENT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_INTERNATIONAL ACCOUNTANT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_INTERNATIONAL ACCOUNTING MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_INTERNATIONAL FINANCE MANAGER,PC_D,Profit Center_Display,No,Yes
+MIT,CLX_IT BUSINESS ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_LCOE ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_LCOE MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_LER TAX ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_LER TAX MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_MARKETING ACCOUNTANT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_MARKETING ACCOUNTING MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_MCOE ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_MCOE MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_P&A ANALYST,PC_D,Profit Center_Display,No,Yes
+P2P,CLX_P2P FREIGHT ANALYST,PC_D,Profit Center_Display,No,Yes
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT,PC_D,Profit Center_Display,No,Yes
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT MANAGER,PC_D,Profit Center_Display,No,Yes
+P2P,CLX_P2P REPORTING ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_PCOE ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_PCOE MANAGER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_PPD ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_PPD FINANCE MANAGER,PC_D,Profit Center_Display,No,Yes
+LARCC,CLX_RISK_MANAGEMENT_DISPLAY,PC_D,Profit Center_Display,No,Yes
+LARCC,CLX_RISK_MANAGEMENT_POSTING,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_SALES ACCOUNTANT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_SALES FINANCE ANALYST,PC_D,Profit Center_Display,No,Yes
+Sales,CLX_SALES TECH OPS-ANALYST,PC_D,Profit Center_Display,No,Yes
+MIT,CLX_SOLUTION DESIGNER,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_TAX ANALYST,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_TAX MANAGER,PC_D,Profit Center_Display,No,Yes
+Sales,CLX_TRADE OPS - ANALYSTS,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_USOPS ACCOUNTANT,PC_D,Profit Center_Display,No,Yes
+Finance,CLX_USOPS ACCOUNTING MANAGER,PC_D,Profit Center_Display,No,Yes
+O2C,CLX_O2C ORDER PROCESSING,PD_D,Purchasing_Doc_Type_Display,Yes,No
+ES,CLX_EHS SPECIALIST,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PLANT ACCOUNTANT CONTROLLER,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PLANT ENGINEER,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PLANT INVENTORY MANAGEMENT,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PLANT MAINTENANCE MANAGEMENT,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PLANT OPERATIONS MANAGER,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PLANT PARTS MANAGEMENT,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PLANT SITE MANAGER,PC_D,Profit Center_Display,Yes,No
+ES,CLX_PROJECT ENGINEER,PC_D,Profit Center_Display,Yes,No
+Finance,CLX_ESSBASE DATABASE ADMIN,PC_D,Profit Center_Display,Yes,No
+Finance,CLX_FINANCE DISPLAY,PC_D,Profit Center_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT MANAGER,PC_D,Profit Center_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT SPECIALIST,PC_D,Profit Center_Display,Yes,No
+Finance,CLX_TAX ADMINISTRATOR,PC_D,Profit Center_Display,Yes,No
+Finance,CLX_TREASURY MANAGER,PC_D,Profit Center_Display,Yes,No
+GSS,CLX_GSS COE MGR,PC_D,Profit Center_Display,Yes,No
+GSS,CLX_GSS MRO-CAPITAL,PC_D,Profit Center_Display,Yes,No
+GSS,CLX_GSS SOURCING,PC_D,Profit Center_Display,Yes,No
+HR,CLX_HR PAYROLL ANALYST,PC_D,Profit Center_Display,Yes,No
+HR,CLX_HR PAYROLL MANAGER,PC_D,Profit Center_Display,Yes,No
+HR,CLX_HR SAP BASIC,PC_D,Profit Center_Display,Yes,No
+LARCC,CLX_FI BASIC DISPLAYER,PC_D,Profit Center_Display,Yes,No
+MIT,CLX_EDI INTEGRATION ADMINISTRATOR,PC_D,Profit Center_Display,Yes,No
+MIT,CLX_O2C SUPPORT,PC_D,Profit Center_Display,Yes,No
+MIT,CLX_S2P SUPPORT,PC_D,Profit Center_Display,Yes,No
+MIT,CLX_SAP BI ADMINISTRATOR,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_CROSSMARK BROKER,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C AR PROCESSING TEAM LEAD,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C AR REVENUE COORDINATOR,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C ARA DEDUCTION SPECIALIST,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C LOGISTICS CONTROLLER,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C OPERATIONS DISPLAY,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C ORDER PROCESSING EXPORT,PL_U,Plant_Update,,
+O2C,CLX_O2C ORDER PROCESSING EXPORT,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C TRANS SERVICES GROUP,PC_D,Profit Center_Display,Yes,No
+P2P,CLX_P2P OPERATIONS MANAGER,PC_D,Profit Center_Display,Yes,No
+P2P,CLX_P2P PROCESSING ANALYST,PC_D,Profit Center_Display,Yes,No
+P2P,CLX_P2P PROCUREMENT OPS ANALYST,PC_D,Profit Center_Display,Yes,No
+P2P,CLX_P2P SPECIALIZED PROCESSING,PC_D,Profit Center_Display,Yes,No
+Planning,CLX_F2S PDP,PC_D,Profit Center_Display,Yes,No
+PMB,CLX_MARKETING DISPLAY,PC_D,Profit Center_Display,Yes,No
+PPD,CLX_PPD_DISPLAY ROLE,PC_D,Profit Center_Display,Yes,No
+PPD,CLX_PPD_WRITE ROLE,PC_D,Profit Center_Display,Yes,No
+R&D,CLX_R&D SCIENTIST DISPLAY,PC_D,Profit Center_Display,Yes,No
+Sales,CLX_ACOSTA DEDUCTION SPECIALIST,PC_D,Profit Center_Display,Yes,No
+Sales,CLX_SALES DISPLAYER,PC_D,Profit Center_Display,Yes,No
+Sales,CLX_SALES PLANNING-ANALYST COORD,PC_D,Profit Center_Display,Yes,No
+Sales,CLX_UNSALEABLES OPS-ANALYST,PC_D,Profit Center_Display,Yes,No
+Finance,CLX_CFP ANALYST,PC_U,Profit Center_Update,No,Yes
+Finance,CLX_CFP MANAGER,PC_U,Profit Center_Update,No,Yes
+MD,CLX_EDM GLOBAL TEAM,PC_U,Profit Center_Update,No,Yes
+MD,CLX_EDM MDM CONTRACTORS,PC_U,Profit Center_Update,No,Yes
+Finance,CLX_FA MANAGER,PC_U,Profit Center_Update,No,Yes
+MIT,CLX_FICO SUPPORT,PC_U,Profit Center_Update,No,Yes
+Finance,CLX_PPD ANALYST,PC_U,Profit Center_Update,No,Yes
+Finance,CLX_PPD FINANCE MANAGER,PC_U,Profit Center_Update,No,Yes
+ES,CLX_CONTRACT MANUFACTURER (NONCLX),PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_CONTRACT MANUFACTURING MANAGER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_CONTRACT MANUFACTURING SUPPORT,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_EHS SPECIALIST,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT ACCOUNTANT CONTROLLER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT DATA MAINTAINER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT ENGINEER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT INVENTORY MANAGEMENT,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT LOCAL MASTER DATA MAINTAINER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT MAINTENANCE EXECUTION,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT MAINTENANCE MANAGEMENT,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT MAINTENANCE PLANNING,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT MATERIAL COORDINATOR,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT OPERATIONS MANAGER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT PARTS MANAGEMENT,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT PROCESS OPERATOR,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT PRODUCTION EXECUTION,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT PRODUCTION EXECUTION TEAM LEAD,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT PRODUCTION SCHEDULER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT QUALITY MANAGEMENT,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PLANT SITE MANAGER,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_PROJECT ENGINEER,PD_D,Purchasing_Doc_Type_Display,,
+Finance,CLX_CATEGORY COST ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CATEGORY COST MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CFP ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CFP MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+O2C,CLX_O2C ORDER PROCESSING,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_CORPORATE ACCOUNTING MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CORPORATE EBE ACCOUNTANT,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CORPORATE REPORTING MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CREDIT ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_ESSBASE DATABASE ADMIN,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_FA ACCOUNTANT,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_FA MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+O2C,CLX_O2C ORDER PROCESSING,SD_U,Sales_Doc_Type_Update,No,Yes
+Finance,CLX_FORECAST MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_FUNCTIONAL PLANNING ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNAL CONTROL MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNAL INVENTORY MANAGEMENT,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL ACCOUNTANT,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL ACCOUNTING MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL FINANCE MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT SPECIALIST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_LCOE ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_LCOE MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_LER TAX ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_LER TAX MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_MCOE ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_MCOE MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_P&A ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_PCOE ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_PCOE MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_PPD ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_PPD FINANCE MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_SALES ACCOUNTANT,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_TAX ANALYST,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_TAX MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_USOPS ACCOUNTANT,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_USOPS ACCOUNTING MANAGER,PD_D,Purchasing_Doc_Type_Display,Yes,No
+GSS,CLX_GSS COE MGR,PD_D,Purchasing_Doc_Type_Display,,
+GSS,CLX_GSS MRO-CAPITAL,PD_D,Purchasing_Doc_Type_Display,,
+GSS,CLX_GSS SOURCING,PD_D,Purchasing_Doc_Type_Display,,
+GSS,CLX_GSS SOURCING ANALYST,PD_D,Purchasing_Doc_Type_Display,,
+LARCC,CLX_RISK_MANAGEMENT_DISPLAY,PD_D,Purchasing_Doc_Type_Display,,
+LARCC,CLX_RISK_MANAGEMENT_POSTING,PD_D,Purchasing_Doc_Type_Display,,
+MD,CLX_EDM GLOBAL TEAM,PD_D,Purchasing_Doc_Type_Display,,
+MD,CLX_EDM MDM CONTRACTORS,PD_D,Purchasing_Doc_Type_Display,,
+MIT,CLX_APO SUPPORT,PD_D,Purchasing_Doc_Type_Display,,
+MIT,CLX_EDI INTEGRATION ADMINISTRATOR,PD_D,Purchasing_Doc_Type_Display,,
+MIT,CLX_FICO SUPPORT,PD_D,Purchasing_Doc_Type_Display,,
+MIT,CLX_O2C SUPPORT,PD_D,Purchasing_Doc_Type_Display,,
+MIT,CLX_S2P SUPPORT,PD_D,Purchasing_Doc_Type_Display,,
+MIT,CLX_SAP BI ADMINISTRATOR,PD_D,Purchasing_Doc_Type_Display,,
+MIT,CLX_SOLUTION DESIGNER,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C AR PROCESSING TEAM LEAD,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C AR REVENUE COORDINATOR,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C ARA DEDUCTION SPECIALIST,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C OPERATIONS DISPLAY,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C ORDER PROCESSING EXPORT,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C ORDER PROCESSING EXPORT,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C ORDER PROCESSING EXPORT,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_O2C REPORTING & TABLE UPDATES SU,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C TRANS SERVICES GROUP,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_ORD PROC TEAM LEAD LOG OPS SU,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_PLANT DOCK COORDINATOR,PL_D,Plant_Display,Yes,No
+O2C,CLX_PLANT SHIPPING,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P CO-PACK PROCESSING SPECIALIST,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P FREIGHT ANALYST,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P OPERATIONS MANAGER,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT MANAGER,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P PROCESSING ANALYST,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P PROCSPEC SPECIALIST,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P PROCUREMENT CORPORATE SUPPORT MANAGER,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P PROCUREMENT OPS ANALYST,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P PROCUREMENT SUPERVISOR,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P REPORTING ANALYST,PD_D,Purchasing_Doc_Type_Display,,
+P2P,CLX_P2P SPECIALIZED PROCESSING,PD_D,Purchasing_Doc_Type_Display,,
+Planning,CLX_DEPLOYER,PD_D,Purchasing_Doc_Type_Display,,
+Planning,CLX_F2S NETWORK PLANNING DISPLAY,PD_D,Purchasing_Doc_Type_Display,,
+Planning,CLX_F2S NETWORK PLANNING SUPPLY,PD_D,Purchasing_Doc_Type_Display,,
+Planning,CLX_F2S PDP,PD_D,Purchasing_Doc_Type_Display,,
+Planning,CLX_F2S PLANNING COE,PD_D,Purchasing_Doc_Type_Display,,
+PMB,CLX_MARKETING DISPLAY,PD_D,Purchasing_Doc_Type_Display,,
+PPD,CLX_PPD_DISPLAY ROLE,PD_D,Purchasing_Doc_Type_Display,,
+PPD,CLX_PPD_WRITE ROLE,PD_D,Purchasing_Doc_Type_Display,,
+R&D,CLX_R&D MILL TAX,PD_D,Purchasing_Doc_Type_Display,,
+R&D,CLX_R&D SCIENTIST DISPLAY,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_FIELD SALES-ANALYST COORDINATOR,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_FIELD SALES-MANAGER,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_SALES PLANNING-ANALYST COORD,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_SALES TECH OPS-ANALYST,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_TRADE OPS - ANALYSTS,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_UNSALEABLES OPS-ANALYST,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_WBS ORDER MANAGEMENT SPECIALIST,PD_D,Purchasing_Doc_Type_Display,,
+Sales,CLX_WBS ORDER TRADE MGMT SPECIALIST,PD_D,Purchasing_Doc_Type_Display,,
+ES,CLX_CONTRACT MANUFACTURER (NONCLX),PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_CONTRACT MANUFACTURING MANAGER,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_CONTRACT MANUFACTURING SUPPORT,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_EHS SPECIALIST,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT ENGINEER,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT INVENTORY MANAGEMENT,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT MAINTENANCE EXECUTION,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT MAINTENANCE MANAGEMENT,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT MAINTENANCE PLANNING,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT MATERIAL COORDINATOR,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT OPERATIONS MANAGER,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT PARTS MANAGEMENT,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT PROCESS OPERATOR,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT PRODUCTION EXECUTION,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT PRODUCTION EXECUTION TEAM LEAD,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT PRODUCTION SCHEDULER,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PLANT SITE MANAGER,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_PROJECT ENGINEER,PD_U,Purchasing_Doc_Type_Update,,
+Finance,CLX_INTERNATIONAL PROCUREMENT MANAGER,PD_U,Purchasing_Doc_Type_Update,No,Yes
+Finance,CLX_INTERNATIONAL PROCUREMENT SPECIALIST,PD_U,Purchasing_Doc_Type_Update,No,Yes
+GSS,CLX_GSS COE MGR,PD_U,Purchasing_Doc_Type_Update,,
+GSS,CLX_GSS MRO-CAPITAL,PD_U,Purchasing_Doc_Type_Update,,
+GSS,CLX_GSS SOURCING,PD_U,Purchasing_Doc_Type_Update,,
+GSS,CLX_GSS SOURCING ANALYST,PD_U,Purchasing_Doc_Type_Update,,
+MIT,CLX_S2P SUPPORT,PD_U,Purchasing_Doc_Type_Update,,
+O2C,CLX_PLANT DOCK COORDINATOR,PL_U,Plant_Update,No,Yes
+O2C,CLX_PLANT SHIPPING,PD_U,Purchasing_Doc_Type_Update,,
+P2P,CLX_P2P CO-PACK PROCESSING SPECIALIST,PD_U,Purchasing_Doc_Type_Update,,
+P2P,CLX_P2P FREIGHT ANALYST,PD_U,Purchasing_Doc_Type_Update,,
+P2P,CLX_P2P OPERATIONS MANAGER,PD_U,Purchasing_Doc_Type_Update,,
+P2P,CLX_P2P PROCSPEC SPECIALIST,PD_U,Purchasing_Doc_Type_Update,,
+P2P,CLX_P2P PROCUREMENT OPS ANALYST,PD_U,Purchasing_Doc_Type_Update,,
+P2P,CLX_P2P PROCUREMENT SUPERVISOR,PD_U,Purchasing_Doc_Type_Update,,
+Planning,CLX_DEPLOYER,PD_U,Purchasing_Doc_Type_Update,,
+Planning,CLX_F2S NETWORK PLANNING SUPPLY,PD_U,Purchasing_Doc_Type_Update,,
+Planning,CLX_F2S PDP,PD_U,Purchasing_Doc_Type_Update,,
+Planning,CLX_F2S PLANNING COE,PD_U,Purchasing_Doc_Type_Update,,
+ES,CLX_CONTRACT MANUFACTURER (NONCLX),SD_D,Sales_Doc_Type_Display,,
+ES,CLX_CONTRACT MANUFACTURING MANAGER,SD_D,Sales_Doc_Type_Display,,
+ES,CLX_CONTRACT MANUFACTURING SUPPORT,SD_D,Sales_Doc_Type_Display,,
+ES,CLX_PLANT ACCOUNTANT CONTROLLER,SD_D,Sales_Doc_Type_Display,,
+ES,CLX_PLANT INVENTORY MANAGEMENT,SD_D,Sales_Doc_Type_Display,,
+ES,CLX_PLANT PRODUCTION SCHEDULER,SD_D,Sales_Doc_Type_Display,,
+Finance,CLX_CATEGORY COST ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_CATEGORY COST MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_CFP MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+O2C,CLX_PLANT DOCK COORDINATOR,PD_D,Purchasing_Doc_Type_Display,Yes,No
+Finance,CLX_CORPORATE ACCOUNTING MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_CORPORATE REPORTING MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_CREDIT ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+O2C,CLX_PLANT DOCK COORDINATOR,PD_U,Purchasing_Doc_Type_Update,No,Yes
+Finance,CLX_FORECAST MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_FUNCTIONAL PLANNING ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_FUNCTIONAL PLANNING MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL ACCOUNTANT,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL ACCOUNTING MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL FINANCE MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_INTERNATIONAL PROCUREMENT SPECIALIST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_LCOE ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_LCOE MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_LER TAX ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_LER TAX MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_MARKETING ACCOUNTANT,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_P&A ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_PPD ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_PPD FINANCE MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_SALES ACCOUNTANT,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_SALES AND MARKETING ACCOUNTING MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_SALES FINANCE ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_TAX ADMINISTRATOR,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_TAX ANALYST,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_TAX MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_TREASURY MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_USOPS ACCOUNTANT,SD_D,Sales_Doc_Type_Display,Yes,No
+Finance,CLX_USOPS ACCOUNTING MANAGER,SD_D,Sales_Doc_Type_Display,Yes,No
+GSS,CLX_GSS COE MGR,SD_D,Sales_Doc_Type_Display,,
+GSS,CLX_GSS SOURCING ANALYST,SD_D,Sales_Doc_Type_Display,,
+MD,CLX_EDM GLOBAL TEAM,SD_D,Sales_Doc_Type_Display,,
+MD,CLX_EDM MDM CONTRACTORS,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_APO SUPPORT,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_EDI INTEGRATION ADMINISTRATOR,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_FICO SUPPORT,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_O2C SUPPORT,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_S2P SUPPORT,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_SALES SUPPORT,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_SAP ABAP ADMINISTRATOR,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_SAP BI ADMINISTRATOR,SD_D,Sales_Doc_Type_Display,,
+MIT,CLX_SOLUTION DESIGNER,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_CROSSMARK BROKER,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C AR PROCESSING TEAM LEAD,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C AR REVENUE COORDINATOR,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C ARA DEDUCTION SPECIALIST,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C OPERATIONS DISPLAY,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C ORDER PROCESSING SU,PL_D,Plant_Display,,
+O2C,CLX_O2C ORDER PROCESSING SU,PL_U,Plant_Update,,
+O2C,CLX_O2C ORDER PROCESSING SU,PC_D,Profit Center_Display,Yes,No
+O2C,CLX_O2C REPORTING & TABLE UPDATES SU,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C TRANS SERVICES GROUP,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_ORD PROC TEAM LEAD LOG OPS SU,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_PLANT DOCK COORDINATOR,SD_D,Sales_Doc_Type_Display,Yes,No
+O2C,CLX_PLANT SHIPPING,SD_D,Sales_Doc_Type_Display,,
+P2P,CLX_P2P FREIGHT ANALYST,SD_D,Sales_Doc_Type_Display,,
+P2P,CLX_P2P OPERATIONS MANAGER,SD_D,Sales_Doc_Type_Display,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT,SD_D,Sales_Doc_Type_Display,,
+P2P,CLX_P2P PAYABLES CORPORATE SUPPORT MANAGER,SD_D,Sales_Doc_Type_Display,,
+P2P,CLX_P2P PROCESSING ANALYST,SD_D,Sales_Doc_Type_Display,,
+P2P,CLX_P2P REPORTING ANALYST,SD_D,Sales_Doc_Type_Display,,
+P2P,CLX_P2P SPECIALIZED PROCESSING,SD_D,Sales_Doc_Type_Display,,
+Planning,CLX_DEPLOYER,SD_D,Sales_Doc_Type_Display,,
+Planning,CLX_F2S NETWORK PLANNING DISPLAY,SD_D,Sales_Doc_Type_Display,,
+Planning,CLX_F2S NETWORK PLANNING SUPPLY,SD_D,Sales_Doc_Type_Display,,
+Planning,CLX_F2S PDP,SD_D,Sales_Doc_Type_Display,,
+Planning,CLX_F2S PLANNING COE,SD_D,Sales_Doc_Type_Display,,
+PPD,CLX_PPD_DISPLAY ROLE,SD_D,Sales_Doc_Type_Display,,
+PPD,CLX_PPD_WRITE ROLE,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_ACOSTA DEDUCTION SPECIALIST,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_FIELD SALES-ANALYST COORDINATOR,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_FIELD SALES-MANAGER,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_SALES PLANNING-ANALYST COORD,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_SALES TECH OPS-ANALYST,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_TELMARK ORDER MGMT SPECIALIST,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_TRADE OPS - ANALYSTS,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_UNSALEABLES OPS-ANALYST,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_WBS ORDER MANAGEMENT SPECIALIST,SD_D,Sales_Doc_Type_Display,,
+Sales,CLX_WBS ORDER TRADE MGMT SPECIALIST,SD_D,Sales_Doc_Type_Display,,
+ES,CLX_CONTRACT MANUFACTURING MANAGER,SD_U,Sales_Doc_Type_Update,,
+Finance,CLX_INTERNATIONAL PROCUREMENT MANAGER,SD_U,Sales_Doc_Type_Update,No,Yes
+Finance,CLX_INTERNATIONAL PROCUREMENT SPECIALIST,SD_U,Sales_Doc_Type_Update,No,Yes
+Finance,CLX_SALES ACCOUNTANT,SD_U,Sales_Doc_Type_Update,No,Yes
+MIT,CLX_O2C SUPPORT,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_O2C AR PROCESSING TEAM LEAD,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_O2C ARA DEDUCTION SPECIALIST,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_O2C ORDER PROCESSING SU,PD_D,Purchasing_Doc_Type_Display,,
+O2C,CLX_O2C ORDER PROCESSING SU,SD_D,Sales_Doc_Type_Display,,
+O2C,CLX_O2C ORDER PROCESSING SU,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_O2C REPORTING & TABLE UPDATES SU,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_O2C TRANS SERVICES GROUP,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_ORD PROC TEAM LEAD LOG OPS SU,SD_U,Sales_Doc_Type_Update,,
+O2C,CLX_PLANT DOCK COORDINATOR,SD_U,Sales_Doc_Type_Update,No,Yes
+O2C,CLX_PLANT SHIPPING,SD_U,Sales_Doc_Type_Update,,
+Planning,CLX_F2S NETWORK PLANNING SUPPLY,SD_U,Sales_Doc_Type_Update,,
+Planning,CLX_F2S PDP,SD_U,Sales_Doc_Type_Update,,
+Sales,CLX_TELMARK ORDER MGMT SPECIALIST,SD_U,Sales_Doc_Type_Update,,
+Sales,CLX_WBS ORDER MANAGEMENT SPECIALIST,SD_U,Sales_Doc_Type_Update,,
+Sales,CLX_WBS ORDER TRADE MGMT SPECIALIST,SD_U,Sales_Doc_Type_Update,,

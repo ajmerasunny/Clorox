@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE TaskDefinition PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskDefinition name="Clorox Pull and Set VCBR Descriptions" resultAction="Delete" type="Generic">
+  <Attributes>
+    <Map>
+      <entry key="TaskSchedule.host"/>
+      <entry key="ruleName" value="Clorox Pull and Set VCBR Descriptions"/>
+      <entry key="taskCompletionEmailNotify" value="Disabled"/>
+      <entry key="descriptionFilePath" value="%%VCBR_ROLE_DESCRIPTION_PATH%%"/>
+      <entry key="taskCompletionEmailRecipients"/>
+      <entry key="taskCompletionEmailTemplate"/>
+    </Map>
+  </Attributes>
+  <Description>Task that runs to update VCBR descriptions.</Description>
+  <Parent>
+    <Reference class="sailpoint.object.TaskDefinition" name="Run Rule"/>
+  </Parent>
+   <Signature>
+    <Inputs>
+    <Argument name="descriptionFilePath" type="string">
+        <Prompt>Filepath to the VCBR Description csv file</Prompt>
+      </Argument>
+    </Inputs>
+  </Signature>
+</TaskDefinition>

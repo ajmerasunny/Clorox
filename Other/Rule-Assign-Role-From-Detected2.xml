@@ -1,0 +1,211 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox Assign Roles From Detected">
+  <Description>
+        This rule will be called when IP Role Import task runs.
+  </Description>
+  <ReferencedRules>
+    <Reference class="sailpoint.object.Rule" name="Role Parsing and Import RuleLibrary"/>
+  </ReferencedRules>
+  <Source><![CDATA[
+  	import sailpoint.object.Attributes;
+  	import sailpoint.object.TaskResult;
+  	import sailpoint.object.Custom;
+  	import sailpoint.object.IdentityEntitlement;
+  	import sailpoint.object.ManagedAttribute;
+  	
+  	import java.sql.Connection;  
+  	import java.util.ArrayList;
+  	import sailpoint.services.ServicesUtil;
+	import java.util.Arrays;
+	import sailpoint.object.Attributes;
+	import java.text.SimpleDateFormat;
+	import java.util.TimeZone;
+	
+	import sailpoint.object.ProvisioningPlan;
+	import sailpoint.api.Provisioner;
+	import sailpoint.object.ProvisioningProject;
+	import sailpoint.object.ProvisioningPlan.AccountRequest;
+	import sailpoint.object.ProvisioningPlan.AttributeRequest;
+	import sailpoint.object.QueryOptions;
+	import java.util.HashMap;
+	import sailpoint.object.Filter;
+	import java.util.List;
+	import sailpoint.object.Bundle;
+	import java.util.Map;
+	import java.util.Set;
+  	import org.apache.log4j.Logger;
+  	import org.apache.log4j.Level;
+  	
+  	
+  	List detectBundlesFromAppNames = new ArrayList();
+  	detectBundlesFromAppNames.add("%%SAP_R3P_APP_NAME%%");
+  	
+	Logger logger = Logger.getLogger("pslabs.role.import.maintainer");
+	  	
+  	for(String appName : detectBundlesFromAppNames)
+  	{  		
+  		QueryOptions roleQuery = new QueryOptions();
+		roleQuery.addFilter(Filter.eq("appName", appName));
+		roleQuery.addFilter(Filter.eq("type", "business"));		
+		
+		ArrayList roleProp = new ArrayList();
+		roleProp.add("name");
+		
+		Iterator roleIter = context.search(Bundle.class, roleQuery, roleProp);
+		
+		while(roleIter != null && roleIter.hasNext())
+		{
+			String bundleName = (String) roleIter.next()[0];	
+			
+			if(bundleName != null)
+			{
+				String bundleNameIt = bundleName + " (IT)";
+				
+				QueryOptions identityQuery = new QueryOptions();
+				identityQuery.addFilter(Filter.eq("bundles.name", bundleNameIt));
+
+				Iterator identityIter = context.search(Identity.class, identityQuery);
+				
+				while(identityIter != null && identityIter.hasNext())
+				{
+				
+					Identity identity = (Identity) identityIter.next();	
+					
+					if(identity != null)
+					{
+						QueryOptions identityEntQuery = new QueryOptions();						
+						identityEntQuery.addFilter(Filter.eq("name", "assignedRoles"));
+						identityEntQuery.addFilter(Filter.eq("value", bundleName));
+						identityEntQuery.addFilter(Filter.eq("identity", identity));
+						
+						ArrayList identityEntProp = new ArrayList();
+						identityEntProp.add("name");
+						
+						Iterator identityEntIter = context.search(IdentityEntitlement.class, identityEntQuery, identityEntProp);
+						
+						//doesn't have the business role so lets assign it
+						if(identityEntIter == null || !identityEntIter.hasNext())
+						{
+								//before assigning we need to calculate start/end dates
+								Bundle bundleIt = context.getObjectByName(Bundle.class, bundleName + " (IT)");
+								
+								Date addDate = null;
+								Date endDate = null;
+								
+								List entitlements = returnEntitlementValuesFromItRole(bundleIt);
+																
+								if(entitlements != null && !entitlements.isEmpty())
+								{
+									ManagedAttribute singleEntitlementManAtt = entitlements.get(0);
+									String singleEntitlement = singleEntitlementManAtt.getValue();
+																											
+									Map argMap = new HashMap();
+									
+									argMap.put("applicationName", "%%SAP_R3P_APP_NAME%%%");
+									argMap.put("attributeName", "Role Details");
+									argMap.put("identity", identity);
+									argMap.put("nativeId", identity.getAttribute("accountId"));
+									
+									List roleDetails = new ArrayList();
+									Object roleDetailsObj = ServicesUtil.returnLinkAttributeFromNativeId(context, argMap);
+									
+									if(roleDetailsObj instanceof String)
+									{
+										roleDetails.add(roleDetailsObj.toString());
+									}
+									else if(roleDetailsObj instanceof List)
+									{
+										roleDetails = (List) roleDetailsObj;
+									}
+									
+									if(roleDetails != null && !roleDetails.isEmpty())
+									{
+										for(String roleDetail : roleDetails)
+										{			
+											if(roleDetail != null && roleDetail.contains(singleEntitlement))
+											{
+												SimpleDateFormat sapDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+												sapDateFormat.setTimeZone(TimeZone.getTimeZone("%%CLOROX_TIME_ZONE%%"));
+											
+												String [] roleDetailArray = roleDetail.split("#");
+												
+												String startDateString = roleDetailArray[1];
+												String endDateString = roleDetailArray[2];
+												
+												addDate = sapDateFormat.parse(startDateString);
+												
+												//if startdate is in past then don't set
+												if(addDate.compareTo(new Date()) < 0)
+												{
+													addDate = null;
+												}
+																								
+												//if not forever try and set it
+												if(!endDateString.contains("9999"))
+												{
+													endDate = sapDateFormat.parse(endDateString);
+												}
+											}
+										}
+									}
+
+								}
+								
+								ProvisioningPlan plan = new ProvisioningPlan();
+								plan.setIdentity(identity);
+								
+								Map attrMap = new HashMap();
+								
+								if(addDate != null)
+								{
+									attrMap.put("addDate", addDate);
+								}
+								
+								if(endDate != null)
+								{
+									attrMap.put("endDate", endDate);
+								}
+								
+								AccountRequest acctReq = new AccountRequest();
+								acctReq.setApplication(ProvisioningPlan.APP_IIQ);
+								acctReq.setNativeIdentity(identity.getName());
+								acctReq.setOperation(ProvisioningPlan.AccountRequest.Operation.Modify);	
+								
+								AttributeRequest attrReq = new AttributeRequest();   	
+								attrReq.setName("assignedRoles");
+								attrReq.setOperation(ProvisioningPlan.Operation.Add);
+								attrReq.setValue(bundleName);
+								
+								if(!attrMap.isEmpty())
+								{
+									attrReq.setArguments(new Attributes(attrMap));
+								}
+								
+								acctReq.add(attrReq);
+								
+								plan.add(acctReq);
+																						
+								Provisioner provisioner = new Provisioner(context);
+								ProvisioningProject project = provisioner.compile(plan);
+								provisioner.setNoLocking(true);
+								provisioner.execute(project);
+						}
+
+						Util.flushIterator(identityEntIter);
+						
+					}
+				}
+				Util.flushIterator(identityIter);
+				
+			}
+		}
+		Util.flushIterator(roleIter);
+		
+  	}
+  	
+  
+	return "Success";
+       
+    ]]></Source>
+</Rule>

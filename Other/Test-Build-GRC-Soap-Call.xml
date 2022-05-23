@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Test Build Soap Call">
+  <ReferencedRules>
+    <Reference class="sailpoint.object.Rule" name="test SAPGRC Rule Library"/>
+  </ReferencedRules>
+  <Source><![CDATA[   
+		import java.util.HashMap;
+        import java.util.List;
+        import java.util.ArrayList;
+        import java.util.Map;
+        import sailpoint.tools.Util;
+        import sailpoint.object.Application;
+        import sailpoint.object.ManagedAttribute;
+        import sailpoint.object.ProvisioningPlan;
+        import sailpoint.object.ProvisioningPlan.AttributeRequest;
+        import sailpoint.object.ProvisioningPlan.AccountRequest;
+        import java.util.Date;
+        import java.text.SimpleDateFormat;
+        import sailpoint.object.Link;
+        import sailpoint.api.IdentityService;
+		import java.util.Calendar;
+		import java.text.ParseException;
+		import sailpoint.object.Custom;
+		
+		public static String updateUserAccessSoapMessage(SailPointContext context, Map requestHeaderDataMap, List requestedLineItemMap, List userInfoMap, Map userGroupsMap)
+        {
+        if(!requestHeaderDataMap.isEmpty() && !requestedLineItemMap.isEmpty() && !userInfoMap.isEmpty())
+        	{
+	        soapMsg = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:sap-com:document:sap:soap:functions:mc-style\">\n" + 
+	        "   <soapenv:Header>\n" +       
+	        "   </soapenv:Header>\n" + 
+	        "   <soapenv:Body>\n" + 
+	        "       <urn:GracIdmUsrAccsReqServices>\n" + 
+	        "         <RequestHeaderData>\n" + 
+	        "            <Reqtype>"+requestHeaderDataMap.get("Reqtype")+"</Reqtype>\n" + 
+	        "            <Priority>"+requestHeaderDataMap.get("Priority")+"</Priority>\n" +
+	        "            <ReqInitSystem>"+requestHeaderDataMap.get("ReqInitSystem")+"</ReqInitSystem>\n" +
+	        "            <Requestorid>"+requestHeaderDataMap.get("Requestorid")+"</Requestorid>\n" +
+	        "            <Email>"+requestHeaderDataMap.get("Email")+"</Email>\n" +
+	        "            <RequestReason>"+requestHeaderDataMap.get("RequestReason")+"</RequestReason>\n" +
+	        "         </RequestHeaderData>\n" +
+	        "         <RequestedLineItem>\n";
+	        for(int i=0; i< requestedLineItemMap.size();i++)
+	        {
+	        logger.debug(requestedLineItemMap.get(i));
+	        if(requestedLineItemMap.get(i) instanceof Map)
+	        {
+	        Map requestedDataMap =  (Map) requestedLineItemMap.get(i);
+	        soapMsg = soapMsg+ "      	  		<item>\n" + 
+	        "      	 		<ItemName>"+requestedDataMap.get("ItemName").replace("&","&#38;")+"</ItemName>\n" + 
+	        "      	 		<Connector>"+requestedDataMap.get("Connector")+"</Connector>\n" + 
+	        "      	 		<ProvItemType>"+requestedDataMap.get("ProvItemType")+"</ProvItemType>\n" + 
+	        "      	 		<ProvAction>"+requestedDataMap.get("ProvAction")+"</ProvAction>\n" + 
+	        "      	 		<ValidFrom>"+requestedDataMap.get("ValidFrom")+"</ValidFrom>\n" + 
+	        "      	 		<ValidTo>"+requestedDataMap.get("ValidTo")+"</ValidTo>\n" + 
+	        "      	 		<FfOwner>"+requestedDataMap.get("ffOwner")+"</FfOwner>\n" + 
+	        "      	 		<RoleType>"+requestedDataMap.get("RoleType")+"</RoleType>\n" + 
+	        "      		</item>\n" ;
+	        }
+	        }
+	        soapMsg = soapMsg+" </RequestedLineItem>\n"; 
+	        if(userGroupsMap != null)
+	        {
+	        soapMsg = soapMsg+"<UserGroup>\n" + 
+	        "      	  <item>" +
+	        "      	  <UserGroup>"+userGroupsMap.get("UserGroup")+"</UserGroup>\n" +
+	        "      	  <UserGroupDesc>"+userGroupsMap.get("UserGroupDesc")+"</UserGroupDesc>\n" +      
+	        "      	  </item>\n"+
+	        "      	  </UserGroup>\n";
+	        }
+	        soapMsg = soapMsg+"<UserInfo>\n";
+	        for(int j=0; j< userInfoMap.size();j++)
+	        {
+	        logger.debug(userInfoMap.get(j));
+	        if(userInfoMap.get(j) instanceof Map)
+	        {
+	        Map userMap =  (Map) userInfoMap.get(j);
+	         soapMsg = soapMsg+ "   <item>\n" +
+	        "      	  <Userid>"+userMap.get("Userid")+"</Userid>\n" +
+	        "      	  <Fname>"+userMap.get("Fname")+"</Fname>\n" +
+	        "      	  <Lname>"+userMap.get("Lname")+"</Lname>\n" +
+	        "      	  <Email>"+userMap.get("Email")+"</Email>\n" +
+	        "      	  <Telnumber>"+userMap.get("Telnumber")+"</Telnumber>\n" +
+	        "      	  <Department>"+userMap.get("Department")+"</Department>\n" +
+	        "      	  <Company>"+userMap.get("Company")+"</Company>\n" +
+	        "      	  <Empjob>"+userMap.get("Empjob")+"</Empjob>\n" +
+	        "      	  <Empposition>"+userMap.get("Empposition")+"</Empposition>\n" +
+	        "      	  <Location>"+userMap.get("Location")+"</Location>\n" +
+	        "      	  <Costcenter>"+userMap.get("Costcenter")+"</Costcenter>\n" +
+	        "      	  <Function>"+userMap.get("Function")+"</Function>\n" +
+	        "      	  <Emptype>"+userMap.get("Emptype")+"</Emptype>\n" +
+	        "      	  <UserType>"+userMap.get("UserType")+"</UserType>\n" +
+	        "      	  <Manager>"+userMap.get("Manager")+"</Manager>\n" +
+	        "      	  <ValidFrom>"+userMap.get("ValidFrom")+"</ValidFrom>\n" +
+	        "      	  <ValidTo>"+userMap.get("ValidTo")+"</ValidTo>\n" +
+	        "      	  <ManagerEmail>"+userMap.get("ManagerEmail")+"</ManagerEmail>\n" +
+	        "      	  <ManagerFirstname>"+userMap.get("ManagerFirstname")+"</ManagerFirstname>\n" +
+	        "      	  <ManagerLastname>"+userMap.get("ManagerLastname")+"</ManagerLastname>\n" +
+	        "      	  </item>\n";
+        	}
+	        }
+	        soapMsg = soapMsg+" </UserInfo>\n" + 
+	        "      	  </urn:GracIdmUsrAccsReqServices>\n" +
+	        "      	   </soapenv:Body>\n" + 
+	        "      	  </soapenv:Envelope>\n";
+        	}
+        	else
+        	{
+       	 	logger.error("Request Map is null: ");
+        	}
+        	logger.debug("exit updateUserAccessSoapMessage");
+        	return soapMsg;
+    }
+    
+    
+		
+		Custom test = context.getObjectByName(Custom.class, "test");
+		
+		ProvisioningPlan plan = test.get("aplan2");
+
+	
+		String requester = "spadmin";
+		String identityName = "30000048";
+		String requstInitconnectionName = "DV2CLNT100";
+		String requestType = "LOA";
+
+		
+		 plan.setIdentity(context.getObjectByName(Identity.class, identityName));
+          List accountRequestSAPGRC = filterAccountRequestSAPGRC(plan);
+
+
+        /**
+        ** Below are variables defined which can be used in case required.
+        **/
+        String PRIORITY_MEDIUM1 = "006";
+        String PRIORITY_HIGH1 = "007";
+         String BUSINESS_PROCESS_BASIS1 = "Basis";
+        String BUSINESS_PROCESS_APO1 = "APO";
+        String BUSINESS_PROCESS_CRM1 = "CRM";
+        String BUSINESS_PROCESS_FINANCE1 = "Finance";
+        String BUSINESS_PROCESS_HR_PAYROLL1 = "HR and Payroll";
+        String REQUEST_TYPE_CREATE1 = "001";
+        String REQUEST_TYPE_MODIFY1 = "002";
+        String REQUEST_TYPE_LOCK1 = "004";
+        String REQUEST_TYPE_UNLOCK1 = "030";
+        String REQUEST_TYPE_TERM1 = "031";
+        String PROVISIONING_ACTION_ADD1 = "006";
+        String PROVISIONING_ACTION_MODIFY1 = "010";
+        String PROVISIONING_ACTION_DELETE1 = "009";
+        String PROVISIONING_ACTION_LOCK1 = "023";
+        String PROVISIONING_ACTION_UNLOCK1 = "024";
+        String PROVISIONING_ITEM_TYPE_ROL1 = "ROL";
+        String PROVISIONING_ITEM_TYPE_PRF1 = "PRF";
+        String PROVISIONING_ITEM_TYPE_SYS1 = "SYS";
+        String OBJECT_TYPE_USR1 = "USR";
+        String REQUEST_TYPE_BUS1 = "BUS";
+        String REQUEST_TYPE_SIN1 = "SIN";
+        String REQUEST_INIT_SYSTEM1 = "%%GRC_REQINIT_SYSTEM%%";
+        String REQUEST_TYPE_FFID1 = "029";
+        String PROVISIONING_ITEM_TYPE_FFI1 = "FFI";
+        /**
+        ** REPORT_FORMAT1 value depends on <ReportFormat> 2 </ReportFormat> tag of GracIdmUsrAccsReqServices webservice.
+        ** SAP GRC version  10.1, SP-Level 0011 or lower required to set <ReportFormat>DETAILED</ReportFormat>.
+        **/
+        String REPORT_FORMAT1 = "2";
+        
+        public List userInfoList = new ArrayList();
+        public Map userDetailMap = null;
+        public Map requestHeaderDataMap = new HashMap();
+        public List requestLineItemList = new ArrayList();
+        public Map requestLineDataMap = null;
+        public Map completeDetailMap = new HashMap();
+        public Map userGroupMap = new HashMap();
+        public String nativeIdentity = null;
+        public Identity identity = null;
+        public String operation = null;
+        String ristrictedChars = "[? * ' ` ~ &]";
+        /** 
+        ** Providing supporting function to get SAP GRC connector name from sailpoint application
+        **/
+        
+        public String getGRACConnectorName(String appName) throws Exception 
+		{
+			Application app = (Application) context.getObject(Application.class, appName);
+			String grcConnectorName = null;
+			if (null != app)
+		    {
+				grcConnectorName = (String) app.getAttributeValue("GRCConnectorName");
+			}
+			return grcConnectorName;
+        }
+        /**
+        **Supporting function to get value like single or composite for roles and profiles
+        **/
+        public String getGRACEntitlementType(String assignmentName, Application app) 
+		{
+			ManagedAttribute ma = sailpoint.api.ManagedAttributer.getByDisplayName(context, app, assignmentName);
+			String type = null;
+			if (null != ma) 
+			{
+				type = (String) ma.getAttribute("Type");
+				if (null != type) 
+				{
+					if (type.equals("Single")) type = "SIN";
+					else  if (type.equals("Business")) type = "BUS";
+					else if (type.equals("Composite")) type = "COM";
+					else type = "DER";
+				}
+			}
+			return type;
+        }
+        /**
+        ** Function to populate user details for whom access is requested.
+        **/
+        public int populateUserDetailMap(AccountRequest accReq, Identity identity, Application app, String applicationName, int countUserKey) throws ParseException
+		{
+			userDetailMap = new HashMap();
+			String nativeIdentity = accReq.getNativeIdentity();
+			String userId = null;
+			String firstName = null;
+			String lastName = null;
+			String email = null;
+			String manager =  null;
+			AttributeRequest attribReq = null;
+			if(isSAPDirectApplication(app))
+			{
+				String email = identity.getEmail();
+		        if(email == null)
+		        {
+		        	email = identity.getAttribute("extEmail");
+		        }
+		      	
+		      	String startDateSap = "";
+				IdentityService is = new IdentityService(context);
+				List appLinks = is.getLinks(identity, app);	
+				
+                if(appLinks != null && !appLinks.isEmpty())
+                {
+                	Link appLink = appLinks.get(0);
+                	
+                	startDateSap = appLink.getAttribute("User Valid From");
+                }
+                
+                if(startDateSap != null && !startDateSap.isEmpty())
+                {
+                	startDateSap = startDateSap.replace("-","");
+				}
+                else
+                {
+                	startDateSap = new SimpleDateFormat("yyyyMMdd").format(new Date());
+                }
+           
+		      		
+		      	
+		        Date termDate = identity.getAttribute("terminationDate");
+		        Date ctrExpDate = identity.getAttribute("ctrexpDt");
+		        String endDate = null;
+		        if(termDate != null)
+		        {
+		        	endDate =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+		        }
+		        else if(ctrExpDate != null)
+		        {
+		        	endDate = new SimpleDateFormat("yyyyMMdd").format(ctrExpDate);
+		        }
+		        else if(termDate == null && ctrExpDate == null )
+		        {
+		        	endDate = "99991231";
+		        }
+		        userDetailMap.put("Userid",  (String) identity.getAttribute("accountId"));
+				userDetailMap.put("Fname", identity.getFirstname().replaceAll(ristrictedChars," "));
+				userDetailMap.put("Lname", identity.getLastname().replaceAll(ristrictedChars," "));
+				userDetailMap.put("Email", email);
+		       if( identity.getAttribute("costcenterdepartment") != null)
+		        {
+					userDetailMap.put("Department", (String) identity.getAttribute("costcenterdepartment").replaceAll(ristrictedChars," "));
+		        }
+		         if( identity.getAttribute("company") != null)
+		        {
+					userDetailMap.put("Company", (String) identity.getAttribute("company"));
+		        }
+		         if( identity.getAttribute("title") != null)
+		        {
+					 userDetailMap.put("Empjob", (String) identity.getAttribute("title").replaceAll(ristrictedChars," "));
+		        }
+		         if( identity.getAttribute("position") != null)
+		        {
+					 userDetailMap.put("Empposition", (String) identity.getAttribute("position").replaceAll(ristrictedChars," "));
+		        }
+				userDetailMap.put("Location", (String) identity.getAttribute("location"));
+				userDetailMap.put("Emptype", (String) identity.getAttribute("employeeType"));
+		         if( identity.getAttribute("adminCostCenterName") != null)
+		        {
+					userDetailMap.put("Costcenter", (String) identity.getAttribute("adminCostCenterName").replaceAll(ristrictedChars," "));
+		        }
+		         if( identity.getAttribute("department") != null)
+		        {
+					userDetailMap.put("Function", (String) identity.getAttribute("department").replaceAll(ristrictedChars," "));	
+		        }
+				userDetailMap.put("Telnumber", (String) identity.getAttribute("workPhone"));
+				userDetailMap.put("UserType", "A");
+		        userDetailMap.put("ValidFrom", startDateSap);
+		        userDetailMap.put("ValidTo", endDate);
+				Identity manager =  identity.getManager();
+				userDetailMap.put("ManagerEmail", manager.getEmail());
+				userDetailMap.put("Manager", (String) manager.getAttribute("accountId"));
+				userDetailMap.put("ManagerFirstname", manager.getFirstname().replaceAll(ristrictedChars," "));
+				userDetailMap.put("ManagerLastname",manager.getLastname().replaceAll(ristrictedChars," "));
+				userInfoList.add(userDetailMap);
+				countUserKey++;
+        }
+        return countUserKey;
+        }
+        /**
+        ** Function to populate request item map which will contain all access request details for 
+        **/
+        public int populateRequestItemMap(AccountRequest accReq, Application app, String applicationName, int countRoleKey, String userGroup) 
+		{
+        List<AttributeRequest> attrReqList = accReq.getAttributeRequests();
+        boolean isCuaApp = app.getBooleanAttributeValue("IsCUASystem");
+        for(AttributeRequest attrReq : Util.safeIterable(attrReqList))
+        {
+	        if(attrReq.getName().equals("Roles"))
+	        {
+		        AttributeRequest roleReq = attrReq;//accReq.getAttributeRequest("Roles");
+		        String ffOwner = roleReq.get("fireFighterOwner");
+       	 if (null != roleReq && ffOwner == null) 
+       	 {
+        		Object roleNameObject = roleReq.getValue();
+				Date removeDate = roleReq.getRemoveDate();
+		        Date addDate = roleReq.getAddDate();
+				String endDate = null;
+		        String startDate=null;
+			    Date ctrExpDate = identity.getAttribute("ctrexpDt");
+       			Date termDate = identity.getAttribute("terminationDate");
+			        if(removeDate != null)
+				    {
+						endDate =  new SimpleDateFormat("yyyyMMdd").format(removeDate);
+                		
+              		 if(termDate != null)
+                      {
+                         if(removeDate.compareTo(termDate) > 0) 
+                          {
+                            endDate =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+                         }
+                      }
+                      
+                      else if(ctrExpDate != null)
+                		{
+                   			if(removeDate.compareTo(ctrExpDate) > 0) 
+        					{
+                    		endDate =  new SimpleDateFormat("yyyyMMdd").format(ctrExpDate);
+                	 		}
+        				}
+       			  }
+					else
+					{
+						endDate = "99991231";
+					}
+			        if(addDate != null)
+				    {
+						startDate =  new SimpleDateFormat("yyyyMMdd").format(addDate);
+				    }
+			        else
+					{
+						startDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+					}						
+		        if(roleNameObject instanceof String)
+		        {
+			        requestLineDataMap = new HashMap();
+			        String roleName = (String)roleNameObject;
+			        fillRoleNameAndConnectorName(roleName, requestLineDataMap, isCuaApp, applicationName);
+			        requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_ROL1);
+			        requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+			        requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+			        requestLineDataMap.put("ValidFrom", startDate);
+			        requestLineDataMap.put("ValidTo", endDate);
+			        requestLineDataMap.put("RoleType", REQUEST_TYPE_SIN1 );
+			        //    requestLineDataMap.put("RoleType", getGRACEntitlementType(roleName, app));
+			        if (roleReq.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add a role
+			        if (roleReq.getOperation().toString().equals("Set")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_MODIFY1); // to retain /change date
+			        if (roleReq.getOperation().toString().equals("Remove")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_DELETE1); // to remove date
+			        requestLineItemList.add(requestLineDataMap);
+		        }
+		        else if(roleNameObject instanceof List)
+		        {
+			        List roleList = (List)roleNameObject;
+			        for(String role:roleList)
+			        {
+				        requestLineDataMap = new HashMap();
+				        fillRoleNameAndConnectorName(role, requestLineDataMap, isCuaApp, applicationName);
+				        requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_ROL1);
+				        requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+				        requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+				        requestLineDataMap.put("ValidFrom", startDate);
+				        requestLineDataMap.put("ValidTo", endDate);
+				        requestLineDataMap.put("RoleType", REQUEST_TYPE_SIN1 );
+				        //  requestLineDataMap.put("RoleType", getGRACEntitlementType(role, app));
+				        if (roleReq.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add a role
+				        if (roleReq.getOperation().toString().equals("Set")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_MODIFY1); // to retain /change date
+				        if (roleReq.getOperation().toString().equals("Remove")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_DELETE1); 
+				        requestLineItemList.add(requestLineDataMap);
+			        }
+		        }                    
+		        countRoleKey++;
+		    }
+		   else if (null != roleReq && ffOwner != null ) 
+       	    {
+       	        requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_FFID1);
+				Date removeDate = roleReq.getRemoveDate();
+		        Date addDate = roleReq.getAddDate();
+				String endDate = null;
+		        String startDate=null;
+				Date dt = null;
+			    Date ctrExpDate = identity.getAttribute("ctrexpDt");
+       			Date termDate = identity.getAttribute("terminationDate");
+			        if(removeDate != null)
+				    {
+						endDate =  new SimpleDateFormat("yyyyMMdd").format(removeDate);
+                		
+                		 if(termDate != null)
+                      {
+                         if(removeDate.compareTo(termDate) > 0) 
+                          {
+                            endDate =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+                         }
+                      }
+                	else if(ctrExpDate != null)
+                		{
+                   			if(removeDate.compareTo(ctrExpDate) > 0) 
+        					{
+                    		endDate =  new SimpleDateFormat("yyyyMMdd").format(ctrExpDate);
+                	 		}
+        				}
+              		
+       			  }
+					else
+					{
+						if(addDate != null)
+						dt = addDate;
+						else  dt = new Date();
+						Calendar cal = Calendar.getInstance();
+						cal.setTime(dt);
+						cal.add(Calendar.DATE, 1);
+						endDate = new SimpleDateFormat("yyyyMMdd").format(cal.getTime()); 
+					}
+			        if(addDate != null)
+				    {
+						startDate =  new SimpleDateFormat("yyyyMMdd").format(addDate);
+				    }
+			        else
+					{
+						startDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+					}
+        		Object roleNameObject = roleReq.getValue();
+		        if(roleNameObject instanceof String)
+		        {
+			        requestLineDataMap = new HashMap();
+			        String roleName = (String)roleNameObject;
+			        fillRoleNameAndConnectorName(roleName, requestLineDataMap, isCuaApp, applicationName);
+			        requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_FFI1);
+			        requestLineDataMap.put("ValidFrom", startDate);
+			        requestLineDataMap.put("ValidTo", endDate);
+			        requestLineDataMap.put("ffOwner", ffOwner);
+			        if (roleReq.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add a role
+			        requestLineItemList.add(requestLineDataMap);
+		        }
+		        else if(roleNameObject instanceof List)
+		        {
+			        List roleList = (List)roleNameObject;
+			        for(String role:roleList)
+			        {
+				        requestLineDataMap = new HashMap();
+				        fillRoleNameAndConnectorName(role, requestLineDataMap, isCuaApp, applicationName);
+				        requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_FFI1);
+				        requestLineDataMap.put("ValidFrom", startDate);
+				        requestLineDataMap.put("ValidTo", endDate);
+				        requestLineDataMap.put("ffOwner", ffOwner);				       
+				        if (roleReq.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add a role				       
+				        requestLineItemList.add(requestLineDataMap);
+			        }
+		        }                    
+		        countRoleKey++;
+		    }
+		  }
+        if(attrReq.getName().equals("Profiles"))
+		{
+			AttributeRequest profReq = attrReq;//accReq.getAttributeRequest("Profiles");
+			if (null != profReq) 
+			{
+				Object profReqObject = profReq.getValue();
+				Date removeDate = profReq.getRemoveDate();
+				Date addDate = profReq.getAddDate();
+				String endDate = null;
+				String startDate=null;
+				Date ctrExpDate = identity.getAttribute("ctrexpDt");
+       			Date termDate = identity.getAttribute("terminationDate");
+			        if(removeDate != null)
+				    {
+						endDate =  new SimpleDateFormat("yyyyMMdd").format(removeDate);
+						
+						if(termDate != null)
+                      {
+                         if(removeDate.compareTo(termDate) > 0) 
+                          {
+                            endDate =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+                         }
+                      }
+                	else if(ctrExpDate != null)
+                		{
+                   			if(removeDate.compareTo(ctrExpDate) > 0) 
+        					{
+                    		endDate =  new SimpleDateFormat("yyyyMMdd").format(ctrExpDate);
+                	 		}
+        				}
+              		 
+       			  }
+					else
+					{
+						endDate = "99991231";
+					}
+					if(addDate != null)
+					{
+						startDate =  new SimpleDateFormat("yyyyMMdd").format(addDate);
+					}
+					else
+					{
+						startDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+					}
+				if(profReqObject instanceof String)
+				{
+					requestLineDataMap = new HashMap();
+					String profileName = (String)profReqObject;
+					/**
+					* in IdentityIQ we store profile name as "Profile_Name ( Profile_description )"
+					* so extracting only the profile name from the whole string, checking for the " (" in the string.
+					*/
+					if( !isCuaApp && profileName.contains( " (" )) 
+					{
+						profileName = profileName.substring(0, profileName.indexOf(" ("));
+					}
+					fillRoleNameAndConnectorName(profileName, requestLineDataMap, isCuaApp, applicationName);
+					requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_PRF1);
+					requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+					requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+					requestLineDataMap.put("ValidFrom", startDate);
+					requestLineDataMap.put("ValidTo", endDate);
+					requestLineDataMap.put("RoleType", getGRACEntitlementType(profileName, app));
+					if (profReq.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add profile
+					if (profReq.getOperation().toString().equals("Set")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_MODIFY1); // to retain /change date
+					if (profReq.getOperation().toString().equals("Remove")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_DELETE1); // to remove date
+					requestLineItemList.add(requestLineDataMap);
+				}
+				else if(profReqObject instanceof List)
+				{
+					List profList = (List)profReqObject;
+					for(String profile:profList)
+					{
+						requestLineDataMap = new HashMap();
+						if( !isCuaApp && profile.contains( " (" )) {
+						profile = profile.substring(0, profile.indexOf(" ("));
+						}
+						fillRoleNameAndConnectorName(profile, requestLineDataMap, isCuaApp, applicationName);
+						requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_PRF1);
+						requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+						requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+						requestLineDataMap.put("ValidFrom", startDate);
+						requestLineDataMap.put("ValidTo", endDate);
+						requestLineDataMap.put("RoleType", getGRACEntitlementType(profile, app));
+						if (profReq.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add a profile
+						if (profReq.getOperation().toString().equals("Set")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_MODIFY1); // to retain /change date
+						if (profReq.getOperation().toString().equals("Remove")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_DELETE1); // to remove profile
+						requestLineItemList.add(requestLineDataMap);
+					}
+				}
+			countRoleKey++;
+			}
+		}
+        if(attrReq.getName().equals("assignedRoles"))
+		{
+			AttributeRequest assRoles = attrReq;//accReq.getAttributeRequest("assignedRoles");
+			Date removeDate = assRoles.getRemoveDate();
+			Date addDate = assRoles.getAddDate();
+			String endDate = null;
+			String startDate=null;
+			Date ctrExpDate = identity.getAttribute("ctrexpDt");
+       		Date termDate = identity.getAttribute("terminationDate");
+			if(removeDate != null)
+			 {
+						endDate =  new SimpleDateFormat("yyyyMMdd").format(removeDate);
+                		 if(termDate != null)
+                      {
+                         if(removeDate.compareTo(termDate) > 0) 
+                          {
+                            endDate =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+                         }
+                      }
+                		else if(ctrExpDate != null)
+                		{
+                   			if(removeDate.compareTo(ctrExpDate) > 0) 
+        					{
+                    		endDate =  new SimpleDateFormat("yyyyMMdd").format(ctrExpDate);
+                	 		}
+        				}
+              		
+       			  }   	      
+			else
+			{
+				endDate = "99991231";
+			}
+			if(addDate != null)
+			{
+				startDate =  new SimpleDateFormat("yyyyMMdd").format(addDate);
+			}
+			else
+			{
+				startDate = new SimpleDateFormat("yyyyMMdd").format(new Date());
+			}
+			if (null != assRoles) 
+			{
+				Object assReqObject = assRoles.getValue();
+				if(assReqObject instanceof String)
+				{
+					requestLineDataMap = new HashMap();
+					String assignedroleName = (String)assReqObject;
+					fillRoleNameAndConnectorNameforBUS(assignedroleName, requestLineDataMap, isCuaApp, applicationName);
+					requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_ROL1);
+					requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+					requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+					requestLineDataMap.put("ValidFrom", startDate);
+					requestLineDataMap.put("ValidTo", endDate);
+					requestLineDataMap.put("RoleType",REQUEST_TYPE_BUS1 );
+					if (assRoles.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add assRole
+					if (assRoles.getOperation().toString().equals("Set")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_MODIFY1); // to retain /change date
+					if (assRoles.getOperation().toString().equals("Remove")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_DELETE1); // to remove date
+					requestLineItemList.add(requestLineDataMap);
+				}
+				else if(assReqObject instanceof List)
+				{
+					List profList = (List)assReqObject;
+					for(String assRole:profList)
+					{
+						requestLineDataMap = new HashMap();
+						fillRoleNameAndConnectorNameforBUS(assRole, requestLineDataMap, isCuaApp, applicationName);
+						requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_ROL1);
+						requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+						requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+						requestLineDataMap.put("ValidFrom", startDate);
+						requestLineDataMap.put("ValidTo", endDate);
+						requestLineDataMap.put("RoleType", REQUEST_TYPE_BUS1);
+						if (assRoles.getOperation().toString().equals("Add")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_ADD1); // to add a assRole
+						if (assRoles.getOperation().toString().equals("Set")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_MODIFY1); // to retain /change date
+						if (assRoles.getOperation().toString().equals("Remove")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_DELETE1); // to remove assRole
+						requestLineItemList.add(requestLineDataMap);
+					}
+				}
+				countRoleKey++;
+			}
+        }
+    }
+   			if(Util.isNotNullOrEmpty(requstInitconnectionName))
+   			userGroupMap.put("UserGroupDesc",requstInitconnectionName);
+   			userGroupMap.put("UserGroup",userGroup);
+			
+        return countRoleKey;
+	}
+        /**
+        ** Function to populate request item map which will contain all access request details for LOCK and UNLOCK
+        **/
+        /******************************************LOCK*****************************************************************/
+        public int populateRequestItemMapLock(AccountRequest accReq, Application app, String applicationName, int countRoleKey, String userGroup, Identity identity) 
+		{
+			requestLineDataMap = new HashMap();
+			if(Util.isNotNullOrEmpty(requstInitconnectionName))
+			requestLineDataMap.put("ItemName", requstInitconnectionName);  
+			requestLineDataMap.put("Connector", requstInitconnectionName);
+			requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_SYS1);
+			requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+			requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);			
+			
+			if(identity != null)
+			{
+				Date termDate = identity.getAttribute("terminationDate");
+				Date startDate = identity.getAttribute("startDate");
+				
+			    if(termDate == null)
+				{
+					termDate = new Date();
+                }
+                
+                if(startDate == null)
+                {
+                	startDate = new Date();
+                }
+                
+                String validTo =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+                String validFrom =  new SimpleDateFormat("yyyyMMdd").format(startDate);
+				
+				requestLineDataMap.put("ValidTo", validTo);
+				requestLineDataMap.put("ValidFrom", validFrom);
+			}
+			
+   			userGroupMap.put("UserGroupDesc",requstInitconnectionName);
+   			userGroupMap.put("UserGroup",userGroup);
+			if (accReq.getOperation().toString().equals("Disable")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_LOCK1); // to add a role
+			requestLineItemList.add(requestLineDataMap);                              
+			countRoleKey++;
+			return countRoleKey;
+        }
+        /******************************************UNLOCK*****************************************************************/
+        public int populateRequestItemMapUnLock(AccountRequest accReq, Application app, String applicationName, int countRoleKey, String userGroup, Identity identity) 
+		{
+			requestLineDataMap = new HashMap();
+			if(Util.isNotNullOrEmpty(requstInitconnectionName))
+			requestLineDataMap.put("ItemName", requstInitconnectionName);  
+			requestLineDataMap.put("Connector", requstInitconnectionName);
+			requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_SYS1);
+			requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+			requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+			userGroupMap.put("UserGroupDesc",requstInitconnectionName);
+   			userGroupMap.put("UserGroup",userGroup);
+   			
+   			if(identity != null)
+			{
+				Date ctrexpDate = identity.getAttribute("ctrexpDt");
+				
+				String validTo = "";
+				
+			    if(ctrexpDate == null)
+				{
+					validTo = "99991231";
+                }
+                else
+                {
+               		validTo =  new SimpleDateFormat("yyyyMMdd").format(ctrexpDate);
+                }
+                
+                Date startDate = new Date();
+                
+                String validFrom =  new SimpleDateFormat("yyyyMMdd").format(startDate);
+				
+				requestLineDataMap.put("ValidTo", validTo);
+				requestLineDataMap.put("ValidFrom", validFrom);
+			}
+   			
+			if (accReq.getOperation().toString().equals("Enable")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_UNLOCK1); // to retain /change date
+			requestLineItemList.add(requestLineDataMap);
+			countRoleKey++;
+			return countRoleKey;
+        }
+        
+        /******************************************Adds a line item for the system with a start and end date*****************************************************************/
+        public int addStartEndDateItem(AccountRequest accReq, Application app, String applicationName, int countRoleKey, Identity identity) 
+		{
+			requestLineDataMap = new HashMap();
+			if(Util.isNotNullOrEmpty(requstInitconnectionName))
+			requestLineDataMap.put("ItemName", requstInitconnectionName);  
+			requestLineDataMap.put("Connector", requstInitconnectionName);
+			requestLineDataMap.put("ProvAction", REQUEST_TYPE_CREATE);
+			requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_SYS1);
+			requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+			requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+			
+			if(identity != null)
+			{
+				//get end date from term date, otherwise contractor end date, and finally forever for active employee
+				Date termDate = identity.getAttribute("terminationDate");
+				Date ctrexpDate = identity.getAttribute("ctrexpDt");
+				
+				String validTo = "";
+				
+				if(termDate != null)
+				{
+               		validTo =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+				}
+			    if(ctrexpDate != null)
+				{
+               		validTo =  new SimpleDateFormat("yyyyMMdd").format(ctrexpDate);
+                }
+                else
+                {
+                	validTo = "99991231";
+                }
+                                				
+				//get start date from link, otherwise make it today
+				String startDateSap = "";
+				IdentityService is = new IdentityService(context);
+				List appLinks = is.getLinks(identity, app);			
+				
+                if(appLinks != null && !appLinks.isEmpty())
+                {
+                	Link appLink = appLinks.get(0);
+                	
+                	startDateSap = appLink.getAttribute("User Valid From");
+                }
+                
+                if(startDateSap != null && !startDateSap.isEmpty())
+                {
+                	startDateSap = startDateSap.replace("-","");
+				}
+                else
+                {
+                	startDateSap = new SimpleDateFormat("yyyyMMdd").format(new Date());
+                }
+                
+                String validFrom =  startDateSap;
+				
+				requestLineDataMap.put("ValidFrom", validFrom);
+      			requestLineDataMap.put("ValidTo", validTo);
+			}
+			
+			//userGroupMap.put("UserGroup",null);
+			//userGroupMap.put("UserGroupDesc",null);
+			requestLineItemList.add(requestLineDataMap); 
+			countRoleKey++;
+			return countRoleKey;
+        }
+        
+        /******************************************Termination*****************************************************************/
+        public int populateRequestItemMapTerm(AccountRequest accReq, Application app, String applicationName, int countRoleKey, Identity identity) 
+		{
+			requestLineDataMap = new HashMap();
+			if(Util.isNotNullOrEmpty(requstInitconnectionName))
+			requestLineDataMap.put("ItemName", requstInitconnectionName);  
+			requestLineDataMap.put("Connector", requstInitconnectionName);
+			requestLineDataMap.put("ProvItemType", PROVISIONING_ITEM_TYPE_SYS1);
+			requestLineDataMap.put("ObjectType", OBJECT_TYPE_USR1);
+			requestLineDataMap.put("ReportFormat", REPORT_FORMAT1);
+			
+			if(identity != null)
+			{
+				//get start and end dates to set on cube
+				Date termDate = identity.getAttribute("terminationDate");
+				Date startDate = identity.getAttribute("startDate");
+				
+			    if(termDate == null)
+				{
+					termDate = new Date();
+                }
+                
+                if(startDate == null)
+                {
+                	startDate = new Date();
+                }
+                
+                String validTo =  new SimpleDateFormat("yyyyMMdd").format(termDate);
+                String validFrom =  new SimpleDateFormat("yyyyMMdd").format(startDate);
+				
+				requestLineDataMap.put("ValidTo", validTo);
+				requestLineDataMap.put("ValidFrom", validFrom);
+			}
+			
+			userGroupMap.put("UserGroup","TERMINATED");
+			userGroupMap.put("UserGroupDesc",requstInitconnectionName);
+			if (accReq.getOperation().toString().equals("Disable")) requestLineDataMap.put("ProvAction", PROVISIONING_ACTION_LOCK1); // to add a role
+			requestLineItemList.add(requestLineDataMap); 
+			countRoleKey++;
+			return countRoleKey;
+        }
+        /** Function to find whether the application type is SAP - Direct **/
+        public boolean isSAPDirectApplication(Application app) {
+        if(app.getType().equals("SAP - Direct"))
+        return true;
+        else
+        return false;
+        }
+        /** Function to find whether the application type is SAP - Portal **/
+        public boolean isSAPPortalApplication(Application app) {
+        if(app.getType().equals("SAP Portal - UMWebService"))
+        return true;
+        else
+        return false;
+        }
+        /** Function checks if application is CUA or not, and prepares the requestedItem list accordingly.
+        * CUA role and profile has name as well as system id, so we have to separate them in order to fill the request. **/
+        public void fillRoleNameAndConnectorName(String roleName, Map requestLineDataMap, boolean isCuaApp, String applicationName) 
+		{
+			if ( isCuaApp ) {
+				int slashPosition = roleName.indexOf("\\");
+				if (slashPosition != -1) {
+					String connectorNameCUA = roleName.substring(0,slashPosition);
+					String roleNameCUA = roleName.substring(slashPosition+1);
+					requestLineDataMap.put("ItemName", roleNameCUA);
+					requestLineDataMap.put("Connector", connectorNameCUA);
+				}
+			} else {
+				requestLineDataMap.put("ItemName", roleName);
+				requestLineDataMap.put("Connector", getGRACConnectorName(applicationName));
+			}
+        }
+        /** Function checks if application is CUA or not, and prepares the requestedItem list accordingly.
+        * CUA role and profile has name as well as system id, so we have to separate them in order to fill the request. **/
+        public void fillRoleNameAndConnectorNameforBUS(String roleName, Map requestLineDataMap, boolean isCuaApp, String applicationName) 
+		{
+			if ( isCuaApp ) {
+				int slashPosition = roleName.indexOf("\\");
+				if (slashPosition != -1) {
+					String connectorNameCUA = roleName.substring(0,slashPosition);
+					String roleNameCUA = roleName.substring(slashPosition+1);
+					requestLineDataMap.put("ItemName", roleNameCUA);
+					requestLineDataMap.put("Connector", REQUEST_INIT_SYSTEM1);
+				}
+			} else {
+			requestLineDataMap.put("ItemName", roleName);
+			requestLineDataMap.put("Connector", REQUEST_INIT_SYSTEM1);
+			}
+        }
+        
+        //START HERE
+        Identity identity = (Identity) context.getObject(Identity.class, identityName);
+        Date workdayTermDate = identity.getAttribute("terminationDate");
+        
+        
+        String type = (String)identity.getAttribute("type");
+        String userGroup = null;
+        
+        if(workdayTermDate != null)
+        {
+        	userGroup = "TERMINATED";
+        }
+        else if(type != null && type.equalsIgnoreCase("employee"))
+        {
+        	userGroup = "EMPLOYEE";
+        }
+        else if(type != null && type.equalsIgnoreCase("contractor"))
+        {
+        	userGroup = "CONTRACTOR";
+        }
+        /** Filling requestHeader map **/
+        if(requester.equals("Scheduler") || requester.equals("RequestHandler"))
+        requester = identity.getManager().getName();
+        Identity requestorID = (Identity) context.getObject(Identity.class, requester);
+        requestHeaderDataMap.put("Priority", PRIORITY_MEDIUM1); //Priority will be set to medium
+        if(Util.isNotNullOrEmpty(requstInitconnectionName))
+        requestHeaderDataMap.put("ReqInitSystem", requstInitconnectionName);
+        requestHeaderDataMap.put("Requestorid", requester);
+        String email = requestorID.getEmail();
+        requestHeaderDataMap.put("Email", email);
+        requestHeaderDataMap.put("RequestReason", "Provisioning from IdentityIq");
+        requestHeaderDataMap.put("Bproc", BUSINESS_PROCESS_BASIS1); // This need to be decided by end user
+        List accReqList = accountRequestSAPGRC;
+        int countUserKey = 0;
+        int countRoleKey = 0;
+        String operation;
+       // String requestType = plan.get("requestType");
+        for (AccountRequest accReq: accReqList) 
+			{
+			String applicationName = "%%SAP_R3P_APP_NAME%%"; 
+			String nativeIdentity = accReq.getNativeIdentity();
+			Application app = (Application) context.getObject(Application.class, applicationName);
+			if (isSAPDirectApplication(app))
+			{
+				//Will only come here if the type of application is "SAP - Direct"
+				operation = accReq.getOperation().toString(); 
+				if (operation.equals("Create")) 
+				{
+					requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_CREATE1); // request header data contains 001 for create
+					countUserKey = populateUserDetailMap(accReq, identity, app, applicationName, countUserKey);
+					/**Populating access details**/
+					countRoleKey = populateRequestItemMap(accReq, app, applicationName, countRoleKey, userGroup);
+					countRoleKey = addStartEndDateItem(accReq, app, applicationName, countRoleKey, identity);
+				}
+				if (operation.equals("Modify")) 
+				{
+					if(requestHeaderDataMap.get("Reqtype") == null)
+					{
+						requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_MODIFY1);
+					}// request header data contains 002 for modify.
+					if (isSAPDirectApplication(app)) 
+					{
+						countUserKey = populateUserDetailMap(accReq, identity, app, applicationName, countUserKey);
+						/**Populating access details**/
+						countRoleKey = populateRequestItemMap(accReq, app, applicationName, countRoleKey, userGroup);
+					}
+				}
+				if (operation.equals("Disable")) 
+				{
+					countUserKey = populateUserDetailMap(accReq, identity, app, applicationName, countUserKey);
+					// request header data contains 002 for modify.
+					if (isSAPDirectApplication(app)) {
+						if(requestType.contains("TERMINATION") || requestType.contains("LEAVER FEATURE"))
+						{
+							requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_TERM1);
+							countRoleKey = populateRequestItemMapTerm(accReq, app, applicationName, countRoleKey, identity); 
+							countRoleKey = populateRequestItemMap(accReq, app, applicationName, countRoleKey, userGroup);
+						}
+						else
+						{
+							requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_LOCK1);
+							countRoleKey = populateRequestItemMapLock(accReq, app, applicationName, countRoleKey, userGroup, identity);
+						}
+					}
+				}
+				if (operation.equals("Enable")) 
+				{
+					requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_UNLOCK1); // request header data contains 002 for modify.
+					if (isSAPDirectApplication(app)) 
+					{
+						countUserKey = populateUserDetailMap(accReq, identity, app, applicationName, countUserKey);
+						/**Populating access details**/
+						countRoleKey = populateRequestItemMapUnLock(accReq, app, applicationName, countRoleKey, userGroup, identity);
+					}
+				}
+			}
+			if (isSAPPortalApplication(app)) 
+			{
+			/** Code to handle SAP Portal applciation. **/
+			}
+        }
+        
+            //     return updateUserAccessSoapMessage(context, requestHeaderDataMap, requestLineItemList, userInfoList, userGroupMap);
+        
+        
+        completeDetailMap.put("userInfoMap", userInfoList); //userInfoMap);
+        completeDetailMap.put("requestHeaderDataMap", requestHeaderDataMap);
+        completeDetailMap.put("requestLineItemMap", requestLineItemList);
+        completeDetailMap.put("userGroupsMap", userGroupMap);
+        return completeDetailMap;
+
+  ]]></Source>
+</Rule>

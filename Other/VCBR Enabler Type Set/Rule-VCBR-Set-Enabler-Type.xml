@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox VCBR Set Enabler Types">
+  <ReferencedRules>
+    <Reference class="sailpoint.object.Rule" name="Role Parsing and Import RuleLibrary"/>
+  </ReferencedRules>
+  <Description>
+        This rule will be called when IP Role Import task runs.
+  </Description>
+  <Source><![CDATA[
+  	import sailpoint.object.Attributes;
+  	import sailpoint.object.TaskResult;
+  	import sailpoint.object.TaskDefinition;
+  	import sailpoint.object.Custom;
+  	import sailpoint.tools.Util;
+  	import java.sql.Connection;  
+  	import java.util.ArrayList;
+	import java.util.Arrays;
+	import java.util.HashMap;
+	import java.util.List;
+	import sailpoint.object.Bundle;
+	import java.util.Map;
+	import java.util.Set;
+  	import org.apache.log4j.Logger;
+  	import org.apache.log4j.Level;
+  	  	
+  	String TASK_NAME = "Clorox VCBR Set Enabler Types";
+  	
+	Logger logger = Logger.getLogger("pslabs.role.import.maintainer");
+
+  	TaskDefinition taskDef = context.getObjectByName(TaskDefinition.class, TASK_NAME);
+
+	String filePath = taskDef.getString("filePath");
+
+	logger.trace("descriptionpath: " + filePath);
+
+	if(filePath != null)
+	{
+		String dlm = ",";
+		BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
+		RFC4180LineParser parser = new RFC4180LineParser(dlm);
+		
+		//if file doesn't exist			
+		if (!doesFileExist(filePath)) 
+		{
+			logger.error("Unable to find file: " + filePath);
+		
+			taskResult.addMessage(new Message(Message.Type.Error, "ERROR: Couldn't find file")); 
+		}
+		
+		BufferedReader fileInCopy = new BufferedReader(new FileReader(filePath));
+		
+		//Open the CSV file for reading.
+		int lineCounter = 0;
+  		ArrayList headerStrings = new ArrayList();
+  		String thisLine = null;
+  		
+  		Map businessRoleEnablerMappings = new HashMap();
+    
+  		//iterate until entire line isn't null
+  		while (null != (thisLine = fileInCopy.readLine())) 
+		{		
+			thisLine = thisLine.replaceAll("ï»¿", "");
+		
+			if(lineCounter != 0)
+  			{  			
+  				List tokens = parser.parseLine(thisLine);
+  				
+  				if(tokens != null && tokens.size() > 0)
+  				{
+  					String bundleName = "";
+  					String enablerType = "";
+  					String requestable = "";
+  					
+  					if(tokens.get(1) != null)
+  					{
+  						bundleName = tokens.get(1);
+  					}
+  					
+  					if(tokens.get(3) != null)
+  					{
+  						enablerType = tokens.get(3);
+  					}
+  					
+  					if(tokens.get(5) != null)
+  					{
+  						requestable = tokens.get(5);
+  					}
+  					  					
+  					Map businessRoleAttributes = businessRoleEnablerMappings.get(bundleName);
+  					
+  					if(businessRoleAttributes == null)
+  					{
+  						businessRoleAttributes = new HashMap();
+  					}
+  					
+					List requestableEnabler = businessRoleAttributes.get("requestable");
+					List assignedEnabler = businessRoleAttributes.get("autoAssign");
+					
+					if(requestableEnabler == null)
+					{
+						requestableEnabler = new ArrayList();
+					}
+					
+					if(assignedEnabler == null)
+					{
+						assignedEnabler = new ArrayList();
+					}
+					
+					if(requestable.equalsIgnoreCase("Yes"))
+					{
+						requestableEnabler.add(enablerType);
+						businessRoleAttributes.put("requestable", requestableEnabler);
+					}
+					else
+					{
+						assignedEnabler.add(enablerType);
+						businessRoleAttributes.put("autoAssign", assignedEnabler);
+					}
+					
+					businessRoleEnablerMappings.put(bundleName, businessRoleAttributes);
+				}
+			}
+			lineCounter++;
+		}
+				
+		if(businessRoleEnablerMappings != null)
+		{
+			int count = 0;
+			for(String bundleName : businessRoleEnablerMappings.keySet())
+			{
+				if(bundleName != null)
+				{
+					Bundle bundle = context.getObjectByName(Bundle.class, bundleName);
+					
+					if(bundle != null)
+					{
+						Map businessRoleAttributes = businessRoleEnablerMappings.get(bundleName);
+						
+						if(businessRoleAttributes != null)
+						{
+							List requestableEnabler = businessRoleAttributes.get("requestable");
+							List assignedEnabler = businessRoleAttributes.get("autoAssign");
+							
+							if(requestableEnabler != null && !requestableEnabler.isEmpty())
+							{
+								bundle.setAttribute("enablerTypes", Util.listToCsv(requestableEnabler));
+							}
+							
+							if(assignedEnabler != null && !assignedEnabler.isEmpty())
+							{
+								bundle.setAttribute("autoAssignEnablerTypes", Util.listToCsv(assignedEnabler));
+							}
+														
+							context.saveObject(bundle);
+							context.commitTransaction();
+						}
+					}
+				}
+			}
+		}
+	}
+		
+	return "Success";
+       
+    ]]></Source>
+</Rule>

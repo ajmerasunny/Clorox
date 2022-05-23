@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="IBM Content Management Accounts Receivable CSA Team Lead" type="Role" value="IBM Content Management Accounts Receivable CSA Team Lead">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="IBM Imaging"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="CSA Team Lead - CSA can create and work cases + superuser access"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

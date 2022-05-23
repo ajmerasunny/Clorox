@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="test Set firefighter end date to now">  
+  <Source>
+  	<![CDATA[  	
+
+  		import sailpoint.services.ServicesUtil;
+  		import sailpoint.tools.Util;
+  		import sailpoint.object.IdentityEntitlement;
+  		import sailpoint.object.Identity;
+		import sailpoint.object.ProvisioningPlan;
+		import sailpoint.api.Provisioner;
+		import sailpoint.object.ProvisioningProject;
+		import sailpoint.object.ProvisioningPlan.AccountRequest;
+		import sailpoint.object.ProvisioningPlan.AttributeRequest;
+		
+		String identityName = "IDENTITY_NAME_HERE";
+  		String firefighterName = "FIREFIGHTER_ROLE_NAME_HERE";
+		
+		
+		ProvisioningPlan plan = new ProvisioningPlan();
+		plan.setIdentity(context.getObjectByName(Identity.class, identityName));
+		AccountRequest acctReq = new AccountRequest();
+		acctReq.setApplication(ProvisioningPlan.APP_IIQ);
+		acctReq.setNativeIdentity(identityName);
+		acctReq.setOperation(ProvisioningPlan.AccountRequest.Operation.Modify);	
+		
+		AttributeRequest attrReq = new AttributeRequest();   	
+		attrReq.setName("assignedRoles");
+		attrReq.setOperation(ProvisioningPlan.Operation.Remove);
+		attrReq.setValue(firefighterName);
+		
+		acctReq.add(attrReq);
+				
+		plan.add(acctReq);
+																		
+		Provisioner provisioner = new Provisioner(context);
+		ProvisioningProject project = provisioner.compile(plan);
+		provisioner.setNoLocking(true);
+		provisioner.execute(project);
+  		
+  		return "done";
+  		
+  	]]>
+  </Source>
+</Rule>

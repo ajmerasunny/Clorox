@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE TaskDefinition PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskDefinition name="Clorox Get Users Managers Email Report Task" resultAction="Delete" subType="Identity Reports" type="LiveReport">
+    <Attributes>
+        <Map>
+            <entry key="TaskSchedule.host"/>
+            <entry key="dataSourceRule" value="Clorox Get Users Managers Email Report Rule"/>
+            <entry key="disableDetail" value="false"/>
+            <entry key="disableSummary" value="false"/>
+            <entry key="emailFileFormat">
+                <value>
+                    <List>
+                        <String>CSV</String>
+                    </List>
+                </value>
+            </entry>
+            <entry key="reportColumnOrder" value="Firstname, Lastname, Employee ID, Workday Manager, MyTech Manager"/>
+            <entry key="reportDefName" value="Clorox Get Users Managers Email Report"/>
+            <entry key="reportTitle" value="Clorox Get Users Managers Email Report"/>
+        </Map>
+    </Attributes>
+    <Description>Displays information about Get Users Managers Email.</Description>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Parent>
+    	<Reference class="sailpoint.object.TaskDefinition" name="Clorox Get Users Managers Email Report"/>
+    </Parent>
+</TaskDefinition>

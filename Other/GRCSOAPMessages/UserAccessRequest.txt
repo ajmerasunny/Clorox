@@ -1,0 +1,104 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:soap:functions:mc-style">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GracIdmUsrAccsReqServices>
+      
+       <!--Optional:-->
+         <CustomFieldsVal>
+            <!--Zero or more repetitions:-->
+            <item>
+               <Fieldname></Fieldname>
+               <Value></Value>
+            </item>
+         </CustomFieldsVal>
+         <!--Optional:-->
+         <Language></Language>
+         <!--Optional:-->
+         <Parameter>
+            <!--Zero or more repetitions:-->
+            <item>
+               <Parameter></Parameter>
+               <ParameterValue></ParameterValue>
+               <ParameterDesc></ParameterDesc>
+            </item>
+         </Parameter>
+         <RequestHeaderData>
+    <Reqtype>002</Reqtype>
+            <Priority>006</Priority>
+            <ReqDueDate/>
+            <ReqInitSystem>DV2CLNT100</ReqInitSystem>
+            <Requestorid>spadmin</Requestorid>
+            <Email>spadmin@cloroxdev.com</Email>
+            <RequestReason>Provisioning from IdentityIq</RequestReason>
+            <Funcarea/>
+            <Bproc></Bproc>
+         </RequestHeaderData>
+         <RequestedLineItem>      
+    <!--Zero or more repetitions:-->
+            <item>
+      <ItemName>IT:E:F:MIT:BAS:BASIS_ADMIN_CMN</ItemName>
+               <Connector>DV2CLNT100</Connector>
+               <ProvItemType>ROL</ProvItemType>
+               <ProvType/>
+               <AssignmentType/>
+               <ProvStatus/>
+               <ValidFrom/>
+               <ValidTo/>
+               <FfOwner/>
+               <Comments/>
+               <ProvAction>009</ProvAction>
+               <RoleType>SIN</RoleType>
+            </item>
+         </RequestedLineItem>
+         <!--Optional:-->
+         <UserGroup>
+            <!--Zero or more repetitions:-->
+            <item>
+               <UserGroup></UserGroup>
+               <UserGroupDesc></UserGroupDesc>
+            </item>
+         </UserGroup>
+         <UserInfo>
+    <!--Zero or more repetitions:-->
+            <item>
+      <Userid>20000076</Userid>
+               <Title/>
+               <Fname>Pooja</Fname>
+               <Lname>test2</Lname>
+               <SncName></SncName>
+               <UnsecSnc></UnsecSnc>
+               <Accno></Accno>
+               <UserGroup></UserGroup>
+               <ValidFrom></ValidFrom>
+               <ValidTo></ValidTo>
+               <Empposition>Manager</Empposition>
+               <Empjob></Empjob>
+               <Personnelno></Personnelno>
+               <Personnelarea></Personnelarea>
+               <CommMethod></CommMethod>
+               <Fax></Fax>
+               <Email>Pooja.LegalTST@burtsbees.com</Email>
+               <Telnumber>001-298-7643</Telnumber>
+               <Department>IT</Department>
+               <Company>Clorox</Company>
+               <Location>Rogers, AR - USA</Location>
+               <Costcenter></Costcenter>
+               <Printer></Printer>
+               <Orgunit>test</Orgunit>
+               <Emptype>Contractor</Emptype>
+               <Manager>00012493</Manager>
+               <ManagerEmail>GINA.ROBERTSON@CLOROX.COM</ManagerEmail>
+               <ManagerFirstname>Gina</ManagerFirstname>
+               <ManagerLastname>Robertson</ManagerLastname>
+               <StartMenu></StartMenu>
+               <LogonLang></LogonLang>
+               <DecNotation></DecNotation>
+               <DateFormat></DateFormat>
+               <Alias></Alias>
+               <UserType/>
+               <Function></Function>
+            </item>
+         </UserInfo>
+      </urn:GracIdmUsrAccsReqServices>
+   </soapenv:Body>
+</soapenv:Envelope>

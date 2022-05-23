@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox Get Users Managers Email Report Rule">
+  <Description>Query for any identities that have the needsJoiner set, and clear it.</Description>
+	
+  <Source><![CDATA[
+	import sailpoint.object.QueryOptions;
+	import sailpoint.object.Filter;
+	import sailpoint.object.Identity;
+	import sailpoint.services.RuleDataSource;
+	import sailpoint.api.SailPointContext;
+	import sailpoint.object.Filter;
+	import sailpoint.object.QueryOptions;
+	import sailpoint.object.Identity;
+	import sailpoint.tools.Util;
+	import sailpoint.object.Application;
+	import sailpoint.reporting.ReportParameterUtil;
+	import java.util.List;
+	import java.util.ArrayList;
+	import sailpoint.api.IdentityService;
+	import java.util.Date;
+	import java.util.Iterator;
+	import java.util.Map;
+	import java.util.HashMap;
+	import sailpoint.services.ServicesUtil;
+	import sailpoint.tools.Util;
+	import sailpoint.object.Link;
+
+	//list of maps to return for report
+	
+	List data = new ArrayList();				
+
+
+	//create queryoptions and filters for the inactive but active account users
+	QueryOptions qo = new QueryOptions();
+	qo.addFilter(Filter.eq("links.application.name", "Workday"));
+	qo.addFilter(Filter.eq("inactive", false));
+	qo.setDistinct(true);
+	
+	List filterAtt = new ArrayList();
+	
+	filterAtt.add("id");
+	
+	Map reportMap = new HashMap();
+	
+	Iterator iter = context.search(Identity.class, qo, filterAtt);
+		
+	List identityIds = new ArrayList();
+	
+	Application workday = context.getObjectByName(Application.class, "Workday");
+	Application myTech =  context.getObjectByName(Application.class, "MyTech");
+					  			
+	while(iter != null && iter.hasNext())
+	{
+		String identityId = iter.next()[0];	
+		identityIds.add(identityId);
+	}
+	Util.flushIterator(iter);
+
+	for(String identityId : identityIds)
+	{
+	
+		Identity identity = context.getObjectById(Identity.class, identityId);
+		IdentityService is = new IdentityService(context);
+		
+		List workdayLinks = is.getLinks(identity, workday);	
+		List myTechLinks = is.getLinks(identity, myTech);			
+				
+		if(workdayLinks != null && myTechLinks != null && workdayLinks.size() > 0 && myTechLinks.size() > 0)
+		{
+			Link workdayLink = workdayLinks.get(0);
+			Link myTechLink = myTechLinks.get(0);
+			
+			String workdayManager = workdayLink.getAttribute("Manager_ID__c");
+			String myTechManager = myTechLink.getAttribute("manager");
+			
+			if(workdayManager == null)
+			{
+				workdayManager = "";
+			}
+			else
+			{
+				Identity manager = context.getObjectByName(Identity.class, workdayManager);
+				if(manager != null)
+				{
+					workdayManager = manager.getDisplayName();
+					context.decache(manager);
+				}
+				else
+				{
+					workdayManager = "";
+				}
+			}
+			
+			if(myTechManager == null)
+			{
+				myTechManager = "";
+			}
+			
+			if(!workdayManager.equalsIgnoreCase(myTechManager))
+			{
+				Map val = new HashMap();
+				
+				//get some of the user's attributes
+				val.put("Firstname", identity.getFirstname());
+				val.put("Lastname", identity.getLastname());
+				val.put("Employee ID", identity.getName());
+				val.put("Workday Manager", workdayManager);
+				val.put("MyTech Manager", myTechManager);
+				
+				
+				data.add(val);
+			}
+		}
+		
+		context.decache(identity);
+		
+	}
+	
+	
+	return data;
+	
+			
+  ]]></Source>
+</Rule>

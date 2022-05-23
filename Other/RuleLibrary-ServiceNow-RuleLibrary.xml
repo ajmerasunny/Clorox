@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox ServiceNow RuleLibrary">
+  <Description>A Library of rules for the Abbott environment for manage groups.</Description>
+  <Source>
+	<![CDATA[
+	import org.apache.commons.logging.LogFactory;
+	import org.apache.commons.logging.Log;
+
+  	import sailpoint.api.SailPointContext; 	
+  	import sailpoint.object.Application;
+  	import sailpoint.object.Identity;
+  	import sailpoint.object.TaskResult;
+  	import sailpoint.object.AttributeAssignment;
+	import sailpoint.object.EntitlementGroup;  	
+  	import sailpoint.object.IdentityEntitlement;
+  	import sailpoint.object.RoleAssignment;
+	import sailpoint.object.RoleTarget;
+	import sailpoint.api.ObjectUtil;
+  	
+  	import sailpoint.object.ResourceObject;
+  	import sailpoint.object.Custom;
+  	import sailpoint.object.QueryOptions;
+  	import sailpoint.object.Filter;
+  	import sailpoint.object.Link;
+  	import sailpoint.object.ManagedAttribute;
+  	import sailpoint.object.Attributes;
+  	import sailpoint.tools.Util;  
+	import sailpoint.tools.GeneralException;  
+	import java.io.UnsupportedEncodingException;  
+	import java.nio.ByteBuffer;  
+	import java.util.UUID;  
+	import java.util.Vector;
+	import java.util.Collections;
+	import java.util.Iterator;
+	import sailpoint.tools.CloseableIterator;
+
+	import sailpoint.object.ProvisioningPlan;
+	import sailpoint.object.ProvisioningPlan.AccountRequest;
+	import sailpoint.object.ProvisioningPlan.Operation;
+	import sailpoint.object.ProvisioningPlan.AccountRequest.Operation;
+	import sailpoint.object.ProvisioningPlan.AttributeRequest;
+ 
+  	import java.util.Properties;
+  	import javax.naming.Context;
+	import javax.naming.directory.DirContext;
+	import javax.naming.directory.SearchControls;
+	import javax.naming.directory.InitialDirContext;
+	import javax.naming.NamingEnumeration;
+	import javax.naming.directory.SearchResult;
+	import sailpoint.api.IdentityService;
+	import sailpoint.connector.Connector;
+	import sailpoint.api.Aggregator;
+	
+	import java.io.UnsupportedEncodingException;  
+	import java.nio.ByteBuffer;  
+	import java.util.UUID;  
+	import org.apache.commons.codec.DecoderException;  
+	import org.apache.commons.codec.binary.Base64;  
+	import org.apache.commons.codec.binary.Hex;  
+	import java.nio.file.Files;
+	import java.nio.file.Paths;
+	import java.nio.file.Path;
+    import java.io.File;
+  	import org.apache.commons.io.FileUtils;
+
+  	
+  	public ResourceObject doesServiceNowHaveUserName(SailPointContext context, String appName, String username)
+  	{  		
+		Boolean foundUser = false;
+		List singleUser = new ArrayList();
+		singleUser.add("user_name=" + username);
+				
+		if(appName != null && username != null)
+		{
+			Application serviceNow = context.getObject(Application.class, appName);
+			
+			if(serviceNow != null)
+			{
+				Application appObject = serviceNow.deepCopy(context);
+				appObject.setAttribute("accountFilterAttribute", "username=" + username);
+				String appConnName = appObject.getConnector();
+				Connector appConnector = sailpoint.connector.ConnectorFactory.getConnector(appObject, null);
+							
+				
+				CloseableIterator iterator = appConnector.iterateObjects("account", null, null);
+				
+				try 
+				{ 
+                    if (iterator != null && iterator.hasNext() ) 
+                    {  
+                       ResourceObject rObj = iterator.next();
+                       
+                       
+					foundUser = true;
+					}
+				}
+				catch(Exception e)
+				{
+					throw e;
+				}
+				
+			}
+		}
+		
+		return foundUser;
+	}
+		
+
+		    ]]>  
+  </Source>  
+</Rule>  
+	
