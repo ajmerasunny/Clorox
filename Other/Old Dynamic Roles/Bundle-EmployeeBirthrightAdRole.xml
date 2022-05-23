@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="Employee Birthright AD Role" name="Employee Birthright AD Role" type="dynamic">
+    <Attributes>
+        <Map>
+            <entry key="acceleratorPackEnabled"/>
+            <entry key="accountSelectorRules"> 
+	          <value>
+	              <AccountSelectorRules>
+	                  <ApplicationAccountSelectorRules>
+	                    <ApplicationAccountSelectorRule>
+	                        <ApplicationRef>
+	                            <Reference class="sailpoint.object.Application" name="Active Directory"/>
+	                        </ApplicationRef>
+	                        <RuleRef>
+	                            <Reference class="sailpoint.object.Rule" name="Clorox Primary AD Account Selector Rule"/>
+	                        </RuleRef>
+	                    </ApplicationAccountSelectorRule>
+	                  </ApplicationAccountSelectorRules>
+	              </AccountSelectorRules>
+	          </value>
+	        </entry>
+            <entry key="additionalRoleBusApprovalRule"/>
+            <entry key="additionalRoleBusApprovers"/>
+            <entry key="allowDuplicateAccounts" value="false"/>
+            <entry key="allowMultipleAssignments" value="false"/>
+            <entry key="apaccountType"/>
+            <entry key="appName"/>
+            <entry key="formappName"/>
+            <entry key="isBirthright" value="true"/>
+            <entry key="mergeTemplates" value="false"/>
+            <entry key="roleBusApprovalRule"/>
+            <entry key="roleBusApprovers"/>
+            <entry key="rolePrivileged"/>
+            <entry key="sysDescriptions">
+                <value>
+                    <Map>
+                        <entry key="en_US"/>
+                    </Map>
+                </value>
+            </entry>
+        </Map>
+    </Attributes>
+    <Inheritance>
+        <Reference class="sailpoint.object.Bundle" name="Clorox BaselineBirthright AD Roles"/>
+    </Inheritance>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Selector>
+        <IdentitySelector>
+            <RuleRef>
+                <Reference class="sailpoint.object.Rule" name="Clorox AD Birthright Employee Assignment Rule"/>
+            </RuleRef>
+        </IdentitySelector>
+    </Selector>
+    <Profiles>
+        <Profile>
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="Active Directory"/>
+            </ApplicationRef>
+            <Constraints>
+                <Filter operation="CONTAINS_ALL" property="memberOf">
+                    <Value>
+                        <List>
+                            <String>CN=ALL CLOROX EMPLOYEES%%ENVIRONMENT_TAG%%,%%AD_GROUP_ALL_CLOROX_EMPLOYEES_OU%%</String>
+                            <String>CN=ENTERPRISE SECURSOFT%%ENVIRONMENT_TAG%%,%%AD_GROUP_ENTERPRISE_SECURSOFT_OU%%</String>
+                            <String>CN=ENTERPRISE WIRELESS%%ENVIRONMENT_TAG%%,%%AD_GROUP_ENTERPRISE_WIRELESS_OU%%</String>
+                            <String>CN=ENTERPRISE EP NONMGR%%ENVIRONMENT_TAG%%,%%AD_GROUP_ENTERPRISE_EP_CONTR_OU%%</String>
+                            <String>CN=DOMAIN USERS%%ENVIRONMENT_TAG%%,%%AD_GROUP_DOMAIN_USERS_NA_OU%%</String>
+                            <String>CN=VISTA USERS%%ENVIRONMENT_TAG%%,%%AD_GROUP_VISTA_USERS_CLRX_OU%%</String>
+                            <String>CN=OKTA-VERIFY%%ENVIRONMENT_TAG%%,%%AD_GROUP_OKTA_VERIFY_OU%%</String>
+                            <String>CN=BOX USERS%%ENVIRONMENT_TAG%%,%%AD_GROUP_BOX_USERS_OU%%</String>
+                            <String>CN=MB_STAKEHOLDERS%%ENVIRONMENT_TAG%%,%%AD_GROUP_MB_STAKEHOLDERS_OU%%</String>
+                            <String>CN=YAMMER USERS%%ENVIRONMENT_TAG%%,%%AD_GROUP_YAMMER_USERS_OU%%</String>
+                            <String>CN=ML YAMMER NOTIFICATIONS%%ENVIRONMENT_TAG%%,%%AD_GROUP_ML_YAMMER_NOTIFICATIONS_OU%%</String>
+                            <String>CN=US-JBS GRPDATA%%ENVIRONMENT_TAG%%,%%AD_GROUP_US_JBS_GRPDATA_OU%%</String>
+                            <String>CN=US-JBS USERS%%ENVIRONMENT_TAG%%,%%AD_GROUP_US_JBS_USERS_OU%%</String>
+                        </List>
+                    </Value>
+                </Filter>
+            </Constraints>
+        </Profile>
+    </Profiles>
+</Bundle>

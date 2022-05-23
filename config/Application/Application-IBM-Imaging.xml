@@ -46,7 +46,7 @@
       </entry>
       <entry key="apPopulationReverseLeaverOptions"/>
       <entry key="apServiceAccountUniqueName"/>
-      <entry key="appBusApprovalRule"/>
+      <entry key="appBusApprovalRule" value="Clorox Skip Role Owner Approval on Remove Access Rule"/>
       <entry key="appBusApprovers"/>
       <entry key="assignmentGroupname"/>
       <entry key="authoritativeEmployee"/>
@@ -217,6 +217,23 @@
   <Owner>
     <Reference class="sailpoint.object.Identity" name="spadmin"/>
   </Owner>
+  <ProvisioningForms>
+    <Form name="Create" objectType="account" type="Create">
+      <Attributes>
+        <Map>
+          <entry key="pageTitle" value="Create"/>
+        </Map>
+      </Attributes>
+      <Description>Create</Description>
+      <Section label="Account" name="Account">
+        <Field displayName="username" helpKey="username" name="username" type="string">
+          <Script>
+            <Source><![CDATA[return application.getName() + " " + identity.getName();]]></Source>
+          </Script>
+        </Field>
+      </Section>
+    </Form>
+  </ProvisioningForms>  
   <Schemas>
    <Schema  displayAttribute="username"  identityAttribute="username" instanceAttribute=""  nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None">
       <AttributeDefinition name="username" type="string">

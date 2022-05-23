@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>  
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">  
+<Rule language="beanshell" name="Run Powershell Script Rule Library" >  
+  <Source>  
+    <![CDATA[  
+        import java.io.*;  
+        import java.net.*;  
+        import java.util.*;  
+        import org.apache.commons.logging.Log;  
+        import org.apache.commons.logging.LogFactory;   
+        import sailpoint.tools.GeneralException;  
+        import sailpoint.tools.Message;  
+        import sailpoint.tools.Util;  
+        import sailpoint.object.ProvisioningPlan.AttributeRequest;
+		import sailpoint.object.ProvisioningPlan.AccountRequest;
+		import sailpoint.object.ProvisioningPlan.Operation;
+		import sailpoint.object.Attributes;
+		import sailpoint.api.SailPointFactory;
+		import sailpoint.api.SailPointContext;
+        import sailpoint.tools.xml.XMLReferenceResolver;  
+        import sailpoint.object.Application; 
+        import sailpoint.object.RpcResponse;
+        import sailpoint.object.RpcRequest;
+        import sailpoint.connector.RPCService; 
+        import sailpoint.object.Identity;
+        import sailpoint.object.Rule;
+
+		//runs the information on iqservice
+        public RpcResponse callIQService(Map data, String rpcService,String iqServiceHost, int iqServicePort) throws Exception{  
+                
+                RPCService service = new RPCService(iqServiceHost, iqServicePort);  
+                RpcRequest request = new RpcRequest("SPConnector", "provision" , data); // We will running this as a "runBeforeScript"  
+                RpcResponse response = service.execute(request);  
+                return response;  
+        }  
+        
+        //runs a powershell beforeconnector rule
+        public Object runConnectorRule(SailPointContext context, String beforeModifyRuleName, Map arguments, String iqServiceHost, int iqServicePort, String applicationName, String iqserviceUserPassword) throws Exception 
+        {  
+                HashMap dataMap = new HashMap();  
+  
+				// Get the application to put the application XML into the dataMap.  
+				Application app = SailPointFactory.getCurrentContext().getObject(Application.class, applicationName);  
+				Application appObj = app.deepCopy((XMLReferenceResolver)SailPointFactory.getCurrentContext());  
+				
+				// Get the rule containing the PowerShell script.  
+	            Rule ruleObj = context.getObjectByName(Rule.class, beforeModifyRuleName);
+	            
+	            if(ruleObj != null)
+	            {  
+		            dataMap.put("postScript",ruleObj);  
+		            dataMap.put("Application",appObj.getAttributes());  
+		            
+		            Map appMap = new HashMap();
+		           	appMap.put("IQServicePassword","");
+		           	appMap.put("IQServiceUser",""); 
+		           	appMap.put("RevokeLimitedAccess","false"); 
+		          // 	appMap.put("ListItemDelimiter","false"); 
+		          // 	appMap.put("URLItemDelimiter","false"); 
+		           	dataMap.put("App", appMap);
+		           
+		  
+		  			//create a dummy account request
+		            AccountRequest accountRequest = new AccountRequest();  
+		            accountRequest.setApplication(applicationName);
+		            accountRequest.setNativeIdentity("PLACEHOLDER"); 
+		            accountRequest.setOperation(AccountRequest.Operation.Modify);
+		            
+		            //create dummy attribute request to have response data passed back 
+		            AttributeRequest attributeRequest = new AttributeRequest();  
+		            attributeRequest.setName("CmdletResponse");  
+		            attributeRequest.setOperation(Operation.Add);  
+		            attributeRequest.setValue(""); 
+		            accountRequest.add(attributeRequest);
+		            
+		            //if null create them
+		            if(arguments == null)
+		            {
+		            	arguments = new HashMap();
+		            }
+		            //put the password in the arguments
+		            arguments.put("IQ_SERVICE_PASSWORD", context.decrypt(iqserviceUserPassword));
+		            
+		            //add arguments to the account request to pass into powershell
+		            accountRequest.setArguments(new Attributes(arguments));
+		            
+		            //add the request to the datamap
+		            dataMap.put("Request",accountRequest);  
+		            //call the iiqservice with the request to launch the script
+		            
+		            RpcResponse iqserviceResponse = callIQService(dataMap,"NTConnector",iqServiceHost,iqServicePort);
+		                    
+		                    return iqserviceResponse;   
+		            //if null then it was a failure 
+		            if(iqserviceResponse != null)
+		            {
+		            	//get the messages, if any were placed then we'll only pull out the one and return it
+		           		List messages = iqserviceResponse.getMessages();
+		           		
+		           		if(messages != null && !messages.isEmpty())
+		           		{
+		           			return messages.get(0);
+		           		}
+		            }
+		            else
+		            {
+		            	return "FAILURE";
+		            } 
+		            
+		            return "SUCCESS";
+	            }
+	            else
+	            {
+	            	return "FAILURE";
+	            }
+	        
+	        
+        }  
+    ]]>  
+  </Source>  
+</Rule>  

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE TaskDefinition PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskDefinition name="Clorox VCBR Set Enabler Types" resultAction="Delete" type="Generic">
+  <Attributes>
+    <Map>
+      <entry key="TaskSchedule.host"/>
+      <entry key="ruleName" value="Clorox VCBR Set Enabler Types"/>
+      <entry key="taskCompletionEmailNotify" value="Disabled"/>
+      <entry key="filePath" value="%%VCBR_ENABLER_TYPE_FILEPATH%%"/>
+      <entry key="taskCompletionEmailRecipients"/>
+      <entry key="taskCompletionEmailTemplate"/>
+    </Map>
+  </Attributes>
+  <Description>Task that runs to update VCBR descriptions.</Description>
+  <Parent>
+    <Reference class="sailpoint.object.TaskDefinition" name="Run Rule"/>
+  </Parent>
+   <Signature>
+    <Inputs>
+    <Argument name="filePath" type="string">
+        <Prompt>Filepath to the VCBR enabler types csv file.</Prompt>
+      </Argument>
+    </Inputs>
+  </Signature>
+</TaskDefinition>

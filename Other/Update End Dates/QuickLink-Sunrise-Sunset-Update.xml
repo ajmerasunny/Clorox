@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE QuickLink PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<QuickLink action="workflow" messageKey="Update Start/End Dates" category="Manage" name="Update Sunrise/Sunset Dates" ordering="8">
+  <Attributes>
+    <Map>
+      <entry key="workflowName" value="Update Sunrise/Sunset Dates Workflow"/>
+      <entry key="flow" value="Update Sunrise/Sunset Dates"/>
+      <entry key="httpSession">
+        <value>
+          <Script>
+            <Source><![CDATA[   
+              import javax.faces.context.FacesContext;  
+              import javax.servlet.http.HttpSession;   
+              
+              FacesContext fc = FacesContext.getCurrentInstance();  
+              HttpSession session = fc.getExternalContext().getSession(true);  
+              return session;
+            ]]></Source>
+          </Script>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Description>Sunrise Sunset Update</Description>
+  <QuickLinkOptions allowSelf="true">
+  	<DynamicScopeRef>
+      <Reference class="sailpoint.object.DynamicScope" name="Everyone"/>
+    </DynamicScopeRef>    
+  </QuickLinkOptions>
+</QuickLink>

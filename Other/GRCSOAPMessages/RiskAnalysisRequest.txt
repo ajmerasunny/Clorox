@@ -1,0 +1,40 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:soap:functions:mc-style">
+   <soapenv:Header>
+   
+   </soapenv:Header>
+   <soapenv:Body>
+      <urn:GracIdmRiskWoutNoServices>
+        
+        <ConnectorId>
+    <item>
+      <Connector>DV2CLNT100</Connector>
+    </item>
+  </ConnectorId>
+  <ObjectId>
+    <item>
+      <Objid>TEST_SUB2</Objid>
+    </item>
+  </ObjectId>
+  <ObjectType>USR</ObjectType>
+  <ReportFormat>2</ReportFormat>
+  <Simulation>
+    <item>
+      <Connector>DV2CLNT100</Connector>
+      <Simuobtype>ROL</Simuobtype>
+      <SimuobjidLst>
+        <item>
+       <!--   <Simuobjid>ZS.STD_DEV</Simuobjid>
+           <Simuobjid>IT:E:F:MIT:BAS:BASIS_ADMIN_CMN</Simuobjid>  -->
+            <Simuobjid>NXT_PURCHASING</Simuobjid>
+        </item>
+      </SimuobjidLst>
+      <Excludesimu>S</Excludesimu>
+    </item>
+  </Simulation>
+
+
+      
+         <UserType></UserType>
+      </urn:GracIdmRiskWoutNoServices>
+   </soapenv:Body>
+</soapenv:Envelope>

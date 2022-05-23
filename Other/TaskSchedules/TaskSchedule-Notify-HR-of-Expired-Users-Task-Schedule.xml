@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE TaskSchedule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskSchedule id="Clorox Send HR Expired Contractor Notification Task Schedule" name="Clorox Send HR Expired Contractor Notification Task Schedule">
+  <Arguments>
+    <Map>
+      <entry key="TaskSchedule.host"/>
+      <entry key="executor" value="Clorox Send HR Expired Contractor Notification"/>
+      <entry key="launcher" value="spadmin"/>
+    </Map>
+  </Arguments>
+  <CronExpressions>
+    <String>0 0 0,5 ? * * *</String>
+  </CronExpressions>
+  <Description>Notify's HR of expired contractors.</Description>
+</TaskSchedule>

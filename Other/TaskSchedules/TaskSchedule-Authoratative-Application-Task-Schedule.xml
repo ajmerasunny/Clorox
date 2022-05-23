@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE TaskSchedule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<TaskSchedule id="Authoritative Application Aggregation Task Schedule" name="Authoritative Application Aggregation Task Schedule">
+  <Arguments>
+    <Map>
+      <entry key="TaskSchedule.host"/>
+      <entry key="executor" value="Clorox Authoritative Account Aggregation"/>
+      <entry key="launcher" value="spadmin"/>
+    </Map>
+  </Arguments>
+  <CronExpressions>
+    <String>0 0 0/6 ? * * *</String>
+  </CronExpressions>
+  <Description>Scheduled task to launch the authoratative application aggregation</Description>
+</TaskSchedule>

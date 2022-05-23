@@ -1,0 +1,10 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:urn="urn:sap-com:document:sap:soap:functions:mc-style">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <urn:GracIdmReqDetailsServices>
+         <!--Optional:-->
+         <Language>EN</Language>
+         <RequestNumber>927</RequestNumber>
+      </urn:GracIdmReqDetailsServices>
+   </soapenv:Body>
+</soapenv:Envelope>

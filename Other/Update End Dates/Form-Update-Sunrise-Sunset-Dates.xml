@@ -1,0 +1,279 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Form PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Form name="Update Access Start/End Dates Form" type="Workflow">
+	<Attributes>
+		<Map>
+			<entry key="pageTitle" value="Update Access Start/End Dates Form" />
+		</Map>
+	</Attributes>
+	<Button action="next" label="Next" />
+	<Button action="cancel" label="Cancel" />
+	<Section name="section0" label="Selected User" columns="2">
+		<Field displayName="Selected User" name="selectedIdentity" readOnly="true" columnSpan="2" value="ref:quickLinkIdentityId" helpKey="User selected to update end date." type="identity"/>
+	</Section>
+		
+	<Section name="section1" label="Update Access Start/End Dates" columns="2">
+		<Field displayName="Application" name="application" postBack="true" value="SAP ECC R3P Domestic" readOnly="true" required="true" columnSpan="2" helpKey="Select application access exists upon." type="Application"/>
+		<Field displayName="Access" name="access" required="true" dependencies="application" multi="true" columnSpan="2" dynamic="true" helpKey="List of Access">
+	 		<Attributes>
+ 				<Map>
+	 			<entry key="hidden">
+	 				<value>
+		 				<Script>
+		 					<Source>
+		 						<![CDATA[
+		 							if(application != null)
+		 							{
+		 								return false;
+		 							}
+		 							return true;
+		 						]]>
+		 					</Source>
+		 				</Script>
+	 				</value>
+	 			</entry>
+	 			</Map>
+	 		</Attributes>
+	 		<AllowedValuesDefinition> 
+				<Script> 
+					<Source> 
+						<![CDATA[ 
+						import sailpoint.object.Application;
+			        	import sailpoint.services.ServicesUtil;
+			        	import sailpoint.object.IdentityEntitlement;
+			        	import sailpoint.tools.Util;
+			        	import sailpoint.object.Identity;
+			        	import sailpoint.object.Bundle;
+			        	import sailpoint.object.ManagedAttribute;
+			        	
+			        	Map arguments = new HashMap();
+			        	arguments.put("identity", identityName);
+			        	arguments.put("name", "assignedRoles");
+			        	
+			        	List allRoleAccess = ServicesUtil.getIdentityEntitlements(context, arguments);
+			        	arguments.remove("name");
+			        	arguments.put("application", application);
+			        	
+			        	List allEntAccess = ServicesUtil.getIdentityEntitlements(context, arguments);
+
+			        	List allowedVals = new ArrayList();
+			        	Map accessMap = new HashMap();
+			        	
+			        	for(IdentityEntitlement idEnt : Util.safeIterable(allRoleAccess))
+			        	{
+			        		if(idEnt != null)
+			        		{
+			        			String value = idEnt.getValue();
+			        			
+			        			if(value != null)
+			        			{
+			        				Bundle bun = context.getObjectByName(Bundle.class, value);
+			        					
+		        					if(bun != null)
+		        					{
+		        						String bundleAppName = bun.getAttribute("appName");
+		        						String birthright = bun.getAttribute("isBirthright");
+		        						
+		        						if(bundleAppName != null && bundleAppName.equalsIgnoreCase(application))
+		        						{
+		        							if(birthright == null || birthright.isEmpty() || birthright.equalsIgnoreCase("false"))
+		        							{
+			        							allowedVals.add(value);
+			        							accessMap.put(value, idEnt);
+		        							}
+		        						}
+			        				}
+			        				
+			        			}
+			        		}
+			        	}
+			        	
+			        	for(IdentityEntitlement idEnt : Util.safeIterable(allEntAccess))
+			        	{
+			        		if(idEnt != null)
+			        		{
+			        			String value = idEnt.getValue();
+			        			String name = idEnt.getName();
+			        			
+			        			if(value != null)
+			        			{
+			        				Map entArgs = new HashMap();
+		        					entArgs.put("attribute", name);
+		        					entArgs.put("application", application);
+		        					entArgs.put("value", value);
+		        					
+		        					List manAttList = ServicesUtil.returnManagedAttributes(context, entArgs);
+		        					
+		        					if(manAttList != null && !manAttList.isEmpty())
+		        					{
+		        						ManagedAttribute manAtt = manAttList.get(0);
+		        						
+		        						if(manAtt.isRequestable())
+		        						{
+		        							allowedVals.add(manAtt.getDisplayName());
+		        							accessMap.put(manAtt.getDisplayName(), idEnt);
+		        						}
+		        					}
+			        			}
+			        		}
+			        	}
+			        				
+			        	form.getField("accessMap").setValue(accessMap);
+			        	
+			        	if(allowedVals.isEmpty())
+			        	{
+							allowedVals.add("No Access On Application");			        	
+						}
+						
+						return allowedVals;
+			        	
+						]]> 
+					</Source> 
+				</Script> 
+			</AllowedValuesDefinition>
+	 		<ValidationScript>
+		        <Source><![CDATA[
+		        	if(value.size() > 0)
+		        	{
+		        		for(String string : value)
+		        		{
+		        			if(string.equalsIgnoreCase("No Access On Application"))
+		        			{
+		        				return "Remove 'No Access On Application'";
+		        			}
+		        		}
+		        	}
+		        	
+		        	
+			      ]]> </Source>
+		      </ValidationScript>  
+		</Field>
+		<Field displayName="Start Date" dependencies="application" dynamic="true" name="startDate" type="date" columnSpan="1">
+			<Attributes>
+ 				<Map>
+	 			<entry key="hidden">
+	 				<value>
+		 				<Script>
+		 					<Source>
+		 						<![CDATA[
+		 							if(application != null)
+		 							{
+		 								return false;
+		 							}
+		 							return true;
+		 						]]>
+		 					</Source>
+		 				</Script>
+	 				</value>
+	 			</entry>
+	 			</Map>
+	 		</Attributes>
+			<ValidationScript>
+		        <Source><![CDATA[
+		        import sailpoint.tools.Util;
+  				import java.util.Calendar;
+  				import sailpoint.object.Identity;
+  				
+  				Identity identity = context.getObjectByName(Identity.class, identityName);
+				Date workerEndDate = identity.getAttribute("ctrexpDt");
+				
+				if(workerEndDate != null && value == null)
+				{
+					return "Must select a date before user's expiration date.";
+				}
+  				
+  				if(value != null)
+  				{
+  					if(value.compareTo(new Date()) < 0)
+					{
+						return "Cannot select a day in the past";
+					}
+					
+					if(workerEndDate != null)
+					{
+						if(workerEndDate.compareTo(value) < 0)
+						{
+							return workerEndDate.compareTo(value);
+							return "Cannot select a day past user's end date";
+						}
+					}
+					
+					
+  				}
+		        	
+			      ]]> </Source>
+		     </ValidationScript>  
+		</Field>
+		<Field displayName="End Date" dependencies="application" dynamic="true" name="endDate" type="date" columnSpan="1">
+			<Attributes>
+ 				<Map>
+	 			<entry key="hidden">
+	 				<value>
+		 				<Script>
+		 					<Source>
+		 						<![CDATA[
+		 							if(application != null)
+		 							{
+		 								return false;
+		 							}
+		 							return true;
+		 						]]>
+		 					</Source>
+		 				</Script>
+	 				</value>
+	 			</entry>
+	 			</Map>
+	 		</Attributes>
+			<ValidationScript>
+		        <Source><![CDATA[
+		        import sailpoint.tools.Util;
+  				import java.util.Calendar;
+  				import sailpoint.object.Identity;
+  				
+  				Identity identity = context.getObjectByName(Identity.class, identityName);
+				Date workerEndDate = identity.getAttribute("ctrexpDt");
+				
+				Date startDate = form.getField("startDate").getValue();
+				
+				if(startDate != null && value != null)
+				{
+					if(value.compareTo(startDate) <= 0)
+					{
+						return "End date must come after start date";
+					}
+				}
+				
+				
+				if(workerEndDate != null && value == null)
+				{
+					return "Must select a date before user's expiration date.";
+				}
+  				
+  				if(value != null)
+  				{
+  					if(value.compareTo(new Date()) < 0)
+					{
+						return "Cannot select a day in the past";
+					}
+					
+					
+					
+					if(workerEndDate != null)
+					{
+						if(workerEndDate.compareTo(value) < 0)
+						{
+							return workerEndDate.compareTo(value);
+							return "Cannot select a day past user's end date";
+						}
+					}
+					
+					
+  				}
+		        	
+			      ]]> </Source>
+		     </ValidationScript>  
+		</Field>
+		<Field name="accessMap" hidden="true" displayType="String" columnSpan="2"/>
+	</Section>		
+</Form>
+		

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Custom PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Custom name="Clorox Terminated Identities Mappings">
+   <Attributes>                   
+        <Map>
+            <entry key="SMART TERMINATED USERS">
+                <value>                                                                   
+                    <Map>                                                          
+			            <entry key="00107076" value="true"/>
+						<entry key="00039645" value="true"/>
+						<entry key="00111373" value="true"/>
+						<entry key="00111472" value="true"/>
+						<entry key="00110656" value="true"/>
+						<entry key="00042113" value="true"/>
+						<entry key="00110660" value="true"/>
+						<entry key="00044305" value="true"/>
+						<entry key="00111643" value="true"/>
+						<entry key="00111522" value="true"/>
+						<entry key="00110014" value="true"/>
+						<entry key="00110691" value="true"/>
+						<entry key="00111375" value="true"/>
+						<entry key="00107565" value="true"/>
+						<entry key="00110666" value="true"/>
+						<entry key="00110133" value="true"/>
+						<entry key="00111277" value="true"/>
+						<entry key="00110277" value="true"/>
+						<entry key="00111602" value="true"/>
+						<entry key="00108310" value="true"/>
+						<entry key="00106863" value="true"/>
+						<entry key="00109543" value="true"/>
+						<entry key="00108554" value="true"/>
+						<entry key="00110354" value="true"/>
+						<entry key="00107215" value="true"/>
+						<entry key="00111690" value="true"/>
+						<entry key="00112426" value="true"/>
+						<entry key="00112456" value="true"/>
+						<entry key="00112558" value="true"/>
+						<entry key="00110284" value="true"/>
+						<entry key="00111332" value="true"/>
+						<entry key="00110603" value="true"/>
+						<entry key="00111674" value="true"/>
+						<entry key="00111105" value="true"/>
+						<entry key="00111301" value="true"/>
+						<entry key="00112471" value="true"/>
+						<entry key="00111909" value="true"/>
+						<entry key="00111519" value="true"/>
+						<entry key="00110605" value="true"/>
+						<entry key="00111775" value="true"/>
+						<entry key="00110623" value="true"/>
+						<entry key="00112073" value="true"/>
+						<entry key="00110658" value="true"/>
+						<entry key="00110722" value="true"/>
+						<entry key="00111521" value="true"/>
+						<entry key="00106862" value="true"/>
+						<entry key="00110527" value="true"/>
+						<entry key="00108995" value="true"/>
+						<entry key="00107965" value="true"/>
+						<entry key="00039229" value="true"/>
+						<entry key="00040571" value="true"/>
+						<entry key="00019803" value="true"/>
+						<entry key="00039471" value="true"/>
+						<entry key="00112565" value="true"/>
+						<entry key="00107910" value="true"/>
+						<entry key="00032741" value="true"/>
+						<entry key="00043308" value="true"/>
+						<entry key="00033092" value="true"/>
+						<entry key="00106581" value="true"/>
+						<entry key="00014732" value="true"/>
+						<entry key="00011472" value="true"/>
+						<entry key="00031854" value="true"/>
+                    </Map>                                               
+                </value>                                     
+            </entry>
+         </Map>                
+    </Attributes>   
+    <Description>
+  Custom object to keep track of terminated identities before production.
+	</Description>
+</Custom>

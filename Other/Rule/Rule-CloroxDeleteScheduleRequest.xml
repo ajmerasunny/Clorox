@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox Delete Schedule Request">
+ <ReferencedRules>
+   <Reference class="sailpoint.object.Rule" name="Clorox Identity Rules Library"/>
+ </ReferencedRules>
+    <Source>              
+        <![CDATA[
+  import sailpoint.object.Filter;
+  import sailpoint.object.QueryOptions;
+  import sailpoint.api.SailPointContext; 
+  import sailpoint.object.Request;
+  import org.apache.log4j.Logger;
+  import org.apache.log4j.Level;
+  import sailpoint.api.Terminator;
+  import sailpoint.tools.Util;
+  import java.util.Date;
+
+
+  Logger log = Logger.getLogger("com.clorox.rule.RuleLibrary");
+  Filter name = Filter.notnull("name");					
+  QueryOptions option = new QueryOptions();
+  option.addFilter(name);
+
+  Iterator iterator = context.search(Request.class, option);
+  if(iterator != null)
+  {
+    while(iterator.hasNext())
+    {
+      Request request = (Request) iterator.next();
+      if(request != null)
+      {
+       Date createDate = request.getCreated();
+      
+       // 30th september in EPOCH       
+       Date endDate = new Date(1569801600000L); 
+       
+       if(createDate.before(endDate))
+       {
+       
+        String type = request.getAttributes().getString("requestType");
+        if(type != null && !type.isEmpty() && type.equalsIgnoreCase("REQUEST MANAGER FEATURE"))
+        {
+          String id =  request.getAttributes().getString("identityName");
+          Map entryMap = getCustomAttribute(context, "Clorox Terminated Identities Mappings", "SMART TERMINATED USERS");
+          if(entryMap != null && id != null)
+          {
+            if(entryMap.get(id) == null)
+            {
+              log.debug("---id not found on actual termination so deleting request for ---"+id);
+              Terminator t = new Terminator(context);
+              t.deleteObject(request);
+            }
+      
+          }
+
+        }
+       }
+
+      }
+
+    }
+  }
+
+  ]]>
+ </Source>
+</Rule>

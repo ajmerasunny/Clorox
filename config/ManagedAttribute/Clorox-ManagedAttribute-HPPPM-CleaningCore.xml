@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="BusinessUnit" displayName="HP PPM Cleaning Core"  requestable="true" type="BusinessUnit" value="HP PPM BU">
+<ManagedAttribute aggregated="true" attribute="BusinessUnit" displayName="HP PPM Cleaning Core"  requestable="true" type="BusinessUnit" value="HP PPM Cleaning Core">
   <ApplicationRef>
     <Reference class="sailpoint.object.Application" name="%%HP_PPM_APP_NAME%%"/>
   </ApplicationRef>

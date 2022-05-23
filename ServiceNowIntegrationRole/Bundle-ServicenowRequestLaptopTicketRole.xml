@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="ServiceNow Request Laptop Ticket Role" name="ServiceNow Request Laptop Ticket Role" type="business">
+          
+    
+    <Attributes>
+                    
+        
+        <Map>
+                              
+            
+            <entry key="acceleratorPackEnabled"/>
+                              
+            
+            <entry key="accountSelectorRules"/>
+                              
+            
+            <entry key="additionalRoleBusApprovalRule"/>
+                              
+            
+            <entry key="additionalRoleBusApprovers"/>
+                              
+            
+            <entry key="allowDuplicateAccounts" value="false"/>
+                              
+            
+            <entry key="allowMultipleAssignments" value="false"/>
+                              
+            
+            <entry key="apaccountType"/>
+                              
+            
+            <entry key="appName"/>
+                              
+            
+            <entry key="formappName"/>
+                              
+            
+            <entry key="isBirthright"/>
+                              
+            
+            <entry key="mergeTemplates" value="false"/>
+                              
+            
+            <entry key="roleBusApprovalRule"/>
+                              
+            
+            <entry key="roleBusApprovers"/>
+                              
+            
+            <entry key="rolePrivileged"/>
+                              
+            
+            <entry key="sysDescriptions">
+                                        
+                
+                <value>
+                                                  
+                    
+                    <Map>
+                                                            
+                        
+                        <entry key="en_US"/>
+                                                          
+                    
+                    </Map>
+                                                
+                
+                </value>
+                                      
+            
+            </entry>
+                            
+        
+        </Map>
+                  
+    
+    </Attributes>
+          
+    
+    <Owner>
+                    
+        
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+                  
+    
+    </Owner>
+          
+    
+    <ProvisioningForms>
+                    
+        
+        <Form name="My Tech Laptop Ticket Form">
+                              
+            
+            <ApplicationRef>
+                                        
+                
+                <Reference class="sailpoint.object.Application" name="MyTech Ticket Integration"/>
+                                      
+            
+            </ApplicationRef>
+                              
+            
+            <Attributes>
+                                        
+                
+                <Map>
+                                                  
+                    
+                    <entry key="pageTitle" value="My Tech Laptop Ticket Form"/>
+                                                  
+                    
+                    <entry key="title" value="Create Ticket Policy"/>
+                                                
+                
+                </Map>
+                                      
+            
+            </Attributes>
+                              
+            
+            <Section name="Section 1">
+                                        
+                
+                <Field displayName="Operation" name="Operation" type="string" value="Laptop Creation Request Ticket"/>
+                                        
+                
+                <Field displayName="Work Telephone" name="Work Telephone" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+return identity.getAttribute("workPhone");]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Manager's Email" name="Manager's Email" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+if(identity.getManager() != null)
+{
+return identity.getManager().getEmail();
+}]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Work Email" name="Work Email" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+return identity.getEmail();]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Country" name="Country" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+return identity.getAttribute("country");]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Account Code/Cost Center" name="Account Code/Cost Center" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+return identity.getAttribute("costCenter");]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Company Code" name="Company Code" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+return identity.getAttribute("companyCode");]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field name="Cost Center Manager" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+return identity.getAttribute("adminCostCenterName");]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Lease Buyout" name="Lease Buyout" type="string" value="Yes"/>
+                                        
+                
+                <Field displayName="Start Date" name="Start Date" type="string">
+                                                  
+                    
+                    <Script>
+                                                            
+                        
+                        <Source>
+                                                        
+                            <![CDATA[import sailpoint.object.Identity;
+
+return identity.getAttribute("startDate");]]>
+                                                    
+                        </Source>
+                                                          
+                    
+                    </Script>
+                                                
+                
+                </Field>
+                                        
+                
+                <Field displayName="Employee Status" name="Employee Status" type="string" value="New Hire"/>
+                                      
+            
+            </Section>
+                            
+        
+        </Form>
+                  
+    
+    </ProvisioningForms>
+        
+
+</Bundle>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="IBM Content Management Accounts Payable P2P Vendor Invoices" type="Role" value="IBM Content Management Accounts Payable P2P Vendor Invoices">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="IBM Imaging"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="P2P Vendor Invoices - Access to Supplier Invoices is highly restricted. If you require access, please indicate which type of documents you need in the “Comments” box."/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

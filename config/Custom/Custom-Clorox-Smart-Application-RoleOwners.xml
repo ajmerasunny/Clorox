@@ -22,7 +22,7 @@
             <entry key="%%Concur_APP_NAME%%" value="%%CLX_AR_ConcurAdmin_OWNER_WORKGROUP%%"/>
             <entry key="%%EssBase%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
             <entry key="IBM Content Management Accounts Payable" value="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
-            <entry key="IBM Content Management Accounts Receivable" value="CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP"/>            
+            <entry key="IBM Content Management Accounts Receivable" value="%%CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP%%"/>            
           </Map>
         </value>
       </entry>

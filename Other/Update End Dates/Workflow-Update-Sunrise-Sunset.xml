@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Workflow PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Workflow explicitTransitions="true" name="Update Sunrise/Sunset Dates Workflow">
+	<!-- **************************************************************************
+	CUSTOM WORKFLOW SPECIFIC VARIABLES
+	**************************************************************************-->	
+	<Variable name="confirmationForm" />
+	<Variable name="identityModel" />
+	<Variable input="true" name="httpSession" transient="true"/>
+	<!-- ******************************************************
+	VARIABLES USED DURING PROCESSING
+	**************************************************************************-->
+  <Variable editable="true" name="identityName"/>
+    <Variable initializer="true" name="transient"/>
+  
+  <Variable initializer="string:true" name="trace"/>
+  <Variable input="true" name="launcher"/>
+  <Variable input="true" name="quickLinkIdentityId"/>
+  <Variable input="true" name="identityEmail"/>
+  
+  <Variable editable="true" initializer="false" name="foregroundProvisioning"/>
+  <Description>
+		Workflow to do a targeted aggregation on a user.
+  </Description>
+  <RuleLibraries>
+    <Reference class="sailpoint.object.Rule" name="LCM Workflow Library"/>
+  </RuleLibraries>
+  <Step icon="Start" name="Start">
+    <Transition to="GetIdentityModel"/>
+  </Step>
+  <Step action="call:getIdentityModel" icon="Default" name="GetIdentityModel" posX="225" posY="10" resultVariable="identityModel">
+    <Arg name="expandIdentity" value="false"/>
+    <Arg name="expandLinks" value="false"/>
+    <Description>Get the Identity Model for the user</Description>
+    <Transition to="Update IdentityModel"/>
+  </Step>
+  <Step name="Update IdentityModel">
+    <Script>
+      <Source><![CDATA[
+      	import sailpoint.object.Identity;
+      	
+      	Identity identity = context.getObjectById(Identity.class, quickLinkIdentityId);
+      	workflow.put("identityName", identity.getName());
+      	workflow.put("identityDisplayName", identity.getDisplayName());
+      	workflow.put("identityEmail", identity.getEmail());
+      	
+      
+		identityModel.put("identityName", identityName);
+		workflow.put("identityModel", identityModel);
+	]]></Source>
+    </Script>
+    <Transition to="Show Update Access Sunrise/Sunset Dates Form"/>
+  </Step>
+  <Step icon="Approval" name="Show Update Access Sunrise/Sunset Dates Form">
+    <Approval mode="serial" owner="ref:launcher" return="identityModel" send="launcher, identityName, identityModel, quickLinkIdentityId">
+      <Arg name="workItemType" value="Form"/>
+      <Arg name="workItemDescription" value="GetIdentityModels"/>
+      <Arg name="workItemForm" value="Update Access Sunrise/Sunset Dates Form"/>
+      <Arg name="workItemFormBasePath" value="identityModel"/>
+    </Approval>
+    <Transition to="Build Confirmation Form" when="lastApprovalState.equalsIgnoreCase(&quot;Finished&quot;);"/>
+  </Step>
+  <Step action="call:buildReadOnlyForm" name="Build Confirmation Form" resultVariable="confirmationForm">
+    <Arg name="form" value="Update Access Sunrise/Sunset Dates Form"/>
+    <Arg name="pageTitle" value="Targeted Aggregation Confirmation Form"/>
+    <Arg name="nextButtonLabel" value="Submit"/>
+    <Description>
+	     Create the read-only form to be displayed.
+	  </Description>
+    <Transition to="Show Update Access Sunrise/Sunset Dates Confirmation Form"/>
+  </Step>
+  <Step icon="Approval" name="Show Update Access Sunrise/Sunset Dates Confirmation Form">
+    <Approval mode="serial" owner="ref:launcher" return="identityModel" send="launcher, identityModel, identityName, quickLinkIdentityId">
+      <Arg name="workItemType" value="Form"/>
+      <Arg name="workItemDescription" value="Update Access Sunrise/Sunset Dates Form"/>
+      <Arg name="workItemForm" value="ref:confirmationForm"/>
+      <Arg name="workItemFormBasePath" value="identityModel"/>
+    </Approval>
+    <Transition to="Show Update Access Sunrise/Sunset Dates Form" when="lastApprovalState.equalsIgnoreCase(&quot;Rejected&quot;);"/>
+    <Transition to="Form Submitted Message" when="lastApprovalState.equalsIgnoreCase(&quot;Finished&quot;);"/>
+  </Step>
+  <Step name="Form Submitted Message">
+    <Script>
+      <Source><![CDATA[
+
+  		import javax.faces.application.FacesMessage;
+        import javax.faces.context.FacesContext;
+	  	import org.apache.commons.logging.LogFactory;
+      	import org.apache.commons.logging.Log;
+        import java.util.List;
+        import java.util.ArrayList;
+        
+        
+        Log logger = LogFactory.getLog("abbott.LotusNotes.workflow.requestId");
+        logger.debug("Inside Add Submit Message...");
+        String message = "Update Start/End dates launched for: " + identityName;
+        
+        FacesMessage myMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, message, "This is ignored");
+        List myMessages = new ArrayList(); 
+		myMessages.add(myMessage);
+		
+		if(httpSession != null)
+		{
+			httpSession.setAttribute("sailpoint.web.PageCodeBase.sessionMessages", myMessages);
+		}
+	]]></Source>
+    </Script>
+    <Transition to="Build Provisioning Plan"/>
+  </Step>
+  <Step name="Build Provisioning Plan">
+    <Script>
+      <Source><![CDATA[
+			import sailpoint.object.ProvisioningPlan;
+			import sailpoint.object.ProvisioningPlan.AttributeRequest;
+			import sailpoint.object.ProvisioningPlan.AccountRequest;
+			import sailpoint.object.ProvisioningPlan.Operation;
+  		import sailpoint.object.Identity;
+  		import sailpoint.object.IdentityEntitlement;
+  		import sailpoint.object.Application;
+  		import sailpoint.object.ProvisioningTarget;
+  		import sailpoint.tools.Util;
+  		import sailpoint.object.Bundle;
+  		import sailpoint.object.Attributes;
+  		
+  		Identity identity = context.getObjectByName(Identity.class, identityName);
+  		List chosenAccess = identityModel.get("access");
+  		Map accessMap = identityModel.get("accessMap");
+  		Date chosenEndDate = identityModel.get("endDate");
+  		Date chosenStartDate = identityModel.get("startDate");
+  		
+  		ProvisioningPlan plan = new ProvisioningPlan();
+  		plan.setIdentity(identity);
+  		
+  		List accountRequests = new ArrayList();
+  		Map accountRequestsMap = new HashMap();
+  		List provisioningTargets = new ArrayList();
+
+  		for(String accessKey : Util.safeIterable(chosenAccess))
+  		{
+  			IdentityEntitlement idEnt = accessMap.get(accessKey);
+  			
+  			String appName = idEnt.getAppName();
+  			
+  			if(appName == null)
+  			{
+  				appName = "IdentityIQ";
+  			}
+  			
+  			
+  			String nativeId = idEnt.getNativeIdentity();
+  			String idEntName = idEnt.getName();
+  			String value = idEnt.getValue();
+  			Date startDate = idEnt.getStartDate();
+  			Date endDate = idEnt.getEndDate();
+  			
+  			String accReqKey = appName + nativeId;
+  			
+  			AccountRequest accReq = accountRequestsMap.get(accReqKey);
+  			  			  			
+  			
+  			if(accReq == null)
+  			{
+  				accReq = new AccountRequest(AccountRequest.Operation.Modify, appName, null, nativeId);
+  			}
+  			  			
+  			
+  			AttributeRequest attributeRequest = new AttributeRequest(idEntName, ProvisioningPlan.Operation.Add, value);
+  			
+  			if(idEntName.equalsIgnoreCase("assignedRoles"))
+  			{
+  				provisioningTargets.add(new ProvisioningTarget(context.getObjectByName(Bundle.class, value)));
+  			}
+  			else
+  			{
+  				provisioningTargets.add(new ProvisioningTarget(context.getObjectByName(Application.class), idEntName, value));
+  			}
+  			  			
+  			
+  			
+  			Map attReqArgs = new HashMap();
+  			
+  			attReqArgs.put("endDate", endDate);
+  			attReqArgs.put("startDate", startDate);
+  			
+  			if(chosenEndDate != null)
+  			{
+  				attReqArgs.put("endDate", chosenEndDate);
+  			}
+  			
+  			if(chosenStartDate != null)
+  			{
+  				attReqArgs.put("startDate", chosenStartDate);
+  			}
+						  			
+											
+			attributeRequest.setArguments(new Attributes(attReqArgs));
+			
+			accReq.add(attributeRequest);
+			
+  			accountRequestsMap.put(accReqKey, accReq);  			
+  			
+  		}
+  		
+  		for(String key : accountRequestsMap.keySet())
+  		{
+  			AccountRequest accReqToAdd = accountRequestsMap.get(key);
+  			Map accReqArgs = new HashMap();
+  			accReqArgs.put("comments", "Requesting a new start/end date on this access.");
+  			accReqToAdd.setArguments(new Attributes(accReqArgs));
+  			
+  			accountRequests.add(accReqToAdd);
+  		}
+  		
+  		
+  		plan.setAccountRequests(accountRequests);
+  		Map planArgs = new HashMap();
+  		planArgs.put("source", "LCM");
+  		
+  		plan.setArguments(new Attributes(planArgs));
+  		plan.setProvisioningTargets(provisioningTargets);
+  		
+  		workflow.put("plan", plan);
+  		
+  		
+	]]></Source>
+    </Script>
+    <Transition to="Call Wrapper"/>
+  </Step>
+   <Step name="Call Wrapper">
+    <Arg name="enableRetryRequest" value="false"/>
+	<Arg name="fallbackApprover" value="spadmin"/>
+	<Arg name="sessionOwner" value="spadmin"/>
+	<Arg name="endOnManualWorkItems" value="false"/>
+	<Arg name="noApplicationTemplates" value="false"/>
+	<Arg name="identityDisplayName" value="ref:identityDisplayName"/>
+	<Arg name="foregroundProvisioning" value="false"/>
+	<Arg name="doRefresh" value="true"/>
+	<Arg name="plan" value="plan"/>
+	<Arg name="flow" value="AccessRequest"/>
+	<Arg name="source" value="LCM"/>
+	<Arg name="bypassApprovals" value="false"/>
+	<Arg name="noFiltering" value="false"/>
+	<Arg name="noTriggers" value="true"/>
+	<Arg name="autoVerifyIdentityRequest" value="false"/>
+	<Arg name="isProvisioningFailed" value="false"/>
+	<Arg name="validatePSA" value="true"/>
+	<Arg name="launcher" value="spadmin"/>
+	<Arg name="allowRequestsWithViolations" value="true"/>
+	<Arg name="fireFighterAccess" value="false"/>
+	<Arg name="requireViolationReviewComments" value="true"/>
+	<Arg name="suppressNotifications" value="false"/>
+	<Arg name="doRefreshLogicalApps" value="false"/>
+	<Arg name="endOnProvisioningForms" value="false"/>
+	<Arg name="enablePSA" value="true"/>
+	<Arg name="sendRequestNotifications" value="false"/>
+	<Arg name="identityEmail" value="ref:identityEmail"/>
+	<Arg name="postProvisioningRule" value="false"/>
+	<Arg name="policyScheme" value="interactive"/>
+	<Arg name="setPreviousApprovalDecisions" value="false"/>
+	<Arg name="optimisticProvisioning" value="false"/>
+    <WorkflowRef>
+      <Reference class="sailpoint.object.Workflow" name="Workflow-FrameWork-Wrapper"/>
+    </WorkflowRef>
+    <Transition to="end"/>
+  </Step>
+  <Step icon="Stop" name="end"/>
+</Workflow>

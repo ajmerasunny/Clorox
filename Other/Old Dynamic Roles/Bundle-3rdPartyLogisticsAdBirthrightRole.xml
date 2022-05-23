@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="3rd Party Logistics AD Birthright Role" name="3rd Party Logistics AD Birthright Role" type="dynamic">
+    <Attributes>
+        <Map>
+	        <entry key="accountSelectorRules"> 
+	          <value>
+	              <AccountSelectorRules>
+	                  <ApplicationAccountSelectorRules>
+	                    <ApplicationAccountSelectorRule>
+	                        <ApplicationRef>
+	                            <Reference class="sailpoint.object.Application" name="Active Directory"/>
+	                        </ApplicationRef>
+	                        <RuleRef>
+	                            <Reference class="sailpoint.object.Rule" name="Clorox Primary AD Account Selector Rule"/>
+	                        </RuleRef>
+	                    </ApplicationAccountSelectorRule>
+	                  </ApplicationAccountSelectorRules>
+	              </AccountSelectorRules>
+	          </value>
+	        </entry>
+            <entry key="acceleratorPackEnabled"/>
+            <entry key="additionalRoleBusApprovalRule"/>
+            <entry key="additionalRoleBusApprovers"/>
+            <entry key="allowDuplicateAccounts" value="false"/>
+            <entry key="allowMultipleAssignments" value="false"/>
+            <entry key="apaccountType"/>
+            <entry key="appName"/>
+            <entry key="formappName"/>
+            <entry key="isBirthright" value="true"/>
+            <entry key="mergeTemplates" value="false"/>
+            <entry key="roleBusApprovalRule"/>
+            <entry key="roleBusApprovers"/>
+            <entry key="rolePrivileged"/>
+            <entry key="sysDescriptions">
+                <value>
+                    <Map>
+                        <entry key="en_US"/>
+                    </Map>
+                </value>
+            </entry>
+        </Map>
+    </Attributes>
+    <Inheritance>
+        <Reference class="sailpoint.object.Bundle" name="Clorox BaselineBirthright AD Roles"/>
+    </Inheritance>
+    <Owner>
+        <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    </Owner>
+    <Selector>
+        <IdentitySelector>
+            <RuleRef>
+                <Reference class="sailpoint.object.Rule" name="Clorox AD Birthright 3rd Party Logistics Assignment Rule"/>
+            </RuleRef>
+        </IdentitySelector>
+    </Selector>
+    <Profiles>
+        <Profile>
+            <ApplicationRef>
+                <Reference class="sailpoint.object.Application" name="Active Directory"/>
+            </ApplicationRef>
+            <Constraints>
+                <Filter operation="CONTAINS_ALL" property="memberOf">
+                    <Value>
+                        <List>
+                            <String>CN=3RD PARTY LOGISTICS%%ENVIRONMENT_TAG%%,%%AD_GROUP_3RD_PARTY_LOGISTICS_OU%%</String>
+                            <String>CN=DOMAIN USERS%%ENVIRONMENT_TAG%%,%%AD_GROUP_DOMAIN_USERS_EXT_OU%%</String>
+                        </List>
+                    </Value>
+                </Filter>
+            </Constraints>
+        </Profile>
+    </Profiles>
+</Bundle>

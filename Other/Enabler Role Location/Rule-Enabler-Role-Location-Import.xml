@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox Enabler Role Location Import">
+  <ReferencedRules>
+    <Reference class="sailpoint.object.Rule" name="Role Parsing and Import RuleLibrary"/>
+  </ReferencedRules>
+  <Description>
+        This rule will be called when IP Role Import task runs.
+  </Description>
+  <Source><![CDATA[
+  	import sailpoint.object.Attributes;
+  	import sailpoint.object.TaskResult;
+  	import sailpoint.object.TaskDefinition;
+  	import sailpoint.object.Custom;
+  	import sailpoint.tools.Util;
+  	import sailpoint.object.ManagedAttribute;
+  	import java.sql.Connection;  
+  	import java.util.ArrayList;
+  	import sailpoint.api.Describer;
+	import java.util.Arrays;
+	import java.util.HashMap;
+	import java.util.List;
+	import sailpoint.object.Bundle;
+	import java.util.Map;
+	import java.util.Set;
+  	import org.apache.log4j.Logger;
+  	import org.apache.log4j.Level;
+  	  	
+  	String TASK_NAME = "Clorox Enabler Role Location Import";
+  	
+	Logger logger = Logger.getLogger("pslabs.role.import.maintainer");
+
+  	TaskDefinition taskDef = context.getObjectByName(TaskDefinition.class, TASK_NAME);
+
+	String filePath = taskDef.getString("filePath");
+
+	
+
+	if(filePath != null)
+	{
+		String dlm = ",";
+		BufferedReader fileIn = new BufferedReader(new FileReader(filePath));
+		RFC4180LineParser parser = new RFC4180LineParser(dlm);
+		
+		//if file doesn't exist			
+		if (!doesFileExist(filePath)) 
+		{
+			logger.error("Unable to find file: " + filePath);
+		
+			taskResult.addMessage(new Message(Message.Type.Error, "ERROR: Couldn't find file")); 
+		}
+		
+		BufferedReader fileInCopy = new BufferedReader(new FileReader(filePath));
+		
+		//Open the CSV file for reading.
+		int lineCounter = 0;
+  		ArrayList headerStrings = new ArrayList();
+  		String thisLine = null;
+  		    
+  		//iterate until entire line isn't null
+  		while (null != (thisLine = fileInCopy.readLine())) 
+		{		
+			thisLine = thisLine.replaceAll("ï»¿", "");
+				
+			if(lineCounter != 0)
+  			{  			
+  				List tokens = parser.parseLine(thisLine);
+  				
+  				if(tokens != null && tokens.size() > 0)
+  				{
+  					String enablerRoleName = tokens.get(4);
+  					logger.trace("enablerRoleNAme: " + enablerRoleName);
+  					if(enablerRoleName != null)
+  					{
+  						ManagedAttribute ma = returnManagedAttributeFromAttribute(context, "enablerDescription", enablerRoleName);
+  						
+  						if(ma != null)
+  						{
+  					logger.trace("tokens.get(3): " + tokens.get(3));
+  							logger.trace("ma: " + ma.toXml());
+  							ma.setAttribute("location", tokens.get(3));
+  						
+							context.saveObject(ma);
+							context.commitTransaction();
+  						}
+  					}
+				}
+			}
+			lineCounter++;
+		}
+	}
+		
+	return "Success";
+       
+    ]]></Source>
+</Rule>
