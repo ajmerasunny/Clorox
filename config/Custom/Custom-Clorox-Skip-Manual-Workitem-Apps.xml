@@ -6,10 +6,10 @@
       <entry key="Applications">
         <value>
           <List>
-            <String>CCMS</String>
-            <String>CTC Colorbase</String>
-            <String>CTC Hard Surface Cleaning</String>
-            <String>IBM Imaging</String>
+            <String>%%CCMS_APP_NAME%%</String>
+            <String>%%CTC_Colorbase_APP_NAME%%</String>
+            <String>%%CTC_HardSurface_Cleaning_APP_NAME%%</String>
+            <String>%%IBM_Imaging_APP_NAME%%</String>
           </List>
         </value>
       </entry>
