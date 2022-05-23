@@ -50,6 +50,5 @@
   </Owner>
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="MediaBin External IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="MediaBin Stakeholder IT Role"/>
   </Requirements>
 </Bundle>
