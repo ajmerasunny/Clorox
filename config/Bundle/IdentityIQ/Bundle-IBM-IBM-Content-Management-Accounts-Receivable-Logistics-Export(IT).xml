@@ -26,7 +26,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName"/>
+      <entry key="appName" value="%%IBM_Imaging_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -61,7 +61,7 @@
     <Reference class="sailpoint.object.Bundle" name="IBM Imaging"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
   </Owner>
   <Profiles>
     <Profile>
@@ -73,10 +73,24 @@
           <Value>
             <List>
              <String>%%FCM_SR_LogisticsExport%%</String>         
-	    </List>
+	          </List>
           </Value>
         </Filter>
       </Constraints>
     </Profile>
+    <Profile>
+      <ApplicationRef>
+        <Reference class="sailpoint.object.Application" name="%%IBM_Imaging_APP_NAME%%"/>
+      </ApplicationRef>
+      <Constraints>
+        <Filter operation="CONTAINS_ALL" property="Role">
+          <Value>
+            <List>
+              <String>IBM Content Management Accounts Receivable Logistics Export</String>
+            </List>
+          </Value>
+        </Filter>
+      </Constraints>
+    </Profile>    
   </Profiles>
 </Bundle>

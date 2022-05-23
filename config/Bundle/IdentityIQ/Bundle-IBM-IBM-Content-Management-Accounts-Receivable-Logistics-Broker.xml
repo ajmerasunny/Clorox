@@ -46,7 +46,7 @@
     <Reference class="sailpoint.object.Bundle" name="IBM Imaging"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="IBM Content Management Accounts Receivable Logistics Broker IT Role"/>
