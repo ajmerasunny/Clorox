@@ -395,7 +395,7 @@
     <Transition to="end"/>
   </Step>
   <Step icon="Approval" name="Manual Actions" posX="2104" posY="126">
-    <Approval mode="parallelPoll" owner="rule:Build Manual Action Approvals" renderer="lcmManualActionsRenderer.xhtml" send="identityDisplayName,identityName,policyViolations">
+    <Approval mode="parallelPoll" owner="rule:Clorox Build Manual Action Approvals" renderer="lcmManualActionsRenderer.xhtml" send="identityDisplayName,identityName,policyViolations">
       <AfterScript>
         <Source><![CDATA[
                     
