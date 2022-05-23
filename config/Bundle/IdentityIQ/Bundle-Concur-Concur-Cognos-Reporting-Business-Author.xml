@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="Concur Cognos Reporting Business Author" name="Concur Cognos Reporting Business Author" type="business">
+  <Attributes>
+    <Map>
+      <entry key="acceleratorPackEnabled"/>
+      <entry key="accountSelectorRules"/>
+      <entry key="additionalRoleBusApprovalRule"/>
+      <entry key="additionalRoleBusApprovers"/>
+      <entry key="additionalRoleBusBuyers"/>
+      <entry key="allApprovers"/>
+      <entry key="allBuyers"/>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="apaccountType"/>
+      <entry key="appName" value="%%Concur_APP_NAME%%"/>
+      <entry key="autoAssignEnablerTypes"/>
+      <entry key="businessSubprocessName"/>
+      <entry key="defaultEndDateSpan"/>
+      <entry key="defaultStartDateSpan"/>
+      <entry key="enablerTypes"/>
+      <entry key="formappName"/>
+      <entry key="isBirthright"/>
+      <entry key="mandatoryEntitlements"/>
+      <entry key="mandatoryRoles"/>
+      <entry key="mergeTemplates" value="false"/>
+      <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
+      <entry key="roleBusApprovalRule"/>
+      <entry key="roleBusApprovers"/>
+      <entry key="roleKeywords" value="Concur Cognos Reporting Business Author"/>
+      <entry key="rolePrivileged"/>
+      <entry key="sapVcbr">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="singleRoleRequest"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="Run existing reports in Cognos (Concur reporting tool)."/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="Concur"/>
+  </Inheritance>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+  </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="ConcurUs IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur Cognos Reporting Business Author IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur P Card IT Role"/>
+  </Requirements>
+</Bundle>
