@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IBM Content Management Accounts Receivable Logistics RDS IT Role" name="IBM Content Management Accounts Receivable Logistics RDS IT Role" type="it">
+<Bundle displayName="IBM Content Management Accounts Receivable RDS IT Role" name="IBM Content Management Accounts Receivable RDS IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
