@@ -255,7 +255,7 @@
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
   <ProvisioningForms>
     <Form name="Create" objectType="account" type="Create">

@@ -66,6 +66,14 @@
 						resultMap.put("ApprovalRequired","true");
 						approvers = smartApplicationOwners.get("IBM Content Management Accounts Receivable");                
 						resultMap.put("Approvers", approvers);
+					} else if(roleName.startsWith("Concur")) {
+						if(roleName.contains("Concur Expense")) {
+							approvers = smartApplicationOwners.get("Concur Expense");                
+						} else {
+							approvers = smartApplicationOwners.get("Concur");                
+						}
+						resultMap.put("ApprovalRequired","true");						
+						resultMap.put("Approvers", approvers);
 					}    
 					else if(smartApplications.contains(appName)) {
 						resultMap.put("ApprovalRequired","true");

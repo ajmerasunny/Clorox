@@ -46,7 +46,7 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
   <Profiles>
     <Profile>

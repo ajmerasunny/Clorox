@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="Concur T&amp;E Admin Clorox P2P IT Role" name="Concur T&amp;E Admin Clorox P2P IT Role" type="it">
+<Bundle displayName="Concur T&amp;E Admin - Clorox P2P IT Role" name="Concur T&amp;E Admin - Clorox P2P IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -25,7 +25,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="Concur T&amp;E Admin Clorox P2P"/>
+      <entry key="roleKeywords" value="Concur T&amp;E Admin - Clorox P2P"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -46,7 +46,7 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
   <Profiles>
     <Profile>
@@ -57,7 +57,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>Concur T&amp;E Admin Clorox P2P</String>
+              <String>Concur T&amp;E Admin - Clorox P2P</String>
             </List>
           </Value>
         </Filter>

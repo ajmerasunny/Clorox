@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle disabled="true" displayName="Concur T&amp;E Admin Clorox Country Specific" name="Concur T&amp;E Admin Clorox Country Specific" type="business">
+<Bundle disabled="true" displayName="Concur T&amp;E Admin - Clorox Country Specific" name="Concur T&amp;E Admin - Clorox Country Specific" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -27,7 +27,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="Concur T&amp;E Admin Clorox Country Specific"/>
+      <entry key="roleKeywords" value="Concur T&amp;E Admin - Clorox Country Specific"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -48,9 +48,10 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
   <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="Concur T&amp;E Admin Clorox Country Specific IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur T&amp;E Admin - Clorox Country Specific IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur IT Role"/>
   </Requirements>
 </Bundle>

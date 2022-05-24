@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="Concur Cognos Reporting Professional Author" name="Concur Cognos Reporting Professional Author" type="business">
+<Bundle displayName="Concur Cognos Reporting - Professional Author" name="Concur Cognos Reporting - Professional Author" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -27,7 +27,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="Concur Cognos Reporting Professional Author"/>
+      <entry key="roleKeywords" value="Concur Cognos Reporting - Professional Author"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -48,11 +48,11 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
   <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="ConcurUs IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="Concur Cognos Reporting Professional Author IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="Concur P Card IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur Cognos Reporting - Professional Author IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur P-Card IT Role"/>
   </Requirements>
 </Bundle>

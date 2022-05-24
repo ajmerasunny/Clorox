@@ -19,7 +19,8 @@
           <Map>
             <entry key="%%CCMS_APP_NAME%%" value="%%CLX_AR_CCMSAdmin_OWNER_WORKGROUP%%"/>
             <entry key="%%iDMS_APP_NAME%%" value="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
-            <entry key="%%Concur_APP_NAME%%" value="%%CLX_AR_ConcurAdmin_OWNER_WORKGROUP%%"/>
+            <entry key="Concur Expense" value="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
+            <entry key="Concur" value="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
             <entry key="%%EssBase%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
             <entry key="IBM Content Management Accounts Payable" value="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
             <entry key="IBM Content Management Accounts Receivable" value="%%CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP%%"/>            

@@ -48,10 +48,10 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
   </Owner>
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="Concur Expense User IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="ConcurUs IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur IT Role"/>
   </Requirements>
 </Bundle>

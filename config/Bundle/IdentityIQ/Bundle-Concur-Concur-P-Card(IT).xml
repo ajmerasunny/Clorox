@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="Concur P Card IT Role" name="Concur P Card IT Role" type="it">
+<Bundle displayName="Concur P-Card IT Role" name="Concur P-Card IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -51,7 +51,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Grants access to entitlement AD CONCURGROUP"/>
+            <entry key="en_US" value="Grants access to entitlement AD Group P-Card"/>
           </Map>
         </value>
       </entry>
@@ -61,7 +61,7 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
   <Profiles>
     <Profile>
@@ -72,7 +72,7 @@
         <Filter operation="CONTAINS_ALL" property="memberOf">
           <Value>
             <List>
-              <String>CN=P-Card_DEV,OU=Sailpoint-Dev,DC=na,DC=corp,DC=clorox,DC=com</String>
+              <String>%%CONCUR_PCARD_AD_GROUP%%</String>
             </List>
           </Value>
         </Filter>

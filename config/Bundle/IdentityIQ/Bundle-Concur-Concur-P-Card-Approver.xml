@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="Concur P CARD Approver" name="Concur P CARD Approver" type="business">
+<Bundle displayName="Concur P-Card Approver" name="Concur P-Card Approver" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -27,7 +27,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="Concur P CARD Approver"/>
+      <entry key="roleKeywords" value="Concur P-Card Approver"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -48,10 +48,10 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="Concur P-Card IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="Concur P-CARD Approver IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur P-Card Approver IT Role"/>
   </Requirements>
 </Bundle>

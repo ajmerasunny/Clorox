@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="Role" displayName="P CARD Approver" type="Role" value="P CARD Approver">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="Concur P-Card Approver" type="Role" value="Concur P-Card Approver">
   <ApplicationRef>
     <Reference class="sailpoint.object.Application" name="%%Concur_APP_NAME%%"/>
   </ApplicationRef>
@@ -9,13 +9,13 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="P CARD Approver"/>
+            <entry key="en_US" value="Review and approve p-card reports."/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
 </ManagedAttribute>

@@ -1,15 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="Concur T&amp;E Admin Internal Audit &amp;Tax" name="Concur T&amp;E Admin Internal Audit &amp;Tax" type="business">
+<Bundle displayName="Concur IT Role" name="Concur IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
-      <entry key="accountSelectorRules"/>
+      <entry key="accountSelectorRules">
+        <value>
+          <AccountSelectorRules>
+            <ApplicationAccountSelectorRules>
+              <ApplicationAccountSelectorRule>
+                <ApplicationRef>
+                  <Reference class="sailpoint.object.Application" name="%%AD_APP_NAME%%"/>
+                </ApplicationRef>
+                <RuleRef>
+                  <Reference class="sailpoint.object.Rule" name="Clorox Primary AD Account Selector Rule"/>
+                </RuleRef>
+              </ApplicationAccountSelectorRule>
+            </ApplicationAccountSelectorRules>
+          </AccountSelectorRules>
+        </value>
+      </entry>
       <entry key="additionalRoleBusApprovalRule"/>
       <entry key="additionalRoleBusApprovers"/>
-      <entry key="additionalRoleBusBuyers"/>
       <entry key="allApprovers"/>
-      <entry key="allBuyers"/>
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
@@ -27,7 +40,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="Concur T&amp;E Admin Internal Audit &amp; Tax"/>
+      <entry key="roleKeywords" value="ConcurUs"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -38,7 +51,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Review T&amp;amp;E and P-card activity. For Audit and Tax teams only."/>
+            <entry key="en_US" value="Grants access to entitlement AD Group Concur"/>
           </Map>
         </value>
       </entry>
@@ -48,10 +61,22 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%00040066_OWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
-  <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="ConcurUs IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="Concur T&amp;E Admin Internal Audit &amp; Tax IT Role"/>
-  </Requirements>
+  <Profiles>
+    <Profile>
+      <ApplicationRef>
+        <Reference class="sailpoint.object.Application" name="%%AD_APP_NAME%%"/>
+      </ApplicationRef>
+      <Constraints>
+        <Filter operation="CONTAINS_ALL" property="memberOf">
+          <Value>
+            <List>
+              <String>%%CONCUR_US_AD_GROUP%%</String>
+            </List>
+          </Value>
+        </Filter>
+      </Constraints>
+    </Profile>
+  </Profiles>
 </Bundle>
