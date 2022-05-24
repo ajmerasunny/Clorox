@@ -51,7 +51,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="CTC-Colorbase-This role gives users access to Colorbase within CTC application."/>
+            <entry key="en_US" value="CTC-Colorbase-This role gives users access to Colorbase within the CTC application."/>
           </Map>
         </value>
       </entry>
