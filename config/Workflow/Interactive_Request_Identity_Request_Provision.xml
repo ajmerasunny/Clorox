@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Workflow PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <Workflow explicitTransitions="true" libraries="Identity,IdentityRequest" name="Interactive Request Identity Request Provision" type="Subprocess">
-  <Variable editable="true" initializer="false" input="true" name="optimisticProvisioning">
+  <Variable editable="true" initializer="true" input="true" name="optimisticProvisioning">
     <Description>Set to true to enable optimistic provisioning.  This will cause
       changes to the entitlements compiled from role assignments to be 
       applied immediately to the identity cube rather than waiting
