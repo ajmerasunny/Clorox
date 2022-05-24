@@ -46,23 +46,20 @@
 
       //New Code added here
       int count = 0;
+      
       if(acctReq != null)
       {
-        List <AttributeRequest> attrRequests = acctReq.getAttributeRequests();
-        if(attrRequests != null && !attrRequests.isEmpty())
+        
+        if(appsLists != null && appsLists.contains(acctReq.getApplication().toString()))
         {
-          for (AttributeRequest attrRequest : attrRequests) {
-            if(attrRequest != null && appsLists != null && appsLists.contains(attrRequest.getValue().toString()))
-            {
-              count++;
-            }
-          }
+          count++;
         }
+
         if(count == 1)
           continue;
       }
       //New code ended here
-
+     
       AccountRequest account = new AccountRequest(acctReq.toMap());
 
       if ( AccountRequest.Operation.Create.equals(account.getOperation()) ) {
