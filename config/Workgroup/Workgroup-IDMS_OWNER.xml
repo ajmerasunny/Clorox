@@ -4,7 +4,6 @@
   <Attributes>
     <Map>
       <entry key="displayName" value="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
-      <entry key="email" value="%%IDMS_ADMIN_OWNER_EMAIL_ADDRESS%%"/>
     </Map>
   </Attributes>
   <Description>IDMS Application Administrators</Description>
@@ -12,7 +11,7 @@
     <Map>
       <entry key="workgroupNotificationOption">
         <value>
-          <WorkgroupNotifationOption>Both</WorkgroupNotifationOption>
+          <WorkgroupNotifationOption>MembersOnly</WorkgroupNotifationOption>
         </value>
       </entry>
     </Map>
