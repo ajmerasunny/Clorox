@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="Concur T&amp;E Admin - IT" name="Concur T&amp;E Admin - IT" type="business">
+  <Attributes>
+    <Map>
+      <entry key="acceleratorPackEnabled"/>
+      <entry key="accountSelectorRules"/>
+      <entry key="additionalRoleBusApprovalRule"/>
+      <entry key="additionalRoleBusApprovers"/>
+      <entry key="additionalRoleBusBuyers"/>
+      <entry key="allApprovers"/>
+      <entry key="allBuyers"/>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="apaccountType"/>
+      <entry key="appName" value="%%Concur_APP_NAME%%"/>
+      <entry key="autoAssignEnablerTypes"/>
+      <entry key="businessSubprocessName"/>
+      <entry key="defaultEndDateSpan"/>
+      <entry key="defaultStartDateSpan"/>
+      <entry key="enablerTypes"/>
+      <entry key="formappName"/>
+      <entry key="isBirthright"/>
+      <entry key="mandatoryEntitlements"/>
+      <entry key="mandatoryRoles"/>
+      <entry key="mergeTemplates" value="false"/>
+      <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
+      <entry key="roleBusApprovalRule"/>
+      <entry key="roleBusApprovers"/>
+      <entry key="roleKeywords" value="Concur T&amp;E Admin IT"/>
+      <entry key="rolePrivileged"/>
+      <entry key="sapVcbr">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="singleRoleRequest"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="Manage the Expense program in Concur. Only to be used by IT."/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="Concur"/>
+  </Inheritance>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
+  </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="Concur IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur T&amp;E Admin - IT Role"/>
+  </Requirements>
+</Bundle>

@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="Concur Expense Approver" type="Role" value="Concur Expense Approver">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%Concur_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="Create and submit expense reports for T&amp;E."/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>
