@@ -1,128 +1,128 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%EssBase%%" profileClass="" type="DelimitedFile">
+<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%HP_PPM_APP_NAME%%" profileClass="" type="DelimitedFile">
   <Attributes>
     <Map>
-      <entry key="Cubes/Applications.columnNames"/>
-      <entry key="Cubes/Applications.commentCharacter"/>
-      <entry key="Cubes/Applications.delimiter"/>
-      <entry key="Cubes/Applications.file"/>
-      <entry key="Cubes/Applications.fileEncoding"/>
-      <entry key="Cubes/Applications.filterEmptyRecords">
+      <entry key="BusinessUnit.columnNames"/>
+      <entry key="BusinessUnit.commentCharacter"/>
+      <entry key="BusinessUnit.delimiter"/>
+      <entry key="BusinessUnit.file"/>
+      <entry key="BusinessUnit.fileEncoding"/>
+      <entry key="BusinessUnit.filterEmptyRecords">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Cubes/Applications.filterString"/>
-      <entry key="Cubes/Applications.hasHeader">
+      <entry key="BusinessUnit.filterString"/>
+      <entry key="BusinessUnit.hasHeader">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Cubes/Applications.indexColumn"/>
-      <entry key="Cubes/Applications.isCaseInsensitiveMerge">
+      <entry key="BusinessUnit.indexColumn"/>
+      <entry key="BusinessUnit.isCaseInsensitiveMerge">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Cubes/Applications.isSortedByIndexColumn">
+      <entry key="BusinessUnit.isSortedByIndexColumn">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Cubes/Applications.mergeColumns"/>
-      <entry key="Cubes/Applications.mergeRows">
+      <entry key="BusinessUnit.mergeColumns"/>
+      <entry key="BusinessUnit.mergeRows">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Cubes/Applications.numberOfLinesToSkip"/>
-      <entry key="Cubes/Applications.regularExpression"/>
-      <entry key="Cubes/Applications.stopIfLineHasWrongColumnLength">
+      <entry key="BusinessUnit.numberOfLinesToSkip"/>
+      <entry key="BusinessUnit.regularExpression"/>
+      <entry key="BusinessUnit.stopIfLineHasWrongColumnLength">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="PassphraseForPrivateKey"/>
       <entry key="PrivateKeyFilePath"/>
-      <entry key="ProfitCenters/Organization.columnNames"/>
-      <entry key="ProfitCenters/Organization.commentCharacter"/>
-      <entry key="ProfitCenters/Organization.delimiter"/>
-      <entry key="ProfitCenters/Organization.file"/>
-      <entry key="ProfitCenters/Organization.fileEncoding"/>
-      <entry key="ProfitCenters/Organization.filterEmptyRecords">
+      <entry key="Role.columnNames"/>
+      <entry key="Role.commentCharacter"/>
+      <entry key="Role.delimiter"/>
+      <entry key="Role.file"/>
+      <entry key="Role.fileEncoding"/>
+      <entry key="Role.filterEmptyRecords">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="ProfitCenters/Organization.filterString"/>
-      <entry key="ProfitCenters/Organization.hasHeader">
+      <entry key="Role.filterString"/>
+      <entry key="Role.hasHeader">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="ProfitCenters/Organization.indexColumn"/>
-      <entry key="ProfitCenters/Organization.isCaseInsensitiveMerge">
+      <entry key="Role.indexColumn"/>
+      <entry key="Role.isCaseInsensitiveMerge">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="ProfitCenters/Organization.isSortedByIndexColumn">
+      <entry key="Role.isSortedByIndexColumn">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="ProfitCenters/Organization.mergeColumns"/>
-      <entry key="ProfitCenters/Organization.mergeRows">
+      <entry key="Role.mergeColumns"/>
+      <entry key="Role.mergeRows">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="ProfitCenters/Organization.numberOfLinesToSkip"/>
-      <entry key="ProfitCenters/Organization.regularExpression"/>
-      <entry key="ProfitCenters/Organization.stopIfLineHasWrongColumnLength">
+      <entry key="Role.numberOfLinesToSkip"/>
+      <entry key="Role.regularExpression"/>
+      <entry key="Role.stopIfLineHasWrongColumnLength">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Scenario.columnNames"/>
-      <entry key="Scenario.commentCharacter"/>
-      <entry key="Scenario.delimiter"/>
-      <entry key="Scenario.file"/>
-      <entry key="Scenario.fileEncoding"/>
-      <entry key="Scenario.filterEmptyRecords">
+      <entry key="TimeCardEntry.columnNames"/>
+      <entry key="TimeCardEntry.commentCharacter"/>
+      <entry key="TimeCardEntry.delimiter"/>
+      <entry key="TimeCardEntry.file"/>
+      <entry key="TimeCardEntry.fileEncoding"/>
+      <entry key="TimeCardEntry.filterEmptyRecords">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Scenario.filterString"/>
-      <entry key="Scenario.hasHeader">
+      <entry key="TimeCardEntry.filterString"/>
+      <entry key="TimeCardEntry.hasHeader">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Scenario.indexColumn"/>
-      <entry key="Scenario.isCaseInsensitiveMerge">
+      <entry key="TimeCardEntry.indexColumn"/>
+      <entry key="TimeCardEntry.isCaseInsensitiveMerge">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Scenario.isSortedByIndexColumn">
+      <entry key="TimeCardEntry.isSortedByIndexColumn">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Scenario.mergeColumns"/>
-      <entry key="Scenario.mergeRows">
+      <entry key="TimeCardEntry.mergeColumns"/>
+      <entry key="TimeCardEntry.mergeRows">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
-      <entry key="Scenario.numberOfLinesToSkip"/>
-      <entry key="Scenario.regularExpression"/>
-      <entry key="Scenario.stopIfLineHasWrongColumnLength">
+      <entry key="TimeCardEntry.numberOfLinesToSkip"/>
+      <entry key="TimeCardEntry.regularExpression"/>
+      <entry key="TimeCardEntry.stopIfLineHasWrongColumnLength">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="acceleratorPackEnabled"/>
@@ -166,7 +166,7 @@
       </entry>
       <entry key="apPopulationReverseLeaverOptions"/>
       <entry key="apServiceAccountUniqueName"/>
-      <entry key="appBusApprovalRule" value="Clorox Skip Role Owner Approval on Remove Access Rule"/>
+      <entry key="appBusApprovalRule"/>
       <entry key="appBusApprovers"/>
       <entry key="assignmentGroupname"/>
       <entry key="authoritativeEmployee"/>
@@ -312,7 +312,7 @@
       <entry key="softPolicyviolations"/>
       <entry key="stopIfLineHasWrongColumnLength">
         <value>
-          <Boolean></Boolean>
+          <Boolean/>
         </value>
       </entry>
       <entry key="sysDescriptions">
@@ -335,7 +335,7 @@
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_ESSBASE_OWNER_WORKGROUP%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_HPPPMAdmin_OWNER_WORKGROUP%%"/>
   </Owner>
   <ProvisioningForms>
     <Form name="Create" objectType="account" type="Create">
@@ -356,53 +356,37 @@
   </ProvisioningForms>
   <Schemas>
     <Schema displayAttribute="username" identityAttribute="username" instanceAttribute="" nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None">
-      <AttributeDefinition name="username" type="string">
+      <AttributeDefinition entitlement="true" managed="true" multi="true" name="Role" schemaObjectType="Role" type="string">
+        <Description>Role</Description>
+      </AttributeDefinition>
+      <AttributeDefinition entitlement="true" managed="true" name="TimeCardEntry" schemaObjectType="TimeCardEntry" type="string">
+        <Description>TimeCardEntry</Description>
+      </AttributeDefinition>
+      <AttributeDefinition entitlement="true" managed="true" multi="true" name="BusinessUnit" schemaObjectType="BusinessUnit" type="string">
+        <Description>BusinessUnit</Description>
+      </AttributeDefinition>
+      <AttributeDefinition defaultValue="HPPPM" name="username" type="string">
         <Description>username</Description>
-      </AttributeDefinition>
-      <AttributeDefinition entitlement="true" managed="true" multi="true" name="ProfitCenters/Organization" schemaObjectType="ProfitCenters/Organization" type="string">
-        <Description>ProfitCenters/Organization</Description>
-      </AttributeDefinition>
-      <AttributeDefinition entitlement="true" managed="true" multi="true" name="Cubes/Applications" schemaObjectType="Cubes/Applications" type="string">
-        <Description>Cubes/Applications</Description>
-      </AttributeDefinition>
-      <AttributeDefinition entitlement="true" managed="true" multi="true" name="Scenario" schemaObjectType="Scenario" type="string">
-        <Description>Scenario</Description>
-      </AttributeDefinition>
-	  <AttributeDefinition entitlement="true" managed="true" multi="true" name="AccessType" schemaObjectType="AccessType" type="string">
-        <Description>AccessType</Description>
-      </AttributeDefinition>
-       <AttributeDefinition entitlement="true" managed="true" multi="true" name="EssBaseApplication" schemaObjectType="EssBaseApplication" type="string">
-        <Description>EssBaseApplication</Description>
       </AttributeDefinition>
       <AttributeDefinition name="AccountExpiration" type="string">
         <Description>AccountExpiration</Description>
+      </AttributeDefinition>       
+    </Schema>
+    <Schema aggregationType="group" descriptionAttribute="Role" displayAttribute="Role" identityAttribute="Role" instanceAttribute="Role" nativeObjectType="Role" objectType="Role" permissionsRemediationModificationType="None">
+      <AttributeDefinition entitlement="true" multi="true" name="Role" schemaObjectType="Role" type="string">
+        <Description>Role</Description>
       </AttributeDefinition>
     </Schema>
-    <Schema aggregationType="group"  descriptionAttribute="Cubes/Applications" displayAttribute="Cubes/Applications" identityAttribute="Cubes/Applications" instanceAttribute="Cubes/Applications" nativeObjectType="Cubes/Applications" objectType="Cubes/Applications" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="Cubes/Applications" schemaObjectType="Cubes/Applications" type="string">
-        <Description>Cubes/Applications</Description>
+    <Schema aggregationType="group" descriptionAttribute="BusinessUnit" displayAttribute="BusinessUnit" identityAttribute="BusinessUnit" instanceAttribute="BusinessUnit" nativeObjectType="BusinessUnit" objectType="BusinessUnit" permissionsRemediationModificationType="None">
+      <AttributeDefinition entitlement="true" multi="true" name="BusinessUnit" schemaObjectType="BusinessUnit" type="string">
+        <Description>BusinessUnit</Description>
       </AttributeDefinition>
     </Schema>
-    <Schema aggregationType="group" descriptionAttribute="ProfitCenters/Organization" displayAttribute="ProfitCenters/Organization" identityAttribute="ProfitCenters/Organization" instanceAttribute="ProfitCenters/Organization" nativeObjectType="ProfitCenters/Organization" objectType="ProfitCenters/Organization" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="ProfitCenters/Organization" schemaObjectType="ProfitCenters/Organization" type="string">
-        <Description>ProfitCenters/Organization</Description>
+    <Schema aggregationType="group" descriptionAttribute="" displayAttribute="TimeCardEntry" identityAttribute="TimeCardEntry" instanceAttribute="TimeCardEntry" nativeObjectType="TimeCardEntry" objectType="TimeCardEntry" permissionsRemediationModificationType="None">
+      <AttributeDefinition entitlement="true" name="TimeCardEntry" schemaObjectType="TimeCardEntry" type="string">
+        <Description>TimeCardEntry</Description>
       </AttributeDefinition>
     </Schema>
-    <Schema aggregationType="group" descriptionAttribute="Scenario" displayAttribute="Scenario" identityAttribute="Scenario" instanceAttribute="Scenario" nativeObjectType="Scenario" objectType="Scenario" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="Scenario" schemaObjectType="Scenario" type="string">
-        <Description>Scenario</Description>
-      </AttributeDefinition>
-    </Schema>
-	 <Schema aggregationType="group" descriptionAttribute="AccessType" displayAttribute="AccessType"  identityAttribute="AccessType" instanceAttribute="AccessType" nativeObjectType="AccessType" objectType="AccessType" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="AccessType" schemaObjectType="AccessType" type="string">
-        <Description>AccessType</Description>
-      </AttributeDefinition>
-	  </Schema>
-      <Schema aggregationType="group" descriptionAttribute="EssBaseApplication" displayAttribute="EssBaseApplication"  identityAttribute="EssBaseApplication" instanceAttribute="EssBaseApplication" nativeObjectType="EssBaseApplication" objectType="EssBaseApplication" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="EssBaseApplication" schemaObjectType="EssBaseApplication" type="string">
-        <Description>EssBaseApplication</Description>
-      </AttributeDefinition>
-	  </Schema>
   </Schemas>
   <ApplicationScorecard/>
 </Application>
