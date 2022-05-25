@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="ProfitCenters/Organization" displayName="Essbase 21400 Brita" type="ProfitCenters/Organization" value="Essbase 21400 Brita">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%Essbase_APP_NAME%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="This role gives users access to the Brita profit center"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>
