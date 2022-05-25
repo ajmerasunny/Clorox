@@ -403,7 +403,6 @@
         <Description>EssBaseApplication</Description>
       </AttributeDefinition>
 	  </Schema>
-    </Schema>
-  </Schemas>
+	 </Schemas>
   <ApplicationScorecard/>
 </Application>
