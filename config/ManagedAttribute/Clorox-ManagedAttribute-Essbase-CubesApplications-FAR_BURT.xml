@@ -16,6 +16,6 @@
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_Essbase_OWNER_WORKGROUP%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
   </Owner>
 </ManagedAttribute>
