@@ -2,7 +2,7 @@
 <!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <Rule language="beanshell" name="Clorox Build Manual Action Approvals">
   <ReferencedRules>
-    <Reference class="sailpoint.object.Rule" name="Approval Library"/>
+    <Reference class="sailpoint.object.Rule" name="Clorox Approval Library"/>
   </ReferencedRules>
   <Source><![CDATA[
   import sailpoint.object.ApprovalSet;

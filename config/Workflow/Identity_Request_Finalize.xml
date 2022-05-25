@@ -52,7 +52,7 @@
       variable.
     </Description>
   </Variable>
-  <Variable initializer="true" name="autoVerifyIdentityRequest">
+  <Variable name="autoVerifyIdentityRequest">
     <Description>
       Flag to indicate when finishing the request we should
       automatically mark it verified. Currently used by

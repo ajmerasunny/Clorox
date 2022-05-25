@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="ProfitCenters/Organization" displayName="Essbase ALL" requestable="true" type="ProfitCenters/Organization" value="Essbase ALL">
+<ManagedAttribute aggregated="true" attribute="ProfitCenters/Organization" displayName="Essbase ALL"  type="ProfitCenters/Organization" value="Essbase ALL">
   <ApplicationRef>
     <Reference class="sailpoint.object.Application" name="%%Essbase_APP_NAME%%"/>
   </ApplicationRef>
