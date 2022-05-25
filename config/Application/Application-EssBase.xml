@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%EssBase%%" profileClass="" type="DelimitedFile">
+<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%Essbase_APP_NAME%%" profileClass="" type="DelimitedFile">
   <Attributes>
     <Map>
       <entry key="Cubes/Applications.columnNames"/>
@@ -335,7 +335,7 @@
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_ESSBASE_OWNER_WORKGROUP%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_Essbase_OWNER_WORKGROUP%%"/>
   </Owner>
   <ProvisioningForms>
     <Form name="Create" objectType="account" type="Create">
@@ -371,36 +371,36 @@
 	  <AttributeDefinition entitlement="true" managed="true" multi="true" name="AccessType" schemaObjectType="AccessType" type="string">
         <Description>AccessType</Description>
       </AttributeDefinition>
-       <AttributeDefinition entitlement="true" managed="true" multi="true" name="EssBaseApplication" schemaObjectType="EssBaseApplication" type="string">
-        <Description>EssBaseApplication</Description>
+       <AttributeDefinition entitlement="true" managed="true" multi="true" name="Environment" schemaObjectType="Environment" type="string">
+        <Description>Environment</Description>
       </AttributeDefinition>
       <AttributeDefinition name="AccountExpiration" type="string">
         <Description>AccountExpiration</Description>
       </AttributeDefinition>
     </Schema>
-    <Schema aggregationType="group"  descriptionAttribute="Cubes/Applications" displayAttribute="Cubes/Applications" identityAttribute="Cubes/Applications" instanceAttribute="Cubes/Applications" nativeObjectType="Cubes/Applications" objectType="Cubes/Applications" permissionsRemediationModificationType="None">
+    <Schema aggregationType="group"  descriptionAttribute="" displayAttribute="Cubes/Applications" identityAttribute="Cubes/Applications" instanceAttribute="Cubes/Applications" nativeObjectType="Cubes/Applications" objectType="Cubes/Applications" permissionsRemediationModificationType="None">
       <AttributeDefinition entitlement="true" multi="true" name="Cubes/Applications" schemaObjectType="Cubes/Applications" type="string">
         <Description>Cubes/Applications</Description>
       </AttributeDefinition>
     </Schema>
-    <Schema aggregationType="group" descriptionAttribute="ProfitCenters/Organization" displayAttribute="ProfitCenters/Organization" identityAttribute="ProfitCenters/Organization" instanceAttribute="ProfitCenters/Organization" nativeObjectType="ProfitCenters/Organization" objectType="ProfitCenters/Organization" permissionsRemediationModificationType="None">
+    <Schema aggregationType="group" descriptionAttribute="" displayAttribute="ProfitCenters/Organization" identityAttribute="ProfitCenters/Organization" instanceAttribute="ProfitCenters/Organization" nativeObjectType="ProfitCenters/Organization" objectType="ProfitCenters/Organization" permissionsRemediationModificationType="None">
       <AttributeDefinition entitlement="true" multi="true" name="ProfitCenters/Organization" schemaObjectType="ProfitCenters/Organization" type="string">
         <Description>ProfitCenters/Organization</Description>
       </AttributeDefinition>
     </Schema>
-    <Schema aggregationType="group" descriptionAttribute="Scenario" displayAttribute="Scenario" identityAttribute="Scenario" instanceAttribute="Scenario" nativeObjectType="Scenario" objectType="Scenario" permissionsRemediationModificationType="None">
+    <Schema aggregationType="group" descriptionAttribute="" displayAttribute="Scenario" identityAttribute="Scenario" instanceAttribute="Scenario" nativeObjectType="Scenario" objectType="Scenario" permissionsRemediationModificationType="None">
       <AttributeDefinition entitlement="true" multi="true" name="Scenario" schemaObjectType="Scenario" type="string">
         <Description>Scenario</Description>
       </AttributeDefinition>
     </Schema>
-	 <Schema aggregationType="group" descriptionAttribute="AccessType" displayAttribute="AccessType"  identityAttribute="AccessType" instanceAttribute="AccessType" nativeObjectType="AccessType" objectType="AccessType" permissionsRemediationModificationType="None">
+	 <Schema aggregationType="group" descriptionAttribute="" displayAttribute="AccessType"  identityAttribute="AccessType" instanceAttribute="AccessType" nativeObjectType="AccessType" objectType="AccessType" permissionsRemediationModificationType="None">
       <AttributeDefinition entitlement="true" multi="true" name="AccessType" schemaObjectType="AccessType" type="string">
         <Description>AccessType</Description>
       </AttributeDefinition>
 	  </Schema>
-      <Schema aggregationType="group" descriptionAttribute="EssBaseApplication" displayAttribute="EssBaseApplication"  identityAttribute="EssBaseApplication" instanceAttribute="EssBaseApplication" nativeObjectType="EssBaseApplication" objectType="EssBaseApplication" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="EssBaseApplication" schemaObjectType="EssBaseApplication" type="string">
-        <Description>EssBaseApplication</Description>
+      <Schema aggregationType="group" descriptionAttribute="" displayAttribute="Environment"  identityAttribute="Environment" instanceAttribute="Environment" nativeObjectType="Environment" objectType="Environment" permissionsRemediationModificationType="None">
+      <AttributeDefinition entitlement="true" multi="true" name="Environment" schemaObjectType="Environment" type="string">
+        <Description>Environment</Description>
       </AttributeDefinition>
 	  </Schema>
 	 </Schemas>

@@ -11,7 +11,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName" value="%%EssBase%%"/>
+      <entry key="appName" value="%%Essbase_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -36,14 +36,21 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="This role gives users access to the Natural Personal Care profit center"/>
+            <entry key="en_US" value="This role gives users access to the Natural Personal Care profit center&lt;br&gt;&#10;&#10;&lt;br&gt;&#10;&#10;&lt;b&gt;Additional Steps required for your request:&lt;/b&gt;&lt;br&gt;&#10;&#10;
+&lt;ul&gt;
+&lt;li&gt;Select Environment: QA or Production&lt;/li&gt;
+&lt;li&gt;Select Cubes/Applications&lt;/li&gt;
+&lt;li&gt;Select Scenario(Actuals, All or Plan)&lt;/li&gt;
+&lt;li&gt;Select AccessType(Calc, Read or Write)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br&gt;"/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
   <Inheritance>
-    <Reference class="sailpoint.object.Bundle" name="EssBase"/>
+    <Reference class="sailpoint.object.Bundle" name="Essbase"/>
   </Inheritance>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>

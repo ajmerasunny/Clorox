@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="EssBase" name="EssBase" type="organizational">
+<Bundle displayName="Essbase" name="Essbase" type="organizational">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -36,13 +36,13 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="EssBase - This role gives users access to the EssBase application."/>
+            <entry key="en_US" value="Essbase - This role gives users access to the Essbase application."/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_ESSBASE_OWNER_WORKGROUP%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_Essbase_OWNER_WORKGROUP%%"/>
   </Owner>
 </Bundle>

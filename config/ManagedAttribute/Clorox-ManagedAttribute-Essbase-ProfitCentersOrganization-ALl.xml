@@ -2,7 +2,7 @@
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <ManagedAttribute aggregated="true" attribute="ProfitCenters/Organization" displayName="Essbase ALL" requestable="true" type="ProfitCenters/Organization" value="Essbase ALL">
   <ApplicationRef>
-    <Reference class="sailpoint.object.Application" name="%%EssBase%%"/>
+    <Reference class="sailpoint.object.Application" name="%%Essbase_APP_NAME%%"/>
   </ApplicationRef>
   <Attributes>
     <Map>
@@ -16,6 +16,6 @@
     </Map>
   </Attributes>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_ESSBASE_OWNER_WORKGROUP%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
   </Owner>
 </ManagedAttribute>

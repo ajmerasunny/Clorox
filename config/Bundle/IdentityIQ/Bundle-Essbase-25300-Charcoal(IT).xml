@@ -11,7 +11,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName" value="%%EssBase%%"/>
+      <entry key="appName" value="%%Essbase_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -43,7 +43,7 @@
     </Map>
   </Attributes>
   <Inheritance>
-    <Reference class="sailpoint.object.Bundle" name="EssBase"/>
+    <Reference class="sailpoint.object.Bundle" name="Essbase"/>
   </Inheritance>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
@@ -51,7 +51,7 @@
   <Profiles>
     <Profile>
       <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%EssBase%%"/>
+        <Reference class="sailpoint.object.Application" name="%%Essbase_APP_NAME%%"/>
       </ApplicationRef>
       <Constraints>
         <Filter operation="CONTAINS_ALL" property="ProfitCenters/Organization">
