@@ -82,6 +82,14 @@
 					}
 				} 
 			}
+			else {
+				// For ManagedAttributes                
+                if(smartApplications.contains(appName)) {
+					resultMap.put("ApprovalRequired","true");
+					approvers = smartApplicationOwners.get(appName);                
+					resultMap.put("Approvers", approvers);
+				}
+      		}			
 		}	
 		log.debug(" map " + resultMap.toString());  
 		return resultMap;
