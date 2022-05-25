@@ -78,7 +78,7 @@
             <String>RULE:IRI:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:MediaBin:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:Concur:Clorox AttributeSync AccountExpiration Rule</String>
-            <String>RULE:EssBase:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:Essbase:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:MDWorkflow:Clorox AttributeSync AccountExpiration Rule</String>
           </List>
         </value>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="Essbase 21110 Laundry" name="Essbase 21110 Laundry" type="business">
+  <Attributes>
+    <Map>
+      <entry key="acceleratorPackEnabled"/>
+      <entry key="accountSelectorRules"/>
+      <entry key="additionalRoleBusApprovalRule"/>
+      <entry key="additionalRoleBusApprovers" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
+      <entry key="allApprovers"/>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="apaccountType"/>
+      <entry key="appName" value="%%Essbase_APP_NAME%%"/>
+      <entry key="autoAssignEnablerTypes"/>
+      <entry key="businessSubprocessName"/>
+      <entry key="defaultEndDateSpan"/>
+      <entry key="defaultStartDateSpan"/>
+      <entry key="enablerTypes"/>
+      <entry key="formappName"/>
+      <entry key="isBirthright"/>
+      <entry key="mandatoryEntitlements"/>
+      <entry key="mandatoryRoles"/>
+      <entry key="mergeTemplates" value="false"/>
+      <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
+      <entry key="roleBusApprovalRule"/>
+      <entry key="roleBusApprovers"/>
+      <entry key="roleKeywords"/>
+      <entry key="rolePrivileged"/>
+      <entry key="sapVcbr">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="singleRoleRequest"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="This role gives users access to the Laundry profit center&lt;br&gt;&#10;&#10;&lt;br&gt;&#10;&#10;&lt;b&gt;Additional Steps required for your request:&lt;/b&gt;&lt;br&gt;&#10;&#10;
+&lt;ul&gt;
+&lt;li&gt;Select Environment: QA or Production&lt;/li&gt;
+&lt;li&gt;Select Cubes/Applications&lt;/li&gt;
+&lt;li&gt;Select Scenario(Actuals, All or Plan)&lt;/li&gt;
+&lt;li&gt;Select AccessType(Calc, Read or Write)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;br&gt;"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="Essbase"/>
+  </Inheritance>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
+  </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="Essbase 21110 Laundry IT Role"/>
+  </Requirements>
+</Bundle>
