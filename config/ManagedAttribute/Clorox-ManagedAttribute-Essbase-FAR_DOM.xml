@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Cubes/Applications" displayName="Essbase FAR_DOM"  requestable="true"  type="Cubes/Applications" value="Essbase FAR_DOM">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="%%EssBase%%"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="This allows users access to FAR_DOM Essbase Application"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_ESSBASE_OWNER_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>
