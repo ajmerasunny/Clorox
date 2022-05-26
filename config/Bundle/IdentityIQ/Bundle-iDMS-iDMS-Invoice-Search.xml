@@ -38,7 +38,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="This role provides expanded iDMS search capabilities and permits users to view all images stored in iDMS, which are composed of invoices processed in the previous 2 years. (Role should be reserved for those individuals who have a business requirement to obtain a high volume of invoice copies.)"/>
+            <entry key="en_US" value="This role provides expanded iDMS search capabilities and permits users to view all images stored in iDMS, which are composed of invoices processed in the previous 2 years. (Role should be reserved for those individuals who have a business requirement to obtain a high volume of invoice copies.)."/>
           </Map>
         </value>
       </entry>

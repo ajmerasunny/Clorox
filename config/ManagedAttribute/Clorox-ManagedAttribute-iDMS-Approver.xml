@@ -9,7 +9,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="iDMS Approver"/>
+            <entry key="en_US" value="This role allows individuals to approve invoices for payments within iDMS. (Approval Authority limit is dictated by Grade Level (GL). Please visit the P2P web site for the approval authority limit for your GL)."/>
           </Map>
         </value>
       </entry>

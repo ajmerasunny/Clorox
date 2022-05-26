@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US"/>
+            <entry key="en_US" value="This role is for those who assist in the resolution of certain price discrepancies. (GSS COE access only)."/>
           </Map>
         </value>
       </entry>
