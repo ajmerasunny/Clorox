@@ -4,6 +4,7 @@
   <Attributes>
     <Map>
       <entry key="displayName" value="%%CLX_AR_MKTG-MIMS_OWNER_WORKGROUP%%"/>
+      <entry key="email" value="%%MRDB_ADMIN_EMAIL_ADDRESS%%"/>
     </Map>
   </Attributes>
   <Description>MRDB Application</Description>
@@ -11,7 +12,7 @@
     <Map>
       <entry key="workgroupNotificationOption">
         <value>
-          <WorkgroupNotifationOption>Both</WorkgroupNotifationOption>
+          <WorkgroupNotifationOption>GroupEmailOnly</WorkgroupNotifationOption>
         </value>
       </entry>
     </Map>
