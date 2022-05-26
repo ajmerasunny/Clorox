@@ -135,7 +135,7 @@
         }
 
         List scopeNames = new ArrayList();
-        for (int i=0; i&lt;val.size(); ++i) {
+        for (int i=0; i<val.size(); ++i) {
             scopeNames.add(fetchScopeName((String) val.get(i)));
         }
         
@@ -476,7 +476,7 @@
         ManagedAttribute ma = ManagedAttributer.get(context, app.getId(), name, value);
         if ( ma != null ) {
             if(smartApplications.contains(app.getName())) {
-                owner = application.getOwner();
+                owner = app.getOwner().getName();
             } else {
             Identity maOwner = ma.getOwner();
             if ( maOwner != null ) 
