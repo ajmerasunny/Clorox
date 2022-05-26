@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="HP PPM Finance or CCEM" name="HP PPM Finance or CCEM" type="business">
+<Bundle displayName="HP PPM Finance or Cost Savings" name="HP PPM Finance or Cost Savings" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -25,7 +25,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="HP PPM Finance or CCEM"/>
+      <entry key="roleKeywords" value="HP PPM Finance or Cost Savings"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="For Finance or CCEM PPM Access- Allows user to run financial summary or cost savings reports in PPM. Also need to request appropriate BU entitlement&lt;br&gt;&#10;&#10;&lt;br&gt;&#10;&#10;&lt;b&gt;Additional Steps required for your request:&lt;/b&gt;&lt;br&gt;&#10;&#10;Please ensure that you select a Business Unit Entitlement (e.g., HP PPM ASIA, HP PPM AMEA)&lt;br&gt;"/>
+            <entry key="en_US" value="Allows user to run financial summary or cost savings reports in PPM. Automatically receives all Business Units. "/>
           </Map>
         </value>
       </entry>
@@ -50,6 +50,6 @@
   </Owner>
   <Requirements>
     <Reference class="sailpoint.object.Bundle" name="HP PPM PPM Users IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="HP PPM Finance or CCEM IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="HP PPM Finance or Cost Savings IT Role"/>
   </Requirements>
 </Bundle>

@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="For Approver Only PPM Access- Allows users to approve time in PPM. Also need to request appropriate BU entitlement&lt;br&gt;&#10;&#10;&lt;br&gt;&#10;&#10;&lt;b&gt;Additional Steps required for your request:&lt;/b&gt;&lt;br&gt;&#10;&#10;Please ensure that you select a Business Unit Entitlement (e.g., HP PPM ASIA, HP PPM AMEA)&lt;br&gt;"/>
+            <entry key="en_US" value="Allows user's name to be used as an approver.  Additional Steps required for your request. Select at least one (1) business unit entitlement."/>
           </Map>
         </value>
       </entry>

@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="For PSO Project Manager/Team Lead PPM Access-Allows user to update and modify PPM projects. Also need to request appropriate BU entitlement "/>
+            <entry key="en_US" value="Allows user to update and modify PPM projects. Additional Steps required for your request. Select at least one (1) business unit entitlement."/>
           </Map>
         </value>
       </entry>
