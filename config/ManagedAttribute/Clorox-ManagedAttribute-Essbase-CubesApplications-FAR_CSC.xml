@@ -9,7 +9,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
+            <entry key="en_US" value="This allows users access to FAR_CSC Essbase Application"/>
           </Map>
         </value>
       </entry>
