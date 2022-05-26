@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="Role" displayName="MRDB"  type="Role" value="MRDB">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="Market Research Database (MRDB)"  type="Role" value="Market Research Database (MRDB)">
   <ApplicationRef>
-    <Reference class="sailpoint.object.Application" name="%%MRDB_APP_NAME%%"/>
+    <Reference class="sailpoint.object.Application" name="%%MarketResearchDatabase(MRDB)_APP_NAME%%"/>
   </ApplicationRef>
   <Attributes>
     <Map>
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="MRDB"/>
+            <entry key="en_US" value="Market Research Database (MRDB)"/>
           </Map>
         </value>
       </entry>

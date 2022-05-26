@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="MRDB" name="MRDB" type="business">
+<Bundle displayName="Market Research Database (MRDB)" name="Market Research Database (MRDB)" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -11,13 +11,13 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName" value="%%MRDB_APP_NAME%%"/>
+      <entry key="appName" value="%%MarketResearchDatabase(MRDB)_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
       <entry key="defaultStartDateSpan"/>
       <entry key="enablerTypes"/>
-      <entry key="formappName" value="MRDB"/>
+      <entry key="formappName" value="Market Research Database (MRDB)"/>
       <entry key="isBirthright"/>
       <entry key="mandatoryEntitlements"/>
       <entry key="mandatoryRoles"/>
@@ -25,7 +25,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="MRDB"/>
+      <entry key="roleKeywords" value="Market Research Database (MRDB)"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -43,12 +43,12 @@
     </Map>
   </Attributes>
   <Inheritance>
-    <Reference class="sailpoint.object.Bundle" name="MRDB Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Market Research Database (MRDB) Role"/>
   </Inheritance>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_MKTG-MIMS_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="MRDB IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Market Research Database (MRDB) IT Role"/>
   </Requirements>
 </Bundle>

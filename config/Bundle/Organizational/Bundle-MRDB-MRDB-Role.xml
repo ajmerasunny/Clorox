@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="MRDB Role" name="MRDB Role" type="organizational">
+<Bundle displayName="Market Research Database (MRDB) Role" name="Market Research Database (MRDB) Role" type="organizational">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -30,7 +30,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="IRI"/>
+            <entry key="en_US" value="Market Research Database (MRDB)"/>
           </Map>
         </value>
       </entry>

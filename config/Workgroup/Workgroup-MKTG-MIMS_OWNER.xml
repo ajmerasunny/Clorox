@@ -4,10 +4,10 @@
   <Attributes>
     <Map>
       <entry key="displayName" value="%%CLX_AR_MKTG-MIMS_OWNER_WORKGROUP%%"/>
-      <entry key="email" value="%%MRDB_ADMIN_EMAIL_ADDRESS%%"/>
+      <entry key="email" value="%%MarketResearchDatabase(MRDB)_ADMIN_EMAIL_ADDRESS%%"/>
     </Map>
   </Attributes>
-  <Description>MRDB Application</Description>
+  <Description>Market Research Database (MRDB) Application</Description>
   <Preferences>
     <Map>
       <entry key="workgroupNotificationOption">

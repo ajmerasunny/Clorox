@@ -37,7 +37,7 @@
                   <String>%%CTC_CISPRO_Global_APP_NAME%%</String>
                   <String>%%CTC_HardSurface_Cleaning_APP_NAME%%</String>
                   <String>%%IBM_Imaging_APP_NAME%%</String>
-                  <String>%%MRDB_APP_NAME%%</String>
+                  <String>%%MarketResearchDatabase(MRDB)_APP_NAME%%</String>
                   <String>%%MediaBin_APP_NAME%%</String>
                   <String>%%IRI_APP_NAME%%</String>
                   <String>%%CTC_Colorbase_APP_NAME%%</String>

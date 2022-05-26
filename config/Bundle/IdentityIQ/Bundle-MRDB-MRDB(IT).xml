@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="MRDB IT Role" name="MRDB IT Role" type="it">
+<Bundle displayName="Market Research Database (MRDB) IT Role" name="Market Research Database (MRDB) IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -11,7 +11,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName" value="%%MRDB_APP_NAME%%"/>
+      <entry key="appName" value="%%MarketResearchDatabase(MRDB)_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -25,7 +25,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="MRDB IT Role"/>
+      <entry key="roleKeywords" value="Market Research Database (MRDB) IT Role"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -36,14 +36,14 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="MRDB IT Role"/>
+            <entry key="en_US" value="Market Research Database (MRDB) IT Role"/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
   <Inheritance>
-    <Reference class="sailpoint.object.Bundle" name="MRDB Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Market Research Database (MRDB) Role"/>
   </Inheritance>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_MKTG-MIMS_OWNER_WORKGROUP%%"/>
@@ -51,13 +51,13 @@
   <Profiles>
     <Profile>
       <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%MRDB_APP_NAME%%"/>
+        <Reference class="sailpoint.object.Application" name="%%MarketResearchDatabase(MRDB)_APP_NAME%%"/>
       </ApplicationRef>
       <Constraints>
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>MRDB</String>
+              <String>Market Research Database (MRDB)</String>
             </List>
           </Value>
         </Filter>

@@ -74,7 +74,7 @@
             <String>RULE:CCMS:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:CTC Colorbase:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:IBM Imaging:Clorox AttributeSync AccountExpiration Rule</String>
-            <String>RULE:MRDB:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:Market Research Database (MRDB):Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:IRI:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:MediaBin:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:Concur:Clorox AttributeSync AccountExpiration Rule</String>
