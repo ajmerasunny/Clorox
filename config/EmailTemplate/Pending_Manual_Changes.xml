@@ -68,5 +68,5 @@
       </Argument>
     </Inputs>
   </Signature>
-  <Subject>Changes requested to $identityDisplayName need manual interaction</Subject>
+  <Subject>$approvalSet.items.get(0).applicationName - Changes requested for $identityDisplayName need manual interaction</Subject>
 </EmailTemplate>
