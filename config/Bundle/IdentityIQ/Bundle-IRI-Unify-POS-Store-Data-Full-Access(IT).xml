@@ -1,10 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IRI unify POS (Store) Data Full Access" name="IRI unify POS (Store) Data Full Access" type="business">
+<Bundle displayName="IRI Unify POS (Store) Data Full Access IT Role" name="IRI Unify POS (Store) Data Full Access IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
-      <entry key="accountSelectorRules"/>
       <entry key="additionalRoleBusApprovalRule"/>
       <entry key="additionalRoleBusApprovers"/>
       <entry key="allApprovers"/>
@@ -48,8 +47,20 @@
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
   </Owner>
-  <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="IRI unify POS (Store) Data Full Access IT Role"/>
-    <Reference class="sailpoint.object.Bundle" name="IRI IT Role"/>
-  </Requirements>
+  <Profiles>
+    <Profile>
+      <ApplicationRef>
+        <Reference class="sailpoint.object.Application" name="IRI"/>
+      </ApplicationRef>
+      <Constraints>
+        <Filter operation="CONTAINS_ALL" property="Role">
+          <Value>
+            <List>
+              <String>IRI Unify POS (Store) Data Full Access</String>
+            </List>
+          </Value>
+        </Filter>
+      </Constraints>
+    </Profile>
+  </Profiles>
 </Bundle>
