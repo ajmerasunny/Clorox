@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Allows user's name to be used as an approver.  Additional Steps required for your request. Select at least one (1) business unit entitlement."/>
+            <entry key="en_US" value="Allows user's name to be used as an approver."/>
           </Map>
         </value>
       </entry>

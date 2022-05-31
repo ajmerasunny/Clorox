@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Allows user to log R&amp;D Time Sheets in PPM. For R&amp;D Project Leader PPM Access- Allows users to create discovery entries in PPM. Additional Steps required for your request. Select at least one (1) business unit entitlement. "/>
+            <entry key="en_US" value="Allows user to log R&amp;D Time Sheets in PPM.&lt;b>Additional Steps required for your request-Select at least one (1) business unit entitlement.&lt;/b>"/>
           </Map>
         </value>
       </entry>
