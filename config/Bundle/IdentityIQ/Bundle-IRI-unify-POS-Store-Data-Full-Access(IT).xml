@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IRI unify POS (Store) Data Full Access IT Role" name="IRI unify POS (Store) Data Full Access IT Role" type="it">
+<Bundle displayName="IRI Unify POS (Store) Data Full Access IT Role" name="IRI Unify POS (Store) Data Full Access IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -56,7 +56,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>IRI unify POS (Store) Data Full Access</String>
+              <String>IRI Unify POS (Store) Data Full Access</String>
             </List>
           </Value>
         </Filter>
