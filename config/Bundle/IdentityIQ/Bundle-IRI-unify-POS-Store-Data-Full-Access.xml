@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="IRI unify POS (Store) Data Full Access" name="IRI unify POS (Store) Data Full Access" type="business">
+<Bundle displayName="IRI Unify POS (Store) Data Full Access" name="IRI Unify POS (Store) Data Full Access" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -49,7 +49,7 @@
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_IRI_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="IRI unify POS (Store) Data Full Access IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="IRI Unify POS (Store) Data Full Access IT Role"/>
     <Reference class="sailpoint.object.Bundle" name="IRI IT Role"/>
   </Requirements>
 </Bundle>

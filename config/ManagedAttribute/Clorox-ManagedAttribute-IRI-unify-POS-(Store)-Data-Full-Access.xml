@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="Role" displayName="IRI unify POS (Store) Data Full Access" type="Role" value="IRI unify POS (Store) Data Full Access">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="IRI Unify POS (Store) Data Full Access" type="Role" value="IRI unify POS (Store) Data Full Access">
   <ApplicationRef>
     <Reference class="sailpoint.object.Application" name="%%IRI_APP_NAME%%"/>
   </ApplicationRef>
@@ -9,7 +9,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="IRI unify POS (Store) Data Full Access"/>
+            <entry key="en_US" value="IRI Unify POS (Store) Data Full Access"/>
           </Map>
         </value>
       </entry>
