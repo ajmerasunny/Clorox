@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Allows user to update and modify PPM projects. Additional Steps required for your request. Select at least one (1) business unit entitlement."/>
+            <entry key="en_US" value="Allows user to update and modify PPM projects.&lt;b>Additional Steps required for your request-Select at least one (1) business unit entitlement.&lt;/b>"/>
           </Map>
         </value>
       </entry>

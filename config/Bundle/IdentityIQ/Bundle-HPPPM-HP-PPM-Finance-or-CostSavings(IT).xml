@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="Allows user to run financial summary or cost savings reports in PPM. Automatically receives all Business Units. "/>
+            <entry key="en_US" value="Allows user to run financial summary or cost savings reports in PPM.&lt;b> Automatically receives all Business Units.&lt;/b> "/>
           </Map>
         </value>
       </entry>
