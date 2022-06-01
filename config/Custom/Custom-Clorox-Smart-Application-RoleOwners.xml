@@ -44,6 +44,7 @@
                   <String>%%Concur_APP_NAME%%</String>
                   <String>%%Essbase_APP_NAME%%</String>
                   <String>%%MDWORKFLOW_APP_NAME%%</String>
+                  <String>IBM Content Management</String>
                 </List>
             </value>
         </entry>              
