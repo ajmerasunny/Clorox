@@ -4,6 +4,7 @@
   <Attributes>
     <Map>
       <entry key="displayName" value="%%CLX_AR_Essbase_OWNER_WORKGROUP%%"/>
+      <entry key="email" value="%%ESSBASE_ADMIN_EMAIL_ADDRESS%%"/>
     </Map>
   </Attributes>
   <Description>Essbase Manual WorkItem Owner</Description>
@@ -11,7 +12,7 @@
     <Map>
       <entry key="workgroupNotificationOption">
         <value>
-          <WorkgroupNotifationOption>MembersOnly</WorkgroupNotifationOption>
+          <WorkgroupNotifationOption>GroupEmailOnly</WorkgroupNotifationOption>
         </value>
       </entry>
     </Map>
