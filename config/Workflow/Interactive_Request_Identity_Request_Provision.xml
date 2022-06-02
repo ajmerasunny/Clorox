@@ -238,7 +238,8 @@
     <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
     <Arg name="plan" value="ref:plan"/>
     <Arg name="recompilePlan" value="true"/>
-    <Arg name="dontUpdatePlan" value="false"/>
+    <Arg name="dontUpdatePlan" value="false">
+    </Arg>
     <Description>
       Dig through the ApprovalSets found in the Approval step and build an audit
       trail for the decisions.  Then for any rejected items remove them from

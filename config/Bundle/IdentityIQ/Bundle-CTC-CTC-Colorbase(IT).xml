@@ -72,7 +72,7 @@
         <Filter operation="CONTAINS_ALL" property="memberOf">
           <Value>
             <List>
-              <String>%%CTC_CLOROBASE_GROUP%%</String>
+              <String>%%CTC_COLORBASE_GROUP%%</String>
             </List>
           </Value>
         </Filter>

@@ -1,0 +1,482 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Workflow PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Workflow explicitTransitions="true" libraries="SAPGRCIntegration,Identity" name="Clorox SAP GRC Data Generator" type="Subprocess">
+  <Variable initializer="ref:identityName" input="true" name="identityName" required="true">
+    <Description>The name of the identity being updated.</Description>
+  </Variable>
+  <Variable input="true" name="approvalSet" output="true" required="true">
+    <Description>This attributes is set during the &amp;quot;Build Approval Set&amp;quot; step,
+      which builds this list by going through the ProvisioningPlan
+      to build the line items that need to be approved,
+      This variable includes all ApprovalItems that are part of
+      the request process and is updated during the AfterScript
+      of the approval process by assimilating the decisions
+      and comments from the Approvals copy of the ApprovalItem.</Description>
+  </Variable>
+  <Variable input="true" name="plan">
+    <Description>A master provisioning plan object required for building transient approval set for GRC response.</Description>
+  </Variable>
+  <Variable input="true" name="project">
+    <Description>A ProvisioningProject object describing the modifications to the identity.
+      This may include a list of Question objects which will
+      cause the generation of a Form and a WorkItem to solicit
+      additional information necessary for provisioning.</Description>
+  </Variable>
+  <Variable initializer="ref:identityDisplayName" input="true" name="identityDisplayName" required="true"/>
+  <Variable initializer="GRC SAP" input="true" name="applicationNameSAPGRC">
+    <Description>The name of Application used for SAP GRC checks.</Description>
+  </Variable>
+  <Variable name="accountRequestSAPGRC" output="true">
+    <Description>A list of SAP Direct AccountRequest which are qualified for SAP GRC violation check.</Description>
+  </Variable>
+  <Variable name="completeDetailMap" output="true">
+    <Description>The map used to keep all other maps which are required as an input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="userInfoMap" output="true">
+    <Description>A list containing UserInfo data required as an input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="requestedLineItemMap" output="true">
+    <Description>A list containing RequestedLineItem data required as an input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="credentialsMap" output="true">
+    <Description>The map containing values of credentials to connect to SAP GRC server.</Description>
+  </Variable>
+  <Variable name="requestHeaderDataMap" output="true">
+    <Description>The map containing values of requester details which is required as input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="requestHeaderDataMap" output="true">
+    <Description>The map containing values of requester details which is required as input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="userGroupsMap" output="true">
+    <Description>The map containing user group details which is required as input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="customFieldsValMap" output="true">
+    <Description>The map containing custom values of requester which is required as input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="parameterMap" output="true">
+    <Description>The map containing parameter values which is required as input for SAP GRC Request Executor subprocess.</Description>
+  </Variable>
+  <Variable name="language" output="true">
+    <Description>The language used by requester. Default language is English &amp;quot;EN&amp;quot;</Description>
+  </Variable>
+  <Variable initializer="$(launcher)" input="true" name="requester">
+    <Description>Requester who initiated the request</Description>
+  </Variable>
+  <Variable initializer="false" name="trace">
+    <Description>Used for debugging this workflow and when set to true trace will be sent to stdout.</Description>
+  </Variable>
+  <Variable input="true" name="reportType">
+    <Description>A comma separated string of Report Type values used for SAP GRC check.</Description>
+  </Variable>
+  <Variable input="true" name="riskLevel">
+    <Description>A comma separated string of Risk Level values used for SAP GRC check.</Description>
+  </Variable>
+  <Variable input="true" name="ruleSetId">
+    <Description>A comma separated string of Rule Set Id values used for SAP GRC check.</Description>
+  </Variable>
+  <Variable input="true" name="simulationRiskOnly">
+    <Description>SimulationRiskOnly means that results will display the results of risks or violations which will be obtained from the COMBINATION of user&amp;#39;s existing assignment and the new assignments
+      - If value specifed is X,it will just show the new violation result obtained from combination of new assignment.
+      - If value specifed is Blank,it will show all the violations of old assignments as well as new assignments. It will be a consolidated violation result.</Description>
+  </Variable>
+  <Variable name="endDate" output="true">
+    <Description>End date of the role assignment.</Description>
+  </Variable>
+  <Variable name="startDate" output="true">
+    <Description>Start date of the role assignment.</Description>
+  </Variable>
+  <Variable input="true" name="IdentityRequestId"/>
+  <Variable input="true" name="requestNumber" output="true">
+    <Description>
+      The request number received after successful execution of the User Access Web service.
+      This Request number is used by Request Detail Web service for polling.
+    </Description>
+  </Variable>
+  <Variable input="true" name="requestStubDetailsMap" output="true">
+    <Description>Holding user info and headerinfo to generate request detail stub.</Description>
+  </Variable>
+  <Variable input="true" name="requestStatusMap" output="true">
+    <Description>
+      The request status map containing the status information of the request received from the Request Detail Web service of GRC.
+      This map is returned to the calling workflow.
+      Request status could be OK or FAILED.
+      The map has all the information retrieved from the last stage of approval on SAP GRC system. 
+      The Map(String,Object) containing following fields.
+      1) RequestStatus         Status of the request
+      2) Risk Violation Information
+      RiskViolations           This is a list of key as a String and Object as a value
+      UserId                 User Id
+      RiskId                 Risk Id
+      RiskDesc               Risk Description
+      RiskLevelDesc          Risk Level Description
+      RuleId                 Rule Id
+      System                 System Name
+      RoleList               Role List, A Map(String,String) containing following -
+      Role               Role Name
+      CompositRole       Composite Role
+      Action                 This is a list containing the Action names. List(String)
+      3) Requested Item Details - The details of requested items and its related properties
+      RequestedItems        A Map(String,String) containing following -
+      ItemId                 Item Id
+      ItemDesc               Item Description
+      Connector              System Connector
+      ProvItemType           Provision Item Type
+      ProvItemTypeDesc       Provision Item Description
+      ProvType               Provision Type
+      ProvTypeDesc           Provision Type Description
+      AssignmentType         Assignment type
+      AssignmentTypeDesc     Assignment Type Description
+      ProvStatus             Provision Status
+      ProvStatusDesc         Provision Status Description
+      Status                 Status
+      ApprovalStatus         Approval Status
+      ApprovalStatusDesc     Approval Status Description
+      ProvAction             Provision Action
+      ProvActionDesc         Provision Action Description
+      ValidFrom              Valid From Date
+      ValidTo                Valid To Date
+      Comments               Comments
+      Owners                 Owners
+      ReqItemDesc            Request Item Description
+      4) Current Stage - The stage at which the request is currently residing.
+      CurrentStage           The Map(String,String) containing following -
+      CurstageName           Current Stage Name
+      CurstageDesc           Current Stage Description
+      Approver               Approver - A comma separated approvers list
+      5) MsgType - Contains type of exception occurred in the web service call.
+      6) MsgStatement - A short description about the failure occurred while executing an User Access Web service.
+    </Description>
+  </Variable>
+  <Description>This subprocess is used in "Provision and Approval" subprocess. This will fetch details of an identity who requested for access, 
+    the identity for whom access is requested and the details of the access which are requested.</Description>
+  <RuleLibraries>
+    <Reference class="sailpoint.object.Rule" name="SAPGRC Rule Library"/>
+    <Reference class="sailpoint.object.Rule" name="Clorox Identity Entitlement Library"/>
+  </RuleLibraries>
+  <Step icon="Start" name="Start" posX="37" posY="11">
+    <Transition to="Update ApprovalSet"/>
+  </Step>
+  <Step icon="Default" name="Update ApprovalSet" posX="319" posY="14">
+    <Script>
+      <Source>
+      	
+        import java.util.List;
+
+		import sailpoint.api.SailPointContext;
+		import sailpoint.object.ApprovalItem;
+		import sailpoint.object.ApprovalSet;
+		import sailpoint.object.WorkItem;
+		import sailpoint.tools.GeneralException;
+		import sailpoint.tools.xml.AbstractXmlObject;
+        ApprovalSet appSetCopy = approvalSet.deepCopy(context);
+        List appSetItems = appSetCopy.getItems();
+        for(ApprovalItem item : appSetItems)
+        {
+       	 Object state = item.getState();
+       	 if(state == null)
+       	 {
+        	item.setState(WorkItem.State.Finished);
+       	 }
+        }
+        workflow.put("approvalSet", appSetCopy);
+      </Source>
+    </Script>
+    <Transition to="Process GRC Approvals"/>
+  </Step>
+  <Step action="call:processPlanApprovalDecisions" condition="script:!isNull(approvalSet)" icon="Task" name="Process GRC Approvals" posX="200" posY="11" resultVariable="plan">
+    <Arg name="disableAudit" value="true"/>
+    <Arg name="dontUpdatePlan" value="false"/>
+    <Arg name="approvalSet" value="ref:approvalSet"/>
+    <Arg name="recompile" value="true"/>
+    <Arg name="project" value="ref:project"/>
+    <Arg name="plan">
+      <Script>
+        <Source>
+                    
+        				return plan.deepCopy(context);
+                	
+                </Source>
+      </Script>
+    </Arg>
+    <Description>
+      Processing Approval Set again after IIQ Approval decisions are processed.
+      This will update plan and recompile project.
+    </Description>
+    <Transition to="Initialize Detail Map"/>
+  </Step>
+  <Step icon="Default" name="Initialize Detail Map" posX="319" posY="14" resultVariable="completeDetailMap">
+    <Arg name="requester" value="ref:requester"/>
+    <Arg name="identityName" value="ref:identityName"/>
+    <Arg name="requstInitconnectionName" value="call:getRequestInitializationSystem"/>
+    <Arg name="accountRequestSAPGRC">
+      <Script>
+        <Source>
+                    
+			          import java.util.List;
+			          import java.util.ArrayList; 
+			          import sailpoint.workflow.WorkflowContext;
+			          import sailpoint.object.ProvisioningPlan;
+			          import sailpoint.object.Custom;
+			          import sailpoint.object.Identity;
+			          import sailpoint.services.ServicesUtil;
+			          import sailpoint.object.ProvisioningPlan.AccountRequest;
+			          
+			          plan.setIdentity(context.getObjectByName(Identity.class, identityName));
+			          WorkflowContext wfc = wfcontext.getRootContext();
+			          
+			          List accReqList = filterAccountRequestSAPGRC(wfc,plan);
+			          workflow.put("accountRequestSAPGRC", accReqList);
+			          
+			          for(AccountRequest accReq : accReqList)
+			          {
+			          	logger.trace("SAP account request found after filtering: " + accReq.toXml());
+			          }
+			          			          
+			          return accReqList; 			          
+                
+                </Source>
+      </Script>
+    </Arg>
+    <Script>
+      <Source>
+                
+		        import java.util.HashMap;
+		        import java.util.List;
+		        import java.util.ArrayList;
+		        import sailpoint.api.IdentityService;
+		        import java.util.Map;
+		        import sailpoint.tools.Util;
+		        import sailpoint.object.Identity;
+		        import sailpoint.object.Application;
+		        import sailpoint.object.ProvisioningPlan;
+		        import sailpoint.object.ProvisioningPlan.AttributeRequest;
+		        import sailpoint.object.ProvisioningPlan.AccountRequest;
+		        import org.apache.commons.logging.Log;
+				import org.apache.commons.logging.LogFactory;
+			        
+		        Log logger = LogFactory.getLog("clorox.workflow.grcsap.dataGenerator");
+		        
+		        logger.debug("Begin building map");
+        
+        		//request types
+				String REQUEST_TYPE_CREATE = "001";
+				String REQUEST_TYPE_MODIFY = "002";
+				String REQUEST_TYPE_LOCK = "004";
+				String REQUEST_TYPE_UNLOCK = "030";
+				String REQUEST_TYPE_TERM = "031";
+		        
+		        //map of all the identity's attributes
+		        Map userInfoMap = new HashMap();
+		        
+		        //list of maps for each requested item
+		        List requestLineItemList = new ArrayList();
+		        
+		        //map of all the connector names to avoid duplicates
+		        Map connectorNames = new HashMap();
+		        
+		        Identity identity = context.getObject(Identity.class, identityName);
+		        
+		        //map of usergroup to add to the request
+		        String userGroup = getUserGroup(identity);
+        		
+        		//generate the header data map
+        		Map requestHeaderDataMap = generateRequestHeaderDataMap(requester, identity);
+        		
+		        String requestType = plan.get("requestType");
+		        
+		        IdentityService idService = new IdentityService(context);
+		        
+		        //set initial request system
+		        requestHeaderDataMap.put("ReqInitSystem", "RQ2CLNT300");
+		        
+		        Map groupedAccountRequestMaps = groupAccountRequestByAppInMap(accountRequestSAPGRC);
+		        
+        		for(String applicationName: Util.safeIterable(groupedAccountRequestMaps.keySet()))
+				{
+					Application app = (Application) context.getObject(Application.class, applicationName);
+										
+					for(AccountRequest accReq : Util.safeIterable(groupedAccountRequestMaps.get(applicationName)))
+					{
+						String nativeIdentity = accReq.getNativeIdentity();
+						
+						int count = idService.countLinks(identity, app);
+						
+						if(app.getType().equals("SAP - Direct") || app.getType().equals("SAP GRC"))
+						{
+							//Will only come here if the type of application is "SAP - Direct" or "SAP GRC"
+							String operation = accReq.getOperation().toString(); 
+							
+							//populate the userInfoMap list
+							userInfoMap = populateUserDetailMap(nativeIdentity, identity, app);
+							
+							if (operation.equals("Create") || count == 0) 
+							{
+								logger.trace("Found a Create request");
+								
+								//Create op is a create request
+								requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_CREATE); // request header data contains 001 for create
+								
+								populateRequestItemMap(accReq, app, requestHeaderDataMap, requestLineItemList, connectorNames,requestType);
+								
+								//populate the start end dates for the new account creation
+								addStartEndDateItem(accReq, app, identity, requestLineItemList);
+							}
+							else if (operation.equals("Modify")) 
+							{
+								logger.trace("Found a Modify request");
+								
+								//if not already set, then set to modify, this is so we don't clash with creates
+								if(requestHeaderDataMap.get("Reqtype") == null)
+								{
+									requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_MODIFY);
+								}
+								
+								populateRequestItemMap(accReq, app, requestHeaderDataMap, requestLineItemList, connectorNames,requestType);
+							}
+							else if (operation.equals("Disable")) 
+							{						
+								// Leaver/Termination is a termination, while other disable is a lock
+								if(requestType.contains("TERMINATION") || requestType.contains("LEAVER FEATURE"))
+								{
+									logger.trace("Found an Termination/Lock request");
+									
+									requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_TERM);
+							
+									populateRequestItemMap(accReq, app, requestHeaderDataMap, requestLineItemList, connectorNames,requestType);
+									populateRequestItemMapTerm(accReq,app, identity, requestLineItemList); 
+								}
+								else
+								{
+									logger.trace("Found Disable/Lock request");
+									
+									requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_LOCK);
+									populateRequestItemMapLock(accReq,app, identity, requestLineItemList);
+								}
+								
+							}
+							else if (operation.equals("Enable")) 
+							{
+								logger.trace("Found an Enable request");
+								//enable means unlock
+								requestHeaderDataMap.put("Reqtype", REQUEST_TYPE_UNLOCK);
+								
+								populateRequestItemMap(accReq, app, requestHeaderDataMap, requestLineItemList, connectorNames,requestType);
+								
+								connectorNames.put(app.getAttributeValue("GRCConnectorName"), "true");
+								
+								logger.debug("Inside Data generator workflow. After invoking populateRequestItemMap connectorNames="+connectorNames);
+								//add items
+								populateRequestItemMapUnLock(accReq,app, identity, requestLineItemList);
+							}
+						}
+						else
+						{
+							logger.eror("Unexpected application type.");
+						}
+					}
+					
+					context.decache(app);
+        		}
+        		
+        		List userGroupMapList = new ArrayList();
+        		logger.debug("Inside Data generator workflow. connectorNames="+connectorNames);
+        		//get all the connector names and add as user groups
+        		for(String connectorNameKey : Util.safeIterable(connectorNames.keySet()))
+        		{
+        			Map userGroupMap = new HashMap();
+        			userGroupMap.put("UserGroup", userGroup);
+        			userGroupMap.put("UserGroupDesc", connectorNameKey);
+        			
+        			userGroupMapList.add(userGroupMap);
+        		}
+        		
+        		List userInfoMapList = new ArrayList();
+        		userInfoMapList.add(userInfoMap);
+        		        		
+        		//all the details to pass back
+		        Map completeDetailMap = new HashMap();
+		        
+        		completeDetailMap.put("requestHeaderDataMap", requestHeaderDataMap);
+        		completeDetailMap.put("userInfoMap", userInfoMapList);
+        		completeDetailMap.put("requestLineItemMap", requestLineItemList);
+        		completeDetailMap.put("userGroupsMap", userGroupMapList);
+        		
+        		logger.trace("Finished building map: " + completeDetailMap);
+					       		
+        		return completeDetailMap;
+            
+            </Source>
+    </Script>
+    <Transition to="Stop">
+      <Script>
+        <Source>
+                    
+          				import sailpoint.tools.Util;
+          				
+          				if(completeDetailMap != null &amp;&amp; !completeDetailMap.isEmpty())
+          				{
+          					return false;
+          				} 
+          				
+          				return true;
+                
+                </Source>
+      </Script>
+    </Transition>
+    <Transition to="Invoke SAP GRC Request Executor"/>
+  </Step>
+  <Step icon="Default" name="Invoke SAP GRC Request Executor" posX="425" posY="201">
+    <Arg name="numberOfRetries"/>
+    <Arg name="approvalSet" value="ref:approvalSet"/>
+    <Arg name="riskLevel"/>
+    <Arg name="auditLog"/>
+    <Arg name="requestedLineItemMap" value="script:return completeDetailMap.get(&quot;requestLineItemMap&quot;);"/>
+    <Arg name="pollingInterval"/>
+    <Arg name="language" value="script:return &quot;EN&quot;;"/>
+    <Arg name="requestStatusMap"/>
+    <Arg name="requestHeaderDataMap" value="script:return completeDetailMap.get(&quot;requestHeaderDataMap&quot;);"/>
+    <Arg name="credentialsMap" value="call:buildGRCCredentialMap"/>
+    <Arg name="identityDisplayName" value="ref:identityDisplayName"/>
+    <Arg name="accountRequestSAPGRC" value="ref:accountRequestSAPGRC"/>
+    <Arg name="requester" value="ref:requester"/>
+    <Arg name="reportType"/>
+    <Arg name="trace"/>
+    <Arg name="requestNumber"/>
+    <Arg name="requestStubDetailsMap"/>
+    <Arg name="plan" value="ref:plan"/>
+    <Arg name="connectionTimeout"/>
+    <Arg name="parameterMap"/>
+    <Arg name="ruleSetId"/>
+    <Arg name="currentStage"/>
+    <Arg name="completeDetailMap"/>
+    <Arg name="identityName" value="ref:identityName"/>
+    <Arg name="userGroupsMap" value="script:return completeDetailMap.get(&quot;userGroupsMap&quot;);"/>
+    <Arg name="IdentityRequestId" value="ref:IdentityRequestId"/>
+    <Arg name="simulationRiskOnly"/>
+    <Arg name="retriableErrors"/>
+    <Arg name="userInfoMap" value="script:return completeDetailMap.get(&quot;userInfoMap&quot;);"/>
+    <Arg name="customFieldsValMap"/>
+    <Return name="completeDetailMap" to="completeDetailMap"/>
+    <Return name="userInfoMap" to="userInfoMap"/>
+    <Return name="requestedLineItemMap" to="requestedLineItemMap"/>
+    <Return name="requestHeaderDataMap" to="requestHeaderDataMap"/>
+    <Return name="credentialsMap" to="credentialsMap"/>
+    <Return name="userGroupsMap" to="userGroupsMap"/>
+    <Return name="parameterMap" to="parameterMap"/>
+    <Return name="customFieldsValMap" to="customFieldsValMap"/>
+    <Return name="approvalSet" to="approvalSet"/>
+    <Return name="riskLevel" to="riskLevel"/>
+    <Return name="ruleSetId" to="ruleSetId"/>
+    <Return name="reportType" to="reportType"/>
+    <Return name="simulationRiskOnly" to="simulationRiskOnly"/>
+    <Return name="endDate" to="endDate"/>
+    <Return name="startDate" to="startDate"/>
+    <Return name="requestStatusMap" to="requestStatusMap"/>
+    <Return name="requestNumber" to="requestNumber"/>
+    <WorkflowRef>
+      <Reference class="sailpoint.object.Workflow" name="Clorox SAP GRC Request Executer"/>
+    </WorkflowRef>
+    <Transition to="Stop"/>
+  </Step>
+  <Step icon="Stop" name="Stop" posX="554" posY="11"/>
+</Workflow>
