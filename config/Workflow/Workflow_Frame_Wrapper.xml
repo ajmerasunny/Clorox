@@ -384,7 +384,7 @@
   <Variable name="business_justification">
     <Description>Holding business_justification value for GRC.</Description>
   </Variable>
-  <Variable initializer="false" name="smartRoles"/>
+
   <Description>Accelerator Pack Workflow</Description>
   <RuleLibraries>
     <Reference class="sailpoint.object.Rule"  name="Rule-Framework-AfterBeforeProvisionRuleLibrary"/>
@@ -1009,86 +1009,8 @@
             
             </Source>
     </Script>
-    <Transition to="Update workItemComments" when="script:doProcessProject == true"/>
+    <Transition to="Calculate Required ApprovalTypes" when="script:doProcessProject == true"/>
     <Transition to="end"/>
-  </Step>
-  <Step name="Update workItemComments" posX="4304" posY="1518">
-    <Script>
-      <Source>
-                
-			 
-        /*import sailpoint.object.Question;
-import sailpoint.object.ProvisioningProject;
-import sailpoint.object.Question.Type;
-import sailpoint.object.Util;
-import java.util.List;
-import java.util.ArrayList;
-
-List comments = new ArrayList();
-
-String comment="";
-
-        if (project !=null)
-{
-        
-List&lt;Question> questions=project.getQuestionHistory();
-if(questions!=null){
-
-        
-       
-	for(int i=0;i&lt;questions.size();i++)
-	{
-         
-	if(questions.get(i).getType().equals(Question.Type.Role))
-	{
-         
-       
-			Object answer=questions.get(i).getAnswer();
-			if (answer instanceof List)
-			{
-				List answerList = (List) answer;
-        String ansStr = String.join(", ", answerList);
-				
-        
-        comments.add(questions.get(i).getAttributeName()+":"+ ansStr);
-					
-      
-        
-			}
-        else if(answer instanceof Boolean){
-       boolean answerBool=(Boolean)answer;
-        if(answerBool)
-        comments.add(questions.get(i).getAttributeName()+":true");
-        
-        else
-        comments.add(questions.get(i).getAttributeName()+":false");
-       
-        
-        
-        }
-        else if(answer instanceof String){
-       String answerstr=(String)answer;
-        if(answerstr!=null)
-        comments.add(questions.get(i).getAttributeName()+":"+answerstr);
-        
-        else
-        comments.add(questions.get(i).getAttributeName()+":");
-       
-        
-        
-        }
-        
-	}
-		}
-     
-      //  wfcontext.setVariable("workItemComments", comment);  
-        wfcontext.setVariable("workItemComments", comments);
-   }     
-}
- */         
-            </Source>
-    </Script>
-    <Transition to="Calculate Required ApprovalTypes"/>
   </Step>
   <Step name="Calculate Required ApprovalTypes" posX="4438" posY="1518" resultVariable="requiredApprovalTypes">
     <Script>
@@ -1740,7 +1662,7 @@ if(questions!=null){
     <Transition to="end"/>
   </Step>
   <Step action="call:addMessage" name="Exit on Invalid Multiple Forms" posX="2544" posY="1054">
-    <Arg name="message" value="This request will not be submitted as it has more than one application which requires Input Forms, Please submit request for those roles individually"/>
+    <Arg name="message" value="Request Requires Multiple Forms, Please request roles individually"/>
     <Arg name="type" value="Error"/>
     <Transition to="end"/>
   </Step>

@@ -128,7 +128,7 @@
       </entry>
       <entry key="moveAccountContainer"/>
       <entry key="moverExtendedRule"/>
-      <entry key="moverProcess" value="Do Nothing"/>
+      <entry key="moverProcess" value="Manager Certification"/>
       <entry key="moverRevocation" value="Do Nothing"/>
       <entry key="nativeChangeDetectionAttributeScope" value="entitlements"/>
       <entry key="nativeChangeDetectionAttributes"/>

@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox-Rule-FrameWorkCertificationExclusion" type="CertificationExclusion">
+  <Description>Excludes Entitlements/Roles from the Certification if they
+		match the exclusion criteria of the
+		corresponding Custom object.
+	</Description>
+  <Signature returnType="String">
+    <Inputs>
+      <Argument name="log">
+        <Description>
+					The log object associated with the SailPointContext.
+				</Description>
+      </Argument>
+      <Argument name="context">
+        <Description>
+					A sailpoint.api.SailPointContext object that can be used to query
+					the database if necessary.
+				</Description>
+      </Argument>
+      <Argument name="entity" type="AbstractCertifiableEntity">
+        <Description>
+					The AbstractCertifiableEntity that is part of the certification.
+					Currently, this is either an Identity, Entitlement, or Role.
+				</Description>
+      </Argument>
+      <Argument name="certification" type="Certification">
+        <Description>
+					The certification that this identity is part of.
+				</Description>
+      </Argument>
+      <Argument name="certContext" type="CertificationContext">
+        <Description>
+					The CertificationContext that is being used to generate the
+					certification.
+				</Description>
+      </Argument>
+      <Argument name="items" type="List">
+        <Description>
+					List of Certifiable items that are currently part of the
+					certification for this identity. Any items that should be excluded
+					from the certification should be deleted from this list and added
+					to the itemsToExclude list.
+				</Description>
+      </Argument>
+      <Argument name="itemsToExclude" type="List">
+        <Description>
+					A List of Certifiable items that should not be included in the
+					certification. This list will be empty when the rule is executed
+					and any items that should not be part of the certification should
+					be moved from the items list to the itemsToExclude list.
+				</Description>
+      </Argument>
+      <Argument name="state">
+        <Description>
+					A Map containing state information.
+				</Description>
+      </Argument>
+    </Inputs>
+    <Returns>
+      <Argument name="explanation" type="String">
+        <Description>
+					An optional explanation describing why the items were excluded.
+				</Description>
+      </Argument>
+    </Returns>
+  </Signature>
+  <Source>
+	<![CDATA[
+	import sailpoint.object.Certifiable;
+	import sailpoint.object.EntitlementGroup;
+	import sailpoint.object.Entitlement;
+	import sailpoint.object.Attributes;
+	import sailpoint.object.Bundle;
+	import sailpoint.object.Custom;
+	import sailpoint.object.CustomGlobal;
+	import sailpoint.object.Identity;
+	import sailpoint.object.Application;
+	import sailpoint.object.ManagedAttribute;
+	import sailpoint.object.Filter;
+	import sailpoint.object.QueryOptions;
+	import sailpoint.tools.Util;
+	import sailpoint.api.SailPointContext;
+	import sailpoint.api.IdentityService;
+	import org.apache.commons.logging.Log;
+	import org.apache.commons.logging.LogFactory;
+	import sailpoint.object.CertificationItem;
+	import sailpoint.object.RoleAssignment;
+	import sailpoint.tools.GeneralException;
+	import sailpoint.object.ObjectConfig;
+	import sailpoint.rapidapponboarding.rule.ObjectConfigAttributesRuleLibrary;
+	import sailpoint.rapidapponboarding.rule.CertificationRuleLibrary;
+	import sailpoint.rapidapponboarding.logger.LogEnablement;
+	import sailpoint.services.ServicesUtil;
+	
+	Log logger = LogFactory.getLog("rapidapponboarding.rules");
+    // Get list of Smart applications for exclusion from mover certification
+    Custom customObject = context.getObjectByName(Custom.class, "Clorox SMART Application with Secondary Approval");
+    List allApplications = customObject.getList("AllApplications");
+	String explanation = "";
+	// Skip RoleAssignments that are not correctly defined on Identity Cube anymore
+	items.removeAll(Collections.singleton(null));
+	//Iterate through the certifiable items and check if each one is in the exclusion list
+	Iterator it = items.iterator();
+	while(it.hasNext()) 
+	{
+		Certifiable certObj = it.next();
+		//Check if this certification object is in the list of exclusions
+		if(CertificationRuleLibrary.isRoleOrEntitlementExcluded(context,certObj,entity,"excludePrivilegedAccess")) 
+		{
+			itemsToExclude.add(certObj);
+			it.remove();
+			explanation = "Entitlements match the exclusion criteria";
+		}
+		else
+		{
+			if(certObj instanceof Bundle)
+			{
+				Bundle bundle = (Bundle) certObj;
+				
+				if(bundle != null)
+				{
+					String type = bundle.getType();
+					if(bundle.isDisabled())
+					{
+						itemsToExclude.add(certObj);
+						it.remove();
+					}
+					else if(type != null && (type.equalsIgnoreCase("it") || type.equalsIgnoreCase("inactive")|| type.equalsIgnoreCase("dynamic") || type.equalsIgnoreCase("firefighter")))
+					{
+						itemsToExclude.add(certObj);
+						it.remove();
+					} else if(allApplications.contains(bundle.getAttribute("appName"))){                          
+                        logger.trace(" Excluding smart application roles" + bundle.getAttribute("appName"));                          
+					    itemsToExclude.add(certObj);
+					    it.remove();
+                        explanation = "Entitlements belongs to Smart Applications";
+                    }
+				}
+			}
+			else if(certObj instanceof EntitlementGroup)
+			{
+				EntitlementGroup entGroup = (EntitlementGroup) certObj;
+				
+				String entGroupAttributes = entGroup.getAttributeNames().get(0);
+				
+				Map manAttArgs = new HashMap();
+				manAttArgs.put("application", entGroup.getApplication());
+				manAttArgs.put("attribute", entGroupAttributes);
+				manAttArgs.put("value", entGroup.getAttributes().get(entGroupAttributes));
+                if (allApplications.contains(entGroup.getApplicationName())) {
+                    logger.trace(" Excluding smart application entitlements" + entGroup.getApplicationName());  
+                    itemsToExclude.add(certObj);
+					it.remove();
+                    explanation = "Entitlements belongs to Smart Applications";
+                }
+                else {
+				
+				List managedAttributes = ServicesUtil.returnManagedAttributes(context, manAttArgs);				
+				if(managedAttributes != null && !managedAttributes.isEmpty())				{
+					ManagedAttribute managedAttribute = managedAttributes.get(0);					
+					if(managedAttribute != null)
+					{
+						//if not requestable remove it
+						if(!managedAttribute.isRequestable())
+						{
+							itemsToExclude.add(certObj);
+							it.remove();
+						}
+					}
+				}				
+				explanation = "Entitlements match the exclusion criteria or not requestable";
+                }    				
+			}
+		}
+	}
+	return explanation;
+	    ]]>
+	</Source>
+</Rule>

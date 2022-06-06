@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Identity name="%%CLX_AR_ConcurAdmin_OWNER_WORKGROUP%%" workgroup="true">
+<Identity name="%%CONCUR_DEFAULT_ROLEOWNER%%" workgroup="true">
   <Attributes>
     <Map>
-      <entry key="displayName" value="%%CLX_AR_ConcurAdmin_OWNER_WORKGROUP%%"/>
+      <entry key="displayName" value="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
     </Map>
   </Attributes>
   <Description>Concur Secondary Role Approvers</Description>
