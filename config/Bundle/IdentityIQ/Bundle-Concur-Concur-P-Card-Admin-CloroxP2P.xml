@@ -1,13 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="Concur P-Card Admin IT Role" name="Concur P-Card Admin IT Role" type="it">
+<Bundle displayName="Concur P-Card Admin - Clorox P2P" name="Concur P-Card Admin - Clorox P2P" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
       <entry key="accountSelectorRules"/>
       <entry key="additionalRoleBusApprovalRule"/>
       <entry key="additionalRoleBusApprovers"/>
+      <entry key="additionalRoleBusBuyers"/>
       <entry key="allApprovers"/>
+      <entry key="allBuyers"/>
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
@@ -17,7 +19,7 @@
       <entry key="defaultEndDateSpan"/>
       <entry key="defaultStartDateSpan"/>
       <entry key="enablerTypes"/>
-      <entry key="formappName" value="Concur"/>
+      <entry key="formappName"/>
       <entry key="isBirthright"/>
       <entry key="mandatoryEntitlements"/>
       <entry key="mandatoryRoles"/>
@@ -25,7 +27,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords" value="Concur P-Card Admin"/>
+      <entry key="roleKeywords" value="Concur P-Card Admin - Clorox P2P"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -36,7 +38,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US"/>
+            <entry key="en_US" value="Manage the p-card program in Concur. Only to be used by P2P."/>
           </Map>
         </value>
       </entry>
@@ -48,20 +50,8 @@
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
   </Owner>
-  <Profiles>
-    <Profile>
-      <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%Concur_APP_NAME%%"/>
-      </ApplicationRef>
-      <Constraints>
-        <Filter operation="CONTAINS_ALL" property="Role">
-          <Value>
-            <List>
-              <String>Concur P-Card Admin</String>
-            </List>
-          </Value>
-        </Filter>
-      </Constraints>
-    </Profile>
-  </Profiles>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="Concur P-Card IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Concur P-Card Admin - Clorox P2P IT Role"/>
+  </Requirements>
 </Bundle>
