@@ -12,7 +12,7 @@
     <Map>
       <entry key="workgroupNotificationOption">
         <value>
-          <WorkgroupNotifationOption>MembersOnly</WorkgroupNotifationOption>
+          <WorkgroupNotifationOption>GroupEmailOnly</WorkgroupNotifationOption>
         </value>
       </entry>
     </Map>
