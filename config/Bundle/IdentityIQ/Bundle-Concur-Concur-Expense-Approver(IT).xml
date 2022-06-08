@@ -46,7 +46,7 @@
     <Reference class="sailpoint.object.Bundle" name="Concur"/>
   </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
+    <Reference class="sailpoint.object.Identity" name="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
   </Owner>
   <Profiles>
     <Profile>
