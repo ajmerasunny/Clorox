@@ -405,23 +405,28 @@
           import sailpoint.object.WorkItem;
           import sailpoint.object.WorkItem;
           import sailpoint.workflow.IdentityRequestLibrary;
+          import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
           if (item == null) {
               // must not be a leaf approval...
               return;
           }
-          // mark all of the items finished once the item is complete
-          ApprovalSet set = (ApprovalSet)item.get("approvalSet");
-          if ( set != null ) {
-              List approvalItems = set.getItems();
-              for ( ApprovalItem approvalItem : approvalItems ) {
-                  approvalItem.setState(WorkItem.State.Finished);
-                  // update identity request provisioning state
-                  IdentityRequestLibrary.updateIdentityRequestItemProvisioningState(approvalItem, wfcontext);
-              }
+
+          WorkItem.State state = item.getState();
+        if (state.equals(WorkItem.State.Expired)) {
+          List approvalItems = approvalSet.getItems();
+          for (ApprovalItem approvalItem : approvalItems) {
+              approvalItem.reject();
+              ist listOfComments = approvalItem.getComments();
+              approvalItem.add(new Comment("Auto expire due to lack of action", "spadmin")); 
+              item.setCompletionComments("Auto expired item due to lack of action");
           }
+        }
+          assimilateWorkItemApprovalSet(wfcontext, item, approvalSet); 
           // Audit the manual change
           auditManualAction(item);
-        
+          IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
+				  //Everything below is Accelerator Pack Stuff - Start
+				  ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item);        
                 ]]></Source>
       </AfterScript>
       <Arg name="workItemRequester" value="$(launcher)"/>
@@ -455,8 +460,8 @@
 								context.commitTransaction();  								
 							}  
 						}  
-					}  
-        ]]></Source>
+					}   
+		      ]]></Source>
       </InterceptorScript>
     </Approval>
     <Transition to="end"/>
