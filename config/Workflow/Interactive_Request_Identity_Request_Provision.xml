@@ -405,28 +405,27 @@
           import sailpoint.object.WorkItem;
           import sailpoint.object.WorkItem;
           import sailpoint.workflow.IdentityRequestLibrary;
+          import sailpoint.api.Workflower;
           import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
           if (item == null) {
               // must not be a leaf approval...
               return;
           }
 
-          WorkItem.State state = item.getState();
-        if (state.equals(WorkItem.State.Expired)) {
-          List approvalItems = approvalSet.getItems();
-          for (ApprovalItem approvalItem : approvalItems) {
-              approvalItem.reject();
-              ist listOfComments = approvalItem.getComments();
-              approvalItem.add(new Comment("Auto expire due to lack of action", "spadmin")); 
-              item.setCompletionComments("Auto expired item due to lack of action");
+          if ( set != null ) {
+              List approvalItems = set.getItems();
+              for ( ApprovalItem approvalItem : approvalItems ) {
+                  approvalItem.setState(WorkItem.State.Finished);
+                  // update identity request provisioning state
+                  IdentityRequestLibrary.updateIdentityRequestItemProvisioningState(approvalItem, wfcontext);
+              }
           }
-        }
-          assimilateWorkItemApprovalSet(wfcontext, item, approvalSet); 
-          // Audit the manual change
-          auditManualAction(item);
-          IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
-				  //Everything below is Accelerator Pack Stuff - Start
-				  ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item);        
+      //MasterSet gets updated here based on work item ApprovalSet
+				assimilateWorkItemApprovalSet(wfcontext, item, approvalSet); 
+				auditDecisions(item);  
+				IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
+				//Everything below is Accelerator Pack Stuff - Start
+				ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item);     
                 ]]></Source>
       </AfterScript>
       <Arg name="workItemRequester" value="$(launcher)"/>
@@ -445,8 +444,8 @@
          
 		      import sailpoint.object.Workflow;   
 		      import sailpoint.object.Attributes;  		            		  		     
-          
-		      Date expirationDate = new Date();  		
+          if (method !=null && method.equals(Workflow.INTERCEPTOR_OPEN_WORK_ITEM)) {
+           Date expirationDate = new Date();  		
 		      String hoursTillExpiration = manualWorkItemHoursTillExpiration;  					
 					if (hoursTillExpiration!=null) {  
 					  int hoursTillExpirationInt=Util.atoi(hoursTillExpiration);  
@@ -455,12 +454,15 @@
 							Date dateExp = Util.incrementDateByMinutes(new Date(), minutes);  							
 							if(item!=null && item.getExpirationDate()==null && context!=null && dateExp!=null) {  							  
 								item.setExpiration(dateExp);   
-								item.setWakeUpDate(dateExp);  
+								item.setWakeUpDate(dateExp);
+                item.setHandler("sailpoint.api.Interrogator");  
 								context.saveObject(item);  
 								context.commitTransaction();  								
 							}  
 						}  
-					}   
+					}  
+          }
+		      
 		      ]]></Source>
       </InterceptorScript>
     </Approval>

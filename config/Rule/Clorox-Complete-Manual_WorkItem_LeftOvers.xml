@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox Complete Manual WorkItem Left Overs Rule">
+  <Description>This rule is used for adding roles to users for testing purposes.</Description>
+  <Signature returnType="String">
+    <Inputs>
+      <Argument name="context">
+        <Description>
+            A SailPointContext object used if its necessary to query objects from the database.
+        </Description>
+      </Argument>
+    </Inputs>
+    <Returns>
+      <Argument name="output">
+        <Description>
+        </Description>
+      </Argument>
+    </Returns>
+  </Signature>
+  <Source>
+      <![CDATA[
+        import java.util.*;
+        import sailpoint.object.*;
+        import sailpoint.api.*;
+        import org.apache.commons.logging.Log;
+        import org.apache.commons.logging.LogFactory;
+        import sailpoint.object.ProvisioningPlan.AccountRequest.Operation;
+        import sailpoint.object.ProvisioningPlan.AccountRequest;
+        import sailpoint.object.ProvisioningPlan.AttributeRequest;
+        import sailpoint.object.ProvisioningPlan;
+        import java.text.SimpleDateFormat;
+        import sailpoint.tools.Util;
+        import sailpoint.object.TaskResult;
+        import sailpoint.tools.GeneralException; 
+        import sailpoint.tools.Message;
+    
+        private Log mlogger = LogFactory.getLog("clorox.rule.workitem.manual.complete");
+        mlogger.debug("**** Starting Clorox  Manual WorkItem Complete Rule *****");
+            
+        // ====================== IMPORTANT ==========================
+        // For testing without completing objects: set autoComplete = false
+        // Once fully tested, set autoComplete = true
+        // ====================== IMPORTANT ==========================
+        String lineDelimiter =",";
+        String lineEndMarker = "|";
+        boolean autoComplete = true; // Default mode
+        int noofDays = 30; // Default value 
+        //String completionComment = "Auto completed via rule for SailPoint 8.1 Upgrade project."; // default value
+        Identity admin = context.getObjectByName(Identity.class,"spadmin");
+        StringBuffer workitemDetails = new StringBuffer(); // to Store workitem details
+        workitemDetails.append("WorkItemID"+lineDelimiter+"WorkItemType"+lineDelimiter+"WorkItemName"+lineDelimiter+"WorkItemCreatedDate"+lineDelimiter+"WorkItemRequester"+lineDelimiter+"WorkItemRequestee"+lineDelimiter+"WorkItemOwner"+lineDelimiter+"WorkflowCaseName"+lineEndMarker);
+        workitemDetails.append("\n");
+  		Terminator term = new Terminator(context);
+        List workflowCaseIDsForDeletion = new ArrayList();
+
+        // Get the parameters from task defintion   
+       // if(config!=null) {
+         // noofDays = Integer.parseInt(config.get("noofDays"));
+          //autoComplete = Boolean.parseBoolean(config.get("autoComplete"));
+        //  completionComment = config.get("comment");
+       // }
+  
+       	String completionComment = " Completed by myAccess due to issue with manual workitem completion";
+
+        QueryOptions qo = new QueryOptions();
+        Calendar date = Calendar.getInstance();
+        date.add(Calendar.DATE, -noofDays);
+        date.set(Calendar.MINUTE,0);
+  		date.set(Calendar.HOUR_OF_DAY,12);
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date d = date.getTime();
+        long time = d.getTime();
+        Filter type = Filter.and(Filter.eq("type", WorkItem.Type.ManualAction),Filter.eq("state","Finished")); 
+        // Filter f = Filter.and(type,Filter.le("created", d));
+        qo.addFilter(type);
+        List props = new ArrayList();
+        props.add("name");
+        Iterator it = context.search(WorkItem.class, qo, props);
+        List witems = new ArrayList();
+        while (it.hasNext()){
+            String name = it.next()[0];
+            witems.add(name);
+        }  
+      
+        for (String wi : witems){
+            WorkItem workItem = context.getObjectByName(WorkItem.class, wi);
+            if (null != workItem){
+                // Get Work Item Name, Type, Create Date
+                String workItemName = workItem.getDescription();
+                WorkItem.Type workItemType = workItem.getType();
+                Date workItemCreatedDate = workItem.getCreated();
+                // Get Requester Name          
+                String workItemRequesterName = "";
+                if(workItem.getRequester()!=null) {
+                    Identity workItemRequester = workItem.getRequester();
+                    workItemRequesterName = workItemRequester.getDisplayableName();
+                }
+                // Get Owner Name
+                String workItemOwnerName = "";
+                Identity workItemOwner = null;
+                if(workItem.getOwner()!=null) {
+                    workItemOwner  = workItem.getOwner();
+                    workItemOwnerName = workItemOwner.getDisplayableName();
+                } else {
+                    workItemOwner = context.getObjectByName(Identity.class,"spadmin");
+                }
+                
+                // Get Requestee Name
+                String  workItemRequesteeName = "";                                    
+                if(WorkItem.Type.Form.equals(workItemType)) {
+                    Attributes configAttrs=workItem.getAttributes();
+                    if(configAttrs!=null) {
+                        if(configAttrs.get("identityName")!=null) {
+                            String identityName  = configAttrs.get("identityName");
+                            Identity workItemRequestee = context.getObjectByName(Identity.class,identityName);
+                            if(workItemRequestee!=null) {                    
+                                workItemRequesteeName = workItemRequestee.getDisplayableName();
+                            }
+                        }
+                    }
+                }
+                // Get Workflow Case Name  
+                String workflowCaseName = "";            
+                if(workItem.getWorkflowCase()!=null) {
+                    WorkflowCase wfCase = workItem.getWorkflowCase();
+                    workflowCaseName = wfCase.getName();
+                    workflowCaseIDsForDeletion.add(wfCase.getId());
+                }
+
+                workitemDetails.append(wi+lineDelimiter+workItemType.toString()+lineDelimiter+workItemName+lineDelimiter+workItemCreatedDate+lineDelimiter+workItemRequesterName+lineDelimiter+workItemRequesteeName+lineDelimiter+workItemOwnerName+lineDelimiter+workflowCaseName+lineEndMarker);
+                workitemDetails.append("\n");
+                if(autoComplete) {              
+                    ApprovalSet as = workItem.getApprovalSet();
+                    if (null != as){
+                        List approvalList = as.getItems();
+                        if (null != approvalList &amp;&amp; !approvalList.isEmpty()){
+                            for(ApprovalItem item : approvalList){
+                                Comment cmnt = new Comment();
+                                cmnt.setComment(completionComment);
+                                cmnt.setAuthor("spadmin");
+                                cmnt.setDate(new Date());
+                                item.add(cmnt);
+                                item.approve();
+                            }
+                        }
+                        as.setAllProvisioned();
+                    }
+                        
+                    workItem.setCompletionComments(completionComment);              
+                    workItem.addComment(completionComment,admin);                            
+                    workItem.setCompleter("spadmin");              
+                    workItem.addComment(completionComment,admin);
+                    workItem.setState(WorkItem.State.Finished);
+                    workItem.setCompleter(workItemOwner.getName());
+                    workItem.setHandler("sailpoint.api.Interrogator");          
+                    context.saveObject(workItem);
+                    context.commitTransaction();
+                    Workflower wf = new Workflower(context);
+                    wf.process(workItem,false);
+                }
+            }
+        }
+  
+        if(autoComplete) {
+            if(!Util.isEmpty(workflowCaseIDsForDeletion)) {
+                for(String id: workflowCaseIDsForDeletion) {
+                    WorkflowCase wfCase = context.getObject(WorkflowCase.class, id);
+                    term.deleteObject(wfCase);        
+                }
+            }
+        }
+        
+        Util.flushIterator(it);
+        Message totalMessage = new Message();
+        totalMessage.setType(Message.Type.Info);
+        totalMessage.setKey(" WorkItem Count: " + context.countObjects(WorkItem.class, qo) + " WorkItem Data " + workitemDetails.toString());  
+        taskResult.addMessage(totalMessage); 
+        ]]>
+    </Source>
+</Rule>
