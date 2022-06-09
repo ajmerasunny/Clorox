@@ -44,6 +44,7 @@
         String lineDelimiter =",";
         String lineEndMarker = "|";
         boolean autoComplete = true; // Default mode
+        boolean autoCleanup = false; // Delete workflow case and task result
         int noofDays = 30; // Default value 
         //String completionComment = "Auto completed via rule for SailPoint 8.1 Upgrade project."; // default value
         Identity admin = context.getObjectByName(Identity.class,"spadmin");
@@ -162,7 +163,7 @@
             }
         }
   
-        if(autoComplete) {
+        if(autoCleanup) {
             if(!Util.isEmpty(workflowCaseIDsForDeletion)) {
                 for(String id: workflowCaseIDsForDeletion) {
                     WorkflowCase wfCase = context.getObject(WorkflowCase.class, id);

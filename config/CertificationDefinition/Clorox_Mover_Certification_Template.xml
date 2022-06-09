@@ -143,7 +143,7 @@
         </value>
       </entry>
       <entry key="preDelegationRuleName"/>
-      <entry key="processRevokesImmediately" value="true"/>
+      <entry key="processRevokesImmediately" value="false"/>
       <entry key="remediation.remindersAndEscalations">
         <value>
           <NotificationConfig>
@@ -161,7 +161,7 @@
       <entry key="requireBulkCertifyConfirmation" value="true"/>
       <entry key="requireMitigationComments" value="true"/>
       <entry key="requireReassignmentCompletion" value="false"/>
-      <entry key="saveExclusions" value="true"/>
+      <entry key="saveExclusions" value="false"/>
       <entry key="sendPreDelegationCompleteEmails" value="true"/>
       <entry key="shortNameTemplate" value="Manager Mover Certification${fullDate}"/>
       <entry key="signOffApproverRuleName"/>
