@@ -14,7 +14,7 @@
   <Variable input="true" name="startDate">
     <Description>Start date of the role assignment.</Description>
   </Variable>
-  <Variable editable="true" initializer="true" input="true" name="foregroundProvisioning">
+  <Variable initializer="false" name="foregroundProvisioning">
     <Description>Normally provisioning is done in a step that uses the &amp;quot;background&amp;quot;
       option to force the workflow to be suspend and be resumed in a
       background task thread.  This prevents the browser session from
@@ -399,34 +399,33 @@
     <Approval mode="parallelPoll" owner="rule:Clorox Build Manual Action Approvals" renderer="lcmManualActionsRenderer.xhtml" send="identityDisplayName,identityName,policyViolations">
       <AfterScript>
         <Source><![CDATA[
-                    
           import sailpoint.object.ApprovalSet;
           import sailpoint.object.ApprovalItem;
           import sailpoint.object.WorkItem;
           import sailpoint.object.WorkItem;
           import sailpoint.workflow.IdentityRequestLibrary;
-          import sailpoint.api.Workflower;
           import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
           if (item == null) {
               // must not be a leaf approval...
               return;
           }
-
-          if ( set != null ) {
-              List approvalItems = set.getItems();
-              for ( ApprovalItem approvalItem : approvalItems ) {
-                  approvalItem.setState(WorkItem.State.Finished);
-                  // update identity request provisioning state
-                  IdentityRequestLibrary.updateIdentityRequestItemProvisioningState(approvalItem, wfcontext);
-              }
+          WorkItem.State state = item.getState();
+          if (state.equals(WorkItem.State.Expired)) {
+          List approvalItems = approvalSet.getItems();
+            for (ApprovalItem approvalItem : approvalItems) {
+              approvalItem.reject();
+              List listOfComments = approvalItem.getComments();
+              approvalItem.add(new Comment("Auto expire due to lack of action", "spadmin")); 
+              item.setCompletionComments("Auto expired item due to lack of action");
+            }
           }
-      //MasterSet gets updated here based on work item ApprovalSet
-				assimilateWorkItemApprovalSet(wfcontext, item, approvalSet); 
-				auditDecisions(item);  
-				IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
-				//Everything below is Accelerator Pack Stuff - Start
-				ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item);     
-                ]]></Source>
+          assimilateWorkItemApprovalSet(wfcontext, item, approvalSet); 
+          // Audit the manual change
+          auditManualAction(item);
+          IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
+				  //Everything below is Accelerator Pack Stuff - Start
+				  ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item); 
+        ]]></Source>
       </AfterScript>
       <Arg name="workItemRequester" value="$(launcher)"/>
       <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
@@ -441,28 +440,37 @@
       <Arg name="workItemEscalationStyle" value="reminder"/>
       <InterceptorScript>
         <Source><![CDATA[
-         
-		      import sailpoint.object.Workflow;   
-		      import sailpoint.object.Attributes;  		            		  		     
-          if (method !=null && method.equals(Workflow.INTERCEPTOR_OPEN_WORK_ITEM)) {
-           Date expirationDate = new Date();  		
-		      String hoursTillExpiration = manualWorkItemHoursTillExpiration;  					
-					if (hoursTillExpiration!=null) {  
-					  int hoursTillExpirationInt=Util.atoi(hoursTillExpiration);  
-						if(hoursTillExpirationInt!=null && hoursTillExpirationInt>0) {  
-						  int minutes = hoursTillExpirationInt * 60;  
-							Date dateExp = Util.incrementDateByMinutes(new Date(), minutes);  							
-							if(item!=null && item.getExpirationDate()==null && context!=null && dateExp!=null) {  							  
-								item.setExpiration(dateExp);   
-								item.setWakeUpDate(dateExp);
-                item.setHandler("sailpoint.api.Interrogator");  
-								context.saveObject(item);  
-								context.commitTransaction();  								
-							}  
-						}  
-					}  
-          }
-		      
+          import sailpoint.object.Workflow;   
+		      import sailpoint.object.Attributes;  	
+          import org.apache.log4j.Logger;  
+		      import org.apache.log4j.Level; 
+          
+          Logger log = Logger.getLogger("rapidapponboarding.rules");
+		      if (method !=null && method.equals(Workflow.INTERCEPTOR_OPEN_WORK_ITEM)) {
+            log.trace(" Entering Open Work Item Method ");
+            Date expirationDate = new Date();  		
+		        String hoursTillExpiration = manualWorkItemHoursTillExpiration;  					
+					  if (hoursTillExpiration!=null) {  
+					    int hoursTillExpirationInt=Util.atoi(hoursTillExpiration);  
+						  if(hoursTillExpirationInt!=null && hoursTillExpirationInt>0) {  
+						    int minutes = hoursTillExpirationInt * 60;  
+							  Date dateExp = Util.incrementDateByMinutes(new Date(), minutes);  							
+							  if(item!=null && item.getExpirationDate()==null && context!=null && dateExp!=null) {  							  
+                  item.setExpiration(dateExp);   
+                  item.setWakeUpDate(dateExp);           			
+                  context.saveObject(item);  
+                  context.commitTransaction();  								
+							  }  
+						  }  
+					  }  
+          log.trace(" Exiting Open Work Item Method ");
+          }           
+          if (method !=null && method.equals(Workflow.INTERCEPTOR_POST_ASSIMILATION)) {
+            log.trace(" Entering Post Assimilation Method ");
+            log.trace(" setting handler, Interrogator");
+            item.setHandler("sailpoint.api.Interrogator");          
+            log.trace(" Exiting Post Assimilation Method ");        
+          }		      
 		      ]]></Source>
       </InterceptorScript>
     </Approval>
