@@ -20,6 +20,8 @@
             <entry key="%%CCMS_APP_NAME%%" value="%%CLX_AR_CCMSAdmin_OWNER_WORKGROUP%%"/>
             <entry key="%%iDMS_APP_NAME%%" value="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
             <entry key="Concur Expense" value="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
+            <entry key="Concur Expense Approver" value="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
+            <entry key="Concur Expense User" value="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>                        
             <entry key="Concur" value="%%CONCUR_DEFAULT_ROLEOWNER%%"/>          
             <entry key="%%Concur_APP_NAME%%" value="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
             <entry key="%%Essbase_APP_NAME%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
