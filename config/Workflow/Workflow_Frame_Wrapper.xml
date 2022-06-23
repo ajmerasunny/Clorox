@@ -1471,7 +1471,7 @@
   <Step name="After Refresh" posX="6014" posY="1518">
     <Script>
       <Source>
-                
+          executeAfterProvisionRuleForIDMS(context, workflow,identityName,plan,project,approvalSet);     
 		    	afterProvisionRule(context, workflow,identityName,project,approvalSet);
             
             </Source>

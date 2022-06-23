@@ -401,6 +401,95 @@
 		LogEnablement.isLogDebugEnabled(fwLogger,"End isBusinessRole false");
         return false;
     }
+
+	public void executeAfterProvisionRuleForIDMS(SailPointContext context, Workflow workflow, String identityName, ProvisioningPlan plan, ProvisioningProject project,ApprovalSet approvalSet) throws Exception {    
+    	LogEnablement.isLogDebugEnabled(fwLogger," Entering  executeAfterProvisionRuleForIDMS");
+		Identity identity = context.getObjectByName(Identity.class,identityName);
+    	boolean executePlan = false;
+    	if(plan!=null) {
+			LogEnablement.isLogDebugEnabled(fwLogger," Plan " + plan.toXml());                          
+      		List assignedRoles = identity.getAssignedRoles();
+			LogEnablement.isLogDebugEnabled(fwLogger," List of Assigned Roles " + Util.listToCsv(assignedRoles));
+			List assignedRolesName = new ArrayList();
+			if(!Util.isEmpty(assignedRoles)) {									 
+				for(Bundle b: assignedRoles) {
+					assignedRolesName.add(b.getName());					  
+				}
+			}
+			LogEnablement.isLogDebugEnabled(fwLogger," Current Assigned Roles " + Util.listToCsv(assignedRolesName));
+			String applicationName = "IIQ";
+			boolean addAttributeRequestforIDMSConfirmer = false;
+			boolean doesAddRequestforIDMSConfirmerExists = false;
+			boolean isIDMSRequest = false;
+			List accountRequests = plan.getAccountRequests(applicationName);
+			if(!Util.isEmpty(accountRequests)) {
+				for(AccountRequest accountRequest: accountRequests) {  
+					LogEnablement.isLogDebugEnabled(fwLogger," Account Request: " + accountRequest.toXml());            
+					String nativeIdentity = accountRequest.getNativeIdentity();                
+					List attributeRequests = accountRequest.getAttributeRequests();                                           
+					if(Util.size(attributeRequests) > 0) {
+						for(AttributeRequest attributeRequest: attributeRequests) {
+							String name = attributeRequest.getName(); 
+							sailpoint.object.ProvisioningPlan.Operation op = attributeRequest.getOperation();
+							LogEnablement.isLogDebugEnabled(fwLogger," Name :" + name );
+							if(attributeRequest.getValue() instanceof String) {
+								String value = attributeRequest.getValue();
+                      			LogEnablement.isLogDebugEnabled(fwLogger," Value " + value);
+								if(value.equals("iDMS Confirmer")) {
+									doesAddRequestforIDMSConfirmerExists = true;
+								}
+								if(value.startsWith("iDMS")) {
+									isIDMSRequest = true;
+								}
+							} 
+							if(attributeRequest.getValue() instanceof List) {
+								List values = attributeRequest.getValue();
+								if(values.contains("iDMS Confirmer")) {
+									doesAddRequestforIDMSConfirmerExists = true;
+								}
+								if(Util.listToCsv(values).contains("iDMS")) {
+									isIDMSRequest = true;
+								}                                               
+							}
+							
+							LogEnablement.isLogDebugEnabled(fwLogger,"doesAddRequestforIDMSConfirmerExists" + doesAddRequestforIDMSConfirmerExists);										
+							if(name.equals("assignedRoles") && !op.equals(sailpoint.object.ProvisioningPlan.Operation.Remove) && !doesAddRequestforIDMSConfirmerExists) {
+								addAttributeRequestforIDMSConfirmer = true;
+							}                                   
+						}    
+					}
+                	LogEnablement.isLogDebugEnabled(fwLogger,"addAttributeRequestforIDMSConfirmer" + addAttributeRequestforIDMSConfirmer);                   
+					if(addAttributeRequestforIDMSConfirmer && !assignedRolesName.contains("iDMS Confirmer") && isIDMSRequest) { 
+                		executePlan = true;
+					}
+				}
+										
+			}               
+		}			
+    	if(executePlan) {      
+			ProvisioningPlan idmsConfirmerPlan = new ProvisioningPlan();
+			ProvisioningPlan.AccountRequest accountRequest = new ProvisioningPlan.AccountRequest();
+			accountRequest.setApplication("IIQ");
+			accountRequest.setOperation(ProvisioningPlan.AccountRequest.Operation.Modify);
+			accountRequest.setNativeIdentity(identityName);    
+			AttributeRequest attrReq = new AttributeRequest("assignedRoles",ProvisioningPlan.Operation.Add,"iDMS Confirmer");
+			attrReq.setAssignment(true);
+			accountRequest.add(attrReq);     
+			idmsConfirmerPlan.add(accountRequest);
+			idmsConfirmerPlan.setIdentity(identity); 
+			LogEnablement.isLogDebugEnabled(fwLogger," Executing Plan " + idmsConfirmerPlan.toXml()); 
+			Provisioner provisioner = new Provisioner(context);
+			provisioner.setNoRoleExpansion(false);
+			provisioner.setNoLocking(true);
+			provisioner.setOptimisticProvisioning(true);
+			ProvisioningProject proObj = provisioner.compile(idmsConfirmerPlan);
+			provisioner.execute(proObj);       
+    	}
+    	LogEnablement.isLogDebugEnabled(fwLogger," Exiting Rule ");     
+	}
+    
+
+
 	/**
 	 * Launch After Provisioning Workflow to remove form roles and after ticket provisinion Rule
 	 * @param context
