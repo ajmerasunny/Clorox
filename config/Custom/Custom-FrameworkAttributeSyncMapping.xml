@@ -80,6 +80,7 @@
             <String>RULE:Concur:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:EssBase:Clorox AttributeSync AccountExpiration Rule</String>
             <String>RULE:MDWorkflow:Clorox AttributeSync AccountExpiration Rule</String>
+            <String>RULE:SAP Info Steward:Clorox AttributeSync AccountExpiration Rule</String>
           </List>
         </value>
       </entry>

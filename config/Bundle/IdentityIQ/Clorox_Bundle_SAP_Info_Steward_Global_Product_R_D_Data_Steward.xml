@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="CTC Colorbase Role" name="CTC Colorbase Role" type="organizational">
+<Bundle displayName="SAP Info Steward Global Product R&amp;D Data Steward" name="SAP Info Steward Global Product R&amp;D Data Steward" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -11,7 +11,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName"/>
+      <entry key="appName" value="%%SAPInfoSteward_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -25,7 +25,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords"/>
+      <entry key="roleKeywords" value="SAP Info Steward Global Product R&amp;D Data Steward"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -36,13 +36,19 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="CTC-Colorbase-This role gives users access to Colorbase within the CTC application."/>
+            <entry key="en_US" value="This role grants access to manage scorecards for Global Product R&amp;amp;D data"/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="SAP Info Steward"/>
+  </Inheritance>
   <Owner>
-    <Reference class="sailpoint.object.Identity" name="spadmin"/>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_SAPInfoSteward_ADMIN_WORKGROUP%%"/>
   </Owner>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="SAP Info Steward Global Product R&amp;D Data Steward IT Role"/>
+  </Requirements>  
 </Bundle>

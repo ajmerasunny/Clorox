@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Bundle displayName="SAP Info Steward Global MD Refresh Status Data Analyst IT Role" name="SAP Info Steward Global MD Refresh Status Data Analyst IT Role" type="it">
+  <Attributes>
+    <Map>
+      <entry key="acceleratorPackEnabled"/>
+      <entry key="accountSelectorRules">
+        <value>
+          <AccountSelectorRules>
+            <ApplicationAccountSelectorRules>
+              <ApplicationAccountSelectorRule>
+                <ApplicationRef>
+                  <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                </ApplicationRef>
+                <RuleRef>
+                  <Reference class="sailpoint.object.Rule" name="Clorox Primary AD Account Selector Rule"/>
+                </RuleRef>
+              </ApplicationAccountSelectorRule>
+            </ApplicationAccountSelectorRules>
+          </AccountSelectorRules>
+        </value>
+      </entry>
+      <entry key="additionalRoleBusApprovalRule"/>
+      <entry key="additionalRoleBusApprovers"/>
+      <entry key="allApprovers"/>
+      <entry key="allowDuplicateAccounts" value="false"/>
+      <entry key="allowMultipleAssignments" value="false"/>
+      <entry key="apaccountType"/>
+      <entry key="appName" value="%%SAPInfoSteward_APP_NAME%%"/>
+      <entry key="autoAssignEnablerTypes"/>
+      <entry key="businessSubprocessName"/>
+      <entry key="defaultEndDateSpan"/>
+      <entry key="defaultStartDateSpan"/>
+      <entry key="enablerTypes"/>
+      <entry key="formappName"/>
+      <entry key="isBirthright"/>
+      <entry key="mandatoryEntitlements"/>
+      <entry key="mandatoryRoles"/>
+      <entry key="mergeTemplates" value="false"/>
+      <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
+      <entry key="roleBusApprovalRule"/>
+      <entry key="roleBusApprovers"/>
+      <entry key="roleKeywords" value="SAP Info Steward Global MD Refresh Status Data Analyst"/>
+      <entry key="rolePrivileged"/>
+      <entry key="sapVcbr">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="singleRoleRequest"/>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="This role grants access to manage scorecards and rules to Global MD Refresh Status data"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="SAP Info Steward"/>
+  </Inheritance>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_SAPInfoSteward_ADMIN_WORKGROUP%%"/>
+  </Owner>
+  <Profiles>
+    <Profile>
+      <ApplicationRef>
+        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+      </ApplicationRef>
+      <Constraints>
+        <Filter operation="CONTAINS_ALL" property="memberOf">
+          <Value>
+            <List>
+              <String>%%SAPInfoSteward_SAP_Info_Steward_Global_MD_Refresh_Status_Data_Analyst_AD_GROUP%%</String>
+            </List>
+          </Value>
+        </Filter>
+      </Constraints>
+    </Profile>
+    <Profile>
+      <ApplicationRef>
+        <Reference class="sailpoint.object.Application" name="%%SAPInfoSteward_APP_NAME%%"/>
+      </ApplicationRef>
+      <Constraints>
+        <Filter operation="CONTAINS_ALL" property="Role">
+          <Value>
+            <List>
+              <String>%%SAPInfoSteward_APP_NAME%%</String>
+            </List>
+          </Value>
+        </Filter>
+      </Constraints>
+    </Profile>     
+  </Profiles>
+</Bundle>
