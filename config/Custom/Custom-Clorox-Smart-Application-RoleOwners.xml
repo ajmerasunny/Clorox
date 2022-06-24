@@ -11,6 +11,7 @@
 			              <String>%%Concur_APP_NAME%%</String>
 			              <String>%%Essbase_APP_NAME%%</String>			
                     <String>%%IBM_Imaging_APP_NAME%%</String>
+                    <String>%%SAPInfoSteward_APP_NAME%%</String>
                 </List>
             </value>
         </entry>
@@ -26,7 +27,8 @@
             <entry key="%%Concur_APP_NAME%%" value="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
             <entry key="%%Essbase_APP_NAME%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
             <entry key="IBM Content Management Accounts Payable" value="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
-            <entry key="IBM Content Management Accounts Receivable" value="%%CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP%%"/>            
+            <entry key="IBM Content Management Accounts Receivable" value="%%CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP%%"/>
+            <entry key="%%SAPInfoSteward_APP_NAME%%" value="%%CLX_AR_SAPInfoSteward_OWNER_WORKGROUP%%"/>            
           </Map>
         </value>
       </entry>
@@ -46,7 +48,11 @@
                   <String>%%Concur_APP_NAME%%</String>
                   <String>%%Essbase_APP_NAME%%</String>
                   <String>%%MDWORKFLOW_APP_NAME%%</String>
+<<<<<<< HEAD
                   <String>IBM Content Management</String>
+=======
+                  <String>%%SAPInfoSteward_APP_NAME%%</String>
+>>>>>>> feature/DS/IS
                 </List>
             </value>
         </entry>              

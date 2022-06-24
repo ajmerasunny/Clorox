@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<<<<<<<< HEAD:config/Bundle/Organizational/Bundle-EssBase-Role.xml
-<Bundle displayName="Essbase" name="Essbase" type="organizational">
-========
-<Bundle displayName="SAP Info Steward" name="SAP Info Steward" type="organizational">
->>>>>>>> feature/DS/IS:config/Bundle/Organizational/Clorox_Bundle_SAP_Info_Steward.xml
+<Bundle displayName="SAP Info Steward Global MD Refresh Status Data Display" name="SAP Info Steward Global MD Refresh Status Data Display" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -15,7 +11,7 @@
       <entry key="allowDuplicateAccounts" value="false"/>
       <entry key="allowMultipleAssignments" value="false"/>
       <entry key="apaccountType"/>
-      <entry key="appName"/>
+      <entry key="appName" value="%%SAPInfoSteward_APP_NAME%%"/>
       <entry key="autoAssignEnablerTypes"/>
       <entry key="businessSubprocessName"/>
       <entry key="defaultEndDateSpan"/>
@@ -29,7 +25,7 @@
       <entry key="noStartEndDatesAfterDateIdentityAttribute"/>
       <entry key="roleBusApprovalRule"/>
       <entry key="roleBusApprovers"/>
-      <entry key="roleKeywords"/>
+      <entry key="roleKeywords" value="SAP Info Steward Global MD Refresh Status Data Display"/>
       <entry key="rolePrivileged"/>
       <entry key="sapVcbr">
         <value>
@@ -40,21 +36,19 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-<<<<<<<< HEAD:config/Bundle/Organizational/Bundle-EssBase-Role.xml
-            <entry key="en_US" value="Essbase - This role gives users access to the Essbase application."/>
-========
-            <entry key="en_US" value="SAP Info Steward"/>
->>>>>>>> feature/DS/IS:config/Bundle/Organizational/Clorox_Bundle_SAP_Info_Steward.xml
+            <entry key="en_US" value="This role grants access to view Global MD Refrest Status data"/>
           </Map>
         </value>
       </entry>
     </Map>
   </Attributes>
+  <Inheritance>
+    <Reference class="sailpoint.object.Bundle" name="SAP Info Steward"/>
+  </Inheritance>
   <Owner>
-<<<<<<<< HEAD:config/Bundle/Organizational/Bundle-EssBase-Role.xml
-    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_Essbase_OWNER_WORKGROUP%%"/>
-========
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_SAPInfoSteward_ADMIN_WORKGROUP%%"/>
->>>>>>>> feature/DS/IS:config/Bundle/Organizational/Clorox_Bundle_SAP_Info_Steward.xml
   </Owner>
+    <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="SAP Info Steward Global MD Refresh Status Data Display IT Role"/>
+  </Requirements>  
 </Bundle>

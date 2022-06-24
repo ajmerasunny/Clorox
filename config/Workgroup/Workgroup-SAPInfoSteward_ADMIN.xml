@@ -1,12 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Identity name="CLX_AR_DSISOwner" workgroup="true">
+<Identity name="%%CLX_AR_SAPInfoSteward_ADMIN_WORKGROUP%%" workgroup="true">
   <Attributes>
     <Map>
-      <entry key="displayName" value="CLX_AR_DSISOwner"/>
+      <entry key="displayName" value="%%CLX_AR_SAPInfoSteward_ADMIN_WORKGROUP%%"/>
     </Map>
   </Attributes>
-  <Description>DS/IS Secondar Role Approvers</Description>
+  <Description>SAP Info Steward Application Admin</Description>
   <Preferences>
     <Map>
       <entry key="workgroupNotificationOption">

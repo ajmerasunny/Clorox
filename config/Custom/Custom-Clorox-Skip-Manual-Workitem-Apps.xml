@@ -10,6 +10,7 @@
             <String>%%CTC_Colorbase_APP_NAME%%</String>
             <String>%%CTC_HardSurface_Cleaning_APP_NAME%%</String>
             <String>%%IBM_Imaging_APP_NAME%%</String>
+            <String>%%SAPInfoSteward_APP_NAME%%</String>
           </List>
         </value>
       </entry>
