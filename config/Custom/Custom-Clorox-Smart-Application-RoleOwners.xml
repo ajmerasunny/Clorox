@@ -48,11 +48,8 @@
                   <String>%%Concur_APP_NAME%%</String>
                   <String>%%Essbase_APP_NAME%%</String>
                   <String>%%MDWORKFLOW_APP_NAME%%</String>
-<<<<<<< HEAD
                   <String>IBM Content Management</String>
-=======
                   <String>%%SAPInfoSteward_APP_NAME%%</String>
->>>>>>> feature/DS/IS
                 </List>
             </value>
         </entry>              
