@@ -2,7 +2,7 @@
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
 <ManagedAttribute aggregated="true" attribute="Role" displayName="SAP Info Steward LATAM Customer Data Analyst" type="Role" value="SAP Info Steward LATAM Customer Data Analyst">
   <ApplicationRef>
-    <Reference class="sailpoint.object.Application" name="SAP Info Steward LATAM Customer Data Analyst"/>
+        <Reference class="sailpoint.object.Application" name="%%SAPInfoSteward_APP_NAME%%"/>
   </ApplicationRef>
   <Attributes>
     <Map>
