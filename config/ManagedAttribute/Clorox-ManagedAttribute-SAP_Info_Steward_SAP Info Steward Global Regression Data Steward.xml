@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="SAP Info Steward Global Regression Data Steward" type="Role" value="SAP Info Steward Global Regression Data Steward">
+  <ApplicationRef>
+    <Reference class="sailpoint.object.Application" name="SAP Info Steward Global Regression Data Steward"/>
+  </ApplicationRef>
+  <Attributes>
+    <Map>
+      <entry key="sysDescriptions">
+        <value>
+          <Map>
+            <entry key="en_US" value="SAP Info Steward Global Regression Data Steward"/>
+          </Map>
+        </value>
+      </entry>
+    </Map>
+  </Attributes>
+  <Owner>
+    <Reference class="sailpoint.object.Identity" name="%%CLX_AR_SAPInfoSteward_ADMIN_WORKGROUP%%"/>
+  </Owner>
+</ManagedAttribute>

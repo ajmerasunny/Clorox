@@ -86,7 +86,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>%%SAPInfoSteward_APP_NAME%%</String>
+              <String>SAP Info Steward Global Product R&amp;D Data Display</String>
             </List>
           </Value>
         </Filter>

@@ -86,7 +86,7 @@
         <Filter operation="CONTAINS_ALL" property="Role">
           <Value>
             <List>
-              <String>%%SAPInfoSteward_APP_NAME%%</String>
+              <String>SAP Data Services Developer</String>
             </List>
           </Value>
         </Filter>
