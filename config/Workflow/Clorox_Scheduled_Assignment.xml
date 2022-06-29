@@ -238,7 +238,7 @@ plan evaluator.</Description>
     </Description>
     <Return name="project" to="project"/>
     <WorkflowRef>
-      <Reference class="sailpoint.object.Workflow" name="Clorox LCM Provisioning"/>
+      <Reference class="sailpoint.object.Workflow" name="Clorox Scheduled LCM Provisioning"/>
     </WorkflowRef>
     <Transition to="Refresh Identity"/>
   </Step>
