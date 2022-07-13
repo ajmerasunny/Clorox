@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle created="1651687370652" displayName="MDWorkflow Contributor" name="MDWorkflow Contributor" type="business">
+<Bundle displayName="Clorox Workflow Designer" name="Clorox Workflow Designer" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -36,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="This role gives access to the Master Data Workflow for Contributor"/>
+            <entry key="en_US" value="This roles gives access to the Master Data Workflow for a Designer&lt;br>"/>
           </Map>
         </value>
       </entry>
@@ -49,6 +49,6 @@
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_MDWorkflow_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="MDWorkflow Contributor IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Clorox Workflow Designer IT Role"/>
   </Requirements>
 </Bundle>

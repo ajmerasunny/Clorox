@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="MDWorkflow Designer IT Role" name="MDWorkflow Designer IT Role" type="it">
+<Bundle displayName="Clorox Workflow Designer IT Role" name="Clorox Workflow Designer IT Role" type="it">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
- <entry key="accountSelectorRules">
+      <entry key="accountSelectorRules">
         <value>
           <AccountSelectorRules>
             <ApplicationAccountSelectorRules>
@@ -69,7 +69,7 @@
         <Reference class="sailpoint.object.Application" name="%%MDWORKFLOW_APP_NAME%%"/>
       </ApplicationRef>
       <Constraints>
-        <Filter operation="EQ" property="Role" value="MDWorkflow Designer"/>
+        <Filter operation="EQ" property="Role" value="Clorox Workflow Designer"/>
       </Constraints>
     </Profile>
     <Profile>
