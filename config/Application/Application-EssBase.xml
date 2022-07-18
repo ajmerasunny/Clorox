@@ -234,7 +234,7 @@
           <Boolean/>
         </value>
       </entry>
-      <entry key="joinerEnabled"/>
+      <entry key="joinerEnabled" value="true"/>
       <entry key="joinerPopulationRegex"/>
       <entry key="joinerRoles"/>
       <entry key="loaExtendedRule"/>

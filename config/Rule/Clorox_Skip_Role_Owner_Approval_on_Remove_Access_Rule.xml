@@ -66,34 +66,50 @@
 						resultMap.put("ApprovalRequired","true");
 						approvers = smartApplicationOwners.get("IBM Content Management Accounts Receivable");                
 						resultMap.put("Approvers", approvers);
-					} else if(roleName.startsWith("Concur")) {
-						if(roleName.contains("Concur Expense")) {
-							approvers = smartApplicationOwners.get("Concur Expense");                
-						} else {
-							approvers = smartApplicationOwners.get("Concur");                
-						}
-						resultMap.put("ApprovalRequired","true");						
-						resultMap.put("Approvers", approvers);
+					}
+					else if(appName.equals("Concur")) {        
+					  if(roleName.startsWith("Concur Expense")) {						
+						approvers = "CLX_AR_ConcurP2PAdmin";              					
+					  } else {
+						approvers = "CLX_AR_ConcurAdmin"; 
+					  }
+					  resultMap.put("ApprovalRequired","true");						
+					  resultMap.put("Approvers", approvers);   
+					}
+					else if(smartApplicationOwners.containsKey(roleName)) {						
+					  approvers = smartApplicationOwners.get(roleName);               						
+					  resultMap.put("ApprovalRequired","true");						
+					  resultMap.put("Approvers", approvers);
 					}    
 					else if(smartApplications.contains(appName)) {
-						resultMap.put("ApprovalRequired","true");
-						approvers = smartApplicationOwners.get(appName);                
-						resultMap.put("Approvers", approvers);
+					  log.debug("smartApplications contains appName");
+					  resultMap.put("ApprovalRequired","true");
+					  approvers = smartApplicationOwners.get(appName);
+					  log.debug("approvers: "+approvers);               
+					  resultMap.put("Approvers", approvers);
 					}
-				} 
-			}
-			else {
-				// For ManagedAttributes                
-                if(smartApplications.contains(appName)) {
+				  } 
+			} else {
+				  if(appName.equals("Concur")) {        
+					if(roleName.startsWith("Concur Expense")) {						
+					  approvers = "CLX_AR_ConcurP2PAdmin";              					
+					} else {
+					  approvers = "CLX_AR_ConcurAdmin"; 
+					}
+					resultMap.put("ApprovalRequired","true");						
+					resultMap.put("Approvers", approvers);   
+				  } else if(smartApplications.contains(appName)) {
 					resultMap.put("ApprovalRequired","true");
 					approvers = smartApplicationOwners.get(appName);                
 					resultMap.put("Approvers", approvers);
-				}
-      		}			
-		}	
-		log.debug(" map " + resultMap.toString());  
-		return resultMap;
- 
+				  }
+				}       
+			}	
+		    if(resultMap!=null) {
+			 log.debug(" map " + resultMap.toString());  
+		    }
+
+           return resultMap;
     ]]>
   </Source>
 </Rule>
