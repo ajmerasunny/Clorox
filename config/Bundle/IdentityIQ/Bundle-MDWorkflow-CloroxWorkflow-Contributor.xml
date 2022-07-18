@@ -1,25 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle  displayName="MDWorkflow Contributor IT Role" name="MDWorkflow Contributor IT Role" type="it">
+<Bundle displayName="Clorox Workflow Contributor" name="Clorox Workflow Contributor" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
- <entry key="accountSelectorRules">
-        <value>
-          <AccountSelectorRules>
-            <ApplicationAccountSelectorRules>
-              <ApplicationAccountSelectorRule>
-                <ApplicationRef>
-                  <Reference class="sailpoint.object.Application" name="%%LDAP_APP_NAME%%"/>
-                </ApplicationRef>
-                <RuleRef>
-                  <Reference class="sailpoint.object.Rule" name="Clorox Primary LDAP Account Selector Rule"/>
-                </RuleRef>
-              </ApplicationAccountSelectorRule>
-            </ApplicationAccountSelectorRules>
-          </AccountSelectorRules>
-        </value>
-      </entry>      
+      <entry key="accountSelectorRules"/>
       <entry key="additionalRoleBusApprovalRule"/>
       <entry key="additionalRoleBusApprovers"/>
       <entry key="allApprovers"/>
@@ -51,7 +36,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="This role gives access to the Master Data Workflow for Contributor&lt;br>"/>
+            <entry key="en_US" value="This role gives access to the Master Data Workflow for Contributor"/>
           </Map>
         </value>
       </entry>
@@ -63,28 +48,7 @@
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_MDWorkflow_OWNER_WORKGROUP%%"/>
   </Owner>
-  <Profiles>
-    <Profile>
-      <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%MDWORKFLOW_APP_NAME%%"/>
-      </ApplicationRef>
-      <Constraints>
-        <Filter operation="EQ" property="Role" value="MDWorkflow Contributor"/>
-      </Constraints>
-    </Profile>
-    <Profile>
-      <ApplicationRef>
-        <Reference class="sailpoint.object.Application"  name="%%LDAP_APP_NAME%%"/>
-      </ApplicationRef>
-      <Constraints>
-        <Filter operation="CONTAINS_ALL" property="groups">
-          <Value>
-            <List>
-              <String>%%MDWORKFLOW_LDAP_GROUPNAME%%</String>
-            </List>
-          </Value>
-        </Filter>
-      </Constraints>
-    </Profile>    
-  </Profiles>
+  <Requirements>
+    <Reference class="sailpoint.object.Bundle" name="Clorox Workflow Contributor IT Role"/>
+  </Requirements>
 </Bundle>

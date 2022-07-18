@@ -234,7 +234,7 @@
           <Boolean/>
         </value>
       </entry>
-      <entry key="joinerEnabled"/>
+      <entry key="joinerEnabled" value="true"/>
       <entry key="joinerPopulationRegex"/>
       <entry key="joinerRoles"/>
       <entry key="loaExtendedRule"/>
@@ -334,6 +334,9 @@
       <entry key="xdaysresetPwd"/>
     </Map>
   </Attributes>
+  <CorrelationRule>
+    <Reference class="sailpoint.object.Rule" name="CLORX SMART Correlation rule"/>
+  </CorrelationRule>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_HPPPMAdmin_OWNER_WORKGROUP%%"/>
   </Owner>

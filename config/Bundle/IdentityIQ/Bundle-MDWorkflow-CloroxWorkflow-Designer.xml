@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Bundle PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Bundle displayName="MDWorkflow Designer" name="MDWorkflow Designer" type="business">
+<Bundle displayName="Clorox Workflow Designer" name="Clorox Workflow Designer" type="business">
   <Attributes>
     <Map>
       <entry key="acceleratorPackEnabled"/>
@@ -49,6 +49,6 @@
     <Reference class="sailpoint.object.Identity" name="%%CLX_AR_MDWorkflow_OWNER_WORKGROUP%%"/>
   </Owner>
   <Requirements>
-    <Reference class="sailpoint.object.Bundle" name="MDWorkflow Designer IT Role"/>
+    <Reference class="sailpoint.object.Bundle" name="Clorox Workflow Designer IT Role"/>
   </Requirements>
 </Bundle>

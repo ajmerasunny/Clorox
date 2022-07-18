@@ -251,29 +251,145 @@
                              ProvisioningPlan plan, String fallbackApprover, 
                              String identity, boolean autoApprove) {
 
-        // djs: use a LinkedHashMap here to perserve the order of the
-        // approvers in the list.  This is important for manager transfer
-        // approvals.
-        Map ownerToSet = new LinkedHashMap();
-        List items = approvalSet.getItems();
-        for ( ApprovalItem item : items ) {
-            List approvers = getApproverNames(scheme, item, plan, identity);
-            if ( approvers != null && approvers.size() == 0 && fallbackApprover != null ) {
+    // djs: use a LinkedHashMap here to perserve the order of the
+    // approvers in the list.  This is important for manager transfer
+    // approvals.
+    List chekDuplicateItems = new ArrayList();
+    Map ownerToSet = new LinkedHashMap();
+    List items = approvalSet.getItems();
+    for ( ApprovalItem item : items ) {
+
+      String reqComments = null;
+      if(item != null && item.getRequesterComments() != null)
+        reqComments =  item.getRequesterComments();
+      //Manideep - new Code start here
+      String op = item.getOperation();
+      
+             String appName = item.getApplicationName();
+
+        Object obj = item.getValue();
+        List valList = new ArrayList();
+        if(obj instanceof List) {
+          valList = (List) obj;
+        }else {
+          String value = (String)obj;
+          valList.add(value);
+        }
+
+      // Manideep - this will execute for the create oprtaion
+      if("Create".equals(op)) {
+
+ 
+
+        for(String val : valList) {
+
+          if(val.contains("=")) {
+            val = val.substring(val.indexOf("=")+1, val.length());
+
+            //parsing the approval iteam and creating multiple approvalitems for each entitlment.
+            //String updatedVal = val.replace("Role =", "").trim().replaceAll("'", "").trim();
+            String updatedVal = val.trim().replaceAll("'", "").trim();
+            List list = Util.csvToList(updatedVal, true);
+
+            if("iDMS".equals(appName)){
+
+              if(null != list && !list.contains("iDMS Confirmer")){
+                list.add("iDMS Confirmer");
+              }
+            }
+
+            for(String itemEntVal : list) {
+              ApprovalItem newItem = new ApprovalItem();
+              newItem.setApplication(appName);
+              newItem.setName(item.getName());
+              newItem.setOperation("Create");
+              newItem.setValue(itemEntVal);
+              if(reqComments != null)
+                newItem.setRequesterComments(reqComments);
+
+              List approvers = getApproverNames(scheme, newItem, plan, identity);
+              if ( approvers != null && approvers.size() == 0 && fallbackApprover != null ) {
                 if ( log.isDebugEnabled() ) {
-                    log.debug("Approver could not be resolved using fallbackApprover '"+fallbackApprover+"'.");
+                  log.debug("Approver could not be resolved using fallbackApprover '"+fallbackApprover+"'.");
                 }
                 approvers.add(fallbackApprover);
-            }
-            //
-            // Build an approval set or add an ApprovalItem 
-            // to an existing set
-            //
-            if ( Util.size(approvers) > 0 ) {
+              }
+              //
+              // Build an approval set or add an ApprovalItem 
+              // to an existing set
+              //
+              if ( Util.size(approvers) > 0 ) {
                 for ( String approver : approvers ) {
-                    ApprovalSet set = (ApprovalSet)ownerToSet.get(approver);
-                    if ( set == null ) {
-                        set = new ApprovalSet();
+                  ApprovalSet set = (ApprovalSet)ownerToSet.get(approver);
+                  if ( set == null ) {
+                    set = new ApprovalSet();
+                  }
+
+                  // Make a copy of the item here so they are independent of the the
+                  // cart's item.  
+                  ApprovalItem itemCopy = XMLObjectFactory.getInstance().clone(newItem, context);
+                  set.add(itemCopy);
+                  ownerToSet.put(approver, set);
+                  if ( autoApprove ) {
+                    // djs: when we come across the launcher who is also the approver
+                    // auto approve the item, this will allow us to audit/report on
+                    // the request but not force an approval.  We won't create an 
+                    // Approval object if all of the items are acccepted
+                    if ( approver.equals(launcher) ) {
+                      itemCopy.setState(WorkItem.State.Finished);
+                      if ( log.isDebugEnabled() ) {
+                        log.debug("Launcher was also approver and was removed.");
+                      }
+                      // If there is just one approver AND we are marking this 
+                      // Auto-Approved also mark the master approvalSets item 
+                      // finished
+                      if ( approvers.size() == 1 ) {
+                        item.setState(WorkItem.State.Finished);
+                      }
                     }
+                  }
+                }
+                //
+                // Update the "cart" representation
+                //
+                // set the item's owner so we have an update
+                // version in the "registry"
+                // Should we store a csv Multiple approvers ?
+                newItem.setOwner(approvers.get(0));
+              }
+
+            }
+          }
+        }
+      }
+      else {
+        //Manideep -  this will execute for add/remove operation modify 
+        if("Remove".equals(op)){
+
+          String remAccess = appName + valList.get(0);
+          if(chekDuplicateItems.contains(remAccess)){
+            continue;
+          }
+
+          chekDuplicateItems.add(remAccess);
+        }
+        List approvers = getApproverNames(scheme, item, plan, identity);
+        if ( approvers != null && approvers.size() == 0 && fallbackApprover != null ) {
+          if ( log.isDebugEnabled() ) {
+            log.debug("Approver could not be resolved using fallbackApprover '"+fallbackApprover+"'.");
+          }
+          approvers.add(fallbackApprover);
+        }
+        //
+        // Build an approval set or add an ApprovalItem 
+        // to an existing set
+        //
+        if ( Util.size(approvers) > 0 ) {
+          for ( String approver : approvers ) {
+            ApprovalSet set = (ApprovalSet)ownerToSet.get(approver);
+            if ( set == null ) {
+              set = new ApprovalSet();
+            }
 
                     // Make a copy of the item here so they are independent of the the
                     // cart's item.  
@@ -306,6 +422,7 @@
                 // version in the "registry"
                 // Should we store a csv Multiple approvers ?
                 item.setOwner(approvers.get(0));
+        }
             }
         }
         if ( log.isDebugEnabled() ) {
@@ -459,13 +576,34 @@
             Map smartApplicationsOwnerMap = customObject.get("ApplicationOwner");
             List smartApplications = customObject.getList("Applications");
             if(smartApplications.contains(appName)) {
-                if(smartApplicationsOwnerMap.containsKey(item.getValue())) {
-                   approverName = smartApplicationsOwnerMap.get(item.getValue());   
-                }
-            }
+          //Converting the approval item value list to String started code here
+          //Gaurav - Updated to handle NPE if there is no value e.g. disable only use case
+          String string = null;
+          if(null != item.getValue()){
+          	string = item.getValue().toString();
+          }
+          String substring = null;
+          if(null != string && (string.contains("[") || string.contains("]")))
+          {
+            int indexOf = string.indexOf("[");
+            int indexOf2 = string.indexOf("]");
+            substring = string.substring(indexOf+1,indexOf2);
+          }else
+          {
+            substring = string;
+          }
+         
+          //Converting the approval item value list to String ended code here
+
+          if(smartApplicationsOwnerMap.containsKey(substring)) {
+            
+            approverName = smartApplicationsOwnerMap.get(substring); 
         }
-        return approverName;
+      }
     }
+    log.trace(" Exiting resolveAppRequestOwner " + approverName);
+    return approverName;
+  }
 
     /**
      * Helper for resolveAppRequestOwner.

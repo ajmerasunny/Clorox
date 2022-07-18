@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE ManagedAttribute PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<ManagedAttribute aggregated="true" attribute="Role" displayName="MDWorkflow Designer" type="Role" value="MDWorkflow Designer">
+<ManagedAttribute aggregated="true" attribute="Role" displayName="Clorox Workflow Contributor" type="Role" value="Clorox Workflow Contributor">
   <ApplicationRef>
     <Reference class="sailpoint.object.Application" name="%%MDWORKFLOW_APP_NAME%%"/>
   </ApplicationRef>
@@ -9,7 +9,7 @@
       <entry key="sysDescriptions">
         <value>
           <Map>
-            <entry key="en_US" value="This roles gives access to the Master Data Workflow for a Designer"/>
+            <entry key="en_US" value="This role gives access to the Master Data Workflow for Contributor"/>
           </Map>
         </value>
       </entry>
