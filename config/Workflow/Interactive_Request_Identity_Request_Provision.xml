@@ -399,32 +399,318 @@
     <Approval mode="parallelPoll" owner="rule:Clorox Build Manual Action Approvals" renderer="lcmManualActionsRenderer.xhtml" send="identityDisplayName,identityName,policyViolations">
       <AfterScript>
         <Source><![CDATA[
-          import sailpoint.object.ApprovalSet;
-          import sailpoint.object.ApprovalItem;
-          import sailpoint.object.WorkItem;
-          import sailpoint.object.WorkItem;
-          import sailpoint.workflow.IdentityRequestLibrary;
-          import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
-          if (item == null) {
-              // must not be a leaf approval...
-              return;
-          }
-          WorkItem.State state = item.getState();
-          if (state.equals(WorkItem.State.Expired)) {
-          List approvalItems = approvalSet.getItems();
-            for (ApprovalItem approvalItem : approvalItems) {
-              approvalItem.reject();
-              List listOfComments = approvalItem.getComments();
-              approvalItem.add(new Comment("Auto expire due to lack of action", "spadmin")); 
-              item.setCompletionComments("Auto expired item due to lack of action");
+  import java.util.ArrayList;
+  import java.util.HashMap;
+  import java.util.List;
+  import java.util.Map;
+
+  import sailpoint.object.ApprovalSet;
+
+  import sailpoint.object.ManagedAttribute;
+  import sailpoint.object.ResourceObject;
+  import sailpoint.object.TaskResult;
+  import sailpoint.object.WorkItem;
+  import sailpoint.tools.Util;
+
+  import sailpoint.object.ApprovalItem;
+  import sailpoint.object.WorkItem;
+  import sailpoint.workflow.IdentityRequestLibrary;
+  import sailpoint.api.IdentityService;
+  import sailpoint.api.Aggregator;
+  import sailpoint.object.*;
+  import sailpoint.object.TaskResult;
+  import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
+  import sailpoint.workflow.WorkflowContext;
+  import sailpoint.object.Filter;
+  import sailpoint.object.ManagedAttribute;
+
+  if (item == null) {
+    // must not be a leaf approval...
+    return;
+  }
+
+  ApprovalItem appItem = null;
+  List approvalItems = approvalSet.getItems();
+
+  log.debug("Entering approvalItems: "+approvalItems) ;
+  WorkItem.State state = item.getState();
+  if (state.equals(WorkItem.State.Expired)) {
+    for (ApprovalItem approvalItem : approvalItems) {
+      approvalItem.reject();
+      List listOfComments = approvalItem.getComments();
+      approvalItem.add(new Comment("Auto expire due to lack of action", "spadmin")); 
+      item.setCompletionComments("Auto expired item due to lack of action");
+    }
+  }
+  log.debug("Entering aggregateGenericAccount") ;
+
+  public aggregateGenericAccount(String identityName, ApprovalSet approvalSet){
+
+
+    log.debug("*** Starting aggregateGenericAccount() ***");
+
+    try{
+
+      Map appVsRolesAdd = new HashMap();
+      Map opMap = new HashMap();
+      Map appVsRolesRemove = new HashMap();
+
+
+      if(approvalSet != null && approvalSet.getItems() != null)
+      {
+        for(ApprovalItem item : approvalSet.getItems()) {
+          if(item != null)
+          {
+            log.debug("approvalSet : "+approvalSet.toXml());
+
+            String appName = item.getApplicationName();
+            String op = item.getOperation();
+            String entAttr = item.getName();
+            List valList = Util.otol(item.getValue());
+
+            log.debug("appName : "+appName);
+            log.debug("op : "+op);
+            log.debug("entAttr : "+entAttr);
+            log.debug("valList : "+valList);
+			
+            ManagedAttribute ma = null;
+            if(Util.isNullOrEmpty(entAttr)) {
+              log.debug("In Entitlement Attr if condition : ");
+              if(valList != null && !valList.isEmpty())
+                ma = context.getUniqueObject(ManagedAttribute.class, Filter.and(Filter.eq("application.name", appName), Filter.eq("value", valList.get(0))));
+              log.debug("ma : "+ma);
+              if(null != ma) {
+                entAttr = ma.getAttribute();
+              }
+              log.debug("entAttr 1 : "+entAttr);
+            }
+
+            if(op != null)
+            {
+              if("Enable".equalsIgnoreCase(op)) {
+                opMap.put(appName, "Enable");
+              }
+              if("Disable".equalsIgnoreCase(op)) {
+                log.debug("Entering Disable If condition ");
+                opMap.put(appName, "Disable");
+                log.debug("Ending Disable If condition ");
+              }
+              if("Create".equalsIgnoreCase(op)) {
+                opMap.put(appName, "Create");
+              }
+
+              if("Remove".equalsIgnoreCase(op)) {
+                log.debug("In Reove Operation");
+                List remAccess = new ArrayList();
+                Map entAttrMap = new HashMap();
+                if(appVsRolesRemove.containsKey(appName)) {
+                  entAttrMap = (Map) appVsRolesRemove.get(appName);
+                  if(entAttrMap.containsKey(entAttr)){
+                    remAccess =  (List) entAttrMap.get(entAttr);
+                  }
+                }
+                remAccess.addAll(Util.otol(item.getValue()));
+                entAttrMap.put(entAttr, remAccess);
+                appVsRolesRemove.put(appName, entAttrMap);
+
+              }
+              else {
+                log.debug("Entering Remove Operation else condition ");
+                List addAccess = new ArrayList();
+                Map addEntAttrMap = new HashMap();
+                log.debug("Entering Remove Operation else condition before appvsRoles condition ");
+                if(appVsRolesAdd.containsKey(appName)) {
+                  log.debug("Entering Remove Operation else condition contains Key ");
+                  addEntAttrMap = (Map) appVsRolesAdd.get(appName);
+                  log.debug("Entering Remove Operation else condition contains Key addEntAttrMap "+addEntAttrMap);
+                  if(entAttr != null && addEntAttrMap.containsKey(entAttr)){
+                    log.debug("Entering Remove Operation else condition null check if condition ");          
+                    addAccess =  (List) addEntAttrMap.get(entAttr);
+                  }
+                }
+                log.debug("Entering Remove Operation else condition skipping appvsRoles condition ");
+                if(valList != null && !valList.isEmpty())
+                  addAccess.addAll(Util.otol(item.getValue()));
+                log.debug("Entering Remove Operation else condition adding list addAccess  ");
+                if(entAttr != null)
+                {
+                  log.debug("Entering Remove Operation else condition entAttr null check start ");
+                  addEntAttrMap.put(entAttr, addAccess);
+                  appVsRolesAdd.put(appName, addEntAttrMap);
+                  log.debug("Entering Remove Operation else condition entAttr null check End ");
+                }
+                log.debug("Ending else condition");   
+              }
             }
           }
-          assimilateWorkItemApprovalSet(wfcontext, item, approvalSet); 
-          // Audit the manual change
-          auditManualAction(item);
-          IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
-				  //Everything below is Accelerator Pack Stuff - Start
-				  ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item); 
+        }
+      }
+
+      log.debug("appVsRolesRemove : "+appVsRolesRemove);
+      log.debug("appVsRolesAdd : "+appVsRolesAdd);
+      log.debug("opMap : "+opMap);
+
+      List appList = new ArrayList(appVsRolesAdd.keySet());
+      log.debug("appList : "+appList);
+      if(appList == null) {
+        appList = new ArrayList();
+      }
+      if(appVsRolesRemove.keySet() != null){
+
+        List remkeyList = new ArrayList(appVsRolesRemove.keySet());
+        log.debug("remkeyList : "+remkeyList);
+        appList.addAll(remkeyList);
+      }
+      if(appList == null) {
+        appList = new ArrayList();
+      }
+      if(opMap.keySet() != null){
+
+        List opList = new ArrayList(opMap.keySet());
+        log.debug("opList : "+opList);
+        appList.addAll(opList);
+      }
+
+
+      Util.removeDuplicates(appList);
+
+      log.debug("appList : "+appList);
+
+      for(String appName : appList) {
+
+        Map remMap = (Map) appVsRolesRemove.get(appName);
+        Map addMap = (Map) appVsRolesAdd.get(appName);
+
+        log.debug("remMap : "+remMap);
+        log.debug("addMap : "+addMap);
+        log.debug("opMap : "+opMap);
+
+
+        if(null != appName){
+          Application app = context.getObjectByName(Application.class, appName);
+          log.debug("----------------------------------------START-----------------------------------------------------------------------");
+          log.debug("app : "+app);
+          if(null != app){
+            ResourceObject rObj = new ResourceObject();
+            rObj.setObjectType("account"); 
+            rObj.setIncremental(false); 
+            rObj.setIncomplete(false);
+
+            Identity identity = context.getObjectByName(Identity.class, identityName);
+            log.debug("identity : "+identity);
+            if(null != identity){
+              String nativeIdentity = app.getName() + " " + identity.getName();
+              log.debug("nativeIdentity : "+nativeIdentity);
+              rObj.setIdentity(nativeIdentity);
+              rObj.setDisplayName(nativeIdentity);
+              rObj.setAttribute("username", nativeIdentity);
+
+              IdentityService idService = new IdentityService(context);
+              Link link = idService.getLink(identity, app, null, nativeIdentity);
+
+
+              System.out.println("link : "+link);
+              if(null != link){
+                rObj.setAttributes(link.getAttributes());
+              }
+
+              if("Disable".equals(opMap.get(appName))){
+                log.debug("Disable Operation");
+                rObj.setAttribute("IIQDisabled", true);
+              }else if("Enable".equals(opMap.get(appName))){
+                log.debug("Enable Operation");
+                rObj.setAttribute("IIQDisabled", false);
+              }
+
+              //update only if any entitlements add/remove
+              if((remMap != null && !remMap.isEmpty()) || (addMap != null && !addMap.isEmpty())){
+                List entAttrList = app.getAccountSchema().getEntitlementAttributeNames();
+                log.debug("entAttrList : "+entAttrList);
+                for(String entAttr : entAttrList) {
+                  log.debug("*** entAttr - Start : "+entAttr);
+                  String attributeName = entAttr;
+                  List values = new ArrayList();
+                  if(null != attributeName){
+                    Object obj = rObj.getAttribute(attributeName);
+
+                    if(null != obj){                                                     
+                      if(obj instanceof String){
+                        values.add(obj);
+                      }else if(obj instanceof List){
+                        values.addAll(obj);
+                      }                                                                             
+                    }
+                  }
+
+
+                  if( addMap != null && addMap.containsKey(attributeName)){
+                    log.debug("Adding Value");
+                    values.addAll(addMap.get(attributeName));
+                  }
+                  if(remMap != null && remMap.containsKey(attributeName)){
+                    log.debug("Removing Value");
+                    values.removeAll(remMap.get(attributeName));
+                  }
+
+                  log.debug("values: "+values);
+                  log.debug("attributeName: "+attributeName);	
+
+                  Util.removeDuplicates(values);
+
+                  log.debug("values after removeDuplicates : "+values);
+
+                  rObj.setAttribute(attributeName, values);
+                  log.debug("*** entAttr - End : "+entAttr);
+                }
+
+              }
+
+              // Create an arguments map for the Aggregator.  This is like Aggregator options in the UI. 
+              Attributes aggArgs = new Attributes();   
+
+              aggArgs.put("noAttributePromotion",    "true");   
+              aggArgs.put("promoteAttributes",       "false");  
+              aggArgs.put("correlateEntitlements",   "false"); 
+              aggArgs.put("noOptimizeReaggregation", "true");   
+              aggArgs.put("externalHandlerSeparateThread", "false");
+
+              Aggregator thdAgg = new Aggregator(context, aggArgs);		  
+              TaskResult taskRes =	thdAgg.aggregate(app, rObj);
+
+              log.debug("taskRes: "+taskRes.toXml());	   
+
+
+            }
+          }
+          log.debug("----------------------------------------END-----------------------------------------------------------------------");
+        }
+      }
+    }catch(Exception e){
+      log.debug("Exception in aggregateGenericAccount() !!!!!!!!! : "+e.getMessage());	
+    }
+
+    log.debug("*** Ending aggregateGenericAccount() ***");
+
+  }
+
+
+  assimilateWorkItemApprovalSet(wfcontext, item, approvalSet); 
+  // Audit the manual change
+  auditManualAction(item);
+  IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
+  //Everything below is Accelerator Pack Stuff - Start
+  ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item);
+
+  if (!state.equals(WorkItem.State.Expired)) {
+    aggregateGenericAccount(identityName, item.get("approvalSet"));
+
+    //List approvalItems = item.get("approvalSet").getItems();
+    // for (ApprovalItem approvalItem : approvalItems) {
+    // wfcontext.setVariable("optimisticProvisioning","true");
+    //aggregateGenericAccount(identityName, item.get("approvalSet"));
+
+    //  }
+  }
         ]]></Source>
       </AfterScript>
       <Arg name="workItemRequester" value="$(launcher)"/>
@@ -440,37 +726,70 @@
       <Arg name="workItemEscalationStyle" value="reminder"/>
       <InterceptorScript>
         <Source><![CDATA[
-          import sailpoint.object.Workflow;   
-		      import sailpoint.object.Attributes;  	
-          import org.apache.log4j.Logger;  
-		      import org.apache.log4j.Level; 
-          
-          Logger log = Logger.getLogger("rapidapponboarding.rules");
-		      if (method !=null && method.equals(Workflow.INTERCEPTOR_OPEN_WORK_ITEM)) {
-            log.trace(" Entering Open Work Item Method ");
-            Date expirationDate = new Date();  		
-		        String hoursTillExpiration = manualWorkItemHoursTillExpiration;  					
-					  if (hoursTillExpiration!=null) {  
-					    int hoursTillExpirationInt=Util.atoi(hoursTillExpiration);  
-						  if(hoursTillExpirationInt!=null && hoursTillExpirationInt>0) {  
-						    int minutes = hoursTillExpirationInt * 60;  
-							  Date dateExp = Util.incrementDateByMinutes(new Date(), minutes);  							
-							  if(item!=null && item.getExpirationDate()==null && context!=null && dateExp!=null) {  							  
-                  item.setExpiration(dateExp);   
-                  item.setWakeUpDate(dateExp);           			
-                  context.saveObject(item);  
-                  context.commitTransaction();  								
-							  }  
-						  }  
-					  }  
+      //Gaurav modified this logic to accomodate no expiration date for DocuSign work items
+      import sailpoint.object.ApprovalSet;
+      import sailpoint.tools.Util;
+      import sailpoint.object.ApprovalItem;
+
+      import sailpoint.object.Workflow;   
+      import sailpoint.object.Attributes;  	
+      import org.apache.log4j.Logger;  
+      import org.apache.log4j.Level; 
+
+      Logger log = Logger.getLogger("rapidapponboarding.rules");
+      if (method !=null && method.equals(Workflow.INTERCEPTOR_OPEN_WORK_ITEM)) {
+        log.trace(" Entering Open Work Item Method ");
+
+        boolean docuSignRequest = false;
+        if(null != item) {
+          ApprovalSet approvalSet = item.getApprovalSet();
+          if(null != approvalSet) {
+            List approvalItems = approvalSet.getItems();
+            if(Util.size(approvalItems) > 0) {
+              for(ApprovalItem approvalItem : approvalItems) {
+                if("DocuSign".equalsIgnoreCase(approvalItem.getApplication())){
+                  docuSignRequest = true;
+                }
+              }
+            }
+          }
+        }
+
+        if(!docuSignRequest){
+          Date expirationDate = new Date();  		
+          String hoursTillExpiration = manualWorkItemHoursTillExpiration;  					
+          if (hoursTillExpiration!=null) {  
+            int hoursTillExpirationInt=Util.atoi(hoursTillExpiration);  
+            if(hoursTillExpirationInt!=null && hoursTillExpirationInt>0) {  
+              int minutes = hoursTillExpirationInt * 60;  
+              Date dateExp = Util.incrementDateByMinutes(new Date(), minutes);  							
+              if(item!=null && item.getExpirationDate()==null && context!=null && dateExp!=null) {  							  
+                item.setExpiration(dateExp);   
+                item.setWakeUpDate(dateExp); 
+
+                context.saveObject(item);  
+                context.commitTransaction();  								
+              }  
+            }  
+          }  
           log.trace(" Exiting Open Work Item Method ");
-          }           
-          if (method !=null && method.equals(Workflow.INTERCEPTOR_POST_ASSIMILATION)) {
-            log.trace(" Entering Post Assimilation Method ");
-            log.trace(" setting handler, Interrogator");
-            item.setHandler("sailpoint.api.Interrogator");          
-            log.trace(" Exiting Post Assimilation Method ");        
-          }		      
+
+        }else{
+          item.setExpiration(null);   
+          item.setWakeUpDate(null);  
+          context.saveObject(item);  
+          context.commitTransaction(); 
+        }
+      }
+
+      if (method !=null && method.equals(Workflow.INTERCEPTOR_POST_ASSIMILATION)) {
+        log.trace(" Entering Post Assimilation Method ");
+        log.trace(" setting handler, Interrogator");
+        item.setHandler("sailpoint.api.Interrogator"); 
+
+        log.trace(" Exiting Post Assimilation Method ");
+
+      }   
 		      ]]></Source>
       </InterceptorScript>
     </Approval>
