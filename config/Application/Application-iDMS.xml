@@ -254,6 +254,9 @@
       <entry key="xdaysresetPwd"/>
     </Map>
   </Attributes>
+    <CorrelationRule>
+    <Reference class="sailpoint.object.Rule" name="CLORX SMART Correlation rule"/>
+  </CorrelationRule>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="%%CLOROX_UAA_ADMINS_OWNER_WORKGROUP%%"/>
   </Owner>
