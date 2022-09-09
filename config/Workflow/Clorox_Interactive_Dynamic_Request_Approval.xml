@@ -1,18 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Workflow PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Workflow libraries="Identity" name="Interactive Request Dynamic Approval" type="Subprocess">
+<Workflow explicitTransitions="true" libraries="Identity" name="Interactive Request Dynamic Approval" type="Subprocess">
   <Variable input="true" name="identityName" required="true">
-    <Description>
-			The name of the identity object being modified.
-		</Description>
+    <Description>The name of the identity object being modified.</Description>
   </Variable>
   <Variable initializer="Normal" input="true" name="workItemPriority">
-    <Description>
-       The String version of a WorkItem.Priority. This variable is
+    <Description>The String version of a WorkItem.Priority. This variable is
        used to set the priority on all of the workitems generated
        as part of this workflow and also set on the IdentityRequest
-       object.
-    </Description>
+       object.</Description>
   </Variable>
   <Variable name="startDate" output="true"/>
   <Variable name="endDate" output="true"/>
@@ -26,9 +22,7 @@
 			when processing approval decisions.</Description>
   </Variable>
   <Variable input="true" name="batchRequestItemId">
-    <Description>
-			Batch request id.
-		</Description>
+    <Description>Batch request id.</Description>
   </Variable>
   <Variable input="true" name="source"/>
   <Variable input="true" name="processManagerApproval"/>
@@ -36,23 +30,18 @@
   <Variable initializer="boolean:false" name="canceledWorkItem"/>
   <Variable initializer="boolean:false" name="expiredWorkItem"/>
   <Variable initializer="script:(identityDisplayName != void) ? identityDisplayName : resolveDisplayName(identityName)" input="true" name="identityDisplayName">
-    <Description>
-			The displayName of the identity being updated.
+    <Description>The displayName of the identity being updated.
 			This may be passed in, if not the script queries for this
-			using a projection query and falls back to the name.
-		</Description>
+			using a projection query and falls back to the name.</Description>
   </Variable>
   <Variable input="true" name="identityEmail"/>
   <Variable input="true" name="project"/>
   <Variable initializer="script:getIdentityProperty(identityName, &quot;id&quot;)" input="true" name="identityId">
-    <Description>
-			The id of the identity being updated.
-		</Description>
+    <Description>The id of the identity being updated.</Description>
   </Variable>
   <Variable input="true" name="identityRequestId" output="true"/>
   <Variable initializer="parallel" input="true" name="approvalMode">
-    <Description>
-			A string that specifies how we should handle the approvals.
+    <Description>A string that specifies how we should handle the approvals.
 			By default this is serial since most of these request with
 			the exception of manager transfers will have only one approver.
 			parallel
@@ -61,44 +50,36 @@
 			rejects terminates the entire approval.
 			parallelPoll
 			Approvals are processed concurrently but consensus is not required.
-			All approvals will be process, we don't stop if there any
+			All approvals will be process, we don&amp;#39;t stop if there any
 			rejections.
 			serial
 			Approvals are processed one at a time and there must be consensus.
 			The first approver that rejects terminates the entire approval.
 			serialPoll
 			Approvals are processed in order but consensus is not required.
-			All approvals will be processed, we don't stop if there are any
-			rejections. In effect we are "taking a poll" of the approvers.
+			All approvals will be processed, we don&amp;#39;t stop if there are any
+			rejections. In effect we are &amp;quot;taking a poll&amp;quot; of the approvers.
 			any
 			Approvals are processed concurrently, the first approver to
-			respond makes the decision for the group.
-		</Description>
+			respond makes the decision for the group.</Description>
   </Variable>
   <Variable input="true" name="fallbackApprover" required="true">
-    <Description>
-			A String that specifies the name of the Identity that will
+    <Description>A String that specifies the name of the Identity that will
 			be assigned any approvals where the owner of the approver
-			can't be resolved. Example if the scheme is "owner" and the
-			application doesn't specify and owner.
-		</Description>
+			can&amp;#39;t be resolved. Example if the scheme is &amp;quot;owner&amp;quot; and the
+			application doesn&amp;#39;t specify and owner.</Description>
   </Variable>
   <Variable initializer="false" input="true" name="includeRejectedItemsInApprovalChain">
-    <Description>
-			When using multi approvalSchemes a flag to indicate if new
-			approvals in the chain will include rejected items.
-		</Description>
+    <Description>When using multi approvalSchemes a flag to indicate if new
+			approvals in the chain will include rejected items.</Description>
   </Variable>
   <Variable input="true" name="policyViolations">
-    <Description>
-			List of policy violations that were found during our initial policy scan.
+    <Description>List of policy violations that were found during our initial policy scan.
 			This list is passed into each work item so the approvers can see
-			pending violations.
-		</Description>
+			pending violations.</Description>
   </Variable>
   <Variable input="true" name="flow">
-    <Description>
-			The name of the LCM flow that launched this workflow.
+    <Description>The name of the LCM flow that launched this workflow.
 			This is one of these values:
 			AccountsRequest
 			EntitlementsRequest
@@ -114,36 +95,27 @@
 			NewAccountDependency
 			PasswordExpiration
 			PasswordsChangeRequest
-			Recovery
-		</Description>
+			Recovery</Description>
   </Variable>
   <Variable input="true" name="trace">
-    <Description>
-			Used for debugging this subprocess and when set to true trace
-			statements will be sent to stdout.
-		</Description>
+    <Description>Used for debugging this subprocess and when set to true trace
+			statements will be sent to stdout.</Description>
   </Variable>
   <Variable name="tmpApprovalSet">
-    <Description>
-			Temporary and transient ApprovalSet used to hold filtered
-			approval sets as we transition through the approval chain.
-		</Description>
+    <Description>Temporary and transient ApprovalSet used to hold filtered
+			approval sets as we transition through the approval chain.</Description>
   </Variable>
   <Variable input="true" name="approvalSet" output="true">
-    <Description>
-			This attributes is set during the "Build Approval Set" step,
+    <Description>This attributes is set during the &amp;quot;Build Approval Set&amp;quot; step,
 			which builds this list by going through the ProvisioningPlan
 			to build the line items that need to be approved,
 			This variable includes all ApprovalItems that are part of
 			the request process and is updated during the AfterScript
 			of the approval process by assimilating the decisions
-			and comments from the Approvals copy of the ApprovalItem.
-		</Description>
+			and comments from the Approvals copy of the ApprovalItem.</Description>
   </Variable>
   <Variable input="true" name="workItemComments">
-    <Description>
-			List of global workflow comments to be appended to the approval workitem.
-		</Description>
+    <Description>List of global workflow comments to be appended to the approval workitem.</Description>
   </Variable>
   <Variable initializer="false" name="autoReject"/>
   <Variable input="true" name="approvalTypes"/>
@@ -417,46 +389,52 @@
   </Variable>
   <Description>Accelerator Pack Workflow</Description>
   <RuleLibraries>
-    <Reference class="sailpoint.object.Rule"  name="LCM Workflow Library"/>
-    <Reference class="sailpoint.object.Rule"  name="Rule-ApprovalFrameWorkLibrary"/>
-    <Reference class="sailpoint.object.Rule"  name="Rule-Framework-NotificationRuleLibrary"/>
+    <Reference class="sailpoint.object.Rule" name="LCM Workflow Library"/>
+    <Reference class="sailpoint.object.Rule" name="Rule-ApprovalFrameWorkLibrary"/>
+    <Reference class="sailpoint.object.Rule" name="Rule-Framework-NotificationRuleLibrary"/>
   </RuleLibraries>
-  <Step icon="Start" name="Start">
+  <Step icon="Start" name="Start" posX="28" posY="10">
     <Transition to="Get Approval Types"/>
   </Step>
-  <Step condition="script:approvalTypes == null" name="Get Approval Types" resultVariable="approvalTypes">
+  <Step condition="script:approvalTypes == null" name="Get Approval Types" posX="98" posY="10" resultVariable="approvalTypes">
     <Script>
-      <Source>
+      <Source><![CDATA[
+                
 			import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
   			return ApprovalRuleLibrary.getPossibleApprovalTypes(context, workflow);
-  		</Source>
+  		
+            ]]></Source>
     </Script>
-    <Transition to="Get Next Approval Type" when="script:approvalTypes != null &amp;&amp; approvalTypes.size() > 0"/>
+    <Transition to="Get Next Approval Type" when="script:approvalTypes != null &amp;&amp; approvalTypes.size() &gt; 0"/>
     <Transition to="Auto Approve"/>
   </Step>
-  <Step name="Get Next Approval Type" resultVariable="currentApprovalType">
+  <Step name="Get Next Approval Type" posX="288" posY="10" resultVariable="currentApprovalType">
     <Script>
-      <Source>
-			
+      <Source><![CDATA[
+                
 			import sailpoint.rapidapponboarding.rule.ApprovalRuleLibrary;
   			return ApprovalRuleLibrary.roadGetNextApprovalType(context,workflow, approvalTypes,this);
   			
-  			</Source>
+            ]]></Source>
     </Script>
-    <Transition to="Get Next Approval Type" when="script:currentApprovalType != null &amp;&amp; ((!isTrue(processManagerApproval) &amp;&amp; currentApprovalType.equals(&quot;ManagerOrServiceAccountOwner&quot;)) || (isTrue(processManagerApproval) &amp;&amp; !currentApprovalType.equals(&quot;ManagerOrServiceAccountOwner&quot;)))"/>
+    <Transition to="Get Next Approval Type">
+      <Script>
+        <Source><![CDATA[currentApprovalType != null && ((!isTrue(processManagerApproval) && currentApprovalType.equals("ManagerOrServiceAccountOwner")) || (isTrue(processManagerApproval) && !currentApprovalType.equals("ManagerOrServiceAccountOwner")))]]></Source>
+      </Script>
+    </Transition>
     <Transition to="Filter ApprovalSet" when="script:currentApprovalType != null"/>
     <Transition to="Cleanup"/>
   </Step>
-  <Step action="script:filterApprovalSet(approvalSet,includeRejectedItemsInApprovalChain,true)" icon="Task" name="Filter ApprovalSet" resultVariable="tmpApprovalSet">
+  <Step action="script:filterApprovalSet(approvalSet,includeRejectedItemsInApprovalChain,true)" icon="Task" name="Filter ApprovalSet" posX="372" posY="210" resultVariable="tmpApprovalSet">
     <Transition to="Do Approval" when="script:!tmpApprovalSet.isEmpty()"/>
     <Transition to="Get Next Approval Type" when="script:approvalTypes != null"/>
     <Transition to="Cleanup"/>
   </Step>
-  <Step icon="Approval" name="Do Approval">
-    <Approval mode="script:roadGetApprovalMode(context, workflow, currentApprovalType, tmpApprovalSet)" renderer="lcmEditableWorkItemRenderer.xhtml" return="" send="currentApprovalType,identityDisplayName,identityName,policyViolations,workItemConfig">
+  <Step icon="Approval" name="Do Approval" posX="550" posY="121">
+    <Approval mode="script:roadGetApprovalMode(context, workflow, currentApprovalType, tmpApprovalSet)" renderer="lcmEditableWorkItemRenderer.xhtml" send="currentApprovalType,identityDisplayName,identityName,policyViolations,workItemConfig">
       <AfterScript>
-        <Source>
-				
+        <Source><![CDATA[
+                    
 				import org.apache.commons.logging.Log;
 				import org.apache.commons.logging.LogFactory;
 				import sailpoint.api.SailPointContext;
@@ -484,8 +462,8 @@
 				IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
 				//Everything below is Accelerator Pack Stuff - Start
 				ApprovalRuleLibrary.cancelorExpiredWorkItemState(wfcontext, workflow,item);
-		  	
-        	</Source>
+        	
+                ]]></Source>
       </AfterScript>
       <Arg name="workItemRequester" value="script:(requestor != null) ? requestor : launcher"/>
       <Arg name="approvalSet" value="ref:tmpApprovalSet"/>
@@ -499,16 +477,20 @@
       <Arg name="forceClassicApprovalUI" value="ref:forceClassicApprovalUI"/>
       <Arg name="operationsDisplayName">
         <Script>
-          <Source>
+          <Source><![CDATA[
+                        
 		        	getIdentityDisplayName(workflow,getopWrkGrpName(), null, false);
-		        </Source>
+		        
+                    ]]></Source>
         </Script>
       </Arg>
       <Arg name="requestId">
         <Script>
-          <Source>
+          <Source><![CDATA[
+                        
 						getRequestId(plan);
-			  		</Source>
+			  		
+                    ]]></Source>
         </Script>
       </Arg>
       <Arg name="workItemHoursBetweenReminders" value="$(workItemConfig.hoursBetweenReminders)"/>
@@ -523,36 +505,37 @@
       <Arg name="escalationSameLevelRule" value="$(workItemConfig.escalationSameLevelRule)"/>
       <Arg name="workItemPriority" value="ref:workItemPriority"/>
       <Arg name="clearApprovalDecisions" value="ref:clearApprovalDecisions"/>
+      <Arg name="setPreviousApprovalDecisions" value="ref:setPreviousApprovalDecisions"/>
       <Arg name="dynamicAppContent">
         <Script>
-          <Source>
-				
+          <Source><![CDATA[
+                        
 					getDynamicTextEmailTemplate( project,"Approval", requestType,workItemConfig);
-					
-		  		</Source>
+		  		
+                    ]]></Source>
         </Script>
       </Arg>
       <Arg name="dynamicAppContentReminder">
         <Script>
-          <Source>
-				
+          <Source><![CDATA[
+                        
 					getDynamicTextEmailTemplate( project,"Reminder", requestType,workItemConfig);
-					
-		  		</Source>
+		  		
+                    ]]></Source>
         </Script>
       </Arg>
       <Arg name="dynamicAppContentEscalation">
         <Script>
-          <Source>
-				
+          <Source><![CDATA[
+                        
 					getDynamicTextEmailTemplate( project,"Escalation", requestType,workItemConfig);
-					
-		  		</Source>
+		  		
+                    ]]></Source>
         </Script>
       </Arg>
       <InterceptorScript>
-        <Source>
-           		
+        <Source><![CDATA[
+                    
 		         import sailpoint.object.Workflow.Approval;
 		         import sailpoint.object.ApprovalItem;
 		         import sailpoint.object.ApprovalSet;
@@ -594,9 +577,9 @@
 		         } else if (Workflow.INTERCEPTOR_START_APPROVAL.equals(method)) {
 		             ApprovalSet currentSet = approval.getApprovalSet();
 		            	//currentSet is always null in case of serialPoll and parallelPoll
-		             if (currentSet != null &amp;&amp; !Util.isEmpty(currentSet.getItems())) {
+		             if (currentSet != null && !Util.isEmpty(currentSet.getItems())) {
 		                 //If filterRejects is true and mode is not serialPoll, filter any rejected items in the master ApprovalSet from the currentSet
-		                 if (approvalMode != null &amp;&amp; !approvalMode.equals(Workflow.ApprovalModeSerialPoll) &amp;&amp; Boolean.valueOf(filterRejects)) {
+		                 if (approvalMode != null && !approvalMode.equals(Workflow.ApprovalModeSerialPoll) && Boolean.valueOf(filterRejects)) {
 		                 	//Filter items from the currentSet that are rejected in the masterSet
 		                 	filterRejectsFromApprovalSet(approvalSet, currentSet);
 		                 }
@@ -608,7 +591,7 @@
 		                     if (Boolean.valueOf(setPreviousApprovalDecisions)) {
 		                         // If setPreviousApprovalDecisions is enabled, set the decision
 		                         // on the items to that of the global item.
-		                         setPreviousDecisionsOnApprovalSet(approvalSet, currentSet);
+		                         //setPreviousDecisionsOnApprovalSet(approvalSet, currentSet);
 		                     }
 		                 }
 		             }
@@ -617,10 +600,10 @@
 		             Approval parentApp = approval.getParent();
 		             // Never relay the state to the root approval
 		             // If we don't have an approvalSet, must be a container approval
-		             if (parentApp != null &amp;&amp; approval.getApprovalSet() == null) {
+		             if (parentApp != null && approval.getApprovalSet() == null) {
 		                 boolean completeAndRejected = false;
 		                 for (Approval child : Util.safeIterable(approval.getChildren())) {
-		                     if (child.isComplete() &amp;&amp; child.getState() == WorkItem.State.Rejected) {
+		                     if (child.isComplete() && child.getState() == WorkItem.State.Rejected) {
 		                         completeAndRejected = true;
 		                     } else {
 		                         completeAndRejected = false;
@@ -632,16 +615,18 @@
 		                     approval.setState(WorkItem.State.Rejected);
 		                 }
 		             }
+		             
+		             
 		         } else if (Workflow.INTERCEPTOR_OPEN_WORK_ITEM.equals(method)) {	               
 		            //Sync IdentityRequestItems with the WorkItem
 		            IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, item.getApprovalSet(), false);
 		         }
-              	
-				</Source>
+				
+                ]]></Source>
       </InterceptorScript>
       <OwnerScript>
-        <Source>
-				
+        <Source><![CDATA[
+                    
 				import org.apache.commons.logging.Log;
 				import org.apache.commons.logging.LogFactory;
 				import sailpoint.rapidapponboarding.logger.LogEnablement;
@@ -683,10 +668,10 @@
 				}
 				return owner;
       			
-      			</Source>
+                ]]></Source>
       </OwnerScript>
       <ValidationScript>
-        <Source>
+        <Source><![CDATA[
                     
                     import sailpoint.api.SailPointContext;
 					import sailpoint.object.ApprovalSet;
@@ -729,7 +714,7 @@
               {
                 if(termDate != null)
                 {			
-                  if(accessEndDate != null &amp;&amp; accessEndDate.after(termDate))
+                  if(accessEndDate != null && accessEndDate.after(termDate))
                   {
                     isApprovedEndDateBeyondCtrEndDate = true;
                   }
@@ -738,7 +723,7 @@
                     }
                 else if(ctrExpDate != null)
                 {
-                  if(accessEndDate != null &amp;&amp; accessEndDate.after(ctrExpDate))
+                  if(accessEndDate != null && accessEndDate.after(ctrExpDate))
                   {
                     isApprovedEndDateBeyondCtrEndDate =  true;
                   }	
@@ -771,7 +756,7 @@
 							log.debug("Inside Do Approval appItem=" + appItem.toXml());	
           
 				    	List comments = appItem.getComments();                                                                                                                                                                      
-			            if ((comments == null || comments.size() == 0) &amp;&amp; (workItemComments == null || workItemComments.size() == 0))
+			            if ((comments == null || comments.size() == 0) && (workItemComments == null || workItemComments.size() == 0))
 			            {                     
 			            	return Message.error("identityiq_approval_mandatory_comment_validation_text");
 			           	}
@@ -784,7 +769,7 @@
               if(null != appItem)
                 log.debug("Inside Do Approval appItem=" + appItem.toXml());	
 
-                if(null != appItem &amp;&amp; ( "Add".equalsIgnoreCase(appItem.getOperation()) || "Create".equalsIgnoreCase(appItem.getOperation())  ) &amp;&amp; null != appItem.getEndDate())
+                if(null != appItem && ( "Add".equalsIgnoreCase(appItem.getOperation()) || "Create".equalsIgnoreCase(appItem.getOperation())  ) && null != appItem.getEndDate())
                 {
                   if (isApprovedEndDateBeyondCtrEndDate(context.getObjectByName(Identity.class, workItemTargetName), appItem.getEndDate()))
                   {
@@ -797,7 +782,7 @@
           
 				    
       			
-                </Source>
+                ]]></Source>
       </ValidationScript>
     </Approval>
     <Description>
@@ -808,9 +793,10 @@
     <Transition to="Notify on Rejection" when="script:isFalse(expiredWorkItem) &amp;&amp; (!approved || approvalSet.isAllRejected() || isTrue(canceledWorkItem))"/>
     <Transition to="Is Work Item Expired"/>
   </Step>
-  <Step name="Is Work Item Expired" resultVariable="autoReject">
+  <Step name="Is Work Item Expired" posX="695" posY="132" resultVariable="autoReject">
     <Script>
-      <Source>
+      <Source><![CDATA[
+                
 			import sailpoint.workflow.IdentityRequestLibrary;
 			import sailpoint.rapidapponboarding.rule.ROADUtil;
 			boolean result = false;
@@ -822,113 +808,142 @@
 				IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
 			}
 			return result;
-			</Source>
+			
+            ]]></Source>
     </Script>
     <Transition to="Notify on Auto Rejection" when="script:isTrue(autoReject)"/>
-    <Transition to="Process Approval Decisions" when="script:isTrue(processManagerApproval) &amp;&amp; currentApprovalType.equals(&quot;ManagerOrServiceAccountOwner&quot;) &amp;&amp; approvalTypes != null"/>
+    <Transition to="Process Approval Decisions">
+      <Script>
+        <Source><![CDATA[isTrue(processManagerApproval) && currentApprovalType.equals("ManagerOrServiceAccountOwner") && approvalTypes != null]]></Source>
+      </Script>
+    </Transition>
     <Transition to="Get Next Approval Type" when="script:approvalTypes != null"/>
     <Transition to="Process Approval Decisions"/>
   </Step>
-  <Step action="call:sendEmail" icon="Email" name="Notify on Auto Rejection">
+  <Step action="call:sendEmail" icon="Email" name="Notify on Auto Rejection" posX="1167" posY="43">
     <Arg name="template">
       <Script>
-        <Source>
+        <Source><![CDATA[
+                    
 	        	getWrapperEmailTemplateName(context, null, "AutoRejection");
-	        </Source>
-      </Script>
-    </Arg>
-    <Arg name="to">
-      <Script>
-        <Source>
-					getIdentityNameForNotification(workflow,launcher, null, false);
-		  		</Source>
+	        
+                ]]></Source>
       </Script>
     </Arg>
     <Arg name="cc" value="ref:identityEmail"/>
+    <Arg name="identityName" value="ref:identityName"/>
     <Arg name="recipientDisplayName">
       <Script>
-        <Source>
+        <Source><![CDATA[
+                    
 	        	getIdentityDisplayName(workflow,launcher, null, false);
-	        </Source>
-      </Script>
-    </Arg>
-    <Arg name="approvalSet" value="ref:approvalSet"/>
-    <Arg name="identityName" value="ref:identityName"/>
-    <Arg name="refIdentityDisplayName">
-      <Script>
-        <Source>
-	        	getIdentityDisplayName(workflow,identityName, null, false);
-	        </Source>
-      </Script>
-    </Arg>
-    <Arg name="dynamicAppContent">
-      <Script>
-        <Source>
-					getDynamicTextEmailTemplate( project,"AutoRejection", requestType);
-		  		</Source>
+	        
+                ]]></Source>
       </Script>
     </Arg>
     <Arg name="requestId">
       <Script>
-        <Source>
+        <Source><![CDATA[
+                    
 					getRequestId(plan);
-		  		</Source>
+		  		
+                ]]></Source>
+      </Script>
+    </Arg>
+    <Arg name="approvalSet" value="ref:approvalSet"/>
+    <Arg name="refIdentityDisplayName">
+      <Script>
+        <Source><![CDATA[
+                    
+	        	getIdentityDisplayName(workflow,identityName, null, false);
+	        
+                ]]></Source>
+      </Script>
+    </Arg>
+    <Arg name="dynamicAppContent">
+      <Script>
+        <Source><![CDATA[
+                    
+					getDynamicTextEmailTemplate( project,"AutoRejection", requestType);
+		  		
+                ]]></Source>
+      </Script>
+    </Arg>
+    <Arg name="to">
+      <Script>
+        <Source><![CDATA[
+                    
+					getIdentityNameForNotification(workflow,launcher, null, false);
+		  		
+                ]]></Source>
       </Script>
     </Arg>
     <Transition to="Process Approval Decisions"/>
   </Step>
-  <Step action="call:sendEmail" icon="Email" name="Notify on Rejection">
+  <Step action="call:sendEmail" icon="Email" name="Notify on Rejection" posX="825" posY="64">
     <Arg name="template">
       <Script>
-        <Source>
+        <Source><![CDATA[
+                    
 	        	getWrapperEmailTemplateName(context, null, "Rejection");
-	        </Source>
-      </Script>
-    </Arg>
-    <Arg name="to">
-      <Script>
-        <Source>
-					getIdentityNameForNotification(workflow,launcher, null, false);
-		  		</Source>
+	        
+                ]]></Source>
       </Script>
     </Arg>
     <Arg name="cc" value="ref:identityEmail"/>
-    <Arg name="dynamicAppContent">
-      <Script>
-        <Source>
-					getDynamicTextEmailTemplate( project,"Rejection", requestType);
-		  		</Source>
-      </Script>
-    </Arg>
+    <Arg name="identityName" value="ref:identityName"/>
     <Arg name="recipientDisplayName">
       <Script>
-        <Source>
+        <Source><![CDATA[
+                    
 	        	getIdentityDisplayName(workflow,launcher, null, false);
-	        </Source>
-      </Script>
-    </Arg>
-    <Arg name="approvalSet" value="ref:approvalSet"/>
-    <Arg name="identityName" value="ref:identityName"/>
-    <Arg name="refIdentityDisplayName">
-      <Script>
-        <Source>
-	        	getIdentityDisplayName(workflow,identityName, null, false);
-	        </Source>
+	        
+                ]]></Source>
       </Script>
     </Arg>
     <Arg name="requestId">
       <Script>
-        <Source>
+        <Source><![CDATA[
+                    
 					getRequestId(plan);
-		  		</Source>
+		  		
+                ]]></Source>
+      </Script>
+    </Arg>
+    <Arg name="approvalSet" value="ref:approvalSet"/>
+    <Arg name="dynamicAppContent">
+      <Script>
+        <Source><![CDATA[
+                    
+					getDynamicTextEmailTemplate( project,"Rejection", requestType);
+		  		
+                ]]></Source>
+      </Script>
+    </Arg>
+    <Arg name="refIdentityDisplayName">
+      <Script>
+        <Source><![CDATA[
+                    
+	        	getIdentityDisplayName(workflow,identityName, null, false);
+	        
+                ]]></Source>
+      </Script>
+    </Arg>
+    <Arg name="to">
+      <Script>
+        <Source><![CDATA[
+                    
+					getIdentityNameForNotification(workflow,launcher, null, false);
+		  		
+                ]]></Source>
       </Script>
     </Arg>
     <Transition to="Process Approval Decisions"/>
   </Step>
-  <Step name="Auto Approve">
+  <Step name="Auto Approve" posX="149" posY="259">
     <Script>
-      <Source>
-			
+      <Source><![CDATA[
+                
 			import org.apache.commons.logging.Log;
 			import org.apache.commons.logging.LogFactory;
 			import sailpoint.object.ApprovalSet;
@@ -960,27 +975,26 @@
 			 }
 			IdentityRequestLibrary.assimilateWorkItemApprovalSetToIdentityRequest(wfcontext, approvalSet);
   			
-  			</Source>
+            ]]></Source>
     </Script>
     <Transition to="Process Approval Decisions"/>
   </Step>
-  <Step action="call:processApprovalDecisions" icon="Task" name="Process Approval Decisions" posX="420" resultVariable="project">
-    <Arg name="approvalSet" value="ref:approvalSet"/>
+  <Step action="call:processApprovalDecisions" icon="Task" name="Process Approval Decisions" posX="726" posY="277" resultVariable="project">
     <Arg name="disableAudit" value="true"/>
+    <Arg name="dontUpdatePlan" value="ref:dontUpdatePlan"/>
+    <Arg name="approvalSet" value="ref:approvalSet"/>
+    <Arg name="recompilePlan" value="true"/>
     <Arg name="project" value="ref:project"/>
     <Arg name="plan" value="ref:plan"/>
-    <Arg name="recompilePlan" value="true"/>
-    <Arg name="dontUpdatePlan" value="ref:dontUpdatePlan"/>
     <Transition to="Cleanup"/>
   </Step>
-  <Step name="Cleanup">
+  <Step name="Cleanup" posX="1171" posY="288">
     <Script>
-      <Source>
-			
-  			//approvalTypes = null;
+      <Source><![CDATA[
+                
+            import sailpoint.object.Custom;
+            
   			workflow.put("approvalTypes", null);
-  			//approvalTypesIter = null;
-  			//workflow.put("approvalTypesIter", null);
   			workflow.put("approvalTypeObj", null);
   			workflow.put("workItemConfig", null);
   			
@@ -996,7 +1010,7 @@
   				{
   					List approvalTypes = eligibleRequestTypes.get(requestType);
   					
-  					if(approvalTypes != null &amp;&amp; approvalTypes.size() == 1)
+  					if(approvalTypes != null && approvalTypes.size() == 1)
   					{
   						singleApproval = true;
   					}
@@ -1005,11 +1019,11 @@
   			
   			workflow.put("singleApproval", singleApproval);
   			
-            </Source>
+            ]]></Source>
     </Script>
     <Transition to="GRC Integration">
       <Script>
-        <Source>
+        <Source><![CDATA[
                     
 					import java.util.ArrayList;
 					import java.util.Iterator;
@@ -1045,7 +1059,7 @@
 					Iterator iterAppNames = context.search(Application.class, qoApps, "name");
 					loggerRapidSS.debug("iterIds=["+iterAppNames+"]");
 					
-				    if(null != iterAppNames &amp;&amp; iterAppNames.hasNext())
+				    if(null != iterAppNames && iterAppNames.hasNext())
 				    { 	
 						 while(iterAppNames.hasNext())
 							{
@@ -1060,24 +1074,24 @@
 					List  provTargets =  plan.getProvisioningTargets();
 					loggerRapidSS.debug("provTargets=["+provTargets+"]");
 					//Check for Fire Figher Access Request
-					if(null != provTargets &amp;&amp; !provTargets.isEmpty())
+					if(null != provTargets && !provTargets.isEmpty())
 					{
 						for(ProvisioningTarget provTarget : provTargets)
 						{
 							String roleName = provTarget.getRole();
 							loggerRapidSS.debug("roleName=["+roleName+"]");
-							if(Util.isNotNullOrEmpty(roleName) &amp;&amp; roleName.toLowerCase().contains("firefighter"))
+							if(Util.isNotNullOrEmpty(roleName) && roleName.toLowerCase().contains("firefighter"))
 							{
 								invokeGRCIntegrationStep = true;
 					        	loggerRapidSS.debug("Fire Figher Request, returning true to invoke GRCIntegration Step");
 					        	return invokeGRCIntegrationStep;
 							}
 							List  acctSelections = provTarget.getAccountSelections();
-							if(null != acctSelections &amp;&amp; !acctSelections.isEmpty())
+							if(null != acctSelections && !acctSelections.isEmpty())
 							{
 								for(AccountSelection acctSelection : acctSelections)
 								{
-									if(null != acctSelection &amp;&amp; Util.isNotNullOrEmpty(acctSelection.getApplicationName()) &amp;&amp; sapDirectAppNames.contains(acctSelection.getApplicationName()))
+									if(null != acctSelection && Util.isNotNullOrEmpty(acctSelection.getApplicationName()) && sapDirectAppNames.contains(acctSelection.getApplicationName()))
 									{
 										invokeGRCIntegrationStep = true;
 										loggerRapidSS.debug("Fire Figher Request observed from provisioning targets, returning true to invoke GRCIntegration Step");
@@ -1088,11 +1102,11 @@
 						}
 					}
 					//Check for Fire Figher Access Request
-					if(null != acctReqs &amp;&amp; !acctReqs.isEmpty())
+					if(null != acctReqs && !acctReqs.isEmpty())
 					{
 						for(AccountRequest acctReq: acctReqs)
 						{
-							if(null != acctReq &amp;&amp; "IIQ".equalsIgnoreCase(acctReq.getApplication()))
+							if(null != acctReq && "IIQ".equalsIgnoreCase(acctReq.getApplication()))
 							{
 								List  attrReqs = acctReq.getAttributeRequests("assignedRoles");
 								loggerRapidSS.debug("Input assignedRoles attrReqs=["+attrReqs+"]");
@@ -1100,7 +1114,7 @@
 								{	
 							        loggerRapidSS.debug("attrReq.getValue()=["+attrReq.getValue()+"]");
 							        
-							        if (Util.isNotNullOrEmpty((String)attrReq.getValue()) &amp;&amp; ((String)attrReq.getValue()).toLowerCase().contains("firefighter"))
+							        if (Util.isNotNullOrEmpty((String)attrReq.getValue()) && ((String)attrReq.getValue()).toLowerCase().contains("firefighter"))
 							        {
 							        	invokeGRCIntegrationStep = true;
 							        	loggerRapidSS.debug("Fire Figher Request, returning true to invoke GRCIntegration Step");
@@ -1115,7 +1129,7 @@
 					String requestType = (String) plan.get("requestType");
 					
 							acctReqs = plan.getAccountRequests();
-							if(null != acctReqs &amp;&amp; !acctReqs.isEmpty())
+							if(null != acctReqs && !acctReqs.isEmpty())
 							{
 								
 							   
@@ -1124,13 +1138,13 @@
 								
 								for(AccountRequest acctReq: acctReqs)
 								{
-									if(null != acctReq &amp;&amp; Util.isNotNullOrEmpty(acctReq.getApplication()) &amp;&amp; ("SAP GRC Access Management".equalsIgnoreCase(acctReq.getApplication()) || sapDirectAppNames.contains(acctReq.getApplication())) )
+									if(null != acctReq && Util.isNotNullOrEmpty(acctReq.getApplication()) && ("SAP GRC Access Management".equalsIgnoreCase(acctReq.getApplication()) || sapDirectAppNames.contains(acctReq.getApplication())) )
 									{								
 										planHasSAPRequest = true;
 										if("SAP GRC Access Management".equalsIgnoreCase(acctReq.getApplication()))
 										{
 											AttributeRequest attrReq = acctReq.getAttributeRequest("Roles");
-											if(null != attrReq &amp;&amp; null != attrReq.getValue() &amp;&amp; attrReq.getValue() instanceof String &amp;&amp; Util.isNullOrEmpty((String)attrReq.getValue()))
+											if(null != attrReq && null != attrReq.getValue() && attrReq.getValue() instanceof String && Util.isNullOrEmpty((String)attrReq.getValue()))
 											{										
 												emptyRolesRequest = true;																			
 											}
@@ -1139,34 +1153,34 @@
 								}
 								loggerRapidSS.debug("planHasGRCRequest=["+planHasSAPRequest+"]");
 								
-								if(!planHasSAPRequest || (emptyRolesRequest &amp;&amp; requestType != null &amp;&amp;  "ATTRIBUTE SYNCHRONIZATION FEATURE".equalsIgnoreCase(requestType)))
+								if(!planHasSAPRequest || (emptyRolesRequest && requestType != null &&  "ATTRIBUTE SYNCHRONIZATION FEATURE".equalsIgnoreCase(requestType)))
 									return false;
 							}				
 					
 				}
 				return invokeGRCIntegrationStep;
 				
-                </Source>
+                ]]></Source>
       </Script>
     </Transition>
     <Transition to="end"/>
   </Step>
-  <Step icon="Default" name="GRC Integration" resultVariable="approvalSet">
+  <Step condition="script:(!isTrue(processManagerApproval) || singleApproval)" icon="Default" name="GRC Integration" posX="1314" posY="107" resultVariable="approvalSet">
     <Arg name="identityName" value="ref:identityName"/>
-    <Arg name="identityDisplayName" value="ref:identityDisplayName"/>
-    <Arg name="launcher" value="ref:launcher"/>
-    <Arg name="requestor" value="ref:requestor"/>
-    <Arg name="source" value="ref:source"/>
-    <Arg name="flow" value="ref:flow"/>
-    <Arg name="policyViolations" value="ref:policyViolations"/>
-    <Arg name="identityRequestId" value="ref:identityRequestId"/>
-    <Arg name="batchRequestItemId" value="ref:batchRequestItemId"/>
     <Arg name="requestType" value="ref:requestType"/>
-    <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
-    <Arg name="trace" value="ref:trace"/>
     <Arg name="approvalSet" value="ref:approvalSet"/>
-    <Arg name="plan" value="ref:plan"/>
+    <Arg name="policyViolations" value="ref:policyViolations"/>
     <Arg name="project" value="ref:project"/>
+    <Arg name="identityRequestId" value="ref:identityRequestId"/>
+    <Arg name="source" value="ref:source"/>
+    <Arg name="requestor" value="ref:requestor"/>
+    <Arg name="identityDisplayName" value="ref:identityDisplayName"/>
+    <Arg name="batchRequestItemId" value="ref:batchRequestItemId"/>
+    <Arg name="trace" value="ref:trace"/>
+    <Arg name="spExtAttrs" value="ref:spExtAttrs"/>
+    <Arg name="plan" value="ref:plan"/>
+    <Arg name="flow" value="ref:flow"/>
+    <Arg name="launcher" value="ref:launcher"/>
     <Return name="approvalSet" to="approvalSet"/>
     <Return name="endDate" to="endDate"/>
     <Return name="startDate" to="startDate"/>
@@ -1178,5 +1192,5 @@
     </WorkflowRef>
     <Transition to="end"/>
   </Step>
-  <Step icon="Stop" name="end"/>
+  <Step icon="Stop" name="end" posX="1434" posY="10"/>
 </Workflow>

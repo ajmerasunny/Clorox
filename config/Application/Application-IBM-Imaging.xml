@@ -1,10 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE Application PUBLIC "sailpoint.dtd" "sailpoint.dtd">
-<Application connector="sailpoint.connector.DelimitedFileConnector" featuresString="DIRECT_PERMISSIONS, NO_RANDOM_ACCESS, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%IBM_Imaging_APP_NAME%%" profileClass="" type="DelimitedFile">
+<Application connector="sailpoint.connector.DefaultLogicalConnector" featuresString="COMPOSITE, DISCOVER_SCHEMA" icon="enterpriseIcon" name="%%IBM_Imaging_APP_NAME%%" profileClass="" type="Logical">
   <Attributes>
     <Map>
-      <entry key="PassphraseForPrivateKey"/>
-      <entry key="PrivateKeyFilePath"/>
+      <entry key="RetainEntitlementOverRemove">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
       <entry key="acceleratorPackEnabled"/>
       <entry key="accountCorrelationAttrExpression"/>
       <entry key="accountCreateConditionalRule"/>
@@ -44,10 +47,10 @@
           <Boolean/>
         </value>
       </entry>
+      <entry key="apPopulationLeaverOptions"/>
       <entry key="apPopulationReverseLeaverOptions"/>
       <entry key="apServiceAccountUniqueName"/>
       <entry key="appBusApprovalRule" value="Clorox Skip Role Owner Approval on Remove Access Rule"/>
-      <entry key="appBusApprovers"/>
       <entry key="assignmentGroupname"/>
       <entry key="authoritativeEmployee"/>
       <entry key="authoritativeNonEmployee"/>
@@ -67,7 +70,75 @@
       </entry>
       <entry key="commentsAttr"/>
       <entry key="commentsValue"/>
-      <entry key="compositeDefinition"/>
+      <entry key="compositeDefinition">
+        <value>
+          <CompositeDefinition accountRule="" primaryTier="Active Directory" remediationRule="">
+            <Tiers>
+              <Tier application="Active Directory" correlationRule="">
+                <IdentitySelector>
+                  <MatchExpression>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_P2PExpenseReports%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%INFOR_view%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_P2PVendorInvoices%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_LogisticsCSA%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_LogisticsCSA-TL%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_LogisticsBroker%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_LogisticsExport%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_LogisticsRDS-TL%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                    <MatchTerm name="memberOf" type="Entitlement" value="%%FCM_SR_LogisticsCSA-TL%%">
+                      <ApplicationRef>
+                        <Reference class="sailpoint.object.Application" name="Active Directory"/>
+                      </ApplicationRef>
+                    </MatchTerm>
+                  </MatchExpression>
+                </IdentitySelector>
+              </Tier>
+            </Tiers>
+          </CompositeDefinition>
+        </value>
+      </entry>
+      <entry key="disableLinkFiltering">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
+      <entry key="disableManagedEntitlementFiltering">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
       <entry key="displayFormRule"/>
       <entry key="eligibilityExpression"/>
       <entry key="enablepsaValidation">
@@ -82,53 +153,17 @@
         </value>
       </entry>
       <entry key="evaluateCreateprovpolicy"/>
-      <entry key="filetransport" value="local"/>
-      <entry key="filterEmptyRecords">
-        <value>
-          <Boolean>true</Boolean>
-        </value>
-      </entry>
-      <entry key="ftpsAuthMethod" value="password"/>
-      <entry key="ftpsClientCertificateFilePath"/>
-      <entry key="ftpsClientCertificatePassphrase"/>
-      <entry key="group.filetransport" value="local"/>
-      <entry key="group.filterEmptyRecords">
-        <value>
-          <Boolean>true</Boolean>
-        </value>
-      </entry>
-      <entry key="group.partitionMode" value="auto"/>
       <entry key="hardPolicyviolations"/>
-      <entry key="hasHeader">
-        <value>
-          <Boolean/>
-        </value>
-      </entry>
-      <entry key="isCaseInsensitiveMerge">
-        <value>
-          <Boolean/>
-        </value>
-      </entry>
-      <entry key="isSortedByIndexColumn">
-        <value>
-          <Boolean/>
-        </value>
-      </entry>
-      <entry key="joinerEnabled" value="true"/>
+      <entry key="joinerEnabled" value="false"/>
       <entry key="joinerPopulationRegex"/>
       <entry key="joinerRoles"/>
       <entry key="loaExtendedRule"/>
       <entry key="loaProcess" value="Disable Only"/>
       <entry key="ltdExtendedRule"/>
       <entry key="ltdProcess" value="Disable Only"/>
-      <entry key="mergeRows">
-        <value>
-          <Boolean/>
-        </value>
-      </entry>
       <entry key="moveAccountContainer"/>
       <entry key="moverExtendedRule"/>
-      <entry key="moverProcess" value="Manager Certification"/>
+      <entry key="moverProcess" value="Do Nothing"/>
       <entry key="moverRevocation" value="Do Nothing"/>
       <entry key="nativeChangeDetectionAttributeScope" value="entitlements"/>
       <entry key="nativeChangeDetectionAttributes"/>
@@ -145,11 +180,13 @@
           <Boolean/>
         </value>
       </entry>
-      <entry key="parseType" value="delimited"/>
-      <entry key="partitionMode" value="auto"/>
+      <entry key="onDeleteRemoveEntitlements">
+        <value>
+          <Boolean/>
+        </value>
+      </entry>
       <entry key="policyType" value="Do Nothing"/>
       <entry key="policytypeExceptions"/>
-      <entry key="port"/>
       <entry key="primarySyncaccounts">
         <value>
           <Boolean/>
@@ -187,14 +224,8 @@
       <entry key="scramPwdattr"/>
       <entry key="scramblePasswordAttr"/>
       <entry key="serviceAccountAttrExpression"/>
-      <entry key="sftpAuthMethod" value="password"/>
-      <entry key="skipSupervisorApproval" value="Clorox Skip Manager Approval on Remove Access Rule"/>
+      <entry key="skipSupervisorApproval"/>
       <entry key="softPolicyviolations"/>
-      <entry key="stopIfLineHasWrongColumnLength">
-        <value>
-          <Boolean/>
-        </value>
-      </entry>
       <entry key="sysDescriptions">
         <value>
           <Map>
@@ -203,55 +234,67 @@
         </value>
       </entry>
       <entry key="targetpasswordSync"/>
-      <entry key="templateApplication" value="DelimitedFile Template"/>
+      <entry key="templateApplication" value="Logical Template"/>
       <entry key="terminationExtendedRule"/>
       <entry key="terminationProcess" value="Disable and Remove Entitlements"/>
       <entry key="txCombinationName"/>
-      <entry key="userLastLogonAttributeName"/>
-      <entry key="userLastLogonDateFormat"/>
       <entry key="xDays"/>
       <entry key="xDeleteDays"/>
       <entry key="xdaysresetPwd"/>
     </Map>
   </Attributes>
-   <CorrelationRule>
-    <Reference class="sailpoint.object.Rule" name="CLORX SMART Correlation rule"/>
-  </CorrelationRule>
   <Owner>
     <Reference class="sailpoint.object.Identity" name="spadmin"/>
   </Owner>
-  <ProvisioningForms>
-    <Form name="Create" objectType="account" type="Create">
-      <Attributes>
-        <Map>
-          <entry key="pageTitle" value="Create"/>
-        </Map>
-      </Attributes>
-      <Description>Create</Description>
-      <Section label="Account" name="Account">
-        <Field displayName="username" helpKey="username" name="username" type="string">
-          <Script>
-            <Source><![CDATA[return application.getName() + " " + identity.getName();]]></Source>
-          </Script>
-        </Field>
-      </Section>
-    </Form>
-  </ProvisioningForms>  
   <Schemas>
-   <Schema  displayAttribute="username"  identityAttribute="username" instanceAttribute=""  nativeObjectType="account" objectType="account" permissionsRemediationModificationType="None">
-      <AttributeDefinition name="username" type="string">
-        <Description>username</Description>
+   <Schema displayAttribute="sAMAccountName" identityAttribute="distinguishedName" instanceAttribute="" nativeObjectType="account" objectType="account">
+      <AttributeDefinition name="distinguishedName" source="Active Directory.distinguishedName" type="string">
+        <Description>distinguished name for which the entity is known by</Description>
       </AttributeDefinition>
-      <AttributeDefinition entitlement="true" managed="true" multi="true" name="Role" schemaObjectType="Role" type="string">
-        <Description>Role</Description>
+      <AttributeDefinition entitlement="true" managed="true" multi="true" name="memberOf" schemaObjectType="group" source="Active Directory.memberOf" type="string">
+        <Description>Group Membership</Description>
       </AttributeDefinition>
-       <AttributeDefinition name="AccountExpiration" type="string">
-        <Description>AccountExpiration</Description>
+      <AttributeDefinition name="sAMAccountName" source="Active Directory.sAMAccountName" type="string">
+        <Description>sAMAccountName</Description>
       </AttributeDefinition>
+      <AttributeDefinition name="accountExpires" type="string"/>
     </Schema>
-    <Schema aggregationType="group"  descriptionAttribute="Role" displayAttribute="Role"  identityAttribute="Role" instanceAttribute="Role"  nativeObjectType="Role" objectType="Role" permissionsRemediationModificationType="None">
-      <AttributeDefinition entitlement="true" multi="true" name="Role" schemaObjectType="Role" type="string">
-        <Description>Role</Description>
+    <Schema descriptionAttribute="" displayAttribute="" identityAttribute="" instanceAttribute="" nativeObjectType="group" objectType="group">
+      <AttributeDefinition name="cn" source="Active Directory.cn" type="string">
+        <Description>common name(s) for which the entity is known by</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="distinguishedName" source="Active Directory.distinguishedName" type="string">
+        <Description>distinguished name for which the entity is known by</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="owner" source="Active Directory.owner" type="string">
+        <Description>owner (of the object)</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="description" source="Active Directory.description" type="string">
+        <Description>descriptive information</Description>
+      </AttributeDefinition>
+      <AttributeDefinition entitlement="true" multi="true" name="memberOf" schemaObjectType="group" source="Active Directory.memberOf" type="string">
+        <Description>Group Membership</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="objectSid" source="Active Directory.objectSid" type="string">
+        <Description>Windows Security Identifier</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="objectguid" source="Active Directory.objectguid" type="string">
+        <Description>Object globally unique identifier </Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="mailNickname" source="Active Directory.mailNickname" type="string">
+        <Description>Exchange Distribution Group Name</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="GroupType" source="Active Directory.GroupType" type="string">
+        <Description>Group Type</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="GroupScope" source="Active Directory.GroupScope" type="string">
+        <Description>Group Scope</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="sAMAccountName" source="Active Directory.sAMAccountName" type="string">
+        <Description>sAMAccountName</Description>
+      </AttributeDefinition>
+      <AttributeDefinition name="msDS-PrincipalName" source="Active Directory.msDS-PrincipalName" type="string">
+        <Description>Name of the entity in the format "NetBIOS domain name\sAMAccountName"</Description>
       </AttributeDefinition>
     </Schema>
   </Schemas>

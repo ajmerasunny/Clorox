@@ -78,19 +78,5 @@
         </Filter>
       </Constraints>
     </Profile>
-	 <Profile>
-      <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%CCMS_APP_NAME%%"/>
-      </ApplicationRef>
-      <Constraints>
-        <Filter operation="CONTAINS_ALL" property="Role">
-          <Value>
-            <List>
-              <String>CCMS</String>
-            </List>
-          </Value>
-        </Filter>
-      </Constraints>
-    </Profile>
   </Profiles>
 </Bundle>

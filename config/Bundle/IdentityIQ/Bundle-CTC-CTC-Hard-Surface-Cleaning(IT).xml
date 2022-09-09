@@ -78,19 +78,5 @@
         </Filter>
       </Constraints>
     </Profile>
-    <Profile>
-      <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%CTC_HardSurface_Cleaning_APP_NAME%%"/>
-      </ApplicationRef>
-      <Constraints>
-        <Filter operation="CONTAINS_ALL" property="Role">
-          <Value>
-            <List>
-              <String>%%CTC_HardSurface_Cleaning_APP_NAME%%</String>
-            </List>
-          </Value>
-        </Filter>
-      </Constraints>
-    </Profile>
   </Profiles>
 </Bundle>

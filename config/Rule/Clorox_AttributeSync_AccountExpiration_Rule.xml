@@ -6,150 +6,169 @@
     <Inputs>
       <Argument name="context">
         <Description>
-				SailPointContext
-			</Description>
+          SailPointContext
+        </Description>
       </Argument>
       <Argument name="identityName">
         <Description>
-				Identity Name
-			</Description>
+          Identity Name
+        </Description>
       </Argument>
       <Argument name="appName">
         <Description>
-				The application Name
-			</Description>
+          The application Name
+        </Description>
       </Argument>
       <Argument name="nativeId">
         <Description>
-				Native ID of the attribute
-			</Description>
+          Native ID of the attribute
+        </Description>
       </Argument>
       <Argument name="workflow">
         <Description>
-				Workflow from which the rule was invoked
-			</Description>
+          Workflow from which the rule was invoked
+        </Description>
       </Argument>
       <Argument name="requestType">
         <Description>
-				Type of Request is equivalent to Feature
-			</Description>
+          Type of Request is equivalent to Feature
+        </Description>
       </Argument>
       <Argument name="spExtAttrs">
         <Description>
-				Any extended attributes in the workflow
-			</Description>
+          Any extended attributes in the workflow
+        </Description>
       </Argument>
     </Inputs>
     <Returns>
       <Argument name="plan">
         <Description>
-				The plan with any modifications needed
-			</Description>
+          The plan with any modifications needed
+        </Description>
       </Argument>
     </Returns>
   </Signature>
   <Source>
-  
-	import sailpoint.object.RequestDefinition;
-	import sailpoint.object.Request;
-	import sailpoint.object.Filter;
-	import sailpoint.object.ManagedAttribute;
-	import sailpoint.object.ProvisioningPlan;
-	import sailpoint.object.ProvisioningPlan.AccountRequest;
-	import sailpoint.object.ProvisioningPlan.AttributeRequest;	
-	import sailpoint.object.QueryOptions;
-	import sailpoint.object.QueryInfo;
-	import java.text.DateFormat;
-	import java.util.Date;
-	import java.util.Calendar;
-  	import sailpoint.services.ServicesUtil;
-	import java.text.SimpleDateFormat;
- 	import org.apache.commons.logging.Log;
-	import org.apache.commons.logging.LogFactory;
-	import sailpoint.object.Identity;
-	import sailpoint.object.ProvisioningPlan.AccountRequest.Operation;
-	import sailpoint.object.ProvisioningPlan.Operation;
-	import sailpoint.api.SailPointContext;
-	import java.util.Date;
-	import java.text.SimpleDateFormat;
-	import java.text.ParseException;
-	import java.util.TimeZone;
-    import sailpoint.object.RoleAssignment;
-    import sailpoint.object.Custom;
-	import sailpoint.object.AttributeAssignment;
-	import sailpoint.tools.Util;
-	
-	Log logger = LogFactory.getLog("clorox.attributesync.AccountExpiration");
-	
-	List accountRequests = new ArrayList();
-	Identity identity = context.getObjectByName(Identity.class, identityName);
-	Map utilArgs = new HashMap();
-	Custom customObject = context.getObjectByName(Custom.class, "Clorox SMART Application with Secondary Approval");
-    List allApplications = customObject.getList("AllApplications");
-	
-	if(identity != null)
-	{
-		//get current expiration date
-		Date ctrexpDt = identity.getAttribute("ctrexpDt");
-		
-		if(ctrexpDt != null)
-		{
-		
-			//change expiration date to string to compare with link attribute
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-			dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
-			
-			String conEndDateString = dateFormat.format(ctrexpDt);
-			
-						//if date to set is not null, and either the current date to set is null or current date is not null but doesn't match the identity attribute, provision the string date
-			if(conEndDateString != null)
-			{				
-				AccountRequest accReq = new AccountRequest(AccountRequest.Operation.Modify, appName, null, nativeId);
-				AttributeRequest attrReq = new AttributeRequest("AccountExpiration",ProvisioningPlan.Operation.Set, conEndDateString);
-	
-	            accReq.add(attrReq);
-	            	
-	            accountRequests.add(accReq);
-			}
-			if(!Util.isEmpty(identity.getRoleAssignments())) {
-				// Update End Date on Role Assignment
-				List assingedRoles = identity.getRoleAssignments(); 
-				for(RoleAssignment roleAssign: assingedRoles){
-					String rName = roleAssign.getRoleName();
-					for(String app: allApplications) {
-						if(rName.contains(app)) {
-							roleAssign.setEndDate(ctrexpDt);
-							context.saveObject(identity);
-							context.commitTransaction();
-						}                    
-					}                
-				}			     
-			}
 
+  import sailpoint.object.RequestDefinition;
+  import sailpoint.object.Link;
+  import sailpoint.object.Request;
+  import sailpoint.object.Filter;
+  import sailpoint.object.ManagedAttribute;
+  import sailpoint.object.ProvisioningPlan;
+  import sailpoint.object.ProvisioningPlan.AccountRequest;
+  import sailpoint.object.ProvisioningPlan.AttributeRequest;	
+  import sailpoint.object.QueryOptions;
+  import sailpoint.object.QueryInfo;
+  import java.text.DateFormat;
+  import java.util.Date;
+  import java.util.Calendar;
+  import sailpoint.services.ServicesUtil;
+  import java.text.SimpleDateFormat;
+  import org.apache.commons.logging.Log;
+  import org.apache.commons.logging.LogFactory;
+  import sailpoint.object.Identity;
+  import sailpoint.object.ProvisioningPlan.AccountRequest.Operation;
+  import sailpoint.object.ProvisioningPlan.Operation;
+  import sailpoint.api.SailPointContext;
+  import java.util.Date;
+  import java.text.SimpleDateFormat;
+  import java.text.ParseException;
+  import java.util.TimeZone;
+  import sailpoint.object.RoleAssignment;
+  import sailpoint.object.Custom;
+  import sailpoint.object.AttributeAssignment;
+  import sailpoint.tools.Util;
 
-			// Update End Date on Attribute/Entitlement Assignment
-			if(!Util.isEmpty(identity.getAttributeAssignments())) {
-				List assingedAttributes = identity.getAttributeAssignments();
-				for(AttributeAssignment attributeAssign: assingedAttributes){
-					String attrValue = attributeAssign.getValue();
-					String appName = attributeAssign.getApplicationName();
-					for(String app: allApplications) {
-						if(attrValue.contains(app)) {
-							attributeAssign.setEndDate(ctrexpDt);
-							context.saveObject(identity);
-							context.commitTransaction();
-						}                    
-					}                
-				}
-			}
+  Log logger = LogFactory.getLog("clorox.attributesync.AccountExpiration");
 
-			context.decache(identity);						
+  List accountRequests = new ArrayList();
+  Identity identity = context.getObjectByName(Identity.class, identityName);
+  Map utilArgs = new HashMap();
+  Custom customObject = context.getObjectByName(Custom.class, "Clorox SMART Application with Secondary Approval");
+  List allApplications = customObject.getList("ContractorEndDateApps");
+
+  if(identity != null)
+  {
+    //get current expiration date
+    Date ctrexpDt = identity.getAttribute("ctrexpDt");
+
+    if(ctrexpDt != null)
+    {
+
+      //change expiration date to string to compare with link attribute
+      SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+      dateFormat.setTimeZone(TimeZone.getTimeZone("America/Los_Angeles"));
+
+      String conEndDateString = dateFormat.format(ctrexpDt);
+
+      //if date to set is not null, and either the current date to set is null or current date is not null but doesn't match the identity attribute, provision the string date
+      if(conEndDateString != null)
+      {				
+        //AccountRequest accReq = new AccountRequest(AccountRequest.Operation.Modify, appName, null, nativeId);
+        //AttributeRequest attrReq = new AttributeRequest("AccountExpiration",ProvisioningPlan.Operation.Set, conEndDateString);
+
+        //accReq.add(attrReq);
+
+        //accountRequests.add(accReq);
+
+        //either that or this
+
+        List links = identity.getLinks();
+        if(links != null &amp;&amp; !links.isEmpty())
+        {
+          for(Link l : links)
+          {
+            if(l.getApplicationName().equals(appName))
+            {
+              l.setAttribute("AccountExpiration",conEndDateString);
+            }
+          }
+
+          identity.assignLinks(links);
+          context.saveObject(identity);
+          context.commitTransaction();
+
         }
-    }        
-	
-	logger.trace("exit attribute sync with accountrequests: " + accountRequests);
-	return accountRequests;
 
-	
-</Source>
+      }
+      if(!Util.isEmpty(identity.getRoleAssignments())) {
+        // Update End Date on Role Assignment
+        List assingedRoles = identity.getRoleAssignments(); 
+        for(RoleAssignment roleAssign: assingedRoles){
+          String rName = roleAssign.getRoleName();
+          for(String app: allApplications) {
+            if(rName.contains(app)) {
+              roleAssign.setEndDate(ctrexpDt);
+              context.saveObject(identity);
+              context.commitTransaction();
+            }                    
+          }                
+        }			     
+      }
+
+
+      // Update End Date on Attribute/Entitlement Assignment
+      if(!Util.isEmpty(identity.getAttributeAssignments())) {
+        List assingedAttributes = identity.getAttributeAssignments();
+        for(AttributeAssignment attributeAssign: assingedAttributes){
+          String attrValue = attributeAssign.getValue();
+          String appName = attributeAssign.getApplicationName();
+          for(String app: allApplications) {
+            if(attrValue.contains(app)) {
+              attributeAssign.setEndDate(ctrexpDt);
+              context.saveObject(identity);
+              context.commitTransaction();
+            }                    
+          }                
+        }
+      }
+
+      context.decache(identity);						
+    }
+  }        
+
+  logger.trace("exit attribute sync with accountrequests: " + accountRequests);
+  return accountRequests;
+  </Source>
 </Rule>

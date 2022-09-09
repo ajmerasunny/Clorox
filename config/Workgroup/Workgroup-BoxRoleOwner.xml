@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Identity name="Box Role Owner" workgroup="true">
+    <Attributes>
+        <Map>
+            <entry key="displayName" value="Box Role Owner"/>
+            <entry key="email" value="Clorox.Messaging.Support@clorox.com"/>
+        </Map>
+    </Attributes>
+    <Description>Role owner for Box Roles</Description>
+    <Preferences>
+        <Map>
+            <entry key="workgroupNotificationOption">
+                <value>
+                    <WorkgroupNotifationOption>GroupEmailOnly</WorkgroupNotifationOption>
+                </value>
+            </entry>
+        </Map>
+    </Preferences>
+</Identity>

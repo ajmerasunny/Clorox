@@ -77,20 +77,6 @@
           </Value>
         </Filter>
       </Constraints>
-    </Profile>
-    <Profile>
-      <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%IBM_Imaging_APP_NAME%%"/>
-      </ApplicationRef>
-      <Constraints>
-        <Filter operation="CONTAINS_ALL" property="Role">
-          <Value>
-            <List>
-              <String>IBM Content Management Accounts Receivable Logistics Broker</String>
-            </List>
-          </Value>
-        </Filter>
-      </Constraints>
-    </Profile>    
+    </Profile>  
   </Profiles>
 </Bundle>

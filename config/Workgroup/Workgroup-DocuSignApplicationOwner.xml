@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Identity name="DocuSign Application Owner" workgroup="true">
+    <Attributes>
+        <Map>
+            <entry key="displayName" value="DocuSign Application Owner"/>
+        </Map>
+    </Attributes>
+    <Description>Application Owner for DocuSign Application.</Description>
+    <Preferences>
+        <Map>
+            <entry key="workgroupNotificationOption">
+                <value>
+                    <WorkgroupNotifationOption>MembersOnly</WorkgroupNotifationOption>
+                </value>
+            </entry>
+        </Map>
+    </Preferences>
+</Identity>

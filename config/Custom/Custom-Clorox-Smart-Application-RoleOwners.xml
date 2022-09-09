@@ -6,50 +6,60 @@
         <entry key="Applications">
             <value>
                 <List>
-                    <String>%%CCMS_APP_NAME%%</String>
-                    <String>%%iDMS_APP_NAME%%</String>
-			              <String>%%Concur_APP_NAME%%</String>
-			              <String>%%Essbase_APP_NAME%%</String>			
-                    <String>%%IBM_Imaging_APP_NAME%%</String>
-                    <String>%%SAPInfoSteward_APP_NAME%%</String>
+                    <String>Box</String>
+		            <String>CCMS</String>
+		            <String>iDMS</String>
+		            <String>Concur</String>
+		            <String>Essbase</String>
+		            <String>IBM Imaging</String>
+		            <String>SAP Info Steward</String>
                 </List>
             </value>
         </entry>
 		<entry key="ApplicationOwner">
         <value>
           <Map>
-            <entry key="%%CCMS_APP_NAME%%" value="%%CLX_AR_CCMSAdmin_OWNER_WORKGROUP%%"/>
-            <entry key="%%iDMS_APP_NAME%%" value="%%CLX_AR_IDMS_OWNER_WORKGROUP%%"/>
-            <entry key="Concur Expense" value="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
-            <entry key="Concur Expense Approver" value="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>
-            <entry key="Concur Expense User" value="%%CONCUR_P2PTRAVELEXPENSE_WORKGROUP%%"/>                        
-            <entry key="Concur" value="%%CONCUR_DEFAULT_ROLEOWNER%%"/>          
-            <entry key="%%Concur_APP_NAME%%" value="%%CONCUR_DEFAULT_ROLEOWNER%%"/>
-            <entry key="%%Essbase_APP_NAME%%" value="%%CLX_AR_FAR_CAN_OWNER_WORKGROUP%%"/>
-            <entry key="IBM Content Management Accounts Payable" value="%%CLX_AR_IBMCtntMgmtAccountsPayable_OWNER_WORKGROUP%%"/>
-            <entry key="IBM Content Management Accounts Receivable" value="%%CLX_AR_IBMCtntMgmtAccountsReceivable_OWNER_WORKGROUP%%"/>
-            <entry key="%%SAPInfoSteward_APP_NAME%%" value="%%CLX_AR_SAPInfoSteward_OWNER_WORKGROUP%%"/>            
+           <entry key="Box" value="Box Role Owner"/>
+            <entry key="Box - General User" value="Box Role Owner"/>
+            <entry key="CCMS" value="CLX_AR_CCMSAdmin"/>
+            <entry key="Concur" value="CLX_AR_ConcurAdmin"/>
+            <entry key="Concur Cognos Reporting - Business Author" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur Cognos Reporting - Professional Author" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur Expense" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur Expense Approver" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur Expense User" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur P-Card Admin - Clorox P2P" value="CLX_AR_ConcurP2P-Pcard"/>
+            <entry key="Concur P-Card Approver" value="CLX_AR_ConcurP2P-Pcard"/>
+            <entry key="Concur P-Card User" value="CLX_AR_ConcurP2P-Pcard"/>
+            <entry key="Concur T&amp;E Admin - Clorox P2P" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur T&amp;E Admin - DXC" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur T&amp;E Admin - IT" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Concur T&amp;E Admin - Internal Audit and Tax" value="CLX_AR_ConcurP2PAdmin"/>
+            <entry key="Essbase" value="CLX_AR_FAR_CAN"/>
+            <entry key="IBM Content Management Accounts Payable" value="CLX_AR_IBMCtntMgmtAccountsPayable"/>
+            <entry key="IBM Content Management Accounts Receivable" value="CLX_AR_IBMCtntMgmtAccountsReceivable"/>          
           </Map>
         </value>
       </entry>
         <entry key="AllApplications">
             <value>
                 <List>
-                  <String>%%HP_PPM_APP_NAME%%</String>
-                  <String>%%iDMS_APP_NAME%%</String>
-                  <String>%%CCMS_APP_NAME%%</String>
-                  <String>%%CTC_CISPRO_Global_APP_NAME%%</String>
-                  <String>%%CTC_HardSurface_Cleaning_APP_NAME%%</String>
-                  <String>%%IBM_Imaging_APP_NAME%%</String>
-                  <String>%%MarketResearchDatabase(MRDB)_APP_NAME%%</String>
-                  <String>%%MediaBin_APP_NAME%%</String>
-                  <String>%%IRI_APP_NAME%%</String>
-                  <String>%%CTC_Colorbase_APP_NAME%%</String>
-                  <String>%%Concur_APP_NAME%%</String>
-                  <String>%%Essbase_APP_NAME%%</String>
-                  <String>%%MDWORKFLOW_APP_NAME%%</String>
-                  <String>IBM Content Management</String>
-                  <String>%%SAPInfoSteward_APP_NAME%%</String>
+                  <String>Box</String>
+		           <String>HP PPM</String>
+		           <String>iDMS</String>
+		           <String>CCMS</String>
+		           <String>CTC CISPRO Global</String>
+		           <String>CTC Hard Surface Cleaning</String>
+		           <String>IBM Imaging</String>
+		           <String>Market Research Database (MRDB)</String>
+		           <String>MediaBin</String>
+		           <String>IRI</String>
+		           <String>CTC Colorbase</String>
+		           <String>Concur</String>
+		           <String>Essbase</String>
+		           <String>Clorox Workflow</String>
+		           <String>IBM Content Management</String>
+		           <String>SAP Info Steward</String>
                 </List>
             </value>
         </entry>              

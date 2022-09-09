@@ -77,20 +77,6 @@
           </Value>
         </Filter>
       </Constraints>
-    </Profile>
-    <Profile>
-      <ApplicationRef>
-        <Reference class="sailpoint.object.Application" name="%%SAPInfoSteward_APP_NAME%%"/>
-      </ApplicationRef>
-      <Constraints>
-        <Filter operation="CONTAINS_ALL" property="Role">
-          <Value>
-            <List>
-              <String>SAP Info Steward LATAM Vendor Data Analyst</String>
-            </List>
-          </Value>
-        </Filter>
-      </Constraints>
-    </Profile>     
+    </Profile>  
   </Profiles>
 </Bundle>

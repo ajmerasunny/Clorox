@@ -234,7 +234,7 @@
           <Boolean/>
         </value>
       </entry>
-      <entry key="joinerEnabled" value="true"/>
+      <entry key="joinerEnabled" value="false"/>
       <entry key="joinerPopulationRegex"/>
       <entry key="joinerRoles"/>
       <entry key="loaExtendedRule"/>
@@ -327,8 +327,6 @@
       <entry key="terminationExtendedRule"/>
       <entry key="terminationProcess" value="Disable and Remove Entitlements"/>
       <entry key="txCombinationName"/>
-      <entry key="userLastLogonAttributeName"/>
-      <entry key="userLastLogonDateFormat"/>
       <entry key="xDays"/>
       <entry key="xDeleteDays"/>
       <entry key="xdaysresetPwd"/>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Identity PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Identity name="%%CLX_AR_ConcurP2P-Pcard%%" workgroup="true">
+  <Attributes>
+    <Map>
+      <entry key="displayName" value="%%CLX_AR_ConcurP2P-Pcard%%"/>
+      <entry key="email" value="%%CONCUR_P2P-Pcard_WORKGROUP_EMAIL_ADDRESS%%"/>
+    </Map>
+  </Attributes>
+  <Description>Concur Application P2P-Pcard Admin</Description>
+  <Preferences>
+    <Map>
+      <entry key="workgroupNotificationOption">
+        <value>
+          <WorkgroupNotifationOption>GroupEmailOnly</WorkgroupNotifationOption>
+        </value>
+      </entry>
+    </Map>
+  </Preferences>
+</Identity>
