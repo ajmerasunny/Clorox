@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule  language="beanshell"  name="Clorox Post Leave of Absence Rule">
+  <Description>This rule runs after the leaver is completed.</Description>
+  <Source>
+	<![CDATA[
+  import sailpoint.object.Custom;
+  import sailpoint.object.Identity;
+  import sailpoint.services.ServicesUtil;
+  import sailpoint.object.RequestDefinition;
+  import sailpoint.object.Request;
+  import sailpoint.object.Filter;
+  import sailpoint.object.QueryOptions;
+  import sailpoint.object.Link;
+
+  import org.apache.commons.logging.Log;
+  import org.apache.commons.logging.LogFactory;
+  import org.apache.log4j.Logger;
+  import org.apache.log4j.Level;
+  
+  Log logger = LogFactory.getLog("clorox.extension.rule.postLOA");
+
+  logger.debug("Enter Clorox Post Leave of absence rule");
+  if(identityName != null)
+  {
+    Identity identity = context.getObjectByName(Identity.class, identityName);
+
+    if(identity != null)
+    {
+      //get object that has the badging locations
+      Custom badgingLocations = context.getObjectByName(Custom.class, "Clorox Badging Location Email Mappings");
+
+      if(badgingLocations != null)
+      {
+        Map mailargs = new HashMap();
+
+        if(identity != null)
+        {
+          //get user location
+          String location = identity.getAttribute("location");
+          String identityDisplayName = identity.getDisplayName();
+
+          if(location != null)
+          {
+            String toEmail = "";
+
+            //remote users all go to the same email address
+            if(location.startsWith("Remote -"))
+            {
+              toEmail = "CLC.Office.Security.Team@clorox.com";
+            }
+            else
+            {
+              //otherwise get it from the custom object
+              toEmail = badgingLocations.get(location);
+            }
+
+            //if no config found for location send it to default address
+            if(toEmail == null)
+            {
+              toEmail = "CLC.Office.Security.Team@clorox.com";
+            }
+
+            //send email
+            if(toEmail != null)
+            {
+              mailargs.put("identityName", identityName);
+              mailargs.put("identityDisplayName", identityDisplayName);
+              mailargs.put("event", "loa");
+              mailargs.put("location", location);
+
+              ServicesUtil.sendEmailMessage(context, toEmail, "Clorox Badging Location LOA EmailTemplate", mailargs);
+            }
+            else
+            {
+              logger.warn("Not sending desktop support email as no to email was found");
+            }
+          }
+          else
+          {
+            logger.warn("Not sending desktop support email as no location was found");
+          }
+
+        }
+      }
+      Filter filter = Filter.and(Filter.eq("identity.id", identity.getId()), Filter.eq("application.type", "Logical"));
+      Iterator search = context.search(Link.class, new QueryOptions().addFilter(filter), "id");
+      while(search.hasNext()) {
+        Link link = context.getObjectById(Link.class, (String)search.next()[0]);
+        link.setAttribute("IIQDisabled", true);
+        context.saveObject(link);
+      }
+      context.commitTransaction();
+
+    }
+  }
+
+  logger.debug("Exit Clorox Post Leave of absence rule");
+
+   ]]></Source>
+</Rule>

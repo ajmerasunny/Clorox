@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE Rule PUBLIC "sailpoint.dtd" "sailpoint.dtd">
+<Rule language="beanshell" name="Clorox Post Rehire Rule">
+  <Description>This rule runs after the leaver is completed.</Description>
+  <ReferencedRules>
+    <Reference class="sailpoint.object.Rule"  name="SP Provisioning Rules Library"/>
+  </ReferencedRules>
+  <Source>
+<![CDATA[
+  import sailpoint.object.Custom;
+  import sailpoint.object.Identity;
+  import sailpoint.services.ServicesUtil;
+  import sailpoint.object.RequestDefinition;
+  import sailpoint.object.Request;
+  import sailpoint.object.ProvisioningProject;
+  import sailpoint.object.ProvisioningPlan;
+  import sailpoint.object.ProvisioningPlan.AccountRequest;
+  import sailpoint.object.ProvisioningPlan.AttributeRequest;
+
+  import sailpoint.object.Filter;
+  import sailpoint.object.Link;
+  import sailpoint.object.QueryOptions;
+
+  //launch attribute sync to push back email and userid
+  RequestDefinition reqDef = context.getObjectByName(RequestDefinition.class, "Workflow Request");
+  Request request = new Request(reqDef); 
+  String requestName = "Launch Attribute Sync After Joiner: " + identityName;
+  request.setName(requestName);
+  request.setAttribute("workflow", "Workflow-Lifecycle-AttributeSync");
+  request.setAttribute("identityName", identityName);
+  request.setAttribute("launcher", "spadmin");
+  request.setNextLaunch(new Date());
+  context.saveObject(request);
+  context.commitTransaction();
+
+  //if no errors, send email to desktop team
+  List projectErrors = getErrors(context, project);
+  if(identityName != null && (projectErrors == null || projectErrors.isEmpty()))
+  {
+    Identity identity = context.getObjectByName(Identity.class, identityName);
+    List plans = project.getPlans();
+
+    for(ProvisioningPlan plan : plans)
+    {
+      //password to put in email
+      String adPassword = "";
+
+      //build map to put into services util method to get back password attribute request
+      Map adPasswordArgs = new HashMap();
+      adPasswordArgs.put("plan", plan);
+      adPasswordArgs.put("attributeRequestNames", "password");
+      adPasswordArgs.put("accountRequestApplicationNames", "Active Directory");
+
+      //get back all password attribute requests that are part of an Active Directory account request
+      List attrReqs = ServicesUtil.getAttributeRequestsFromPlan(context, adPasswordArgs);
+      if(attrReqs != null && !attrReqs.isEmpty())
+      {
+        //pull password out of request
+        AttributeRequest attrReq = attrReqs.get(0);
+        adPassword = attrReq.getValue();
+
+        //send email to desktop support
+        Map mailargs = new HashMap();
+
+        if(identity != null)
+        {
+          String toEmail = "Deskside@clorox.com";
+          mailargs.put("identityName", identityName);
+          mailargs.put("firstname", identity.getFirstname());
+          mailargs.put("lastname", identity.getLastname());
+          mailargs.put("password", context.decrypt(adPassword));
+
+          ServicesUtil.sendEmailMessage(context, toEmail, "Clorox Joiner Desktop Support EmailTemplate", mailargs);
+        }
+      }
+    }
+
+    Filter filter = Filter.and(Filter.eq("identity.id", identity.getId()), Filter.eq("application.type", "Logical"));
+    Iterator search = context.search(Link.class, new QueryOptions().addFilter(filter), "id");
+    while(search.hasNext()) {
+      Link link = context.getObjectById(Link.class, (String)search.next()[0]);
+      link.setAttribute("IIQDisabled", false);
+      context.saveObject(link);
+    }
+    context.commitTransaction();
+  }
+
+  if(identityName != null)
+  {
+    //clear sendEndDate in case a contingent worker is rehired
+    ServicesUtil.provisionIdentityAttribute(context, identityName, "sentEndDateNotification", null);
+  }
+
+  //clear the password off the cube
+  String result = ServicesUtil.provisionIdentityAttribute(context, identityName, "appPassword", null);
+
+   ]]></Source>
+</Rule>
